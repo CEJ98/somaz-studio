@@ -18,6 +18,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide default cursor on desktop for custom cursor */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
+/* Hide scrollbar on horizontal scroll galleries */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);

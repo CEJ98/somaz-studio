@@ -47,7 +47,7 @@ export default function AboutTeaserSection() {
               </p>
             </FadeIn>
             <FadeIn direction="right" delay={0.25}>
-              <Link href="/nosotros" className="btn-ghost group">
+              <Link href="/about" className="btn-ghost group">
                 Conoce al equipo
                 <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </Link>

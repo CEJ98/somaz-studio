@@ -4,9 +4,15 @@ import FadeIn from "@/components/FadeIn";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contacto",
+  title: "Contacto | Somaz Studio",
   description:
     "Contáctanos para hablar sobre tu proyecto. Somaz Studio, Ciudad de México.",
+  openGraph: {
+    title: "Contacto | Somaz Studio",
+    description: "Iniciá una conversación sobre tu próximo proyecto.",
+    url: "https://somazstudio.com/contact",
+    type: "website",
+  },
 };
 
 const contactInfo = [
@@ -26,7 +32,7 @@ const contactInfo = [
     icon: <MapPin size={18} />,
     label: "Dirección",
     value: "Av. Presidente Masaryk 111, Polanco, CDMX",
-    href: "#",
+    href: null,
   },
   {
     icon: <Clock size={18} />,
@@ -36,7 +42,7 @@ const contactInfo = [
   },
 ];
 
-export default function ContactoPage() {
+export default function ContactPage() {
   return (
     <>
       {/* Page Header */}
@@ -73,7 +79,7 @@ export default function ContactoPage() {
                       </div>
                       <div>
                         <p className="section-label text-muted mb-1">{item.label}</p>
-                        {item.href && item.href !== "#" ? (
+                        {item.href ? (
                           <a
                             href={item.href}
                             className="font-body text-ink hover:text-gold transition-colors duration-200 text-base"
@@ -88,18 +94,9 @@ export default function ContactoPage() {
                   </FadeIn>
                 ))}
               </div>
-
-              {/* Studio image */}
-              <FadeIn delay={0.3} className="mt-12">
-                <div className="relative aspect-video overflow-hidden">
-                  <div className="w-full h-full bg-cream flex items-center justify-center">
-                    <p className="section-label text-muted">Somaz Studio — Polanco, CDMX</p>
-                  </div>
-                </div>
-              </FadeIn>
             </div>
 
-            {/* Right: form */}
+            {/* Right: form — full width on mobile */}
             <div className="md:col-span-8">
               <FadeIn delay={0.1}>
                 <ContactForm />

@@ -19,7 +19,7 @@ export default function FeaturedProjectsSection() {
             </h2>
           </FadeIn>
           <FadeIn direction="right" className="hidden md:block">
-            <Link href="/proyectos" className="btn-ghost group">
+            <Link href="/work" className="btn-ghost group">
               Ver todos
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -31,23 +31,21 @@ export default function FeaturedProjectsSection() {
           {/* Main large project */}
           {main && (
             <FadeIn className="md:col-span-7" delay={0.1}>
-              <Link href={`/proyectos/${main.slug}`} className="group block relative overflow-hidden aspect-[4/3] md:aspect-auto md:h-[560px]">
+              <Link href={`/work/${main.slug}`} className="group block relative overflow-hidden aspect-[4/3] md:aspect-auto md:h-[560px]">
                 <Image
                   src={main.image}
                   alt={main.name}
                   fill
-                  className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]"
                   sizes="(max-width: 768px) 100vw, 60vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-500" />
 
-                {/* Arrow */}
                 <div className="absolute top-5 right-5 w-10 h-10 bg-paper flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-2 group-hover:translate-y-0">
                   <ArrowUpRight size={18} className="text-ink" />
                 </div>
 
-                {/* Info */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                   <p className="section-label text-gold mb-2">{main.category} — {main.location}</p>
                   <h3 className="font-heading text-white text-3xl md:text-4xl font-light">
@@ -66,7 +64,7 @@ export default function FeaturedProjectsSection() {
             {rest.map((project, i) => (
               <FadeIn key={project.slug} delay={0.15 + i * 0.1}>
                 <Link
-                  href={`/proyectos/${project.slug}`}
+                  href={`/work/${project.slug}`}
                   className="group block relative overflow-hidden aspect-video md:flex-1"
                   style={{ height: "calc((560px - 24px) / 2)" }}
                 >
@@ -74,12 +72,12 @@ export default function FeaturedProjectsSection() {
                     src={project.image}
                     alt={project.name}
                     fill
-                    className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.04]"
                     sizes="(max-width: 768px) 100vw, 40vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-500" />
 
-                  {/* Arrow */}
                   <div className="absolute top-4 right-4 w-9 h-9 bg-paper flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-y-2 group-hover:translate-y-0">
                     <ArrowUpRight size={16} className="text-ink" />
                   </div>
@@ -100,7 +98,7 @@ export default function FeaturedProjectsSection() {
 
         {/* Mobile CTA */}
         <div className="md:hidden mt-8 text-center">
-          <Link href="/proyectos" className="btn-ghost">
+          <Link href="/work" className="btn-ghost">
             Ver todos los proyectos
             <ArrowRight size={14} />
           </Link>

@@ -18,8 +18,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projects.find((p) => p.slug === params.slug);
   if (!project) return {};
   return {
-    title: project.name,
+    title: `${project.name} | Somaz Studio`,
     description: project.description,
+    openGraph: {
+      title: project.name,
+      description: project.description,
+      images: [{ url: project.image }],
+      url: `https://somazstudio.com/work/${project.slug}`,
+      type: "website",
+    },
   };
 }
 
@@ -33,35 +40,36 @@ export default function ProjectPage({ params }: Props) {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
+      {/* Hero full-width */}
+      <section className="relative w-full h-[75vh] min-h-[520px] overflow-hidden">
         <Image
           src={project.image}
           alt={project.name}
           fill
           className="object-cover"
           priority
+          sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/75" />
 
-        <div className="relative z-10 h-full flex flex-col justify-end pb-16 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="relative z-10 h-full flex flex-col justify-end pb-14 px-6 md:px-12 max-w-[1400px] mx-auto w-full">
           <FadeIn>
             <Link
-              href="/proyectos"
-              className="inline-flex items-center gap-2 text-white/60 hover:text-white font-body text-sm mb-8 transition-colors"
+              href="/work"
+              className="inline-flex items-center gap-2 text-white/60 hover:text-white font-body text-xs tracking-widest uppercase mb-10 transition-colors"
             >
               <ArrowLeft size={14} />
               Todos los proyectos
             </Link>
             <p className="section-label text-gold mb-3">{project.category}</p>
-            <h1 className="font-heading text-[clamp(3rem,7vw,7rem)] text-white font-light leading-[0.92]">
+            <h1 className="font-heading text-[clamp(2.8rem,7vw,7rem)] text-white font-light leading-[0.92]">
               {project.name}
             </h1>
           </FadeIn>
         </div>
       </section>
 
-      {/* Project info bar */}
+      {/* Project metadata bar */}
       <section className="bg-ink py-8 px-6 md:px-12">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -114,9 +122,10 @@ export default function ProjectPage({ params }: Props) {
 
       {/* Image gallery */}
       {project.images.length > 1 && (
-        <section className="pb-20 px-6 md:px-12 bg-paper">
-          <div className="max-w-[1400px] mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <section className="pb-20 bg-paper">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+            {/* Desktop: grid */}
+            <div className="hidden md:grid md:grid-cols-2 gap-4">
               {project.images.slice(1).map((img, i) => (
                 <FadeIn key={i} delay={i * 0.1}>
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -125,22 +134,54 @@ export default function ProjectPage({ params }: Props) {
                       alt={`${project.name} — imagen ${i + 2}`}
                       fill
                       className="object-cover hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      sizes="50vw"
                     />
                   </div>
                 </FadeIn>
+              ))}
+            </div>
+
+            {/* Mobile: horizontal scroll */}
+            <div className="md:hidden flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-none">
+              {project.images.slice(1).map((img, i) => (
+                <div
+                  key={i}
+                  className="relative shrink-0 w-[80vw] aspect-[4/3] overflow-hidden snap-start"
+                >
+                  <Image
+                    src={img}
+                    alt={`${project.name} — imagen ${i + 2}`}
+                    fill
+                    className="object-cover"
+                    sizes="80vw"
+                  />
+                </div>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* Next / Prev Navigation */}
+      {/* CTA */}
+      <section className="py-16 md:py-20 px-6 md:px-12 bg-cream text-center">
+        <FadeIn>
+          <p className="section-label text-muted mb-4">¿Te inspira este proyecto?</p>
+          <Link href="/contact" className="btn-primary">
+            Iniciar un proyecto similar
+            <ArrowRight size={16} />
+          </Link>
+        </FadeIn>
+      </section>
+
+      {/* Prev / Next nav */}
       <section className="border-t border-border bg-paper">
         <div className="max-w-[1400px] mx-auto grid grid-cols-2 divide-x divide-border">
           {prev ? (
-            <Link href={`/proyectos/${prev.slug}`} className="group flex items-center gap-4 p-8 md:p-12 hover:bg-cream transition-colors duration-300">
-              <ArrowLeft size={20} className="text-muted group-hover:text-ink group-hover:-translate-x-1 transition-all duration-300" />
+            <Link
+              href={`/work/${prev.slug}`}
+              className="group flex items-center gap-4 p-8 md:p-12 hover:bg-cream transition-colors duration-300"
+            >
+              <ArrowLeft size={20} className="text-muted group-hover:text-ink group-hover:-translate-x-1 transition-all duration-300 shrink-0" />
               <div>
                 <p className="section-label text-muted mb-2">Anterior</p>
                 <p className="font-heading text-xl md:text-2xl font-light text-ink">{prev.name}</p>
@@ -150,12 +191,15 @@ export default function ProjectPage({ params }: Props) {
             <div />
           )}
           {next ? (
-            <Link href={`/proyectos/${next.slug}`} className="group flex items-center justify-end gap-4 p-8 md:p-12 hover:bg-cream transition-colors duration-300 text-right">
+            <Link
+              href={`/work/${next.slug}`}
+              className="group flex items-center justify-end gap-4 p-8 md:p-12 hover:bg-cream transition-colors duration-300 text-right"
+            >
               <div>
                 <p className="section-label text-muted mb-2">Siguiente</p>
                 <p className="font-heading text-xl md:text-2xl font-light text-ink">{next.name}</p>
               </div>
-              <ArrowRight size={20} className="text-muted group-hover:text-ink group-hover:translate-x-1 transition-all duration-300" />
+              <ArrowRight size={20} className="text-muted group-hover:text-ink group-hover:translate-x-1 transition-all duration-300 shrink-0" />
             </Link>
           ) : (
             <div />

@@ -6,9 +6,15 @@ import FadeIn from "@/components/FadeIn";
 import { team, stats } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Nosotros",
+  title: "Nosotros | Somaz Studio",
   description:
     "Conoce la historia, filosofía y el equipo detrás de Somaz Studio, estudio de arquitectura fundado en 2009 en Ciudad de México.",
+  openGraph: {
+    title: "Nosotros | Somaz Studio",
+    description: "Historia, filosofía y equipo de Somaz Studio.",
+    url: "https://somazstudio.com/about",
+    type: "website",
+  },
 };
 
 const timeline = [
@@ -20,7 +26,7 @@ const timeline = [
   { year: "2024", event: "15 años transformando el paisaje arquitectónico latinoamericano." },
 ];
 
-export default function NosotrosPage() {
+export default function AboutPage() {
   return (
     <>
       {/* Page Header */}
@@ -34,7 +40,6 @@ export default function NosotrosPage() {
           </FadeIn>
         </div>
 
-        {/* Full-width studio image */}
         <div className="mt-16 relative aspect-[21/9] overflow-hidden">
           <Image
             src="https://images.unsplash.com/photo-1497366754035-f200968a2c80?w=1920&q=85"
@@ -42,6 +47,7 @@ export default function NosotrosPage() {
             fill
             className="object-cover object-center"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-paper/30 to-transparent" />
         </div>
@@ -68,14 +74,14 @@ export default function NosotrosPage() {
                 <p className="font-body text-muted text-base md:text-lg leading-relaxed mb-6 max-w-3xl">
                   Nuestro trabajo abarca arquitectura residencial, comercial,
                   cultural y urbana. En todos los casos, partimos del mismo
-                  punto de partida: entender profundamente el lugar, el programa
-                  y las personas que habitarán el espacio.
+                  punto: entender profundamente el lugar, el programa y las
+                  personas que habitarán el espacio.
                 </p>
                 <p className="font-body text-muted text-base md:text-lg leading-relaxed max-w-3xl">
                   Creemos en la arquitectura como acto de responsabilidad:
                   responsabilidad con el cliente, con el contexto urbano y con
-                  el planeta. La sustentabilidad no es una opción en nuestros
-                  proyectos; es un punto de partida indispensable.
+                  el planeta. La sustentabilidad no es una opción; es un punto
+                  de partida indispensable.
                 </p>
               </FadeIn>
             </div>
@@ -180,7 +186,7 @@ export default function NosotrosPage() {
             </h2>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <Link href="/contacto" className="btn-outline border-paper/50 text-paper hover:bg-paper hover:text-ink">
+            <Link href="/contact" className="btn-outline border-paper/50 text-paper hover:bg-paper hover:text-ink">
               Contáctanos
               <ArrowRight size={16} />
             </Link>

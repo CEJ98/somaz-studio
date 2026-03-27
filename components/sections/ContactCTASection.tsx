@@ -22,7 +22,7 @@ export default function ContactCTASection() {
         </FadeIn>
         <FadeIn delay={0.35}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contacto" className="btn-primary">
+            <Link href="/contact" className="btn-primary">
               Iniciar un proyecto
               <ArrowRight size={16} />
             </Link>
