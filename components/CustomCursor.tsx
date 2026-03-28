@@ -1,82 +1,70 @@
-'use client'
+"use client";
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function CustomCursor() {
-  const dotRef = useRef<HTMLDivElement>(null)
-  const ringRef = useRef<HTMLDivElement>(null)
+  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const [hovering, setHovering] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Only activate on pointer-capable devices
-    if (!window.matchMedia('(pointer: fine)').matches) return
-
-    const dot = dotRef.current
-    const ring = ringRef.current
-    if (!dot || !ring) return
-
-    let mouseX = 0
-    let mouseY = 0
-    let ringX = 0
-    let ringY = 0
+    // Only show on non-touch devices
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX
-      mouseY = e.clientY
-      dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`
-    }
+      setPos({ x: e.clientX, y: e.clientY });
+      if (!visible) setVisible(true);
+    };
 
-    let raf: number
-    const animate = () => {
-      ringX += (mouseX - ringX) * 0.12
-      ringY += (mouseY - ringY) * 0.12
-      ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`
-      raf = requestAnimationFrame(animate)
-    }
+    const onOver = (e: MouseEvent) => {
+      const el = e.target as Element;
+      if (el.closest("a, button, [data-cursor-hover]")) setHovering(true);
+    };
 
-    const onEnterLink = () => {
-      dot.classList.add('scale-[2]')
-      ring.classList.add('opacity-0')
-    }
-    const onLeaveLink = () => {
-      dot.classList.remove('scale-[2]')
-      ring.classList.remove('opacity-0')
-    }
+    const onOut = (e: MouseEvent) => {
+      const el = e.target as Element;
+      if (el.closest("a, button, [data-cursor-hover]")) setHovering(false);
+    };
 
-    document.addEventListener('mousemove', onMove)
-    raf = requestAnimationFrame(animate)
+    const onLeave = () => setVisible(false);
+    const onEnter = () => setVisible(true);
 
-    const bindHovers = () => {
-      document.querySelectorAll('a, button, [data-cursor-grow]').forEach((el) => {
-        el.addEventListener('mouseenter', onEnterLink)
-        el.addEventListener('mouseleave', onLeaveLink)
-      })
-    }
-
-    bindHovers()
-    const observer = new MutationObserver(bindHovers)
-    observer.observe(document.body, { childList: true, subtree: true })
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseout", onOut);
+    document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseenter", onEnter);
 
     return () => {
-      document.removeEventListener('mousemove', onMove)
-      cancelAnimationFrame(raf)
-      observer.disconnect()
-    }
-  }, [])
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
+      document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseenter", onEnter);
+    };
+  }, [visible]);
+
+  const size = hovering ? 28 : 8;
 
   return (
-    <>
-      {/* Main dot */}
-      <div
-        ref={dotRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9999] w-2 h-2 rounded-full bg-accent transition-transform duration-150 ease-out hidden md:block"
-        style={{ willChange: 'transform' }}
-      />
-      {/* Trailing ring */}
-      <div
-        ref={ringRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9998] w-8 h-8 rounded-full border border-accent/40 transition-opacity duration-200 hidden md:block"
-        style={{ willChange: 'transform' }}
-      />
-    </>
-  )
+    <motion.div
+      className="fixed top-0 left-0 z-[9999] rounded-full pointer-events-none mix-blend-difference hidden md:block"
+      style={{ backgroundColor: "#C9A96E" }}
+      animate={{
+        x: pos.x - size / 2,
+        y: pos.y - size / 2,
+        width: size,
+        height: size,
+        opacity: visible ? 1 : 0,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 600,
+        damping: 30,
+        mass: 0.4,
+        opacity: { duration: 0.2 },
+      }}
+    />
+  );
 }

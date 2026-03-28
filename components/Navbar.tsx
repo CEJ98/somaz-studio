@@ -1,144 +1,186 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { motion, useScroll } from 'framer-motion'
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
-const ease = [0.22, 1, 0.36, 1] as const
-
-const links = [
-  { href: '/work', label: 'Work' },
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-]
-
-const letters = ['S', 'O', 'M', 'A', 'Z']
+const navLinks = [
+  { href: "/work", label: "Proyectos" },
+  { href: "/about", label: "Nosotros" },
+  { href: "/services", label: "Servicios" },
+];
 
 export default function Navbar() {
-  const pathname = usePathname()
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [logoHovered, setLogoHovered] = useState(false)
-  const { scrollYProgress } = useScroll()
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
-    setMenuOpen(false)
-  }, [pathname])
+    setMenuOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const navBg =
+    isHome && !scrolled
+      ? "bg-transparent"
+      : "bg-paper/95 backdrop-blur-sm border-b border-border";
+
+  const textColor = isHome && !scrolled ? "text-white" : "text-ink";
+
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled || menuOpen ? 'bg-background/95 backdrop-blur-sm border-b border-border' : 'bg-transparent'
-      }`}
-    >
-      <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="font-serif text-xl font-semibold tracking-[0.3em] text-foreground hover:text-accent transition-colors duration-300 flex"
-          onMouseEnter={() => setLogoHovered(true)}
-          onMouseLeave={() => setLogoHovered(false)}
-        >
-          {letters.map((letter, i) => (
-            <motion.span
-              key={i}
-              animate={logoHovered ? { y: -3 } : { y: 0 }}
-              transition={{ duration: 0.3, delay: i * 0.05, ease: ease }}
-              className="inline-block"
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </Link>
-
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-10">
-          {links.map(({ href, label }) => {
-            const isActive = pathname === href
-            return (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className={`relative font-sans text-sm tracking-widest uppercase font-medium transition-colors duration-300 group inline-flex items-center gap-1.5 ${
-                    isActive ? 'text-accent' : 'text-foreground/70 hover:text-foreground'
-                  }`}
-                >
-                  {label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`}
-                  />
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`block h-px w-6 bg-foreground transition-all duration-300 ${
-              menuOpen ? 'rotate-45 translate-y-2.5' : ''
-            }`}
-          />
-          <span
-            className={`block h-px w-6 bg-foreground transition-all duration-300 ${
-              menuOpen ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`block h-px w-6 bg-foreground transition-all duration-300 ${
-              menuOpen ? '-rotate-45 -translate-y-2.5' : ''
-            }`}
-          />
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden bg-background/95 backdrop-blur-sm border-b border-border transition-all duration-300 overflow-hidden ${
-          menuOpen ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0'
-        }`}
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${navBg}`}
       >
-        <ul className="flex flex-col px-6 py-6 gap-6">
-          {links.map(({ href, label }, i) => (
-            <motion.li
-              key={href}
-              initial={{ opacity: 0, x: -16 }}
-              animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-              transition={{ duration: 0.3, delay: i * 0.08, ease: ease }}
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <Link
+            href="/"
+            className={`font-heading font-semibold text-2xl tracking-[0.3em] uppercase transition-colors duration-300 ${textColor}`}
+          >
+            SOMAZ
+            <span
+              className={`ml-2 font-light tracking-[0.15em] ${
+                isHome && !scrolled ? "text-gold-light" : "text-gold"
+              }`}
             >
+              Studio
+            </span>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-10">
+            {navLinks.map((link) => (
               <Link
-                href={href}
-                className={`font-sans text-sm tracking-widest uppercase font-medium ${
-                  pathname === href ? 'text-accent' : 'text-foreground/70'
+                key={link.href}
+                href={link.href}
+                className={`section-label transition-colors duration-300 hover:text-gold relative ${
+                  isActive(link.href)
+                    ? "text-gold"
+                    : textColor
                 }`}
               >
-                {label}
+                {link.label}
+                {isActive(link.href) && (
+                  <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-gold" />
+                )}
               </Link>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
+            ))}
+            <Link
+              href="/contact"
+              className={`section-label px-5 py-2.5 border transition-all duration-300 ${
+                isHome && !scrolled
+                  ? "border-white/60 text-white hover:bg-white hover:text-ink"
+                  : "border-ink text-ink hover:bg-ink hover:text-paper"
+              }`}
+            >
+              Contacto
+            </Link>
+          </nav>
 
-      {/* Scroll progress bar */}
-      <motion.div
-        className="absolute bottom-0 left-0 h-px bg-accent origin-left"
-        style={{ scaleX: scrollYProgress }}
-      />
-    </header>
-  )
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className={`md:hidden p-2 transition-colors duration-300 z-[60] relative ${
+              menuOpen ? "text-paper" : textColor
+            }`}
+            aria-label="Toggle menu"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {menuOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X size={22} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="open"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu size={22} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+            animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
+            exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.45, ease: [0.19, 1, 0.22, 1] }}
+            className="fixed inset-0 z-40 bg-ink flex flex-col pt-24 px-8 pb-12"
+          >
+            <nav className="flex flex-col gap-2 mt-4">
+              {[...navLinks, { href: "/contact", label: "Contacto" }].map(
+                (link, i) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.07, duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
+                  >
+                    <Link
+                      href={link.href}
+                      className={`block font-heading text-[clamp(2.5rem,10vw,4.5rem)] leading-tight transition-colors duration-200 py-2 ${
+                        isActive(link.href)
+                          ? "text-gold"
+                          : "text-paper hover:text-gold"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                )
+              )}
+            </nav>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45 }}
+              className="mt-auto border-t border-paper/10 pt-8"
+            >
+              <p className="section-label text-paper/30 mb-3">Contacto directo</p>
+              <a
+                href="mailto:hola@somazstudio.mx"
+                className="text-paper/60 font-body text-sm hover:text-gold transition-colors"
+              >
+                hola@somazstudio.mx
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }

@@ -1,181 +1,238 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState } from "react";
+import { Send, CheckCircle, AlertCircle } from "lucide-react";
 
-type Status = 'idle' | 'loading' | 'success' | 'error'
+// ─── To connect Formspree: ──────────────────────────────────────────────────
+// 1. Create a form at https://formspree.io
+// 2. Replace the value below with your endpoint
+// 3. Uncomment the fetch call in handleSubmit
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+// ────────────────────────────────────────────────────────────────────────────
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/XXXXXXXX'
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const projectTypes = [
+  "Residencial",
+  "Comercial",
+  "Cultural / Institucional",
+  "Hotelero",
+  "Urbanismo",
+  "Otro",
+];
 
-function FloatingInput({
-  id,
-  name,
-  type = 'text',
-  required,
-}: {
-  id: string
-  name: string
-  type?: string
-  required?: boolean
-}) {
-  const [focused, setFocused] = useState(false)
-  const [hasValue, setHasValue] = useState(false)
-  const active = focused || hasValue
-
-  return (
-    <div className="relative pt-4">
-      <label
-        htmlFor={id}
-        className={`absolute left-0 font-sans tracking-widest uppercase transition-all duration-200 pointer-events-none ${
-          active ? '-top-0 text-accent text-[10px]' : 'top-7 text-foreground/30 text-xs'
-        }`}
-      >
-        {id === 'name' ? 'Name' : 'Email'}
-      </label>
-      <input
-        id={id}
-        name={name}
-        type={type}
-        required={required}
-        onFocus={() => setFocused(true)}
-        onBlur={(e) => {
-          setFocused(false)
-          setHasValue(e.target.value.length > 0)
-        }}
-        className="w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-3 focus:outline-none focus:border-accent transition-colors duration-300"
-      />
-      {hasValue && !focused && (
-        <span className="absolute right-0 top-7 text-accent text-xs">✓</span>
-      )}
-    </div>
-  )
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  projectType: string;
+  budget: string;
+  message: string;
 }
 
-export default function ContactForm() {
-  const [status, setStatus] = useState<Status>('idle')
-  const [msgLen, setMsgLen] = useState(0)
-  const [emailError, setEmailError] = useState('')
+type Status = "idle" | "loading" | "success" | "error";
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const form = e.currentTarget
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value
-    if (!EMAIL_RE.test(email)) {
-      setEmailError('Please enter a valid email address.')
-      return
-    }
-    setEmailError('')
-    setStatus('loading')
-    const data = new FormData(form)
+export default function ContactForm() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [form, setForm] = useState<FormData>({
+    name: "",
+    email: "",
+    phone: "",
+    projectType: "",
+    budget: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
-      })
-      if (res.ok) {
-        setStatus('success')
-        form.reset()
-        setMsgLen(0)
-      } else {
-        setStatus('error')
-      }
-    } catch {
-      setStatus('error')
+      // ── Uncomment when Formspree endpoint is configured ──
+      // const res = await fetch(FORMSPREE_ENDPOINT, {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json", Accept: "application/json" },
+      //   body: JSON.stringify(form),
+      // });
+      // if (!res.ok) throw new Error(`Error ${res.status}`);
+
+      // Simulated success for now (remove when Formspree is live)
+      await new Promise((r) => setTimeout(r, 1200));
+
+      setStatus("success");
+    } catch (err) {
+      setErrorMsg(
+        "Hubo un error al enviar el mensaje. Por favor intenta de nuevo o escríbenos directamente a hola@somazstudio.mx"
+      );
+      setStatus("error");
     }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-center">
+        <div className="w-16 h-16 bg-gold/10 flex items-center justify-center mb-6">
+          <CheckCircle size={32} className="text-gold" />
+        </div>
+        <h3 className="font-heading text-3xl font-light text-ink mb-4">
+          ¡Mensaje recibido!
+        </h3>
+        <p className="font-body text-muted text-base max-w-sm">
+          Gracias por contactarnos. Te responderemos en un máximo de 24 horas
+          hábiles para agendar una primera reunión.
+        </p>
+      </div>
+    );
   }
 
-  const inputClass =
-    'w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-3 focus:outline-none focus:border-accent transition-colors duration-300'
-  const labelClass = 'font-sans text-xs tracking-widest uppercase text-foreground/40 mb-2 block'
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <FloatingInput id="name" name="name" required />
+    <form onSubmit={handleSubmit} className="space-y-8" noValidate>
+      {/* Name + Email */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <FloatingInput id="email" name="email" type="email" required />
-          {emailError && (
-            <p className="font-sans text-[10px] text-red-400 mt-1">{emailError}</p>
-          )}
+          <label htmlFor="name" className="section-label text-muted block mb-2">
+            Nombre completo *
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            minLength={2}
+            value={form.name}
+            onChange={handleChange}
+            placeholder="Tu nombre"
+            className="w-full border-b border-border bg-transparent py-3 font-body text-ink placeholder:text-border/80 focus:outline-none focus:border-gold transition-colors duration-300"
+          />
+        </div>
+        <div>
+          <label htmlFor="email" className="section-label text-muted block mb-2">
+            Email *
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            value={form.email}
+            onChange={handleChange}
+            placeholder="tu@email.com"
+            className="w-full border-b border-border bg-transparent py-3 font-body text-ink placeholder:text-border/80 focus:outline-none focus:border-gold transition-colors duration-300"
+          />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Phone + Project type */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="project_type" className={labelClass}>Project Type</label>
-          <select id="project_type" name="project_type" required className={`${inputClass} appearance-none`}>
-            <option value="" disabled>Select a service</option>
-            <option>3D Visualization</option>
-            <option>Interior Design</option>
-            <option>Conceptual Design</option>
-            <option>Consulting</option>
-            <option>Other</option>
-          </select>
+          <label htmlFor="phone" className="section-label text-muted block mb-2">
+            Teléfono
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="+52 55 1234 5678"
+            className="w-full border-b border-border bg-transparent py-3 font-body text-ink placeholder:text-border/80 focus:outline-none focus:border-gold transition-colors duration-300"
+          />
         </div>
         <div>
-          <label htmlFor="budget" className={labelClass}>Budget Range</label>
-          <select id="budget" name="budget" required className={`${inputClass} appearance-none`}>
-            <option value="" disabled>Select a range</option>
-            <option>Under $1,000</option>
-            <option>$1,000–$5,000</option>
-            <option>$5,000–$15,000</option>
-            <option>$15,000+</option>
+          <label htmlFor="projectType" className="section-label text-muted block mb-2">
+            Tipo de proyecto
+          </label>
+          <select
+            id="projectType"
+            name="projectType"
+            value={form.projectType}
+            onChange={handleChange}
+            className="w-full border-b border-border bg-transparent py-3 font-body text-ink focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer appearance-none"
+          >
+            <option value="" disabled>Selecciona una opción</option>
+            {projectTypes.map((type) => (
+              <option key={type} value={type}>{type}</option>
+            ))}
           </select>
         </div>
       </div>
 
+      {/* Budget */}
       <div>
-        <label htmlFor="message" className={labelClass}>Message</label>
+        <label htmlFor="budget" className="section-label text-muted block mb-2">
+          Presupuesto aproximado
+        </label>
+        <select
+          id="budget"
+          name="budget"
+          value={form.budget}
+          onChange={handleChange}
+          className="w-full border-b border-border bg-transparent py-3 font-body text-ink focus:outline-none focus:border-gold transition-colors duration-300 cursor-pointer appearance-none"
+        >
+          <option value="" disabled>Rango de inversión</option>
+          <option value="menor-1m">Menor a $1,000,000 MXN</option>
+          <option value="1m-5m">$1,000,000 – $5,000,000 MXN</option>
+          <option value="5m-20m">$5,000,000 – $20,000,000 MXN</option>
+          <option value="mayor-20m">Mayor a $20,000,000 MXN</option>
+          <option value="nd">Prefiero no especificar</option>
+        </select>
+      </div>
+
+      {/* Message */}
+      <div>
+        <label htmlFor="message" className="section-label text-muted block mb-2">
+          Cuéntanos sobre tu proyecto *
+        </label>
         <textarea
           id="message"
           name="message"
-          rows={5}
           required
-          placeholder="Tell us about your project..."
-          className={`${inputClass} resize-none`}
-          onChange={(e) => setMsgLen(e.target.value.length)}
+          minLength={10}
+          rows={5}
+          value={form.message}
+          onChange={handleChange}
+          placeholder="Describe brevemente tu idea, el terreno o espacio disponible, el programa que necesitas y cualquier referencia que tengas..."
+          className="w-full border-b border-border bg-transparent py-3 font-body text-ink placeholder:text-border/80 focus:outline-none focus:border-gold transition-colors duration-300 resize-none"
         />
-        <p className="text-right font-sans text-[10px] text-foreground/20 mt-1">{msgLen} chars</p>
       </div>
 
-      <div>
-        {status === 'success' ? (
-          <div className="py-4 px-6 border border-accent/40 text-accent font-sans text-sm">
-            Message sent. We&apos;ll be in touch shortly.
-          </div>
-        ) : status === 'error' ? (
-          <div className="py-4 px-6 border border-red-500/40 text-red-400 font-sans text-sm">
-            Something went wrong. Please email us directly at hola@somazstudio.com
-          </div>
-        ) : (
-          <button
-            type="submit"
-            disabled={status === 'loading'}
-            className="inline-flex items-center gap-3 bg-accent text-background px-10 py-5 font-sans text-sm tracking-widest uppercase hover:bg-accent/90 disabled:opacity-50 transition-all duration-300 group"
-          >
-            {status === 'loading' ? (
-              <span className="flex gap-1">
-                {[0, 1, 2].map((i) => (
-                  <motion.span
-                    key={i}
-                    className="w-1 h-1 rounded-full bg-background inline-block"
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-                  />
-                ))}
-              </span>
-            ) : (
-              <>
-                Send Message
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </>
-            )}
-          </button>
-        )}
+      {/* Error message */}
+      {status === "error" && (
+        <div className="flex items-start gap-3 p-4 bg-red-50 border border-red-200">
+          <AlertCircle size={18} className="text-red-500 shrink-0 mt-0.5" />
+          <p className="font-body text-red-700 text-sm leading-relaxed">{errorMsg}</p>
+        </div>
+      )}
+
+      {/* Submit */}
+      <div className="pt-2">
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {status === "loading" ? (
+            <span className="flex items-center gap-2">
+              <span className="w-4 h-4 border-2 border-paper/40 border-t-paper rounded-full animate-spin" />
+              Enviando...
+            </span>
+          ) : (
+            <>
+              Enviar mensaje
+              <Send size={15} />
+            </>
+          )}
+        </button>
+        <p className="mt-4 font-body text-muted text-xs">
+          * Campos obligatorios. Respondemos en máximo 24 horas hábiles.
+        </p>
       </div>
     </form>
-  )
+  );
 }
