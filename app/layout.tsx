@@ -92,9 +92,9 @@ const jsonLd = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="es" className={geistSans.variable}>
       <head>
@@ -120,5 +120,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  );
+  )
 }
