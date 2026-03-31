@@ -203,6 +203,12 @@ export default function Footer() {
               >
                 LinkedIn
               </a>
+              <Link
+                href="/privacy"
+                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
+              >
+                Privacy
+              </Link>
               <p className="font-sans text-[10px] text-foreground/15 italic">
                 Not a licensed architecture firm.
               </p>

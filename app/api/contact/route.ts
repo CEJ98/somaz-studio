@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
+import { getResend } from '@/lib/resend'
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,6 +25,30 @@ export async function POST(req: NextRequest) {
     if (error) {
       console.error('Supabase error:', error)
       return NextResponse.json({ error: 'Failed to save submission' }, { status: 500 })
+    }
+
+    // Send notification email — non-blocking
+    try {
+      const resend = getResend()
+      if (!resend) throw new Error('RESEND_API_KEY not configured')
+      await resend.emails.send({
+        from: 'Somaz Studio <hola@somazstudio.com>',
+        to: 'hola@somazstudio.com',
+        subject: `New lead: ${name} — ${project_type}`,
+        text: [
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Phone: ${phone || '—'}`,
+          `Project Type: ${project_type}`,
+          `Budget: ${budget}`,
+          `Size (sqft): ${sqft || '—'}`,
+          '',
+          `Message:`,
+          message,
+        ].join('\n'),
+      })
+    } catch (emailErr) {
+      console.error('Resend error:', emailErr)
     }
 
     return NextResponse.json({ success: true })
