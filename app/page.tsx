@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import ProjectCard from '@/components/ProjectCard'
 import { projects } from '@/data/projects'
@@ -29,6 +28,8 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 
 export default function HomePage() {
   const featuredProjects = projects.slice(0, 3)
+  const { scrollY } = useScroll()
+  const watermarkY = useTransform(scrollY, [0, 800], [0, -120])
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -67,12 +68,12 @@ export default function HomePage() {
           className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
           aria-hidden="true"
         >
-          <span
+          <motion.span
             className="font-serif text-foreground opacity-[0.04]"
-            style={{ fontSize: 'clamp(8rem, 20vw, 20rem)', lineHeight: 1 }}
+            style={{ fontSize: 'clamp(8rem, 20vw, 20rem)', lineHeight: 1, y: watermarkY }}
           >
             Studio
-          </span>
+          </motion.span>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto w-full">
@@ -85,17 +86,31 @@ export default function HomePage() {
             Miami · Global
           </motion.p>
 
-          <motion.h1
+          <h1
             className="font-serif leading-[0.88] tracking-tight"
             style={{ fontSize: 'clamp(4rem, 12vw, 9rem)' }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: ease, delay: 0.1 }}
           >
-            <span className="font-light text-foreground/70">Space is</span>
-            <br />
-            <span className="font-semibold text-foreground">the message.</span>
-          </motion.h1>
+            <div className="overflow-hidden">
+              <motion.span
+                className="block font-light text-foreground/70"
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, ease, delay: 0.1 }}
+              >
+                Space is
+              </motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span
+                className="block font-semibold text-foreground"
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, ease, delay: 0.28 }}
+              >
+                the message.
+              </motion.span>
+            </div>
+          </h1>
 
           <motion.div
             className="w-10 h-px bg-accent mb-6 mt-8"

@@ -2,8 +2,11 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import type { Project } from '@/data/projects'
+
+const ease = [0.22, 1, 0.36, 1] as const
 
 interface ProjectCardProps {
   project: Project
@@ -13,6 +16,8 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, priority = false, featured = false }: ProjectCardProps) {
   const [hovered, setHovered] = useState(false)
+  const cardRef = useRef(null)
+  const inView = useInView(cardRef, { once: true, margin: '-80px' })
 
   return (
     <Link
@@ -21,7 +26,15 @@ export default function ProjectCard({ project, priority = false, featured = fals
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className={`relative overflow-hidden ${featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+      <div ref={cardRef} className={`relative overflow-hidden ${featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+        {/* Curtain reveal */}
+        <motion.div
+          className="absolute inset-0 bg-surface z-10 origin-top pointer-events-none"
+          initial={{ scaleY: 1 }}
+          animate={inView ? { scaleY: 0 } : {}}
+          transition={{ duration: 1, ease }}
+          aria-hidden="true"
+        />
         <Image
           src={project.coverImage}
           alt={project.title}
