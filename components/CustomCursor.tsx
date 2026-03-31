@@ -34,11 +34,11 @@ export default function CustomCursor() {
     }
 
     const onEnterLink = () => {
-      dot.classList.add('scale-[2]')
+      dot.classList.add('scale-[3]', 'opacity-30')
       ring.classList.add('opacity-0')
     }
     const onLeaveLink = () => {
-      dot.classList.remove('scale-[2]')
+      dot.classList.remove('scale-[3]', 'opacity-30')
       ring.classList.remove('opacity-0')
     }
 

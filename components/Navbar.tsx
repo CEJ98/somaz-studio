@@ -45,7 +45,7 @@ export default function Navbar() {
             alt="Somaz Studio"
             width={180}
             height={56}
-            className="h-auto w-44 object-contain"
+            className="h-7 w-auto object-contain"
             priority
           />
         </Link>

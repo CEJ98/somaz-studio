@@ -8,6 +8,12 @@ const ease = [0.22, 1, 0.36, 1] as const
 import ProjectCard from '@/components/ProjectCard'
 import { projects, categories, type ProjectCategory } from '@/data/projects'
 
+const sizeToSpan: Record<string, string> = {
+  large: 'md:col-span-8',
+  medium: 'md:col-span-6',
+  small: 'md:col-span-4',
+}
+
 export default function WorkClient() {
   const [active, setActive] = useState<ProjectCategory>('All')
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null)
@@ -66,8 +72,8 @@ export default function WorkClient() {
           Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
         </motion.p>
 
-        {/* Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {/* Editorial Grid — 12 columns */}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-12 gap-2">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, i) => (
               <motion.div
@@ -77,13 +83,13 @@ export default function WorkClient() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.45, delay: i * 0.06, ease: ease }}
-                className={`transition-opacity duration-300 ${
-                  i === 0 ? 'md:col-span-2 lg:col-span-2' : i % 2 !== 0 ? 'md:mt-12' : ''
-                } ${hoveredSlug && hoveredSlug !== project.slug ? 'opacity-40' : 'opacity-100'}`}
+                className={`${sizeToSpan[project.size] || 'md:col-span-4'} transition-opacity duration-300 ${
+                  hoveredSlug && hoveredSlug !== project.slug ? 'opacity-40' : 'opacity-100'
+                }`}
                 onMouseEnter={() => setHoveredSlug(project.slug)}
                 onMouseLeave={() => setHoveredSlug(null)}
               >
-                <ProjectCard project={project} priority={i < 3} featured={i === 0} />
+                <ProjectCard project={project} priority={i < 3} featured={project.featured} />
               </motion.div>
             ))}
           </AnimatePresence>

@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
-import { toast } from 'sonner'
 
 export default function Footer() {
   const [email, setEmail] = useState('')
@@ -23,7 +22,7 @@ export default function Footer() {
         setEmail('')
       }
     } catch {
-      toast.error('Could not subscribe. Please try again or email us at hola@somazstudio.com')
+      window.location.href = `mailto:hola@somazstudio.com?subject=Newsletter&body=I'd like to subscribe: ${encodeURIComponent(email)}`
     }
   }
 

@@ -88,27 +88,33 @@ export default function HomePage() {
 
           <h1
             className="font-serif leading-[0.88] tracking-tight"
-            style={{ fontSize: 'clamp(4rem, 12vw, 9rem)' }}
+            style={{ fontSize: 'clamp(72px, 8vw, 120px)' }}
           >
-            <div className="overflow-hidden">
-              <motion.span
-                className="block font-light text-foreground/70"
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, ease, delay: 0.1 }}
-              >
-                Space is
-              </motion.span>
+            <div className="overflow-hidden flex gap-[0.3em]">
+              {['Space', 'is'].map((word, i) => (
+                <motion.span
+                  key={word}
+                  className="inline-block font-light text-foreground/70"
+                  initial={{ y: '110%' }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1, ease, delay: 0.1 + i * 0.08 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </div>
-            <div className="overflow-hidden">
-              <motion.span
-                className="block font-semibold text-foreground"
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, ease, delay: 0.28 }}
-              >
-                the message.
-              </motion.span>
+            <div className="overflow-hidden flex gap-[0.3em]">
+              {['the', 'message.'].map((word, i) => (
+                <motion.span
+                  key={word}
+                  className="inline-block font-semibold text-foreground"
+                  initial={{ y: '110%' }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1, ease, delay: 0.26 + i * 0.08 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </div>
           </h1>
 
@@ -138,33 +144,38 @@ export default function HomePage() {
             className="mt-12 flex flex-col sm:flex-row gap-4"
           >
             <Link
-              href="/contact"
+              href="/work"
               className="inline-flex items-center gap-3 bg-accent text-background px-8 py-4 font-sans text-sm tracking-widest uppercase hover:bg-accent/90 transition-all duration-300 group"
             >
-              Start a Project
+              View Our Work
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
             <Link
-              href="/work"
-              className="inline-flex items-center gap-3 border border-foreground/25 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
+              href="/contact"
+              className="inline-flex items-center gap-3 border border-foreground/40 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
             >
-              View Our Work
+              Start a Project
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — bounce + fade on scroll */}
         <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
+          style={{ opacity: useTransform(scrollY, [0, 150], [1, 0]) }}
         >
           <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/25 rotate-90 origin-center">
             Scroll
           </span>
-          <div className="w-px h-12 bg-gradient-to-b from-transparent to-foreground/25" />
+          <motion.div
+            className="w-px h-12 bg-gradient-to-b from-transparent to-foreground/25"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </motion.div>
       </section>
 
@@ -292,10 +303,9 @@ export default function HomePage() {
                 transition={{ duration: 0.7, delay: i * 0.12, ease }}
                 className="relative border-t border-border pt-8 pb-10 md:pr-12"
               >
-                <span className="absolute top-4 right-0 font-serif text-[8rem] leading-none text-foreground/[0.03] select-none pointer-events-none font-bold">
+                <span className="absolute top-4 right-0 font-serif leading-none text-foreground/[0.06] select-none pointer-events-none font-bold" style={{ fontSize: '120px' }}>
                   {item.step}
                 </span>
-                <p className="font-sans text-xs tracking-widest uppercase text-accent mb-4">{item.step}</p>
                 <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">{item.title}</h3>
                 <p className="font-sans font-light text-foreground/70 leading-relaxed">{item.description}</p>
               </motion.div>
@@ -355,9 +365,16 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.7, delay: i * 0.1, ease: ease }}
-                className="border border-border p-8 flex flex-col justify-between"
+                className="relative border border-border p-8 flex flex-col justify-between overflow-hidden"
               >
-                <p className="font-serif text-foreground/70 text-lg leading-relaxed mb-8 italic">
+                <span
+                  className="absolute -top-4 -left-2 font-serif text-accent opacity-[0.15] select-none pointer-events-none"
+                  style={{ fontSize: '200px', lineHeight: 1 }}
+                  aria-hidden="true"
+                >
+                  &ldquo;
+                </span>
+                <p className="relative font-serif text-foreground/70 text-lg leading-relaxed mb-8 italic">
                   &ldquo;{t.quote}&rdquo;
                 </p>
                 <div>
@@ -380,7 +397,7 @@ export default function HomePage() {
           >
             <span
               className="font-serif text-foreground opacity-[0.03]"
-              style={{ fontSize: '20rem', lineHeight: 1 }}
+              style={{ fontSize: '40vw', lineHeight: 1 }}
             >
               S
             </span>

@@ -39,7 +39,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
           src={project.coverImage}
           alt={project.title}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
           className={`object-cover transition-[filter,transform] duration-700 ease-out ${
             hovered ? 'scale-[1.04] saturate-[1.1]' : 'scale-100 saturate-[0.85]'
           }`}
@@ -50,9 +50,9 @@ export default function ProjectCard({ project, priority = false, featured = fals
           className={`absolute inset-0 transition-opacity duration-400 flex flex-col justify-end p-6 ${
             hovered ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ background: 'linear-gradient(135deg, transparent 30%, rgba(28,28,26,0.85) 100%)' }}
+          style={{ background: 'rgba(0,0,0,0.6)' }}
         >
-          <p className="font-sans text-xs tracking-widest uppercase text-accent mb-2">
+          <p className="font-sans text-[11px] tracking-widest uppercase text-accent mb-2">
             {project.category}
           </p>
           <div className="overflow-hidden">
