@@ -5,17 +5,20 @@ import { motion } from 'framer-motion'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
+// TODO: Replace with real Formspree endpoint (https://formspree.io)
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/XXXXXXXX'
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function FloatingInput({
   id,
   name,
+  label,
   type = 'text',
   required,
 }: {
   id: string
   name: string
+  label: string
   type?: string
   required?: boolean
 }) {
@@ -31,7 +34,7 @@ function FloatingInput({
           active ? '-top-0 text-accent text-[10px]' : 'top-7 text-foreground/30 text-xs'
         }`}
       >
-        {id === 'name' ? 'Name' : 'Email'}
+        {label}
       </label>
       <input
         id={id}
@@ -94,9 +97,9 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <FloatingInput id="name" name="name" required />
+        <FloatingInput id="name" name="name" label="Name" required />
         <div>
-          <FloatingInput id="email" name="email" type="email" required />
+          <FloatingInput id="email" name="email" label="Email" type="email" required />
           {emailError && (
             <p className="font-sans text-[10px] text-red-400 mt-1">{emailError}</p>
           )}

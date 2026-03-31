@@ -40,18 +40,6 @@ export default function ContactPage() {
               </div>
 
               <div className="border-b border-border pb-8">
-                <p className="font-sans text-xs tracking-widest uppercase text-foreground/30 mb-3">WhatsApp</p>
-                <a
-                  href="https://wa.me/1XXXXXXXXXX"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-serif text-xl text-foreground hover:text-accent transition-colors duration-300"
-                >
-                  +1 (XXX) XXX-XXXX
-                </a>
-              </div>
-
-              <div className="border-b border-border pb-8">
                 <p className="font-sans text-xs tracking-widest uppercase text-foreground/30 mb-4">Follow</p>
                 <div className="flex flex-col gap-3">
                   <a
