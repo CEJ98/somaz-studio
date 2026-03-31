@@ -22,7 +22,7 @@ function FadeUp({ children, delay = 0, className }: { children: React.ReactNode;
   )
 }
 
-function CounterStat({ value, label }: { value: string; label: string }) {
+function CounterStat({ value, suffix = '', label }: { value: string; suffix?: string; label: string }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true })
   const count = useMotionValue(0)
@@ -38,7 +38,7 @@ function CounterStat({ value, label }: { value: string; label: string }) {
   return (
     <div ref={ref}>
       <p className="font-serif font-semibold text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-        {isNumeric ? <motion.span>{rounded}</motion.span> : value}
+        {isNumeric ? <motion.span>{rounded}</motion.span> : value}{suffix}
       </p>
       <p className="font-sans text-sm text-foreground/40 tracking-wide mt-2 uppercase">{label}</p>
     </div>
@@ -47,19 +47,19 @@ function CounterStat({ value, label }: { value: string; label: string }) {
 
 const differentiators = [
   {
-    label: 'Bilingual',
+    label: 'Latin American Roots',
     description:
-      'We work fluently in Spanish and English, making collaboration seamless for Latin American clients.',
+      'Our design sensibility draws from a rich Latin American heritage — warmth, texture, and a deep understanding of how culture shapes space.',
   },
   {
-    label: 'Remote-native',
+    label: 'Concept to Render',
     description:
-      'Our workflow is built for remote collaboration. Clear processes, fast turnaround, no location barriers.',
+      'We handle the full creative arc: from initial spatial concept through material selection, furniture layout, and photorealistic visualization.',
   },
   {
-    label: 'AI-enhanced',
+    label: 'Remote-First Studio',
     description:
-      'We integrate AI tools to accelerate delivery without sacrificing quality or design integrity.',
+      'Built for a borderless world. We collaborate with clients across 8+ countries using a process that is clear, fast, and location-independent.',
   },
 ]
 
@@ -93,7 +93,7 @@ export default function AboutClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25, ease: ease }}
           >
-            <p className="font-sans font-light text-foreground/60 text-lg leading-relaxed">
+            <p className="font-sans font-light text-foreground/70 text-lg leading-relaxed">
               Somaz Studio was founded in Miami with a clear purpose: bring Latin American design sensibility
               to a global market. We specialize in architectural visualization, interior design, and spatial
               concept development — working remotely with clients across the US, Latin America, and beyond.
@@ -120,7 +120,7 @@ export default function AboutClient() {
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">{item.label}</h3>
-                  <p className="font-sans font-light text-foreground/60 leading-relaxed">{item.description}</p>
+                  <p className="font-sans font-light text-foreground/70 leading-relaxed">{item.description}</p>
                 </div>
               </FadeUp>
             ))}
@@ -133,13 +133,13 @@ export default function AboutClient() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
-              { value: '50+', label: 'Projects delivered' },
-              { value: '3', label: 'Countries' },
-              { value: '2', label: 'Languages' },
-              { value: '100%', label: 'Remote capability' },
+              { value: '50', suffix: '+', label: 'Projects delivered' },
+              { value: '8', suffix: '+', label: 'Countries served' },
+              { value: 'EN/ES', suffix: '', label: 'Bilingual team' },
+              { value: '100', suffix: '%', label: 'Remote capability' },
             ].map((stat, i) => (
               <FadeUp key={stat.label} delay={i * 0.1}>
-                <CounterStat value={stat.value} label={stat.label} />
+                <CounterStat value={stat.value} suffix={stat.suffix} label={stat.label} />
               </FadeUp>
             ))}
           </div>
@@ -155,7 +155,7 @@ export default function AboutClient() {
             </h2>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 border border-foreground/30 text-foreground px-10 py-5 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
+              className="inline-flex items-center gap-3 border border-foreground/25 text-foreground px-10 py-5 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
             >
               Get in Touch
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

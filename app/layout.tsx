@@ -4,6 +4,9 @@ import { cormorant, dmSans } from '@/lib/fonts'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
+import { Toaster } from 'sonner'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://somazstudio.com'),
@@ -55,6 +58,20 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <Toaster
+          theme="dark"
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: '#2E2E2B',
+              border: '1px solid #3A3A37',
+              color: '#F0EDE6',
+              fontFamily: 'var(--font-dm-sans)',
+            },
+          }}
+        />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

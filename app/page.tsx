@@ -7,6 +7,7 @@ import { useRef } from 'react'
 import ProjectCard from '@/components/ProjectCard'
 import { projects } from '@/data/projects'
 import { services } from '@/data/services'
+import { testimonials } from '@/data/testimonials'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -91,7 +92,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: ease, delay: 0.1 }}
           >
-            <span className="font-light text-foreground/80">Space is</span>
+            <span className="font-light text-foreground/70">Space is</span>
             <br />
             <span className="font-semibold text-foreground">the message.</span>
           </motion.h1>
@@ -105,25 +106,32 @@ export default function HomePage() {
           />
 
           <motion.p
-            className="font-sans font-light text-foreground/60 max-w-md leading-relaxed"
+            className="font-sans font-light text-foreground/70 max-w-md leading-relaxed"
             style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: ease, delay: 0.25 }}
           >
-            Miami-based design studio.<br />
-            3D visualization · Interior design · Spatial concepts.
+            We turn architectural vision into photorealistic reality —<br />
+            from Miami to the world.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: ease, delay: 0.4 }}
-            className="mt-12"
+            className="mt-12 flex flex-col sm:flex-row gap-4"
           >
             <Link
+              href="/contact"
+              className="inline-flex items-center gap-3 bg-accent text-background px-8 py-4 font-sans text-sm tracking-widest uppercase hover:bg-accent/90 transition-all duration-300 group"
+            >
+              Start a Project
+              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
+            <Link
               href="/work"
-              className="inline-flex items-center gap-3 border border-foreground/30 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
+              className="inline-flex items-center gap-3 border border-foreground/25 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
             >
               View Our Work
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -131,22 +139,17 @@ export default function HomePage() {
           </motion.div>
         </div>
 
-        {/* Scroll indicator — editorial */}
+        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          transition={{ delay: 1.5, duration: 1 }}
         >
-          <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/30 rotate-90 origin-center">
+          <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/25 rotate-90 origin-center">
             Scroll
           </span>
-          <motion.div
-            className="w-px bg-gradient-to-b from-transparent to-foreground/30"
-            initial={{ height: 0 }}
-            animate={{ height: 48, y: [0, 8, 0] }}
-            transition={{ height: { delay: 1.5, duration: 1, ease }, y: { delay: 2.5, duration: 1.5, repeat: Infinity, ease: 'easeInOut' } }}
-          />
+          <div className="w-px h-12 bg-gradient-to-b from-transparent to-foreground/25" />
         </motion.div>
       </section>
 
@@ -161,7 +164,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/work"
-            className="hidden md:inline-flex items-center gap-2 font-sans text-sm text-foreground/50 hover:text-foreground transition-colors duration-300 group"
+            className="hidden md:inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300 group"
           >
             All projects
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -186,7 +189,7 @@ export default function HomePage() {
         <AnimatedSection className="mt-10 md:hidden">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 font-sans text-sm text-foreground/50 hover:text-foreground transition-colors duration-300"
+            className="inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300"
           >
             See All Projects →
           </Link>
@@ -213,12 +216,15 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: i * 0.07, ease: ease }}
                 className="flex items-center gap-6 py-5 border-b border-border group"
               >
-                <span className="font-sans text-xs text-foreground/30 font-medium tracking-wider w-8 shrink-0 group-hover:text-accent transition-colors duration-300">
+                <span className="font-sans text-xs text-foreground/25 font-medium tracking-wider w-8 shrink-0 group-hover:text-accent transition-colors duration-300">
                   {s.number}
                 </span>
-                <span className="font-serif text-xl md:text-2xl text-foreground/80 group-hover:text-foreground group-hover:translate-x-1 transition-all duration-300">
-                  {s.title}
-                </span>
+                <div className="group-hover:translate-x-1 transition-all duration-300">
+                  <span className="font-serif text-xl md:text-2xl text-foreground/70 group-hover:text-foreground block">
+                    {s.title}
+                  </span>
+                  <span className="font-sans text-sm text-foreground/40 italic">{s.tagline}</span>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -226,7 +232,7 @@ export default function HomePage() {
           <AnimatedSection className="mt-12">
             <Link
               href="/services"
-              className="inline-flex items-center gap-3 border border-foreground/30 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
+              className="inline-flex items-center gap-3 border border-foreground/25 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
             >
               Explore Services
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -253,18 +259,51 @@ export default function HomePage() {
           </div>
 
           <AnimatedSection>
-            <p className="font-sans font-light text-foreground/60 text-lg leading-relaxed mb-8">
+            <p className="font-sans font-light text-foreground/70 text-lg leading-relaxed mb-8">
               Somaz Studio brings together design sensibility and cutting-edge visualization tools
               to transform spaces across Miami, Latin America, and beyond.
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 font-sans text-sm text-foreground/50 hover:text-foreground transition-colors duration-300 group"
+              className="inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300 group"
             >
               Our Story
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      <section className="px-6 md:px-10 py-24 md:py-32 border-t border-border">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection className="mb-16">
+            <p className="font-sans text-xs tracking-widest uppercase text-accent mb-3">What Clients Say</p>
+            <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+              Trusted by design-forward clients.
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.7, delay: i * 0.1, ease: ease }}
+                className="border border-border p-8 flex flex-col justify-between"
+              >
+                <p className="font-serif text-foreground/70 text-lg leading-relaxed mb-8 italic">
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+                <div>
+                  <p className="font-sans text-sm text-foreground font-medium">{t.name}</p>
+                  <p className="font-sans text-xs text-foreground/40">{t.role} — {t.location}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -286,7 +325,7 @@ export default function HomePage() {
 
           <AnimatedSection className="relative z-10">
             <h2
-              className="font-serif font-semibold mb-10 bg-gradient-to-r from-foreground to-foreground/50 bg-clip-text text-transparent"
+              className="font-serif font-semibold mb-10 bg-gradient-to-r from-foreground to-foreground/40 bg-clip-text text-transparent"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
             >
               Let&apos;s build something together.

@@ -24,5 +24,24 @@ export default function ProjectPage({ params }: Props) {
   const project = projects.find((p) => p.slug === params.slug)
   if (!project) notFound()
 
-  return <ProjectPageClient project={project} allProjects={projects} />
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.title,
+    description: project.brief,
+    creator: { '@type': 'Organization', name: 'Somaz Studio' },
+    locationCreated: project.location,
+    dateCreated: String(project.year),
+    genre: project.category,
+    image: `https://somazstudio.com${project.coverImage}`,
+    url: `https://somazstudio.com/work/${project.slug}`,
+  }
+
+  // Safe: jsonLd is built entirely from static data in data/projects.ts, no user input
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ProjectPageClient project={project} allProjects={projects} />
+    </>
+  )
 }

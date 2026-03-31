@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import ServiceItem from '@/components/ServiceItem'
 import { services } from '@/data/services'
 import Link from 'next/link'
+import PageFade from '@/components/PageFade'
 
 export const metadata: Metadata = {
   title: 'Design Services',
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="animate-fade-in min-h-screen pt-32 pb-24 px-6 md:px-10">
+    <PageFade className="min-h-screen pt-32 pb-24 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-20">
@@ -23,7 +24,7 @@ export default function ServicesPage() {
           <h1 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}>
             Services
           </h1>
-          <p className="font-sans font-light text-foreground/50 text-lg mt-6 max-w-xl leading-relaxed">
+          <p className="font-sans font-light text-foreground/40 text-lg mt-6 max-w-xl leading-relaxed">
             Every project is different. These packages give you a starting point — we'll tailor the scope to your specific needs.
           </p>
         </div>
@@ -37,7 +38,7 @@ export default function ServicesPage() {
 
         {/* Bottom CTA */}
         <div className="mt-24 pt-16 border-t border-border text-center">
-          <p className="font-serif text-foreground/60 text-2xl mb-8">
+          <p className="font-serif text-foreground/70 text-2xl mb-8">
             Not sure which service fits your project?
           </p>
           <Link
@@ -49,6 +50,6 @@ export default function ServicesPage() {
           </Link>
         </div>
       </div>
-    </div>
+    </PageFade>
   )
 }

@@ -76,7 +76,7 @@ export default function ProjectPageClient({ project, allProjects }: Props) {
               onMouseEnter={() => setHoveredCell(key)}
               onMouseLeave={() => setHoveredCell(null)}
             >
-              <p className="font-sans text-xs tracking-widest uppercase text-foreground/30 mb-2">{label}</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-2">{label}</p>
               {serif ? (
                 <p className="font-serif text-xl">{value}</p>
               ) : accent ? (
@@ -94,9 +94,32 @@ export default function ProjectPageClient({ project, allProjects }: Props) {
             <h1 className="font-serif font-semibold text-foreground mb-6" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
               {project.title}
             </h1>
-            <p className="font-sans font-light text-foreground/60 text-lg leading-relaxed">
+            <p className="font-sans font-light text-foreground/70 text-lg leading-relaxed">
               {project.description}
             </p>
+          </div>
+
+          {/* Sidebar — project meta */}
+          <div className="flex flex-col gap-8 md:pt-2">
+            {metaCells.filter(c => c.key !== 'project').map(({ key, label, value, accent }) => (
+              <div key={key} className="border-b border-border pb-6">
+                <p className="font-sans text-[10px] tracking-widest uppercase text-foreground/25 mb-2">{label}</p>
+                {accent ? (
+                  <p className="font-sans text-sm text-accent">{value}</p>
+                ) : (
+                  <p className="font-sans text-sm text-foreground/70">{value}</p>
+                )}
+              </div>
+            ))}
+            <div className="mt-4">
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-3 bg-accent text-background px-6 py-3 font-sans text-xs tracking-widest uppercase hover:bg-accent/90 transition-all duration-300 group"
+              >
+                Start a Project
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -123,19 +146,23 @@ export default function ProjectPageClient({ project, allProjects }: Props) {
             {/* Remaining images: horizontal scroll on mobile, 2-col grid on desktop */}
             {galleryImages.length > 1 && (
               <>
-                {/* Mobile: horizontal scroll */}
-                <div className="flex md:hidden gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-6 px-6">
-                  {galleryImages.slice(1).map((img, i) => (
-                    <div key={i} className="relative aspect-[4/3] w-[80vw] flex-shrink-0 snap-start overflow-hidden">
-                      <Image
-                        src={img}
-                        alt={`${project.title} — view ${i + 3}`}
-                        fill
-                        className="object-cover"
-                        sizes="80vw"
-                      />
-                    </div>
-                  ))}
+                {/* Mobile: horizontal scroll with fade hint */}
+                <div className="relative md:hidden">
+                  <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-6 px-6">
+                    {galleryImages.slice(1).map((img, i) => (
+                      <div key={i} className="relative aspect-[4/3] w-[80vw] flex-shrink-0 snap-start overflow-hidden">
+                        <Image
+                          src={img}
+                          alt={`${project.title} — view ${i + 3}`}
+                          fill
+                          className="object-cover"
+                          sizes="80vw"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  {/* Fade hint — right edge */}
+                  <div className="absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none" />
                 </div>
 
                 {/* Desktop: 2-col grid */}
@@ -167,7 +194,7 @@ export default function ProjectPageClient({ project, allProjects }: Props) {
         {/* Next Project */}
         {nextProject && (
           <div className="mb-16 pt-16 border-t border-border">
-            <p className="font-sans text-xs tracking-widest uppercase text-foreground/30 mb-8">Next Project</p>
+            <p className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-8">Next Project</p>
             <Link
               href={`/work/${nextProject.slug}`}
               className="group flex flex-col md:flex-row items-start md:items-center gap-6 hover:opacity-80 transition-opacity duration-300"
@@ -187,7 +214,7 @@ export default function ProjectPageClient({ project, allProjects }: Props) {
                   {nextProject.title}
                 </h3>
                 <p className="font-sans text-sm text-foreground/40">{nextProject.location} — {nextProject.year}</p>
-                <span className="inline-block mt-4 font-sans text-sm text-foreground/50 group-hover:text-foreground transition-colors duration-300">
+                <span className="inline-block mt-4 font-sans text-sm text-foreground/40 group-hover:text-foreground transition-colors duration-300">
                   View project →
                 </span>
               </div>
@@ -199,14 +226,14 @@ export default function ProjectPageClient({ project, allProjects }: Props) {
         <div className="flex items-center justify-between pt-12 border-t border-border">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 font-sans text-sm text-foreground/50 hover:text-foreground transition-colors duration-300 group"
+            className="inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300 group"
           >
             <span className="transition-transform duration-300 group-hover:-translate-x-1">←</span>
             All Work
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 border border-foreground/30 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
+            className="inline-flex items-center gap-3 border border-foreground/25 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
           >
             Start a Project
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

@@ -1,21 +1,67 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
+import { toast } from 'sonner'
 
-type Status = 'idle' | 'loading' | 'success' | 'error'
+type Status = 'idle' | 'loading'
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/XXXXXXXX'
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+function FloatingSelect({
+  id,
+  name,
+  label,
+  required,
+  children,
+}: {
+  id: string
+  name: string
+  label: string
+  required?: boolean
+  children: React.ReactNode
+}) {
+  const [hasValue, setHasValue] = useState(false)
+
+  return (
+    <div className="relative pt-4">
+      <label
+        htmlFor={id}
+        className={`absolute left-0 font-sans tracking-widest uppercase transition-all duration-200 pointer-events-none ${
+          hasValue ? '-top-0 text-accent text-[10px]' : 'top-7 text-foreground/25 text-xs'
+        }`}
+      >
+        {label}
+      </label>
+      <select
+        id={id}
+        name={name}
+        required={required}
+        defaultValue=""
+        onChange={(e) => setHasValue(e.target.value !== '')}
+        className="w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-3 focus:outline-none focus:border-accent transition-colors duration-300 appearance-none"
+      >
+        <option value="" disabled />
+        {children}
+      </select>
+    </div>
+  )
+}
+
+const MARQUEE_TEXT =
+  'CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003'
 
 function FloatingInput({
   id,
   name,
+  label,
   type = 'text',
   required,
 }: {
   id: string
   name: string
+  label: string
   type?: string
   required?: boolean
 }) {
@@ -28,10 +74,10 @@ function FloatingInput({
       <label
         htmlFor={id}
         className={`absolute left-0 font-sans tracking-widest uppercase transition-all duration-200 pointer-events-none ${
-          active ? '-top-0 text-accent text-[10px]' : 'top-7 text-foreground/30 text-xs'
+          active ? '-top-0 text-accent text-[10px]' : 'top-7 text-foreground/25 text-xs'
         }`}
       >
-        {id === 'name' ? 'Name' : 'Email'}
+        {label}
       </label>
       <input
         id={id}
@@ -53,6 +99,7 @@ function FloatingInput({
 }
 
 export default function ContactForm() {
+  const router = useRouter()
   const [status, setStatus] = useState<Status>('idle')
   const [msgLen, setMsgLen] = useState(0)
   const [emailError, setEmailError] = useState('')
@@ -68,23 +115,24 @@ export default function ContactForm() {
     setEmailError('')
     setStatus('loading')
     const data = new FormData(form)
+    const payload = Object.fromEntries(data.entries())
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
       if (res.ok) {
-        setStatus('success')
-        form.reset()
-        setMsgLen(0)
+        router.push('/contact/thank-you')
+        return
       } else {
-        setStatus('error')
+        toast.error('Something went wrong. Email us at hola@somazstudio.com')
       }
     } catch {
-      setStatus('error')
+      toast.error('Something went wrong. Email us at hola@somazstudio.com')
     }
+    setStatus('idle')
   }
 
   const inputClass =
@@ -92,65 +140,75 @@ export default function ContactForm() {
   const labelClass = 'font-sans text-xs tracking-widest uppercase text-foreground/40 mb-2 block'
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <FloatingInput id="name" name="name" required />
-        <div>
-          <FloatingInput id="email" name="email" type="email" required />
-          {emailError && (
-            <p className="font-sans text-[10px] text-red-400 mt-1">{emailError}</p>
-          )}
+    <div>
+      {/* Marquee header */}
+      <div className="overflow-hidden border-b border-border/40 mb-12 -mx-6 md:-mx-10">
+        <div className="marquee-track py-3">
+          {[0, 1].map((i) => (
+            <span
+              key={i}
+              className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/25 shrink-0 px-4"
+            >
+              {MARQUEE_TEXT}
+            </span>
+          ))}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <label htmlFor="project_type" className={labelClass}>Project Type</label>
-          <select id="project_type" name="project_type" required className={`${inputClass} appearance-none`}>
-            <option value="" disabled>Select a service</option>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        {/* Row 1: Name + Email */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <FloatingInput id="name" name="name" label="Name" required />
+          <div>
+            <FloatingInput id="email" name="email" label="Email" type="email" required />
+            {emailError && (
+              <p className="font-sans text-[10px] text-red-400 mt-1">{emailError}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Row 2: Phone + Project Size */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <FloatingInput id="phone" name="phone" label="Phone (optional)" type="tel" />
+          <FloatingInput id="sqft" name="sqft" label="Project Size (sqft, optional)" />
+        </div>
+
+        {/* Row 3: Project Type + Budget */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <FloatingSelect id="project_type" name="project_type" label="Project Type" required>
             <option>3D Visualization</option>
             <option>Interior Design</option>
             <option>Conceptual Design</option>
             <option>Consulting</option>
+            <option>Full-Studio Partnership</option>
             <option>Other</option>
-          </select>
+          </FloatingSelect>
+          <FloatingSelect id="budget" name="budget" label="Budget Range" required>
+            <option>Under $5K</option>
+            <option>$5K – $15K</option>
+            <option>$15K – $50K</option>
+            <option>$50K+</option>
+          </FloatingSelect>
         </div>
+
+        {/* Row 4: Message */}
         <div>
-          <label htmlFor="budget" className={labelClass}>Budget Range</label>
-          <select id="budget" name="budget" required className={`${inputClass} appearance-none`}>
-            <option value="" disabled>Select a range</option>
-            <option>Under $1,000</option>
-            <option>$1,000–$5,000</option>
-            <option>$5,000–$15,000</option>
-            <option>$15,000+</option>
-          </select>
+          <label htmlFor="message" className={labelClass}>Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows={5}
+            required
+            placeholder="Tell us about your project..."
+            className={`${inputClass} resize-none`}
+            onChange={(e) => setMsgLen(e.target.value.length)}
+          />
+          {msgLen > 0 && (
+            <p className="text-right font-sans text-[10px] text-foreground/25 mt-1">{msgLen} chars</p>
+          )}
         </div>
-      </div>
 
-      <div>
-        <label htmlFor="message" className={labelClass}>Message</label>
-        <textarea
-          id="message"
-          name="message"
-          rows={5}
-          required
-          placeholder="Tell us about your project..."
-          className={`${inputClass} resize-none`}
-          onChange={(e) => setMsgLen(e.target.value.length)}
-        />
-        <p className="text-right font-sans text-[10px] text-foreground/20 mt-1">{msgLen} chars</p>
-      </div>
-
-      <div>
-        {status === 'success' ? (
-          <div className="py-4 px-6 border border-accent/40 text-accent font-sans text-sm">
-            Message sent. We&apos;ll be in touch shortly.
-          </div>
-        ) : status === 'error' ? (
-          <div className="py-4 px-6 border border-red-500/40 text-red-400 font-sans text-sm">
-            Something went wrong. Please email us directly at hola@somazstudio.com
-          </div>
-        ) : (
+        <div>
           <button
             type="submit"
             disabled={status === 'loading'}
@@ -174,8 +232,8 @@ export default function ContactForm() {
               </>
             )}
           </button>
-        )}
-      </div>
-    </form>
+        </div>
+      </form>
+    </div>
   )
 }

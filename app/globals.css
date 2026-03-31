@@ -30,8 +30,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom cursor — only on pointer devices */
-@media (pointer: fine) {
+/* Custom cursor — only on pointer devices with min 768px screen */
+@media (pointer: fine) and (min-width: 768px) {
   * {
     cursor: none !important;
   }
@@ -79,6 +79,18 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
 }
 
 @layer utilities {

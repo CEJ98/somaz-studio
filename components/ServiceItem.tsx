@@ -48,6 +48,7 @@ export default function ServiceItem({ service }: { service: Service }) {
 
   return (
     <motion.div
+      id={service.slug}
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -66,7 +67,7 @@ export default function ServiceItem({ service }: { service: Service }) {
         {/* Left */}
         <div>
           <div className="flex items-start gap-6 mb-6">
-            <span className="font-sans text-sm text-foreground/30 font-medium tracking-wider mt-1 group-hover:text-accent transition-colors duration-300">
+            <span className="font-sans text-sm text-foreground/25 font-medium tracking-wider mt-1 group-hover:text-accent transition-colors duration-300">
               {service.number}
             </span>
             <div>
@@ -84,13 +85,13 @@ export default function ServiceItem({ service }: { service: Service }) {
               </div>
             </div>
           </div>
-          <p className="font-sans font-light text-foreground/60 text-lg leading-relaxed ml-12 md:ml-14">
+          <p className="font-sans font-light text-foreground/70 text-lg leading-relaxed ml-12 md:ml-14">
             {service.description}
           </p>
           <div className="ml-12 md:ml-14 mt-8">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 font-sans text-sm text-foreground/50 hover:text-foreground transition-colors duration-300 group"
+              className="inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300 group"
             >
               Start a Project
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -103,10 +104,10 @@ export default function ServiceItem({ service }: { service: Service }) {
           {service.packages.map((pkg, i) => (
             <div
               key={i}
-              className="flex items-start justify-between py-4 border-b border-border/50 border-l-2 border-l-transparent hover:border-l-accent hover:bg-surface/50 pl-4 -ml-4 hover:border-b-accent/30 transition-all duration-300 group"
+              className="flex items-start justify-between py-4 border-b border-border/40 border-l-2 border-l-transparent hover:border-l-accent hover:bg-surface/50 pl-4 -ml-4 hover:border-b-accent/25 transition-all duration-300 group"
             >
               <div>
-                <p className="font-sans font-medium text-foreground/80 group-hover:text-foreground transition-colors duration-300">
+                <p className="font-sans font-medium text-foreground/70 group-hover:text-foreground transition-colors duration-300">
                   {pkg.name}
                 </p>
                 {pkg.description && (

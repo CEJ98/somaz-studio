@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import ContactForm from '@/components/ContactForm'
+import PageFade from '@/components/PageFade'
 
 export const metadata: Metadata = {
   title: 'Start a Project',
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="animate-fade-in min-h-screen pt-32 pb-24 px-6 md:px-10">
+    <PageFade className="min-h-screen pt-32 pb-24 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-20">
@@ -27,47 +28,47 @@ export default function ContactPage() {
           <div>
             <div className="space-y-10">
               <div className="border-b border-border pb-8">
-                <p className="font-sans text-xs tracking-widest uppercase text-foreground/30 mb-3">Email</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-3">Email</p>
                 <a
                   href="mailto:hola@somazstudio.com"
                   className="group font-serif text-xl text-foreground hover:text-accent transition-colors duration-300"
                 >
                   <span className="relative inline-block">
                     hola@somazstudio.com
-                    <span className="absolute -bottom-0.5 left-0 h-px bg-accent/60 w-0 group-hover:w-full transition-all duration-[400ms]" />
+                    <span className="absolute -bottom-0.5 left-0 h-px bg-accent/40 w-0 group-hover:w-full transition-all duration-[400ms]" />
                   </span>
                 </a>
               </div>
 
               <div className="border-b border-border pb-8">
-                <p className="font-sans text-xs tracking-widest uppercase text-foreground/30 mb-3">WhatsApp</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-3">WhatsApp</p>
                 <a
-                  href="https://wa.me/1XXXXXXXXXX"
+                  href="https://wa.me/17865377682"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-serif text-xl text-foreground hover:text-accent transition-colors duration-300"
                 >
-                  +1 (XXX) XXX-XXXX
+                  +1 (786) 537-7682
                 </a>
               </div>
 
               <div className="border-b border-border pb-8">
-                <p className="font-sans text-xs tracking-widest uppercase text-foreground/30 mb-4">Follow</p>
+                <p className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-4">Follow</p>
                 <div className="flex flex-col gap-3">
                   <a
                     href="https://instagram.com/somazstudio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-sm text-foreground/60 hover:text-foreground transition-colors duration-300 group inline-flex items-center gap-2"
+                    className="font-sans text-sm text-foreground/70 hover:text-foreground transition-colors duration-300 group inline-flex items-center gap-2"
                   >
                     <span>Instagram</span>
-                    <span className="text-foreground/30">@somazstudio</span>
+                    <span className="text-foreground/25">@somazstudio</span>
                   </a>
                   <a
                     href="https://linkedin.com/company/somazstudio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-sm text-foreground/60 hover:text-foreground transition-colors duration-300"
+                    className="font-sans text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
                   >
                     LinkedIn — Somaz Studio
                   </a>
@@ -88,6 +89,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageFade>
   )
 }

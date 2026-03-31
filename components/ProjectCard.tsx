@@ -48,7 +48,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
             </h3>
           </div>
           <div className="overflow-hidden mt-1">
-            <p className={`font-sans text-sm text-foreground/60 transition-transform duration-500 delay-75 ${hovered ? 'translate-y-0' : 'translate-y-full'}`}>
+            <p className={`font-sans text-sm text-foreground/70 transition-transform duration-500 delay-75 ${hovered ? 'translate-y-0' : 'translate-y-full'}`}>
               {project.location} — {project.year}
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
           {project.category}
         </p>
         <h3 className="font-serif text-xl font-semibold">{project.title}</h3>
-        <p className="font-sans text-sm text-foreground/50">
+        <p className="font-sans text-sm text-foreground/40">
           {project.location} — {project.year}
         </p>
       </div>

@@ -61,7 +61,7 @@ export default function WorkClient() {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: ease }}
-          className="font-sans text-xs tracking-widest uppercase text-foreground/30 mb-8"
+          className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-8"
         >
           Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
         </motion.p>

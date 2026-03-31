@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { motion, useScroll } from 'framer-motion'
@@ -14,13 +15,10 @@ const links = [
   { href: '/contact', label: 'Contact' },
 ]
 
-const letters = ['S', 'O', 'M', 'A', 'Z']
-
 export default function Navbar() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [logoHovered, setLogoHovered] = useState(false)
   const { scrollYProgress } = useScroll()
 
   useEffect(() => {
@@ -41,22 +39,15 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link
-          href="/"
-          className="font-serif text-xl font-semibold tracking-[0.3em] text-foreground hover:text-accent transition-colors duration-300 flex"
-          onMouseEnter={() => setLogoHovered(true)}
-          onMouseLeave={() => setLogoHovered(false)}
-        >
-          {letters.map((letter, i) => (
-            <motion.span
-              key={i}
-              animate={logoHovered ? { y: -3 } : { y: 0 }}
-              transition={{ duration: 0.3, delay: i * 0.05, ease: ease }}
-              className="inline-block"
-            >
-              {letter}
-            </motion.span>
-          ))}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logos/logo-white.png"
+            alt="Somaz Studio"
+            width={180}
+            height={56}
+            className="h-auto w-44 object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop links */}
@@ -81,6 +72,14 @@ export default function Navbar() {
               </li>
             )
           })}
+          <li>
+            <Link
+              href="/contact"
+              className="bg-accent text-background px-5 py-2 font-sans text-xs tracking-widest uppercase hover:bg-accent/90 transition-colors duration-300"
+            >
+              Start a Project
+            </Link>
+          </li>
         </ul>
 
         {/* Mobile hamburger */}
@@ -131,6 +130,18 @@ export default function Navbar() {
               </Link>
             </motion.li>
           ))}
+          <motion.li
+            initial={{ opacity: 0, x: -16 }}
+            animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
+            transition={{ duration: 0.3, delay: links.length * 0.08, ease: ease }}
+          >
+            <Link
+              href="/contact"
+              className="inline-block bg-accent text-background px-5 py-2 font-sans text-xs tracking-widest uppercase hover:bg-accent/90 transition-colors duration-300"
+            >
+              Start a Project
+            </Link>
+          </motion.li>
         </ul>
       </div>
 
