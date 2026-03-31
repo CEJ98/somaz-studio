@@ -26,19 +26,21 @@ function CounterStat({ value, label }: { value: string; label: string }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true })
   const count = useMotionValue(0)
-  const rounded = useTransform(count, (v) => Math.round(v).toString())
-  const isNumeric = /^\d+$/.test(value)
+  const numMatch = value.match(/^(\d+)(.*)$/)
+  const numericValue = numMatch ? parseInt(numMatch[1]) : null
+  const suffix = numMatch ? numMatch[2] : ''
+  const rounded = useTransform(count, (v) => Math.round(v).toString() + suffix)
 
   useEffect(() => {
-    if (inView && isNumeric) {
-      animate(count, parseInt(value), { duration: 1.5, ease: 'easeOut' })
+    if (inView && numericValue !== null) {
+      animate(count, numericValue, { duration: 1.5, ease: 'easeOut' })
     }
-  }, [inView, value, count, isNumeric])
+  }, [inView, numericValue, count])
 
   return (
     <div ref={ref}>
       <p className="font-serif font-semibold text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-        {isNumeric ? <motion.span>{rounded}</motion.span> : value}
+        {numericValue !== null ? <motion.span>{rounded}</motion.span> : value}
       </p>
       <p className="font-sans text-sm text-foreground/40 tracking-wide mt-2 uppercase">{label}</p>
     </div>
