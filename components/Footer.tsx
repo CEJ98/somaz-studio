@@ -72,9 +72,9 @@ export default function Footer() {
             <Image
               src="/logos/logo-white.png"
               alt="Somaz Studio"
-              width={130}
+              width={170}
               height={40}
-              className="h-9 w-auto object-contain mb-3"
+              className="h-10 w-auto object-contain mb-3"
               style={{ mixBlendMode: 'screen' }}
             />
             <p className="font-sans text-sm font-light text-foreground/35 leading-relaxed mb-6">

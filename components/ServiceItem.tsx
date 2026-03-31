@@ -32,7 +32,7 @@ const serviceIcons: Record<string, JSX.Element> = {
       <line x1="8" y1="15" x2="12" y2="15" />
     </svg>
   ),
-  'consulting': (
+  'design-consulting': (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgba(201,169,110,0.6)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="3" width="16" height="11" rx="2" />
       <path d="M7 14 L5 18" />
