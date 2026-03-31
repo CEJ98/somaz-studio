@@ -38,6 +38,7 @@ function FloatingSelect({
         id={id}
         name={name}
         required={required}
+        aria-label={label}
         defaultValue=""
         onChange={(e) => setHasValue(e.target.value !== '')}
         className="w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-3 focus:outline-none focus:border-accent transition-colors duration-300 appearance-none"
@@ -84,6 +85,7 @@ function FloatingInput({
         name={name}
         type={type}
         required={required}
+        aria-label={label}
         onFocus={() => setFocused(true)}
         onBlur={(e) => {
           setFocused(false)
@@ -161,9 +163,11 @@ export default function ContactForm() {
           <FloatingInput id="name" name="name" label="Name" required />
           <div>
             <FloatingInput id="email" name="email" label="Email" type="email" required />
-            {emailError && (
-              <p className="font-sans text-[10px] text-red-400 mt-1">{emailError}</p>
-            )}
+            <div aria-live="polite">
+              {emailError && (
+                <p className="font-sans text-[10px] text-red-400 mt-1">{emailError}</p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -199,6 +203,7 @@ export default function ContactForm() {
             name="message"
             rows={5}
             required
+            maxLength={2000}
             placeholder="Tell us about your project..."
             className={`${inputClass} resize-none`}
             onChange={(e) => setMsgLen(e.target.value.length)}

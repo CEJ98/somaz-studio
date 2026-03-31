@@ -241,6 +241,54 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── HOW WE WORK ── */}
+      <section className="px-6 md:px-10 py-24 md:py-32 border-t border-border">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection className="mb-16">
+            <p className="font-sans text-xs tracking-widest uppercase text-accent mb-3">Our Process</p>
+            <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+              How we work.
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+            {[
+              {
+                step: '01',
+                title: 'Consult',
+                description: 'We begin with a focused conversation — understanding your vision, program, and timeline. No templates, no assumptions.',
+              },
+              {
+                step: '02',
+                title: 'Design',
+                description: 'We develop the spatial concept, material palette, and visualization strategy. Every decision is intentional and documented.',
+              },
+              {
+                step: '03',
+                title: 'Deliver',
+                description: 'Final renders, drawings, or design packages delivered on schedule. Clear, complete, ready to use.',
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.7, delay: i * 0.12, ease }}
+                className="relative border-t border-border pt-8 pb-10 md:pr-12"
+              >
+                <span className="absolute top-4 right-0 font-serif text-[8rem] leading-none text-foreground/[0.03] select-none pointer-events-none font-bold">
+                  {item.step}
+                </span>
+                <p className="font-sans text-xs tracking-widest uppercase text-accent mb-4">{item.step}</p>
+                <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">{item.title}</h3>
+                <p className="font-sans font-light text-foreground/70 leading-relaxed">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── ABOUT INTRO ── */}
       <section className="px-6 md:px-10 py-24 md:py-32 border-t border-border">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-0 items-center">
