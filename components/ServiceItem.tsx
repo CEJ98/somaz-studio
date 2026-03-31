@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import type { Service } from '@/data/services'
 
@@ -52,71 +51,76 @@ export default function ServiceItem({ service }: { service: Service }) {
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: ease }}
-      className="border-t border-border pt-12 pb-16 group relative"
+      transition={{ duration: 0.9, ease }}
+      className="border-t border-border/40 pt-14 pb-20 group relative overflow-hidden"
     >
-      {/* Ghost number */}
+      {/* Ghost number background */}
       <span
-        className="absolute right-0 top-8 font-serif font-semibold text-foreground select-none pointer-events-none opacity-0 group-hover:opacity-[0.04] transition-opacity duration-500"
-        style={{ fontSize: '8rem', lineHeight: 1 }}
+        className="absolute right-0 top-4 font-serif font-bold text-foreground/[0.03] select-none pointer-events-none leading-none"
+        style={{ fontSize: '12rem' }}
         aria-hidden="true"
       >
         {service.number}
       </span>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20">
-        {/* Left */}
-        <div>
-          <div className="flex items-start gap-6 mb-6">
-            <span className="font-sans text-sm text-foreground/25 font-medium tracking-wider mt-1 group-hover:text-accent transition-colors duration-300">
+
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+        {/* Left — service info */}
+        <div className="md:col-span-5 relative z-10">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/20 group-hover:text-accent transition-colors duration-300">
               {service.number}
             </span>
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                {serviceIcons[service.slug] ?? null}
-                <p className="font-sans text-xs tracking-widest uppercase text-accent">
-                  {service.tagline}
-                </p>
-              </div>
-              <div className="relative inline-block">
-                <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)' }}>
-                  {service.title}
-                </h2>
-                <span className="absolute -bottom-1 left-0 h-px bg-accent transition-all duration-500 w-0 group-hover:w-full" />
-              </div>
-            </div>
+            <div className="h-px flex-1 bg-border/30" />
           </div>
-          <p className="font-sans font-light text-foreground/70 text-lg leading-relaxed ml-12 md:ml-14">
+
+          <div className="flex items-center gap-3 mb-3">
+            {serviceIcons[service.slug] ?? null}
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/80">
+              {service.tagline}
+            </p>
+          </div>
+
+          <div className="relative inline-block mb-8">
+            <h2 className="font-serif font-light text-foreground" style={{ fontSize: 'clamp(1.75rem, 3vw, 2.75rem)' }}>
+              {service.title}
+            </h2>
+            <span className="absolute -bottom-1 left-0 h-px bg-accent transition-all duration-500 w-0 group-hover:w-full" />
+          </div>
+
+          <p className="font-sans font-light text-foreground/55 leading-relaxed mb-8">
             {service.description}
           </p>
-          <div className="ml-12 md:ml-14 mt-8">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300 group"
-            >
-              Start a Project
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
-          </div>
+
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/35 hover:text-accent border-b border-foreground/15 pb-0.5 hover:border-accent transition-all duration-300"
+          >
+            Start a Project
+            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>north_east</span>
+          </Link>
         </div>
 
         {/* Right — packages */}
-        <div className="space-y-4">
-          {service.packages.map((pkg, i) => (
-            <div
-              key={i}
-              className="flex items-start justify-between py-4 border-b border-border/40 border-l-2 border-l-transparent hover:border-l-accent hover:bg-surface/50 pl-4 -ml-4 hover:border-b-accent/25 transition-all duration-300 group"
-            >
-              <div>
-                <p className="font-sans font-medium text-foreground/70 group-hover:text-foreground transition-colors duration-300">
-                  {pkg.name}
-                </p>
-                {pkg.description && (
-                  <p className="font-sans text-sm text-foreground/40 mt-0.5">{pkg.description}</p>
-                )}
+        <div className="md:col-span-6 md:col-start-7 relative z-10">
+          <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-6">Packages</p>
+          <div className="space-y-0">
+            {service.packages.map((pkg, i) => (
+              <div
+                key={i}
+                className="flex items-start justify-between py-5 border-b border-border/30 group/pkg hover:border-accent/30 transition-colors duration-300"
+              >
+                <div>
+                  <p className="font-sans text-sm text-foreground/65 group-hover/pkg:text-foreground transition-colors duration-300 mb-0.5">
+                    {pkg.name}
+                  </p>
+                  {pkg.description && (
+                    <p className="font-sans text-[12px] text-foreground/30">{pkg.description}</p>
+                  )}
+                </div>
+                <p className="font-sans text-sm text-accent font-light ml-6 shrink-0">{pkg.price}</p>
               </div>
-              <p className="font-sans text-sm text-accent font-medium ml-4 shrink-0">{pkg.price}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>

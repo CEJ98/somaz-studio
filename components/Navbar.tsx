@@ -33,41 +33,41 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled || menuOpen ? 'bg-background/95 backdrop-blur-sm border-b border-border' : 'bg-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+        scrolled || menuOpen
+          ? 'bg-background/90 backdrop-blur-xl border-b border-border/50'
+          : 'bg-transparent'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="/logos/logo-white.png"
             alt="Somaz Studio"
-            width={180}
-            height={56}
-            className="h-7 w-auto object-contain"
+            width={120}
+            height={40}
+            className="h-6 w-auto object-contain"
             priority
           />
         </Link>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-10">
+        <ul className="hidden md:flex items-center gap-8">
           {links.map(({ href, label }) => {
-            const isActive = pathname === href
+            const isActive = pathname === href || pathname.startsWith(href + '/')
             return (
               <li key={href}>
                 <Link
                   href={href}
-                  className={`relative font-sans text-sm tracking-widest uppercase font-medium transition-colors duration-300 group inline-flex items-center gap-1.5 ${
-                    isActive ? 'text-accent' : 'text-foreground/70 hover:text-foreground'
+                  className={`relative font-sans text-[10px] tracking-[0.25em] uppercase transition-colors duration-300 ${
+                    isActive ? 'text-accent' : 'text-foreground/50 hover:text-foreground'
                   }`}
                 >
                   {label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`}
-                  />
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 w-full h-px bg-accent/40" />
+                  )}
                 </Link>
               </li>
             )
@@ -75,9 +75,10 @@ export default function Navbar() {
           <li>
             <Link
               href="/contact"
-              className="bg-accent text-background px-5 py-2 font-sans text-xs tracking-widest uppercase hover:bg-accent/90 transition-colors duration-300"
+              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 hover:border-accent hover:text-accent px-5 py-2 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
               Start a Project
+              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>north_east</span>
             </Link>
           </li>
         </ul>
@@ -109,22 +110,22 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-background/95 backdrop-blur-sm border-b border-border transition-all duration-300 overflow-hidden ${
-          menuOpen ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0'
+        className={`md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50 transition-all duration-500 overflow-hidden ${
+          menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <ul className="flex flex-col px-6 py-6 gap-6">
+        <ul className="flex flex-col px-6 py-8 gap-6">
           {links.map(({ href, label }, i) => (
             <motion.li
               key={href}
               initial={{ opacity: 0, x: -16 }}
               animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-              transition={{ duration: 0.3, delay: i * 0.08, ease: ease }}
+              transition={{ duration: 0.3, delay: i * 0.06, ease: ease }}
             >
               <Link
                 href={href}
-                className={`font-sans text-sm tracking-widest uppercase font-medium ${
-                  pathname === href ? 'text-accent' : 'text-foreground/70'
+                className={`font-sans text-[10px] tracking-[0.25em] uppercase ${
+                  pathname === href ? 'text-accent' : 'text-foreground/60'
                 }`}
               >
                 {label}
@@ -134,11 +135,11 @@ export default function Navbar() {
           <motion.li
             initial={{ opacity: 0, x: -16 }}
             animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-            transition={{ duration: 0.3, delay: links.length * 0.08, ease: ease }}
+            transition={{ duration: 0.3, delay: links.length * 0.06, ease: ease }}
           >
             <Link
               href="/contact"
-              className="inline-block bg-accent text-background px-5 py-2 font-sans text-xs tracking-widest uppercase hover:bg-accent/90 transition-colors duration-300"
+              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 px-5 py-2.5 font-sans text-[10px] tracking-[0.25em] uppercase"
             >
               Start a Project
             </Link>
@@ -148,7 +149,7 @@ export default function Navbar() {
 
       {/* Scroll progress bar */}
       <motion.div
-        className="absolute bottom-0 left-0 h-px bg-accent origin-left"
+        className="absolute bottom-0 left-0 h-px bg-accent/60 origin-left"
         style={{ scaleX: scrollYProgress }}
       />
     </header>

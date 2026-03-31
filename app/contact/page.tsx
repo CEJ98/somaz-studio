@@ -13,78 +13,83 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <PageFade className="min-h-screen pt-32 pb-24 px-6 md:px-10">
-      <div className="max-w-7xl mx-auto">
+    <PageFade className="min-h-screen pt-28 md:pt-32 pb-24">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
-        <div className="mb-20">
-          <p className="font-sans text-xs tracking-widest uppercase text-accent mb-4">Get in Touch</p>
-          <h1 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}>
-            Let&apos;s talk about<br />your project.
+        <div className="mb-14 md:mb-20">
+          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">Get in Touch</p>
+          <h1 className="font-serif font-light leading-[0.9]" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>
+            <span className="block italic text-foreground/60">Let&apos;s talk about</span>
+            <span className="block font-semibold text-foreground">your project.</span>
           </h1>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+        <div className="architectural-line mb-14" />
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
           {/* Left — contact info */}
-          <div>
-            <div className="space-y-10">
-              <div className="border-b border-border pb-8">
-                <p className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-3">Email</p>
+          <div className="md:col-span-4">
+            <div className="space-y-0">
+              <div className="border-b border-border/40 pb-8 mb-8">
+                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-4">Email</p>
                 <a
                   href="mailto:hola@somazstudio.com"
-                  className="group font-serif text-xl text-foreground hover:text-accent transition-colors duration-300"
+                  className="group font-serif text-xl text-foreground/80 hover:text-accent transition-colors duration-300"
                 >
                   <span className="relative inline-block">
                     hola@somazstudio.com
-                    <span className="absolute -bottom-0.5 left-0 h-px bg-accent/40 w-0 group-hover:w-full transition-all duration-[400ms]" />
+                    <span className="absolute -bottom-0.5 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-500" />
                   </span>
                 </a>
               </div>
 
-              <div className="border-b border-border pb-8">
-                <p className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-3">WhatsApp</p>
+              <div className="border-b border-border/40 pb-8 mb-8">
+                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-4">WhatsApp</p>
                 <a
                   href="https://wa.me/17865377682"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-serif text-xl text-foreground hover:text-accent transition-colors duration-300"
+                  className="font-serif text-xl text-foreground/80 hover:text-accent transition-colors duration-300"
                 >
                   +1 (786) 537-7682
                 </a>
               </div>
 
-              <div className="border-b border-border pb-8">
-                <p className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-4">Follow</p>
-                <div className="flex flex-col gap-3">
+              <div className="border-b border-border/40 pb-8 mb-8">
+                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-4">Follow</p>
+                <div className="flex flex-col gap-4">
                   <a
                     href="https://instagram.com/somazstudio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-sm text-foreground/70 hover:text-foreground transition-colors duration-300 group inline-flex items-center gap-2"
+                    className="inline-flex items-center gap-2 font-sans text-sm text-foreground/55 hover:text-foreground transition-colors duration-300"
                   >
-                    <span>Instagram</span>
-                    <span className="text-foreground/25">@somazstudio</span>
+                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>photo_camera</span>
+                    Instagram — @somazstudio
                   </a>
                   <a
                     href="https://linkedin.com/company/somazstudio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-sm text-foreground/70 hover:text-foreground transition-colors duration-300"
+                    className="inline-flex items-center gap-2 font-sans text-sm text-foreground/55 hover:text-foreground transition-colors duration-300"
                   >
+                    <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>work</span>
                     LinkedIn — Somaz Studio
                   </a>
                 </div>
               </div>
 
               <div>
+                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-3">Location</p>
                 <p className="font-sans text-sm text-foreground/40 leading-relaxed">
-                  Based in Miami, FL.<br />Available worldwide.
+                  Miami, FL — Global
                 </p>
               </div>
             </div>
           </div>
 
           {/* Right — form */}
-          <div>
+          <div className="md:col-span-7 md:col-start-6">
             <ContactForm />
           </div>
         </div>

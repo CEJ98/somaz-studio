@@ -26,14 +26,6 @@ export const metadata: Metadata = {
     title: 'Somaz Studio — 3D Visualization & Interior Design',
     description:
       'Miami-based design studio. 3D visualization · Interior design · Spatial concepts.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Somaz Studio',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -53,6 +45,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${dmSans.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      </head>
       <body className="bg-background text-foreground font-sans antialiased">
         <CustomCursor />
         <Navbar />

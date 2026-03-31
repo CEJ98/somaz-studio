@@ -2,11 +2,10 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-const ease = [0.22, 1, 0.36, 1] as const
-
 import ProjectCard from '@/components/ProjectCard'
 import { projects, categories, type ProjectCategory } from '@/data/projects'
+
+const ease = [0.22, 1, 0.36, 1] as const
 
 const sizeToSpan: Record<string, string> = {
   large: 'md:col-span-8',
@@ -21,36 +20,42 @@ export default function WorkClient() {
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
 
   return (
-    <div className="min-h-screen pt-32 pb-24 px-6 md:px-10">
+    <div className="min-h-screen pt-32 pb-28 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: ease }}
-          className="mb-16"
+          transition={{ duration: 0.9, ease }}
+          className="mb-20"
         >
-          <p className="font-sans text-xs tracking-widest uppercase text-accent mb-4">Portfolio</p>
-          <h1 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}>
+          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">Portfolio</p>
+          <h1
+            className="font-serif font-light italic text-foreground/80"
+            style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
+          >
             Selected Work
           </h1>
         </motion.div>
+
+        {/* Architectural separator */}
+        <div className="architectural-line mb-10" />
 
         {/* Filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: ease }}
-          className="flex flex-wrap gap-3 mb-6"
+          transition={{ duration: 0.6, delay: 0.2, ease }}
+          className="flex flex-wrap gap-2 mb-4"
         >
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`inline-flex items-center font-sans text-xs tracking-widest uppercase px-3 py-1.5 md:px-5 md:py-2.5 border transition-all duration-300 ${
+              className={`font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-2 border transition-all duration-300 ${
                 active === cat
                   ? 'border-accent text-accent'
-                  : 'border-border text-foreground/40 hover:border-foreground/40 hover:text-foreground/70'
+                  : 'border-border/50 text-foreground/35 hover:border-foreground/30 hover:text-foreground/60'
               }`}
             >
               {active === cat && (
@@ -66,10 +71,10 @@ export default function WorkClient() {
           key={filtered.length}
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: ease }}
-          className="font-sans text-xs tracking-widest uppercase text-foreground/25 mb-8"
+          transition={{ duration: 0.3, ease }}
+          className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 mb-10"
         >
-          Showing {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
+          {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
         </motion.p>
 
         {/* Editorial Grid — 12 columns */}
@@ -79,12 +84,12 @@ export default function WorkClient() {
               <motion.div
                 key={project.slug}
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.45, delay: i * 0.06, ease: ease }}
-                className={`${sizeToSpan[project.size] || 'md:col-span-4'} transition-opacity duration-300 ${
-                  hoveredSlug && hoveredSlug !== project.slug ? 'opacity-40' : 'opacity-100'
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.45, delay: i * 0.05, ease }}
+                className={`${sizeToSpan[project.size] || 'md:col-span-4'} transition-opacity duration-500 ${
+                  hoveredSlug && hoveredSlug !== project.slug ? 'opacity-30' : 'opacity-100'
                 }`}
                 onMouseEnter={() => setHoveredSlug(project.slug)}
                 onMouseLeave={() => setHoveredSlug(null)}

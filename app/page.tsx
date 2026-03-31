@@ -1,16 +1,37 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import ProjectCard from '@/components/ProjectCard'
 import { projects } from '@/data/projects'
 import { services } from '@/data/services'
 import { testimonials } from '@/data/testimonials'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-function AnimatedSection({ children, className }: { children: React.ReactNode; className?: string }) {
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Somaz Studio',
+  description: 'Miami-based design studio specializing in 3D visualization, interior design, and spatial concepts.',
+  url: 'https://somazstudio.com',
+  email: 'hola@somazstudio.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Miami',
+    addressRegion: 'FL',
+    addressCountry: 'US',
+  },
+  areaServed: 'Worldwide',
+  serviceType: ['3D Visualization', 'Interior Design', 'Conceptual Design', 'Design Consulting'],
+  sameAs: [
+    'https://instagram.com/somazstudio',
+    'https://linkedin.com/company/somazstudio',
+  ],
+})
+
+function AnimatedSection({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   return (
@@ -18,7 +39,7 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease }}
+      transition={{ duration: 0.9, ease, delay }}
       className={className}
     >
       {children}
@@ -27,359 +48,396 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 }
 
 export default function HomePage() {
-  const featuredProjects = projects.slice(0, 3)
+  const heroProject = projects.find(p => p.featured) ?? projects[0]
+  const selectedProjects = projects.slice(0, 4)
   const { scrollY } = useScroll()
-  const watermarkY = useTransform(scrollY, [0, 800], [0, -120])
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'Somaz Studio',
-    description: 'Miami-based design studio specializing in 3D visualization, interior design, and spatial concepts.',
-    url: 'https://somazstudio.com',
-    email: 'hola@somazstudio.com',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Miami',
-      addressRegion: 'FL',
-      addressCountry: 'US',
-    },
-    areaServed: 'Worldwide',
-    serviceType: ['3D Visualization', 'Interior Design', 'Conceptual Design', 'Design Consulting'],
-    sameAs: [
-      'https://instagram.com/somazstudio',
-      'https://linkedin.com/company/somazstudio',
-    ],
-  }
+  const heroScale = useTransform(scrollY, [0, 600], [1, 1.08])
+  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0])
+  const scrollIndicatorOpacity = useTransform(scrollY, [0, 150], [1, 0])
 
   return (
     <>
-      {/* eslint-disable-next-line react/no-danger -- safe: static hardcoded object, no user input */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      {/* ── HERO ── */}
-      <section className="noise-overlay relative min-h-screen flex flex-col justify-center px-6 md:px-10 pt-24 pb-20">
-        {/* Subtle grid overlay */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{ backgroundImage: 'linear-gradient(#F0EDE6 1px, transparent 1px), linear-gradient(90deg, #F0EDE6 1px, transparent 1px)', backgroundSize: '80px 80px' }}
-        />
+      {/* JSON-LD structured data — static object, no user input */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      />
 
-        {/* Watermark */}
-        <div
-          className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
-          aria-hidden="true"
+      {/* ── HERO — full viewport with project image ── */}
+      <section className="relative h-screen min-h-[700px] overflow-hidden flex flex-col justify-end">
+        {/* Background image with parallax */}
+        <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
+          <Image
+            src={heroProject.images[0]}
+            alt={heroProject.title}
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </motion.div>
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/10" />
+
+        {/* Content */}
+        <motion.div
+          className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-10 pb-20 md:pb-28"
+          style={{ opacity: heroOpacity }}
         >
-          <motion.span
-            className="font-serif text-foreground opacity-[0.04]"
-            style={{ fontSize: 'clamp(8rem, 20vw, 20rem)', lineHeight: 1, y: watermarkY }}
-          >
-            Studio
-          </motion.span>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto w-full">
           <motion.p
-            className="font-sans text-xs tracking-widest uppercase text-accent mb-8"
-            initial={{ opacity: 0, y: 30 }}
+            className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/80 mb-6"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: ease, delay: 0 }}
+            transition={{ duration: 0.8, ease, delay: 0.2 }}
           >
-            Miami · Global
+            Miami · Global · Est. 2022
           </motion.p>
 
-          <h1
-            className="font-serif leading-[0.88] tracking-tight"
-            style={{ fontSize: 'clamp(72px, 8vw, 120px)' }}
-          >
-            <div className="overflow-hidden flex gap-[0.3em]">
-              {['Space', 'is'].map((word, i) => (
-                <motion.span
-                  key={word}
-                  className="inline-block font-light text-foreground/70"
-                  initial={{ y: '110%' }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease, delay: 0.1 + i * 0.08 }}
-                >
-                  {word}
-                </motion.span>
-              ))}
+          <h1 className="font-serif leading-[0.9] tracking-tight mb-8" style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)' }}>
+            <div className="overflow-hidden">
+              <motion.span
+                className="block font-light text-foreground/60 italic"
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.1, ease, delay: 0.3 }}
+              >
+                Space is
+              </motion.span>
             </div>
-            <div className="overflow-hidden flex gap-[0.3em]">
-              {['the', 'message.'].map((word, i) => (
-                <motion.span
-                  key={word}
-                  className="inline-block font-semibold text-foreground"
-                  initial={{ y: '110%' }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease, delay: 0.26 + i * 0.08 }}
-                >
-                  {word}
-                </motion.span>
-              ))}
+            <div className="overflow-hidden">
+              <motion.span
+                className="block font-semibold text-foreground"
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.1, ease, delay: 0.42 }}
+              >
+                the message.
+              </motion.span>
             </div>
           </h1>
 
           <motion.div
-            className="w-10 h-px bg-accent mb-6 mt-8"
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            style={{ originX: 0 }}
-            transition={{ duration: 0.8, ease: ease, delay: 0.2 }}
-          />
-
-          <motion.p
-            className="font-sans font-light text-foreground/70 max-w-md leading-relaxed"
-            style={{ fontSize: 'clamp(1rem, 2vw, 1.125rem)' }}
-            initial={{ opacity: 0, y: 30 }}
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: ease, delay: 0.25 }}
-          >
-            We turn architectural vision into photorealistic reality —<br />
-            from Miami to the world.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: ease, delay: 0.4 }}
-            className="mt-12 flex flex-col sm:flex-row gap-4"
+            transition={{ duration: 0.8, ease, delay: 0.65 }}
           >
             <Link
               href="/work"
-              className="inline-flex items-center gap-3 bg-accent text-background px-8 py-4 font-sans text-sm tracking-widest uppercase hover:bg-accent/90 transition-all duration-300 group"
+              className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
             >
               View Our Work
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>north_east</span>
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 border border-foreground/40 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
+              className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/50 hover:text-foreground border-b border-foreground/20 pb-0.5 hover:border-foreground transition-all duration-300"
             >
               Start a Project
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Scroll indicator — bounce + fade on scroll */}
+        {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          className="absolute bottom-8 right-8 md:right-10 flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
-          style={{ opacity: useTransform(scrollY, [0, 150], [1, 0]) }}
+          style={{ opacity: scrollIndicatorOpacity }}
         >
-          <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/25 rotate-90 origin-center">
+          <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/30 [writing-mode:vertical-lr]">
             Scroll
           </span>
           <motion.div
-            className="w-px h-12 bg-gradient-to-b from-transparent to-foreground/25"
-            animate={{ y: [0, 8, 0] }}
+            className="w-px h-10 bg-gradient-to-b from-foreground/30 to-transparent"
+            animate={{ scaleY: [1, 0.4, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ originY: 0 }}
           />
         </motion.div>
       </section>
 
       {/* ── SELECTED WORK ── */}
-      <section className="px-6 md:px-10 py-24 md:py-32 max-w-7xl mx-auto">
-        <AnimatedSection className="flex items-end justify-between mb-14">
+      <section className="px-6 md:px-10 py-28 md:py-40 max-w-7xl mx-auto">
+        <AnimatedSection className="flex items-end justify-between mb-16">
           <div>
-            <p className="font-sans text-xs tracking-widest uppercase text-accent mb-3">Portfolio</p>
-            <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-              Selected Work
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Selected Work</p>
+            <h2 className="font-serif font-light italic text-foreground/80" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+              Spaces that define culture.
             </h2>
           </div>
           <Link
             href="/work"
-            className="hidden md:inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300 group"
+            className="hidden md:inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/30 hover:text-foreground transition-colors duration-300"
           >
             All projects
-            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>arrow_right_alt</span>
           </Link>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-          {featuredProjects.map((project, i) => (
+        {/* Asymmetric editorial grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+          {/* Project 1 — large, spans 7 cols */}
+          {selectedProjects[0] && (
             <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 30 }}
+              className="md:col-span-7"
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: ease }}
-              className={i === 0 ? 'md:col-span-2' : ''}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.9, ease }}
             >
-              <ProjectCard project={project} priority={i === 0} featured={i === 0} />
+              <Link href={`/work/${selectedProjects[0].slug}`} className="group block relative overflow-hidden aspect-[4/5]">
+                <Image
+                  src={selectedProjects[0].coverImage}
+                  alt={selectedProjects[0].title}
+                  fill
+                  className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 58vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">{selectedProjects[0].category}</p>
+                  <h3 className="font-serif text-2xl font-semibold text-foreground">{selectedProjects[0].title}</h3>
+                  <p className="font-sans text-sm text-foreground/60">{selectedProjects[0].location} — {selectedProjects[0].year}</p>
+                </div>
+                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+              </Link>
             </motion.div>
-          ))}
+          )}
+
+          {/* Projects 2 + 3 stacked — 5 cols */}
+          <div className="md:col-span-5 flex flex-col gap-3">
+            {selectedProjects[1] && (
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.9, ease, delay: 0.1 }}
+              >
+                <Link href={`/work/${selectedProjects[1].slug}`} className="group block relative overflow-hidden aspect-[4/3]">
+                  <Image
+                    src={selectedProjects[1].coverImage}
+                    alt={selectedProjects[1].title}
+                    fill
+                    className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                    sizes="(max-width: 768px) 100vw, 42vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">{selectedProjects[1].category}</p>
+                    <h3 className="font-serif text-xl font-semibold text-foreground">{selectedProjects[1].title}</h3>
+                  </div>
+                  <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                </Link>
+              </motion.div>
+            )}
+            {selectedProjects[2] && (
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.9, ease, delay: 0.2 }}
+              >
+                <Link href={`/work/${selectedProjects[2].slug}`} className="group block relative overflow-hidden aspect-[4/3]">
+                  <Image
+                    src={selectedProjects[2].coverImage}
+                    alt={selectedProjects[2].title}
+                    fill
+                    className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                    sizes="(max-width: 768px) 100vw, 42vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">{selectedProjects[2].category}</p>
+                    <h3 className="font-serif text-xl font-semibold text-foreground">{selectedProjects[2].title}</h3>
+                  </div>
+                  <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                </Link>
+              </motion.div>
+            )}
+          </div>
+
+          {/* Project 4 — full width offset */}
+          {selectedProjects[3] && (
+            <motion.div
+              className="md:col-start-3 md:col-span-8"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.9, ease, delay: 0.15 }}
+            >
+              <Link href={`/work/${selectedProjects[3].slug}`} className="group block relative overflow-hidden aspect-[16/7]">
+                <Image
+                  src={selectedProjects[3].coverImage}
+                  alt={selectedProjects[3].title}
+                  fill
+                  className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                  sizes="(max-width: 768px) 100vw, 67vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">{selectedProjects[3].category}</p>
+                  <h3 className="font-serif text-2xl font-semibold text-foreground">{selectedProjects[3].title}</h3>
+                </div>
+                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+              </Link>
+            </motion.div>
+          )}
         </div>
 
-        <AnimatedSection className="mt-10 md:hidden">
+        <AnimatedSection className="mt-10 flex justify-center">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300"
+            className="inline-flex items-center gap-3 border border-foreground/15 text-foreground/50 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
           >
-            See All Projects →
+            View All Projects
+            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>arrow_right_alt</span>
           </Link>
         </AnimatedSection>
       </section>
 
-      {/* ── SERVICES ── */}
-      <section className="px-6 md:px-10 py-24 md:py-32 border-t border-border">
+      {/* ── PHILOSOPHY / EXPERTISE ── */}
+      <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="mb-16">
-            <p className="font-sans text-xs tracking-widest uppercase text-accent mb-3">Expertise</p>
-            <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-              What We Do
-            </h2>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24">
-            {services.map((s, i) => (
-              <motion.div
-                key={s.number}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.6, delay: i * 0.07, ease: ease }}
-                className="flex items-center gap-6 py-5 border-b border-border group"
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-start">
+            <AnimatedSection className="md:col-span-5">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">Our Approach</p>
+              <blockquote
+                className="font-serif italic text-foreground/70 leading-tight mb-10"
+                style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
               >
-                <span className="font-sans text-xs text-foreground/25 font-medium tracking-wider w-8 shrink-0 group-hover:text-accent transition-colors duration-300">
-                  {s.number}
-                </span>
-                <div className="group-hover:translate-x-1 transition-all duration-300">
-                  <span className="font-serif text-xl md:text-2xl text-foreground/70 group-hover:text-foreground block">
-                    {s.title}
-                  </span>
-                  <span className="font-sans text-sm text-foreground/40 italic">{s.tagline}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                &ldquo;Design is not decoration — it is the language space speaks.&rdquo;
+              </blockquote>
+              <p className="font-sans font-light text-foreground/50 leading-relaxed mb-8">
+                Somaz Studio brings together design sensibility and cutting-edge visualization tools
+                to transform spaces across Miami, Latin America, and beyond.
+              </p>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/40 hover:text-accent border-b border-foreground/20 pb-0.5 hover:border-accent transition-all duration-300"
+              >
+                Our Story
+                <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>north_east</span>
+              </Link>
+            </AnimatedSection>
 
-          <AnimatedSection className="mt-12">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-3 border border-foreground/25 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300 group"
-            >
-              Explore Services
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
-          </AnimatedSection>
+            <div className="md:col-span-7 md:col-start-6">
+              <div className="architectural-line mb-12 hidden md:block" />
+              {services.map((s, i) => (
+                <motion.div
+                  key={s.number}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.7, delay: i * 0.08, ease }}
+                  className="flex items-start gap-6 py-6 border-b border-border/40 group"
+                >
+                  <span className="font-sans text-[10px] text-foreground/20 tracking-widest w-8 shrink-0 pt-1 group-hover:text-accent transition-colors duration-300">
+                    {s.number}
+                  </span>
+                  <div className="flex-1 group-hover:translate-x-1 transition-transform duration-300">
+                    <span className="font-serif text-xl text-foreground/70 group-hover:text-foreground block mb-1 transition-colors duration-300">
+                      {s.title}
+                    </span>
+                    <span className="font-sans text-sm font-light text-foreground/35 italic">{s.tagline}</span>
+                  </div>
+                  <span className="material-symbols-outlined text-foreground/10 group-hover:text-accent transition-colors duration-300 mt-0.5" style={{ fontSize: '18px' }}>
+                    arrow_right_alt
+                  </span>
+                </motion.div>
+              ))}
+              <AnimatedSection className="mt-8" delay={0.3}>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/30 hover:text-accent transition-colors duration-300"
+                >
+                  Explore Services
+                  <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>north_east</span>
+                </Link>
+              </AnimatedSection>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ── HOW WE WORK ── */}
-      <section className="px-6 md:px-10 py-24 md:py-32 border-t border-border">
+      <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40 bg-surface/30">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="mb-16">
-            <p className="font-sans text-xs tracking-widest uppercase text-accent mb-3">Our Process</p>
-            <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+          <AnimatedSection className="mb-20">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Process</p>
+            <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
               How we work.
             </h2>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+          <div className="grid grid-cols-1 md:grid-cols-3">
             {[
-              {
-                step: '01',
-                title: 'Consult',
-                description: 'We begin with a focused conversation — understanding your vision, program, and timeline. No templates, no assumptions.',
-              },
-              {
-                step: '02',
-                title: 'Design',
-                description: 'We develop the spatial concept, material palette, and visualization strategy. Every decision is intentional and documented.',
-              },
-              {
-                step: '03',
-                title: 'Deliver',
-                description: 'Final renders, drawings, or design packages delivered on schedule. Clear, complete, ready to use.',
-              },
+              { step: '01', title: 'Consult', description: 'We begin with a focused conversation — understanding your vision, program, and timeline. No templates, no assumptions.' },
+              { step: '02', title: 'Design', description: 'We develop the spatial concept, material palette, and visualization strategy. Every decision is intentional and documented.' },
+              { step: '03', title: 'Deliver', description: 'Final renders, drawings, or design packages delivered on schedule. Clear, complete, ready to use.' },
             ].map((item, i) => (
               <motion.div
                 key={item.step}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.7, delay: i * 0.12, ease }}
-                className="relative border-t border-border pt-8 pb-10 md:pr-12"
+                transition={{ duration: 0.8, delay: i * 0.12, ease }}
+                className="relative border-t border-border/40 pt-10 pb-12 md:pr-16 overflow-hidden"
               >
-                <span className="absolute top-4 right-0 font-serif leading-none text-foreground/[0.06] select-none pointer-events-none font-bold" style={{ fontSize: '120px' }}>
+                <span
+                  className="absolute -top-6 -right-4 font-serif font-bold leading-none text-foreground/[0.04] select-none pointer-events-none"
+                  style={{ fontSize: '160px' }}
+                  aria-hidden="true"
+                >
                   {item.step}
                 </span>
-                <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">{item.title}</h3>
-                <p className="font-sans font-light text-foreground/70 leading-relaxed">{item.description}</p>
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/70 mb-6">{item.step}</p>
+                <h3 className="font-serif text-3xl font-semibold text-foreground mb-5">{item.title}</h3>
+                <p className="font-sans font-light text-foreground/50 leading-relaxed">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── ABOUT INTRO ── */}
-      <section className="px-6 md:px-10 py-24 md:py-32 border-t border-border">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-8 md:gap-0 items-center">
-          <AnimatedSection>
-            <h2
-              className="font-serif text-foreground leading-tight"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
-            >
-              <span className="block italic font-light">A Latin American perspective.</span>
-              <span className="block font-semibold">A global design language.</span>
-            </h2>
-          </AnimatedSection>
-
-          <div className="hidden md:flex items-center justify-center px-8">
-            <div className="w-px h-16 bg-border" />
-          </div>
-
-          <AnimatedSection>
-            <p className="font-sans font-light text-foreground/70 text-lg leading-relaxed mb-8">
-              Somaz Studio brings together design sensibility and cutting-edge visualization tools
-              to transform spaces across Miami, Latin America, and beyond.
-            </p>
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 font-sans text-sm text-foreground/40 hover:text-foreground transition-colors duration-300 group"
-            >
-              Our Story
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* ── TESTIMONIALS ── */}
-      <section className="px-6 md:px-10 py-24 md:py-32 border-t border-border">
+      <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection className="mb-16">
-            <p className="font-sans text-xs tracking-widest uppercase text-accent mb-3">What Clients Say</p>
-            <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-              Trusted by design-forward clients.
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Testimonials</p>
+            <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+              What clients say.
             </h2>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30">
             {testimonials.map((t, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.7, delay: i * 0.1, ease: ease }}
-                className="relative border border-border p-8 flex flex-col justify-between overflow-hidden"
+                transition={{ duration: 0.8, delay: i * 0.1, ease }}
+                className="relative bg-background px-8 pt-14 pb-10 flex flex-col justify-between overflow-hidden"
               >
                 <span
-                  className="absolute -top-4 -left-2 font-serif text-accent opacity-[0.15] select-none pointer-events-none"
-                  style={{ fontSize: '200px', lineHeight: 1 }}
+                  className="absolute top-4 left-6 font-serif text-accent/10 select-none pointer-events-none"
+                  style={{ fontSize: '80px', lineHeight: 1 }}
                   aria-hidden="true"
                 >
                   &ldquo;
                 </span>
-                <p className="relative font-serif text-foreground/70 text-lg leading-relaxed mb-8 italic">
+                <p className="relative font-serif text-foreground/65 text-lg leading-relaxed italic mb-10">
                   &ldquo;{t.quote}&rdquo;
                 </p>
-                <div>
+                <div className="border-t border-border/40 pt-6">
                   <p className="font-sans text-sm text-foreground font-medium">{t.name}</p>
-                  <p className="font-sans text-xs text-foreground/40">{t.role} — {t.location}</p>
+                  <p className="font-sans text-[11px] text-foreground/35 tracking-wide mt-1">{t.role} — {t.location}</p>
                 </div>
               </motion.div>
             ))}
@@ -387,36 +445,42 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CONTACT CTA ── */}
-      <section className="bg-surface border-t border-border px-6 md:px-10 py-28 md:py-40">
-        <div className="max-w-7xl mx-auto text-center relative overflow-hidden">
-          {/* Decorative background character */}
-          <div
-            className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-            aria-hidden="true"
+      {/* ── CTA ── */}
+      <section className="border-t border-border/50 px-6 md:px-10 py-32 md:py-48 bg-surface/20 relative overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
+          <span
+            className="ghost-text font-serif font-bold leading-none"
+            style={{ fontSize: 'clamp(8rem, 25vw, 22rem)' }}
           >
-            <span
-              className="font-serif text-foreground opacity-[0.03]"
-              style={{ fontSize: '40vw', lineHeight: 1 }}
-            >
-              S
-            </span>
-          </div>
+            SOMAZ
+          </span>
+        </div>
 
-          <AnimatedSection className="relative z-10">
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <AnimatedSection>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">Start a conversation</p>
             <h2
-              className="font-serif font-semibold mb-10 bg-gradient-to-r from-foreground to-foreground/40 bg-clip-text text-transparent"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
+              className="font-serif font-light text-foreground leading-tight mb-12"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
             >
-              Let&apos;s build something together.
+              Ready to bring your<br />
+              <span className="italic text-foreground/60">vision to life?</span>
             </h2>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 bg-accent text-background px-10 py-5 font-sans text-sm tracking-widest uppercase hover:bg-accent/90 transition-all duration-300 group"
-            >
-              Start a Project
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
+              >
+                Start a Project
+                <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>north_east</span>
+              </Link>
+              <Link
+                href="/work"
+                className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+              >
+                View Our Work
+              </Link>
+            </div>
           </AnimatedSection>
         </div>
       </section>

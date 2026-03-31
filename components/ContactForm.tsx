@@ -142,7 +142,7 @@ export default function ContactForm() {
   const labelClass = 'font-sans text-xs tracking-widest uppercase text-foreground/40 mb-2 block'
 
   return (
-    <div>
+    <div className="relative">
       {/* Marquee header */}
       <div className="overflow-hidden border-b border-border/40 mb-12 -mx-6 md:-mx-10">
         <div className="marquee-track py-3">
@@ -157,7 +157,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-10">
         {/* Row 1: Name + Email */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <FloatingInput id="name" name="name" label="Name" required />
@@ -217,7 +217,7 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="inline-flex items-center gap-3 bg-accent text-background px-10 py-5 font-sans text-sm tracking-widest uppercase hover:bg-accent/90 disabled:opacity-50 transition-all duration-300 group"
+            className="inline-flex items-center gap-3 bg-accent text-background px-10 py-5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 disabled:opacity-50 transition-all duration-300 group"
           >
             {status === 'loading' ? (
               <span className="flex gap-1">
@@ -233,7 +233,7 @@ export default function ContactForm() {
             ) : (
               <>
                 Send Message
-                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-0.5" style={{ fontSize: '14px' }}>north_east</span>
               </>
             )}
           </button>
