@@ -29,7 +29,7 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString }} />
-      <HomeClient featuredProjects={projects.slice(0, 3)} services={services} />
+      <HomeClient featuredProjects={projects.slice(0, 3)} allProjects={projects} services={services} />
     </>
   )
 }

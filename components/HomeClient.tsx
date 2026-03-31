@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import ProjectCard from '@/components/ProjectCard'
@@ -27,10 +28,11 @@ function AnimatedSection({ children, className }: { children: React.ReactNode; c
 
 interface Props {
   featuredProjects: Project[]
+  allProjects: Project[]
   services: Service[]
 }
 
-export default function HomeClient({ featuredProjects, services }: Props) {
+export default function HomeClient({ featuredProjects, allProjects, services }: Props) {
   return (
     <>
       {/* ── HERO ── */}
@@ -137,6 +139,29 @@ export default function HomeClient({ featuredProjects, services }: Props) {
           />
         </motion.div>
       </section>
+
+      {/* ── FILMSTRIP ── */}
+      <div className="overflow-hidden border-t border-b border-border/40" style={{ height: 260 }}>
+        <div className="marquee-track h-full">
+          {[...allProjects, ...allProjects].map((p, i) => (
+            <div key={i} className="relative h-full shrink-0" style={{ width: 360 }}>
+              <Image
+                src={p.coverImage}
+                alt={p.title}
+                fill
+                className="object-cover"
+                sizes="360px"
+                style={{ filter: 'brightness(0.6) saturate(0.7)' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/40">{p.location}</p>
+                <p className="font-serif text-sm text-foreground/70 mt-0.5 leading-tight">{p.title}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* ── SELECTED WORK ── */}
       <section className="px-6 md:px-10 py-24 md:py-32 max-w-7xl mx-auto">
