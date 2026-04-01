@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { usePathname } from 'next/navigation'
+import { usePathname } from '@/i18n/navigation'
 
 export default function WhatsAppButton() {
   const pathname = usePathname()

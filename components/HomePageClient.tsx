@@ -1,15 +1,18 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { Link } from '@/i18n/navigation'
+import { motion, useInView, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
+import { useTranslations } from 'next-intl'
 import { projects } from '@/data/projects'
 import { services } from '@/data/services'
 import { testimonials } from '@/data/testimonials'
+import { Icon } from '@/components/icons'
+import { t as tl } from '@/lib/locale'
+import { ease } from '@/lib/motion'
 
-const ease = [0.22, 1, 0.36, 1] as const
-
+// Static JSON-LD — no user input, safe for dangerouslySetInnerHTML
 const jsonLd = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -34,12 +37,13 @@ const jsonLd = JSON.stringify({
 function AnimatedSection({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const reduced = useReducedMotion()
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={reduced ? false : { opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, ease, delay }}
+      transition={reduced ? { duration: 0 } : { duration: 0.9, ease, delay }}
       className={className}
     >
       {children}
@@ -47,13 +51,21 @@ function AnimatedSection({ children, className, delay = 0 }: { children: React.R
   )
 }
 
-export default function HomePage() {
+export default function HomePageClient({ locale }: { locale: string }) {
+  const t = useTranslations('home')
+  const reduced = useReducedMotion()
   const heroProject = projects.find(p => p.featured) ?? projects[0]
   const selectedProjects = projects.slice(0, 4)
   const { scrollY } = useScroll()
-  const heroScale = useTransform(scrollY, [0, 600], [1, 1.08])
-  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0])
-  const scrollIndicatorOpacity = useTransform(scrollY, [0, 150], [1, 0])
+  const heroScale = useTransform(scrollY, [0, 600], reduced ? [1, 1] : [1, 1.08])
+  const heroOpacity = useTransform(scrollY, [0, 500], reduced ? [1, 1] : [1, 0])
+  const scrollIndicatorOpacity = useTransform(scrollY, [0, 150], reduced ? [1, 1] : [1, 0])
+
+  const steps = [
+    { step: '01', title: t('step01Title'), description: t('step01Desc') },
+    { step: '02', title: t('step02Title'), description: t('step02Desc') },
+    { step: '03', title: t('step03Title'), description: t('step03Desc') },
+  ]
 
   return (
     <>
@@ -65,9 +77,8 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
 
-      {/* ── HERO — full viewport with project image ── */}
+      {/* HERO */}
       <section className="relative h-screen min-h-[700px] overflow-hidden flex flex-col justify-end">
-        {/* Background image with parallax */}
         <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
           <Image
             src={heroProject.images[0]}
@@ -79,10 +90,8 @@ export default function HomePage() {
           />
         </motion.div>
 
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/10" />
 
-        {/* Content */}
         <motion.div
           className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-10 pb-20 md:pb-28"
           style={{ opacity: heroOpacity }}
@@ -93,7 +102,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.2 }}
           >
-            Miami · Global · Est. 2022
+            {t('badge')}
           </motion.p>
 
           <h1 className="font-serif leading-[0.9] tracking-tight mb-8" style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)' }}>
@@ -104,7 +113,7 @@ export default function HomePage() {
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, ease, delay: 0.3 }}
               >
-                Space is
+                {t('heroLine1')}
               </motion.span>
             </div>
             <div className="overflow-hidden">
@@ -114,7 +123,7 @@ export default function HomePage() {
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, ease, delay: 0.42 }}
               >
-                the message.
+                {t('heroLine2')}
               </motion.span>
             </div>
           </h1>
@@ -129,19 +138,18 @@ export default function HomePage() {
               href="/work"
               className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
             >
-              View Our Work
-              <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>north_east</span>
+              {t('viewOurWork')}
+              <Icon name="north_east" size={16} />
             </Link>
             <Link
               href="/contact"
               className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/50 hover:text-foreground border-b border-foreground/20 pb-0.5 hover:border-foreground transition-all duration-300"
             >
-              Start a Project
+              {t('startProject')}
             </Link>
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-8 right-8 md:right-10 flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
@@ -150,7 +158,7 @@ export default function HomePage() {
           style={{ opacity: scrollIndicatorOpacity }}
         >
           <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/30 [writing-mode:vertical-lr]">
-            Scroll
+            {t('scroll')}
           </span>
           <motion.div
             className="w-px h-10 bg-gradient-to-b from-foreground/30 to-transparent"
@@ -161,27 +169,25 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* ── SELECTED WORK ── */}
+      {/* SELECTED WORK */}
       <section className="px-6 md:px-10 py-28 md:py-40 max-w-7xl mx-auto">
         <AnimatedSection className="flex items-end justify-between mb-16">
           <div>
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Selected Work</p>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('selectedWork')}</p>
             <h2 className="font-serif font-light italic text-foreground/80" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
-              Spaces that define culture.
+              {t('spacesTagline')}
             </h2>
           </div>
           <Link
             href="/work"
             className="hidden md:inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/30 hover:text-foreground transition-colors duration-300"
           >
-            All projects
-            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>arrow_right_alt</span>
+            {t('allProjects')}
+            <Icon name="arrow_right_alt" size={14} />
           </Link>
         </AnimatedSection>
 
-        {/* Asymmetric editorial grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-          {/* Project 1 — large, spans 7 cols */}
           {selectedProjects[0] && (
             <motion.div
               className="md:col-span-7"
@@ -210,7 +216,6 @@ export default function HomePage() {
             </motion.div>
           )}
 
-          {/* Projects 2 + 3 stacked — 5 cols */}
           <div className="md:col-span-5 flex flex-col gap-3">
             {selectedProjects[1] && (
               <motion.div
@@ -262,7 +267,6 @@ export default function HomePage() {
             )}
           </div>
 
-          {/* Project 4 — full width offset */}
           {selectedProjects[3] && (
             <motion.div
               className="md:col-start-3 md:col-span-8"
@@ -295,34 +299,33 @@ export default function HomePage() {
             href="/work"
             className="inline-flex items-center gap-3 border border-foreground/15 text-foreground/50 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
           >
-            View All Projects
-            <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>arrow_right_alt</span>
+            {t('viewAllProjects')}
+            <Icon name="arrow_right_alt" size={14} />
           </Link>
         </AnimatedSection>
       </section>
 
-      {/* ── PHILOSOPHY / EXPERTISE ── */}
+      {/* PHILOSOPHY / EXPERTISE */}
       <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-start">
             <AnimatedSection className="md:col-span-5">
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">Our Approach</p>
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">{t('ourApproach')}</p>
               <blockquote
                 className="font-serif italic text-foreground/70 leading-tight mb-10"
                 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)' }}
               >
-                &ldquo;Design is not decoration — it is the language space speaks.&rdquo;
+                {t('designQuote')}
               </blockquote>
               <p className="font-sans font-light text-foreground/50 leading-relaxed mb-8">
-                Somaz Studio brings together design sensibility and cutting-edge visualization tools
-                to transform spaces across Miami, Latin America, and beyond.
+                {t('approachParagraph')}
               </p>
               <Link
                 href="/about"
                 className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/40 hover:text-accent border-b border-foreground/20 pb-0.5 hover:border-accent transition-all duration-300"
               >
-                Our Story
-                <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>north_east</span>
+                {t('ourStory')}
+                <Icon name="north_east" size={14} />
               </Link>
             </AnimatedSection>
 
@@ -342,13 +345,11 @@ export default function HomePage() {
                   </span>
                   <div className="flex-1 group-hover:translate-x-1 transition-transform duration-300">
                     <span className="font-serif text-xl text-foreground/70 group-hover:text-foreground block mb-1 transition-colors duration-300">
-                      {s.title}
+                      {tl(s.title, locale)}
                     </span>
-                    <span className="font-sans text-sm font-light text-foreground/35 italic">{s.tagline}</span>
+                    <span className="font-sans text-sm font-light text-foreground/35 italic">{tl(s.tagline, locale)}</span>
                   </div>
-                  <span className="material-symbols-outlined text-foreground/10 group-hover:text-accent transition-colors duration-300 mt-0.5" style={{ fontSize: '18px' }}>
-                    arrow_right_alt
-                  </span>
+                  <Icon name="arrow_right_alt" size={18} className="text-foreground/10 group-hover:text-accent transition-colors duration-300 mt-0.5" />
                 </motion.div>
               ))}
               <AnimatedSection className="mt-8" delay={0.3}>
@@ -356,8 +357,8 @@ export default function HomePage() {
                   href="/services"
                   className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/30 hover:text-accent transition-colors duration-300"
                 >
-                  Explore Services
-                  <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>north_east</span>
+                  {t('exploreServices')}
+                  <Icon name="north_east" size={14} />
                 </Link>
               </AnimatedSection>
             </div>
@@ -365,22 +366,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── HOW WE WORK ── */}
+      {/* HOW WE WORK */}
       <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40 bg-surface/30">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection className="mb-20">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Process</p>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('process')}</p>
             <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
-              How we work.
+              {t('howWeWork')}
             </h2>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3">
-            {[
-              { step: '01', title: 'Consult', description: 'We begin with a focused conversation — understanding your vision, program, and timeline. No templates, no assumptions.' },
-              { step: '02', title: 'Design', description: 'We develop the spatial concept, material palette, and visualization strategy. Every decision is intentional and documented.' },
-              { step: '03', title: 'Deliver', description: 'Final renders, drawings, or design packages delivered on schedule. Clear, complete, ready to use.' },
-            ].map((item, i) => (
+            {steps.map((item, i) => (
               <motion.div
                 key={item.step}
                 initial={{ opacity: 0, y: 30 }}
@@ -405,18 +402,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
+      {/* TESTIMONIALS */}
       <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection className="mb-16">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Testimonials</p>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('testimonials')}</p>
             <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
-              What clients say.
+              {t('whatClientsSay')}
             </h2>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30">
-            {testimonials.map((t, i) => (
+            {testimonials.map((testimonial, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
@@ -433,11 +430,20 @@ export default function HomePage() {
                   &ldquo;
                 </span>
                 <p className="relative font-serif text-foreground/65 text-lg leading-relaxed italic mb-10">
-                  &ldquo;{t.quote}&rdquo;
+                  &ldquo;{tl(testimonial.quote, locale)}&rdquo;
                 </p>
                 <div className="border-t border-border/40 pt-6">
-                  <p className="font-sans text-sm text-foreground font-medium">{t.name}</p>
-                  <p className="font-sans text-[11px] text-foreground/35 tracking-wide mt-1">{t.role} — {t.location}</p>
+                  <p className="font-sans text-sm text-foreground font-medium">{testimonial.name}</p>
+                  <p className="font-sans text-[11px] text-foreground/35 tracking-wide mt-1">{tl(testimonial.role, locale)} — {testimonial.location}</p>
+                  {testimonial.projectSlug && (
+                    <Link
+                      href={`/work/${testimonial.projectSlug}`}
+                      className="inline-flex items-center gap-1.5 mt-3 font-sans text-[9px] tracking-[0.2em] uppercase text-accent/60 hover:text-accent transition-colors duration-300"
+                    >
+                      {t('viewProject')}
+                      <Icon name="north_east" size={10} />
+                    </Link>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -445,7 +451,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* CTA */}
       <section className="border-t border-border/50 px-6 md:px-10 py-32 md:py-48 bg-surface/20 relative overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
           <span
@@ -458,27 +464,27 @@ export default function HomePage() {
 
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <AnimatedSection>
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">Start a conversation</p>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">{t('startConversation')}</p>
             <h2
               className="font-serif font-light text-foreground leading-tight mb-12"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
             >
-              Ready to bring your<br />
-              <span className="italic text-foreground/60">vision to life?</span>
+              {t('readyToBring')}<br />
+              <span className="italic text-foreground/60">{t('visionToLife')}</span>
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
               >
-                Start a Project
-                <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>north_east</span>
+                {t('startProject')}
+                <Icon name="north_east" size={16} />
               </Link>
               <Link
                 href="/work"
                 className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
               >
-                View Our Work
+                {t('viewOurWorkCta')}
               </Link>
             </div>
           </AnimatedSection>

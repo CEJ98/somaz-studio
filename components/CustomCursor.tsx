@@ -57,7 +57,16 @@ export default function CustomCursor() {
     }
 
     bindHovers()
-    const observer = new MutationObserver(bindHovers)
+    let pendingBind = false
+    const debouncedBind = () => {
+      if (pendingBind) return
+      pendingBind = true
+      requestAnimationFrame(() => {
+        bindHovers()
+        pendingBind = false
+      })
+    }
+    const observer = new MutationObserver(debouncedBind)
     observer.observe(document.body, { childList: true, subtree: true })
 
     return () => {

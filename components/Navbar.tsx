@@ -1,25 +1,31 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll } from 'framer-motion'
-
-const ease = [0.22, 1, 0.36, 1] as const
-
-const links = [
-  { href: '/work', label: 'Work' },
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-]
+import { useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import { Icon } from '@/components/icons'
+import { ease } from '@/lib/motion'
 
 export default function Navbar() {
+  const t = useTranslations('nav')
+  const locale = useLocale()
   const pathname = usePathname()
+  const router = useRouter()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const { scrollYProgress } = useScroll()
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
+
+  const links = [
+    { href: '/work', label: t('work') },
+    { href: '/services', label: t('services') },
+    { href: '/about', label: t('about') },
+    { href: '/blog', label: t('notes') },
+    { href: '/contact', label: t('contact') },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40)
@@ -30,6 +36,41 @@ export default function Navbar() {
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
+
+  // Escape key + focus trap for mobile menu
+  useEffect(() => {
+    if (!menuOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+        return
+      }
+      if (e.key !== 'Tab' || !mobileMenuRef.current) return
+      const focusable = Array.from(
+        mobileMenuRef.current.querySelectorAll<HTMLElement>('a, button')
+      ).filter((el) => !el.hasAttribute('disabled'))
+      if (focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [menuOpen])
+
+  function toggleLocale() {
+    router.replace(pathname, { locale: locale === 'en' ? 'es' : 'en' })
+  }
 
   return (
     <header
@@ -73,12 +114,21 @@ export default function Navbar() {
             )
           })}
           <li>
+            <button
+              onClick={toggleLocale}
+              className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
+              aria-label="Switch language"
+            >
+              {locale === 'en' ? 'ES' : 'EN'}
+            </button>
+          </li>
+          <li>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 hover:border-accent hover:text-accent px-5 py-2 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
-              Start a Project
-              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>north_east</span>
+              {t('startProject')}
+              <Icon name="north_east" size={14} />
             </Link>
           </li>
         </ul>
@@ -87,7 +137,7 @@ export default function Navbar() {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden flex flex-col gap-1.5 p-2"
-          aria-label="Toggle menu"
+          aria-label={t('toggleMenu')}
           aria-expanded={menuOpen}
         >
           <span
@@ -110,8 +160,9 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
+        ref={mobileMenuRef}
         className={`md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50 transition-all duration-500 overflow-hidden ${
-          menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <ul className="flex flex-col px-6 py-8 gap-6">
@@ -137,11 +188,23 @@ export default function Navbar() {
             animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
             transition={{ duration: 0.3, delay: links.length * 0.06, ease: ease }}
           >
+            <button
+              onClick={toggleLocale}
+              className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
+            >
+              {locale === 'en' ? 'ES' : 'EN'}
+            </button>
+          </motion.li>
+          <motion.li
+            initial={{ opacity: 0, x: -16 }}
+            animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
+            transition={{ duration: 0.3, delay: (links.length + 1) * 0.06, ease: ease }}
+          >
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 px-5 py-2.5 font-sans text-[10px] tracking-[0.25em] uppercase"
             >
-              Start a Project
+              {t('startProject')}
             </Link>
           </motion.li>
         </ul>

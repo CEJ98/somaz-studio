@@ -1,36 +1,42 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-
-const ease = [0.22, 1, 0.36, 1] as const
-
-const navLinks = [
-  { href: '/work', label: 'Work' },
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-]
-
-const serviceLinks = [
-  { href: '/services#3d-visualization', label: '3D Visualization' },
-  { href: '/services#interior-design', label: 'Interior Design' },
-  { href: '/services#conceptual-design', label: 'Conceptual Design' },
-  { href: '/services#design-consulting', label: 'Consulting' },
-]
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
+import { Icon } from '@/components/icons'
+import { ease } from '@/lib/motion'
 
 export default function Footer() {
+  const tf = useTranslations('footer')
+  const tn = useTranslations('nav')
+  const tform = useTranslations('form')
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
+  const navLinks = [
+    { href: '/work', label: tn('work') },
+    { href: '/services', label: tn('services') },
+    { href: '/about', label: tn('about') },
+    { href: '/contact', label: tn('contact') },
+  ]
+
+  const serviceLinks = [
+    { href: '/services#3d-visualization', label: tform('opt3dViz') },
+    { href: '/services#interior-design', label: tform('optInterior') },
+    { href: '/services#conceptual-design', label: tform('optConceptual') },
+    { href: '/services#design-consulting', label: tform('optConsulting') },
+  ]
+
   async function handleSubscribe(e: React.FormEvent) {
     e.preventDefault()
-    if (!email.trim()) return
+    if (!email.trim() || isLoading) return
+    setIsLoading(true)
     try {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
@@ -43,6 +49,8 @@ export default function Footer() {
       }
     } catch {
       window.location.href = `mailto:hola@somazstudio.com?subject=Newsletter&body=I'd like to subscribe: ${encodeURIComponent(email)}`
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -78,7 +86,7 @@ export default function Footer() {
               style={{ mixBlendMode: 'screen' }}
             />
             <p className="font-sans text-sm font-light text-foreground/35 leading-relaxed mb-6">
-              3D visualization and interior design for the spaces that define culture.
+              {tf('tagline')}
             </p>
             <a
               href="mailto:hola@somazstudio.com"
@@ -86,7 +94,7 @@ export default function Footer() {
             >
               hola@somazstudio.com
             </a>
-            <p className="font-sans text-xs text-foreground/20 mt-1">Miami, FL — Global</p>
+            <p className="font-sans text-xs text-foreground/20 mt-1">{tf('location')}</p>
           </motion.div>
 
           {/* Col 2 — Navigate */}
@@ -96,7 +104,7 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.1, ease }}
           >
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/25 mb-6">
-              Navigate
+              {tf('navigate')}
             </p>
             <ul className="space-y-3">
               {navLinks.map(({ href, label }) => (
@@ -106,7 +114,7 @@ export default function Footer() {
                     className="group inline-block font-sans text-sm text-foreground/55 hover:text-foreground transition-colors duration-300 relative"
                   >
                     {label}
-                    <span className="absolute -bottom-0.5 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-400" />
+                    <span className="absolute -bottom-0.5 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-300" />
                   </Link>
                 </li>
               ))}
@@ -120,7 +128,7 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.2, ease }}
           >
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/25 mb-6">
-              Services
+              {tf('services')}
             </p>
             <ul className="space-y-3">
               {serviceLinks.map(({ href, label }) => (
@@ -130,7 +138,7 @@ export default function Footer() {
                     className="group inline-block font-sans text-sm text-foreground/55 hover:text-foreground transition-colors duration-300 relative"
                   >
                     {label}
-                    <span className="absolute -bottom-0.5 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-400" />
+                    <span className="absolute -bottom-0.5 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-300" />
                   </Link>
                 </li>
               ))}
@@ -144,14 +152,14 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.3, ease }}
           >
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/25 mb-6">
-              Newsletter
+              {tf('newsletter')}
             </p>
             <p className="font-sans text-sm font-light text-foreground/40 leading-relaxed mb-5">
-              Studio updates, project reveals, and design thinking — straight to your inbox.
+              {tf('newsletterCopy')}
             </p>
             {subscribed ? (
               <p className="font-sans text-xs text-accent tracking-wide">
-                ✓ You&apos;re on the list.
+                ✓ {tf('subscribed')}
               </p>
             ) : (
               <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
@@ -165,10 +173,21 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="self-start font-sans text-[10px] tracking-[0.25em] uppercase text-accent hover:text-foreground transition-colors duration-300 group inline-flex items-center gap-2"
+                  disabled={isLoading}
+                  className="self-start font-sans text-[10px] tracking-[0.25em] uppercase text-accent hover:text-foreground transition-colors duration-300 group inline-flex items-center gap-2 disabled:opacity-50"
                 >
-                  Subscribe
-                  <span className="material-symbols-outlined group-hover:translate-x-0.5 transition-transform duration-300" style={{ fontSize: '12px' }}>north_east</span>
+                  {isLoading ? (
+                    <span className="inline-flex gap-1">
+                      <span className="animate-pulse">.</span>
+                      <span className="animate-pulse" style={{ animationDelay: '0.2s' }}>.</span>
+                      <span className="animate-pulse" style={{ animationDelay: '0.4s' }}>.</span>
+                    </span>
+                  ) : (
+                    <>
+                      {tf('subscribe')}
+                      <Icon name="north_east" size={12} className="group-hover:translate-x-0.5 transition-transform duration-300" />
+                    </>
+                  )}
                 </button>
               </form>
             )}
@@ -184,7 +203,7 @@ export default function Footer() {
           <div className="architectural-line mt-16 mb-8" />
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <p className="font-sans text-[10px] tracking-[0.2em] text-foreground/20">
-              © {new Date().getFullYear()} Somaz Studio LLC. Miami, FL.
+              © {new Date().getFullYear()} {tf('copyright')}
             </p>
             <div className="flex items-center gap-6">
               <a
@@ -193,7 +212,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
               >
-                Instagram
+                {tf('instagram')}
               </a>
               <a
                 href="https://linkedin.com/company/somazstudio"
@@ -201,16 +220,22 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
               >
-                LinkedIn
+                {tf('linkedin')}
               </a>
               <Link
                 href="/privacy"
                 className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
               >
-                Privacy
+                {tf('privacy')}
+              </Link>
+              <Link
+                href="/terms"
+                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
+              >
+                {tf('terms')}
               </Link>
               <p className="font-sans text-[10px] text-foreground/15 italic">
-                Not a licensed architecture firm.
+                {tf('disclaimer')}
               </p>
             </div>
           </div>

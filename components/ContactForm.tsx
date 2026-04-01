@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/i18n/navigation'
 import { motion } from 'framer-motion'
 import { toast } from 'sonner'
+import { useTranslations } from 'next-intl'
+import { Icon } from '@/components/icons'
 
 type Status = 'idle' | 'loading'
 
@@ -49,9 +51,6 @@ function FloatingSelect({
     </div>
   )
 }
-
-const MARQUEE_TEXT =
-  'CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003'
 
 function FloatingInput({
   id,
@@ -102,6 +101,7 @@ function FloatingInput({
 
 export default function ContactForm() {
   const router = useRouter()
+  const tf = useTranslations('form')
   const [status, setStatus] = useState<Status>('idle')
   const [msgLen, setMsgLen] = useState(0)
   const [emailError, setEmailError] = useState('')
@@ -111,7 +111,7 @@ export default function ContactForm() {
     const form = e.currentTarget
     const email = (form.elements.namedItem('email') as HTMLInputElement).value
     if (!EMAIL_RE.test(email)) {
-      setEmailError('Please enter a valid email address.')
+      setEmailError(tf('emailError'))
       return
     }
     setEmailError('')
@@ -129,10 +129,10 @@ export default function ContactForm() {
         router.push('/contact/thank-you')
         return
       } else {
-        toast.error('Something went wrong. Email us at hola@somazstudio.com')
+        toast.error(tf('errorToast'))
       }
     } catch {
-      toast.error('Something went wrong. Email us at hola@somazstudio.com')
+      toast.error(tf('errorToast'))
     }
     setStatus('idle')
   }
@@ -151,7 +151,7 @@ export default function ContactForm() {
               key={i}
               className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/25 shrink-0 px-4"
             >
-              {MARQUEE_TEXT}
+              {tf('marquee')}
             </span>
           ))}
         </div>
@@ -160,9 +160,9 @@ export default function ContactForm() {
       <form onSubmit={handleSubmit} className="space-y-10">
         {/* Row 1: Name + Email */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FloatingInput id="name" name="name" label="Name" required />
+          <FloatingInput id="name" name="name" label={tf('name')} required />
           <div>
-            <FloatingInput id="email" name="email" label="Email" type="email" required />
+            <FloatingInput id="email" name="email" label={tf('email')} type="email" required />
             <div aria-live="polite">
               {emailError && (
                 <p className="font-sans text-[10px] text-red-400 mt-1">{emailError}</p>
@@ -173,43 +173,43 @@ export default function ContactForm() {
 
         {/* Row 2: Phone + Project Size */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FloatingInput id="phone" name="phone" label="Phone (optional)" type="tel" />
-          <FloatingInput id="sqft" name="sqft" label="Project Size (sqft, optional)" />
+          <FloatingInput id="phone" name="phone" label={tf('phone')} type="tel" />
+          <FloatingInput id="sqft" name="sqft" label={tf('sqft')} />
         </div>
 
         {/* Row 3: Project Type + Budget */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FloatingSelect id="project_type" name="project_type" label="Project Type" required>
-            <option>3D Visualization</option>
-            <option>Interior Design</option>
-            <option>Conceptual Design</option>
-            <option>Consulting</option>
-            <option>Full-Studio Partnership</option>
-            <option>Other</option>
+          <FloatingSelect id="project_type" name="project_type" label={tf('projectType')} required>
+            <option value="3d-visualization">{tf('opt3dViz')}</option>
+            <option value="interior-design">{tf('optInterior')}</option>
+            <option value="conceptual-design">{tf('optConceptual')}</option>
+            <option value="consulting">{tf('optConsulting')}</option>
+            <option value="full-studio-partnership">{tf('optPartnership')}</option>
+            <option value="other">{tf('optOther')}</option>
           </FloatingSelect>
-          <FloatingSelect id="budget" name="budget" label="Budget Range" required>
-            <option>Under $5K</option>
-            <option>$5K – $15K</option>
-            <option>$15K – $50K</option>
-            <option>$50K+</option>
+          <FloatingSelect id="budget" name="budget" label={tf('budgetRange')} required>
+            <option value="under-5k">{tf('budgetUnder5k')}</option>
+            <option value="5k-15k">{tf('budget5to15k')}</option>
+            <option value="15k-50k">{tf('budget15to50k')}</option>
+            <option value="50k-plus">{tf('budget50kplus')}</option>
           </FloatingSelect>
         </div>
 
         {/* Row 4: Message */}
         <div>
-          <label htmlFor="message" className={labelClass}>Message</label>
+          <label htmlFor="message" className={labelClass}>{tf('message')}</label>
           <textarea
             id="message"
             name="message"
             rows={5}
             required
             maxLength={2000}
-            placeholder="Tell us about your project..."
+            placeholder={tf('messagePlaceholder')}
             className={`${inputClass} resize-none`}
             onChange={(e) => setMsgLen(e.target.value.length)}
           />
           {msgLen > 0 && (
-            <p className="text-right font-sans text-[10px] text-foreground/25 mt-1">{msgLen} chars</p>
+            <p className="text-right font-sans text-[10px] text-foreground/25 mt-1">{msgLen} {tf('chars')}</p>
           )}
         </div>
 
@@ -232,8 +232,8 @@ export default function ContactForm() {
               </span>
             ) : (
               <>
-                Send Message
-                <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-0.5" style={{ fontSize: '14px' }}>north_east</span>
+                {tf('send')}
+                <Icon name="north_east" size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
               </>
             )}
           </button>

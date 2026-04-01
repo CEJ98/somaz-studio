@@ -5,8 +5,7 @@ import Link from 'next/link'
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import type { Project } from '@/data/projects'
-
-const ease = [0.22, 1, 0.36, 1] as const
+import { ease } from '@/lib/motion'
 
 interface ProjectCardProps {
   project: Project

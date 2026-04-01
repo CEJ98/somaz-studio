@@ -1,20 +1,26 @@
 'use client'
 
-import Link from 'next/link'
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
+import { Link } from '@/i18n/navigation'
+import { motion, useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
-
-const ease = [0.22, 1, 0.36, 1] as const
+import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+import { Icon } from '@/components/icons'
+import { ease } from '@/lib/motion'
+import { team } from '@/data/team'
+import { t as tl } from '@/lib/locale'
+import { useLocale } from 'next-intl'
 
 function FadeUp({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+  const reduced = useReducedMotion()
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 35 }}
+      initial={reduced ? false : { opacity: 0, y: 35 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, delay, ease }}
+      transition={reduced ? { duration: 0 } : { duration: 0.9, delay, ease }}
       className={className}
     >
       {children}
@@ -25,15 +31,20 @@ function FadeUp({ children, delay = 0, className }: { children: React.ReactNode;
 function CounterStat({ value, suffix = '', label }: { value: string; suffix?: string; label: string }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true })
+  const reduced = useReducedMotion()
   const count = useMotionValue(0)
   const rounded = useTransform(count, (v) => Math.round(v).toString())
   const isNumeric = /^\d+$/.test(value)
 
   useEffect(() => {
     if (inView && isNumeric) {
-      animate(count, parseInt(value), { duration: 1.5, ease: 'easeOut' })
+      if (reduced) {
+        count.set(parseInt(value))
+      } else {
+        animate(count, parseInt(value), { duration: 1.5, ease: 'easeOut' })
+      }
     }
-  }, [inView, value, count, isNumeric])
+  }, [inView, value, count, isNumeric, reduced])
 
   return (
     <div ref={ref}>
@@ -45,22 +56,16 @@ function CounterStat({ value, suffix = '', label }: { value: string; suffix?: st
   )
 }
 
-const differentiators = [
-  {
-    label: 'Latin American Roots',
-    description: 'Our design sensibility draws from a rich Latin American heritage — warmth, texture, and a deep understanding of how culture shapes space.',
-  },
-  {
-    label: 'Concept to Render',
-    description: 'We handle the full creative arc: from initial spatial concept through material selection, furniture layout, and photorealistic visualization.',
-  },
-  {
-    label: 'Remote-First Studio',
-    description: 'Built for a borderless world. We collaborate with clients across 8+ countries using a process that is clear, fast, and location-independent.',
-  },
-]
-
 export default function AboutClient() {
+  const t = useTranslations('about')
+  const locale = useLocale()
+
+  const differentiators = [
+    { label: t('diff1Label'), description: t('diff1Desc') },
+    { label: t('diff2Label'), description: t('diff2Desc') },
+    { label: t('diff3Label'), description: t('diff3Desc') },
+  ]
+
   return (
     <div className="min-h-screen pt-32 pb-24">
       {/* Hero — philosophy quote */}
@@ -72,7 +77,7 @@ export default function AboutClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease }}
           >
-            Our Story
+            {t('ourStory')}
           </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
@@ -86,13 +91,11 @@ export default function AboutClient() {
                 className="font-serif leading-[0.9] mb-12"
                 style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
               >
-                <span className="block font-light italic text-foreground/60">Miami studio.</span>
-                <span className="block font-semibold text-foreground">Global reach.</span>
+                <span className="block font-light italic text-foreground/60">{t('heading1')}</span>
+                <span className="block font-semibold text-foreground">{t('heading2')}</span>
               </h1>
               <p className="font-sans font-light text-foreground/55 leading-relaxed max-w-lg">
-                Somaz Studio was founded in Miami with a clear purpose: bring Latin American design sensibility
-                to a global market. We specialize in architectural visualization, interior design, and spatial
-                concept development — working remotely with clients across the US, Latin America, and beyond.
+                {t('intro')}
               </p>
             </motion.div>
 
@@ -107,7 +110,7 @@ export default function AboutClient() {
                 className="font-serif italic text-foreground/40 leading-tight"
                 style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}
               >
-                &ldquo;Design is not decoration — it is the language space speaks.&rdquo;
+                {t('quote')}
               </blockquote>
             </motion.div>
           </div>
@@ -118,9 +121,9 @@ export default function AboutClient() {
       <section className="px-6 md:px-10 py-28 md:py-40 border-b border-border/40">
         <div className="max-w-7xl mx-auto">
           <FadeUp className="mb-20">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">Why Somaz</p>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('whySomaz')}</p>
             <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
-              What sets us apart.
+              {t('whySomazSub')}
             </h2>
           </FadeUp>
 
@@ -153,13 +156,48 @@ export default function AboutClient() {
           <div className="architectural-line mb-20" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
-              { value: '50', suffix: '+', label: 'Projects delivered' },
-              { value: '8', suffix: '+', label: 'Countries served' },
-              { value: 'EN/ES', suffix: '', label: 'Bilingual team' },
-              { value: '100', suffix: '%', label: 'Remote capability' },
+              { value: '50', suffix: '+', label: t('stat1Label') },
+              { value: '8', suffix: '+', label: t('stat2Label') },
+              { value: 'EN/ES', suffix: '', label: t('stat3Label') },
+              { value: '100', suffix: '%', label: t('stat4Label') },
             ].map((stat, i) => (
               <FadeUp key={stat.label} delay={i * 0.1}>
                 <CounterStat value={stat.value} suffix={stat.suffix} label={stat.label} />
+              </FadeUp>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="px-6 md:px-10 py-28 md:py-40 border-b border-border/40">
+        <div className="max-w-7xl mx-auto">
+          <FadeUp className="mb-20">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('theTeam')}</p>
+            <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+              {t('whoWeAre')}
+            </h2>
+          </FadeUp>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+            {team.map((member, i) => (
+              <FadeUp key={member.name} delay={i * 0.15}>
+                <div className="flex flex-col md:flex-row gap-8 items-start">
+                  <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0 overflow-hidden">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover grayscale-[20%]"
+                      sizes="160px"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-xl font-semibold text-foreground mb-1">{member.name}</h3>
+                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-4">{tl(member.role, locale)}</p>
+                    <p className="font-sans font-light text-foreground/50 leading-relaxed text-sm">{tl(member.bio, locale)}</p>
+                  </div>
+                </div>
               </FadeUp>
             ))}
           </div>
@@ -178,20 +216,20 @@ export default function AboutClient() {
         </div>
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <FadeUp>
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">Let&apos;s build together</p>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">{t('letsBuild')}</p>
             <h2
               className="font-serif font-light text-foreground mb-12 leading-tight"
               style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
             >
-              Ready to start your<br />
-              <span className="italic text-foreground/60">next project?</span>
+              {t('readyToStart')}<br />
+              <span className="italic text-foreground/60">{t('nextProject')}</span>
             </h2>
             <Link
               href="/contact"
               className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
-              Get in Touch
-              <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>north_east</span>
+              {t('getInTouch')}
+              <Icon name="north_east" size={14} />
             </Link>
           </FadeUp>
         </div>

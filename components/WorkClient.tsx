@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import ProjectCard from '@/components/ProjectCard'
 import { projects, categories, type ProjectCategory } from '@/data/projects'
-
-const ease = [0.22, 1, 0.36, 1] as const
+import { ease } from '@/lib/motion'
 
 const sizeToSpan: Record<string, string> = {
   large: 'md:col-span-8',
@@ -13,7 +13,9 @@ const sizeToSpan: Record<string, string> = {
   small: 'md:col-span-4',
 }
 
-export default function WorkClient() {
+export default function WorkClient({ locale: _locale }: { locale: string }) {
+  const tw = useTranslations('work')
+  const tc = useTranslations('categories')
   const [active, setActive] = useState<ProjectCategory>('All')
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null)
 
@@ -29,12 +31,12 @@ export default function WorkClient() {
           transition={{ duration: 0.9, ease }}
           className="mb-20"
         >
-          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">Portfolio</p>
+          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{tw('portfolio')}</p>
           <h1
             className="font-serif font-light italic text-foreground/80"
             style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
           >
-            Selected Work
+            {tw('selectedWork')}
           </h1>
         </motion.div>
 
@@ -52,6 +54,7 @@ export default function WorkClient() {
             <button
               key={cat}
               onClick={() => setActive(cat)}
+              aria-pressed={active === cat}
               className={`font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-2 border transition-all duration-300 ${
                 active === cat
                   ? 'border-accent text-accent'
@@ -61,7 +64,7 @@ export default function WorkClient() {
               {active === cat && (
                 <span className="inline-block w-1 h-1 rounded-full bg-accent mr-2 mb-0.5" />
               )}
-              {cat}
+              {tc(cat)}
             </button>
           ))}
         </motion.div>
@@ -74,7 +77,7 @@ export default function WorkClient() {
           transition={{ duration: 0.3, ease }}
           className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 mb-10"
         >
-          {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
+          {filtered.length} {filtered.length === 1 ? tw('projectSingular') : tw('projectPlural')}
         </motion.p>
 
         {/* Editorial Grid — 12 columns */}

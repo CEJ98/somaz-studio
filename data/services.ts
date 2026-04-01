@@ -1,99 +1,116 @@
+import type { LocaleString } from '@/lib/locale'
+
 export interface ServicePackage {
-  name: string
+  name: LocaleString
   price: string
-  description?: string
+  description?: LocaleString
 }
 
 export interface Service {
   number: string
-  title: string
+  title: LocaleString
   slug: string
-  tagline: string
-  description: string
+  tagline: LocaleString
+  description: LocaleString
   packages: ServicePackage[]
 }
 
 export const services: Service[] = [
   {
     number: '01',
-    title: '3D Visualization',
+    title: { en: '3D Visualization', es: 'Visualización 3D' },
     slug: '3d-visualization',
-    tagline: 'See it before it exists.',
-    description:
-      'Turn blueprints into photorealistic images before construction begins. We help you sell, present, and get approved faster.',
+    tagline: { en: 'See it before it exists.', es: 'Vélo antes de que exista.' },
+    description: {
+      en: 'Turn blueprints into photorealistic images before construction begins. We help you sell, present, and get approved faster.',
+      es: 'Convierte planos en imágenes fotorrealistas antes de que empiece la construcción. Te ayudamos a vender, presentar y obtener aprobaciones más rápido.',
+    },
     packages: [
       {
-        name: 'Essential',
+        name: { en: 'Essential', es: 'Esencial' },
         price: 'from $350',
-        description: '1 view, 48–72h delivery',
+        description: { en: '1 view, 48–72h delivery', es: '1 vista, entrega en 48–72h' },
       },
       {
-        name: 'Standard',
+        name: { en: 'Standard', es: 'Estándar' },
         price: 'from $1,200',
-        description: '3 views + post-production',
+        description: { en: '3 views + post-production', es: '3 vistas + postproducción' },
       },
       {
-        name: 'Premium',
+        name: { en: 'Premium', es: 'Premium' },
         price: 'from $3,000',
-        description: '5+ views, animation-ready',
+        description: { en: '5+ views, animation-ready', es: '5+ vistas, listo para animación' },
       },
     ],
   },
   {
     number: '02',
-    title: 'Interior Design',
+    title: { en: 'Interior Design', es: 'Diseño de Interiores' },
     slug: 'interior-design',
-    tagline: 'Spaces that feel inevitable.',
-    description:
-      'Full interior design service: space planning, material selection, furniture layout, and mood boards — delivered remotely, executed anywhere.',
+    tagline: { en: 'Spaces that feel inevitable.', es: 'Espacios que se sienten inevitables.' },
+    description: {
+      en: 'Full interior design service: space planning, material selection, furniture layout, and mood boards — delivered remotely, executed anywhere.',
+      es: 'Servicio completo de diseño de interiores: planificación espacial, selección de materiales, distribución de mobiliario y mood boards — entregado de forma remota, ejecutado en cualquier lugar.',
+    },
     packages: [
       {
-        name: 'Single Room',
+        name: { en: 'Single Room', es: 'Habitación Individual' },
         price: 'from $800',
+        description: { en: 'Concept + mood board + material palette for one room', es: 'Concepto + mood board + paleta de materiales para una habitación' },
       },
       {
-        name: 'Full Residence',
+        name: { en: 'Full Residence', es: 'Residencia Completa' },
         price: 'from $3,500',
+        description: { en: 'Full layout, material spec, furniture plan + 3D renders', es: 'Layout completo, especificación de materiales, plano de mobiliario + renders 3D' },
       },
       {
-        name: 'Commercial Space',
+        name: { en: 'Commercial Space', es: 'Espacio Comercial' },
         price: 'from $6,000',
+        description: { en: 'Brand-aligned spatial design, signage, lighting plan', es: 'Diseño espacial alineado a marca, señalética, plan de iluminación' },
       },
     ],
   },
   {
     number: '03',
-    title: 'Conceptual Design',
+    title: { en: 'Conceptual Design', es: 'Diseño Conceptual' },
     slug: 'conceptual-design',
-    tagline: 'The vision, before the plans.',
-    description:
-      'From idea to spatial concept. We develop the vision for your residential or commercial project — without the overhead of a full architecture firm.',
+    tagline: { en: 'The vision, before the plans.', es: 'La visión, antes de los planos.' },
+    description: {
+      en: 'From idea to spatial concept. We develop the vision for your residential or commercial project — without the overhead of a full architecture firm.',
+      es: 'De la idea al concepto espacial. Desarrollamos la visión para tu proyecto residencial o comercial — sin la carga de una firma de arquitectura completa.',
+    },
     packages: [
       {
-        name: 'Residential Concept',
+        name: { en: 'Residential Concept', es: 'Concepto Residencial' },
         price: 'from $2,000',
+        description: { en: 'Spatial concept, massing study, material direction', es: 'Concepto espacial, estudio de masas, dirección de materiales' },
       },
       {
-        name: 'Commercial Concept',
+        name: { en: 'Commercial Concept', es: 'Concepto Comercial' },
         price: 'from $4,500',
+        description: { en: 'Brand-driven concept, program layout, presentation deck', es: 'Concepto basado en marca, programa funcional, deck de presentación' },
       },
     ],
   },
   {
     number: '04',
-    title: 'Design Consulting',
+    title: { en: 'Design Consulting', es: 'Consultoría de Diseño' },
     slug: 'design-consulting',
-    tagline: 'Expert guidance, on demand.',
-    description:
-      'Expert guidance on spatial decisions, material selections, and design direction. Available as hourly sessions or monthly retainer.',
+    tagline: { en: 'Expert guidance, on demand.', es: 'Asesoría experta, cuando la necesitas.' },
+    description: {
+      en: 'Expert guidance on spatial decisions, material selections, and design direction. Available as hourly sessions or monthly retainer.',
+      es: 'Orientación experta en decisiones espaciales, selección de materiales y dirección de diseño. Disponible por sesiones por hora o retainer mensual.',
+    },
     packages: [
       {
-        name: 'Hourly',
+        name: { en: 'Hourly', es: 'Por Hora' },
         price: '$120/hr',
+        description: { en: '60-min video session, summary + action items', es: 'Sesión de 60 min por video, resumen + pasos a seguir' },
       },
       {
-        name: 'Monthly Retainer',
+        name: { en: 'Monthly Retainer', es: 'Retainer Mensual' },
         price: 'from $1,200/mo',
+        description: { en: '4 sessions/month + async support + priority scheduling', es: '4 sesiones/mes + soporte asincrónico + agenda prioritaria' },
       },
     ],
   },
