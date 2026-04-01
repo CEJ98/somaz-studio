@@ -10,6 +10,11 @@ import { Icon } from '@/components/icons'
 import { t as tl } from '@/lib/locale'
 import { ease } from '@/lib/motion'
 
+function useCategoryLabel() {
+  const tc = useTranslations('categories')
+  return (category: string) => tc(category)
+}
+
 interface Props {
   project: Project
   allProjects: Project[]
@@ -129,6 +134,7 @@ function Lightbox({
 
 export default function ProjectPageClient({ project, allProjects, locale }: Props) {
   const tp = useTranslations('project')
+  const catLabel = useCategoryLabel()
   const reduced = useReducedMotion()
   const { scrollY } = useScroll()
   const heroY = useTransform(scrollY, [0, 700], reduced ? [0, 0] : [0, -140])
@@ -144,7 +150,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const infoCols = [
-    { label: tp('categoryLabel'), value: project.category, accent: true },
+    { label: tp('categoryLabel'), value: catLabel(project.category), accent: true },
     { label: tp('locationLabel'), value: project.location },
     { label: tp('yearLabel'), value: String(project.year) },
     ...(project.area ? [{ label: tp('areaLabel'), value: project.area }] : []),
@@ -192,7 +198,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
               transition={{ duration: 0.9, delay: 0.2, ease }}
             >
               <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">
-                {project.category}
+                {catLabel(project.category)}
               </p>
               <h1
                 className="font-serif font-light leading-[0.9]"
@@ -317,7 +323,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
                 {prevProject.title}
               </h2>
               <p className="font-sans text-sm text-foreground/35">
-                {prevProject.category}
+                {catLabel(prevProject.category)}
               </p>
             </div>
           </Link>
@@ -350,7 +356,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
                 {nextProject.title}
               </h2>
               <p className="font-sans text-sm text-foreground/35">
-                {nextProject.category} — {nextProject.location}
+                {catLabel(nextProject.category)} — {nextProject.location}
               </p>
               <span className="inline-flex items-center gap-2 mt-5 font-sans text-[10px] tracking-[0.25em] uppercase text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {tp('viewProject')}

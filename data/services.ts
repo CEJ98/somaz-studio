@@ -2,7 +2,7 @@ import type { LocaleString } from '@/lib/locale'
 
 export interface ServicePackage {
   name: LocaleString
-  price: string
+  price: LocaleString
   description?: LocaleString
 }
 
@@ -28,17 +28,17 @@ export const services: Service[] = [
     packages: [
       {
         name: { en: 'Essential', es: 'Esencial' },
-        price: 'from $350',
+        price: { en: 'from $350', es: 'desde $350' },
         description: { en: '1 view, 48–72h delivery', es: '1 vista, entrega en 48–72h' },
       },
       {
         name: { en: 'Standard', es: 'Estándar' },
-        price: 'from $1,200',
+        price: { en: 'from $1,200', es: 'desde $1,200' },
         description: { en: '3 views + post-production', es: '3 vistas + postproducción' },
       },
       {
         name: { en: 'Premium', es: 'Premium' },
-        price: 'from $3,000',
+        price: { en: 'from $3,000', es: 'desde $3,000' },
         description: { en: '5+ views, animation-ready', es: '5+ vistas, listo para animación' },
       },
     ],
@@ -55,17 +55,17 @@ export const services: Service[] = [
     packages: [
       {
         name: { en: 'Single Room', es: 'Habitación Individual' },
-        price: 'from $800',
+        price: { en: 'from $800', es: 'desde $800' },
         description: { en: 'Concept + mood board + material palette for one room', es: 'Concepto + mood board + paleta de materiales para una habitación' },
       },
       {
         name: { en: 'Full Residence', es: 'Residencia Completa' },
-        price: 'from $3,500',
+        price: { en: 'from $3,500', es: 'desde $3,500' },
         description: { en: 'Full layout, material spec, furniture plan + 3D renders', es: 'Layout completo, especificación de materiales, plano de mobiliario + renders 3D' },
       },
       {
         name: { en: 'Commercial Space', es: 'Espacio Comercial' },
-        price: 'from $6,000',
+        price: { en: 'from $6,000', es: 'desde $6,000' },
         description: { en: 'Brand-aligned spatial design, signage, lighting plan', es: 'Diseño espacial alineado a marca, señalética, plan de iluminación' },
       },
     ],
@@ -82,12 +82,12 @@ export const services: Service[] = [
     packages: [
       {
         name: { en: 'Residential Concept', es: 'Concepto Residencial' },
-        price: 'from $2,000',
+        price: { en: 'from $2,000', es: 'desde $2,000' },
         description: { en: 'Spatial concept, massing study, material direction', es: 'Concepto espacial, estudio de masas, dirección de materiales' },
       },
       {
         name: { en: 'Commercial Concept', es: 'Concepto Comercial' },
-        price: 'from $4,500',
+        price: { en: 'from $4,500', es: 'desde $4,500' },
         description: { en: 'Brand-driven concept, program layout, presentation deck', es: 'Concepto basado en marca, programa funcional, deck de presentación' },
       },
     ],
@@ -104,12 +104,12 @@ export const services: Service[] = [
     packages: [
       {
         name: { en: 'Hourly', es: 'Por Hora' },
-        price: '$120/hr',
+        price: { en: '$120/hr', es: '$120/hora' },
         description: { en: '60-min video session, summary + action items', es: 'Sesión de 60 min por video, resumen + pasos a seguir' },
       },
       {
         name: { en: 'Monthly Retainer', es: 'Retainer Mensual' },
-        price: 'from $1,200/mo',
+        price: { en: 'from $1,200/mo', es: 'desde $1,200/mes' },
         description: { en: '4 sessions/month + async support + priority scheduling', es: '4 sesiones/mes + soporte asincrónico + agenda prioritaria' },
       },
     ],

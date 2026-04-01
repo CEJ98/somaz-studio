@@ -387,8 +387,8 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 className="relative border-t border-border/40 pt-10 pb-12 md:pr-16 overflow-hidden"
               >
                 <span
-                  className="absolute -top-6 -right-4 font-serif font-bold leading-none text-foreground/[0.04] select-none pointer-events-none"
-                  style={{ fontSize: '160px' }}
+                  className="absolute -top-4 -right-2 font-serif font-bold leading-none text-foreground/[0.03] select-none pointer-events-none"
+                  style={{ fontSize: '100px' }}
                   aria-hidden="true"
                 >
                   {item.step}

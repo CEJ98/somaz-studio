@@ -60,7 +60,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
       {/* Ghost number background */}
       <span
         className="absolute right-0 top-4 font-serif font-bold text-foreground/[0.03] select-none pointer-events-none leading-none"
-        style={{ fontSize: '12rem' }}
+        style={{ fontSize: '7rem' }}
         aria-hidden="true"
       >
         {service.number}
@@ -120,7 +120,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
                     <p className="font-sans text-[12px] text-foreground/30">{tl(pkg.description, locale)}</p>
                   )}
                 </div>
-                <p className="font-sans text-sm text-accent font-light ml-6 shrink-0">{pkg.price}</p>
+                <p className="font-sans text-sm text-accent font-light ml-6 shrink-0">{tl(pkg.price, locale)}</p>
               </div>
             ))}
           </div>

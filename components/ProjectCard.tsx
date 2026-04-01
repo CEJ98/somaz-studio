@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import type { Project } from '@/data/projects'
 import { ease } from '@/lib/motion'
 
@@ -14,6 +15,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, priority = false, featured = false }: ProjectCardProps) {
+  const tc = useTranslations('categories')
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef(null)
   const inView = useInView(cardRef, { once: true, margin: '-80px' })
@@ -56,7 +58,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
           style={{ background: 'linear-gradient(to top, rgba(28,28,26,0.85) 0%, transparent 60%)' }}
         >
           <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-2">
-            {project.category}
+            {tc(project.category)}
           </p>
           <div className="overflow-hidden">
             <h3 className={`font-serif text-xl md:text-2xl font-semibold text-foreground transition-transform duration-500 ${hovered ? 'translate-y-0' : 'translate-y-full'}`}>
@@ -70,6 +72,12 @@ export default function ProjectCard({ project, priority = false, featured = fals
           </div>
         </div>
 
+        {/* Glow on hover */}
+        <div
+          className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${hovered ? 'opacity-100' : 'opacity-0'}`}
+          style={{ boxShadow: 'inset 0 0 60px rgba(201, 169, 110, 0.06)' }}
+        />
+
         {/* Accent line bottom */}
         <div className={`absolute bottom-0 left-0 h-px bg-accent transition-all duration-700 ease-out ${hovered ? 'w-full' : 'w-0'}`} />
       </div>
@@ -77,7 +85,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
       {/* Mobile info (below image, no hover on touch) */}
       <div className="p-4 md:hidden">
         <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">
-          {project.category}
+          {tc(project.category)}
         </p>
         <h3 className="font-serif text-xl font-semibold">{project.title}</h3>
         <p className="font-sans text-sm text-foreground/40">

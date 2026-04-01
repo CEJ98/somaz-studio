@@ -80,7 +80,7 @@ export default function Navbar() {
           : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 md:h-20 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-6 md:px-10 h-18 md:h-22 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
@@ -88,7 +88,7 @@ export default function Navbar() {
             alt="Somaz Studio"
             width={160}
             height={40}
-            className="h-8 w-auto object-contain"
+            className="h-10 w-auto object-contain"
             priority
           />
         </Link>
@@ -101,7 +101,7 @@ export default function Navbar() {
               <li key={href}>
                 <Link
                   href={href}
-                  className={`relative font-sans text-[10px] tracking-[0.25em] uppercase transition-colors duration-300 ${
+                  className={`relative font-sans text-xs tracking-[0.25em] uppercase transition-colors duration-300 ${
                     isActive ? 'text-accent' : 'text-foreground/50 hover:text-foreground'
                   }`}
                 >
@@ -116,7 +116,7 @@ export default function Navbar() {
           <li>
             <button
               onClick={toggleLocale}
-              className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
+              className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
               aria-label="Switch language"
             >
               {locale === 'en' ? 'ES' : 'EN'}
@@ -125,7 +125,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 hover:border-accent hover:text-accent px-5 py-2 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 hover:border-accent hover:text-accent px-5 py-2 font-sans text-xs tracking-[0.25em] uppercase transition-all duration-300"
             >
               {t('startProject')}
               <Icon name="north_east" size={14} />
@@ -175,7 +175,7 @@ export default function Navbar() {
             >
               <Link
                 href={href}
-                className={`font-sans text-[10px] tracking-[0.25em] uppercase ${
+                className={`font-sans text-xs tracking-[0.25em] uppercase ${
                   pathname === href ? 'text-accent' : 'text-foreground/60'
                 }`}
               >
@@ -190,7 +190,7 @@ export default function Navbar() {
           >
             <button
               onClick={toggleLocale}
-              className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
+              className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
             >
               {locale === 'en' ? 'ES' : 'EN'}
             </button>
@@ -202,7 +202,7 @@ export default function Navbar() {
           >
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 px-5 py-2.5 font-sans text-[10px] tracking-[0.25em] uppercase"
+              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 px-5 py-2.5 font-sans text-xs tracking-[0.25em] uppercase"
             >
               {t('startProject')}
             </Link>

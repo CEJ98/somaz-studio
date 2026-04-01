@@ -111,7 +111,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
 
           <div className="mt-20 pt-16 border-t border-border/40 relative overflow-hidden">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
-              <span className="ghost-text font-serif font-bold leading-none" style={{ fontSize: '20vw' }}>?</span>
+              <span className="ghost-text font-serif font-bold leading-none" style={{ fontSize: 'clamp(8rem, 20vw, 18rem)' }}>?</span>
             </div>
             <div className="relative z-10 text-center py-8">
               <p className="font-serif italic text-foreground/50 mb-2" style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)' }}>
