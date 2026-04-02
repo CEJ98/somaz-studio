@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { motion, useInView, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
@@ -54,7 +53,6 @@ function AnimatedSection({ children, className, delay = 0 }: { children: React.R
 export default function HomePageClient({ locale }: { locale: string }) {
   const t = useTranslations('home')
   const reduced = useReducedMotion()
-  const heroProject = projects.find(p => p.featured) ?? projects[0]
   const selectedProjects = projects.slice(0, 4)
   const { scrollY } = useScroll()
   const heroScale = useTransform(scrollY, [0, 600], reduced ? [1, 1] : [1, 1.08])
@@ -80,13 +78,13 @@ export default function HomePageClient({ locale }: { locale: string }) {
       {/* HERO */}
       <section className="relative h-screen min-h-[700px] overflow-hidden flex flex-col justify-end">
         <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
-          <Image
-            src={heroProject.images[0]}
-            alt={heroProject.title}
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
+          <video
+            src="/hero-reel.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover"
           />
         </motion.div>
 

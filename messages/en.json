@@ -259,7 +259,26 @@
       "metaTitle": "Terms of Service",
       "metaDesc": "Terms of Service for Somaz Studio.",
       "metaPrivacyTitle": "Privacy Policy",
-      "metaPrivacyDesc": "Privacy Policy for Somaz Studio LLC — how we collect, use, and protect your information."
+      "metaPrivacyDesc": "Privacy Policy for Somaz Studio LLC — how we collect, use, and protect your information.",
+      "lastUpdated": "Last updated: 2025",
+      "s1title": "1. Services",
+      "s1body": "Somaz Studio LLC (\"we,\" \"us,\" or \"the Studio\") provides 3D visualization, interior design, conceptual design, and design consulting services. By engaging our services or submitting a project inquiry, you agree to these Terms of Service.",
+      "s2title": "2. Project Agreements",
+      "s2body": "Each project is governed by a separate written agreement or proposal specifying scope, deliverables, timeline, and fees. These Terms supplement — and do not replace — any project-specific agreement. In case of conflict, the project agreement controls.",
+      "s3title": "3. Intellectual Property",
+      "s3body": "All designs, renderings, drawings, and creative works produced by Somaz Studio remain the intellectual property of Somaz Studio until full payment is received. Upon payment, clients receive a license to use the deliverables as specified in the project agreement. We retain the right to display completed work in our portfolio unless otherwise agreed in writing.",
+      "s4title": "4. Payments",
+      "s4body": "Payment terms are specified in each project agreement. A deposit is typically required before work begins. Unpaid balances may result in work being paused or deliverables withheld until payment is received.",
+      "s5title": "5. Revisions and Scope",
+      "s5body": "Each proposal includes a defined number of revision rounds. Additional revisions or scope changes beyond the agreed terms will be billed at our standard hourly rate or via a change order, to be agreed upon in writing before work proceeds.",
+      "s6title": "6. Limitation of Liability",
+      "s6body": "Somaz Studio is not a licensed architecture or engineering firm. Our visualizations and designs are for representational and planning purposes only and are not construction documents. We are not liable for decisions made based on our work without appropriate professional review. Our total liability for any claim shall not exceed the fees paid for the specific project giving rise to the claim.",
+      "s7title": "7. Confidentiality",
+      "s7body": "We treat all client project information as confidential and will not disclose it to third parties without your consent, except as required by law.",
+      "s8title": "8. Governing Law",
+      "s8body": "These Terms are governed by the laws of the State of Florida, United States. Any disputes shall be resolved in the courts of Miami-Dade County, Florida.",
+      "s9title": "9. Contact",
+      "s9body": "Questions about these Terms? Contact us at hola@somazstudio.com."
     }
   }
 }
