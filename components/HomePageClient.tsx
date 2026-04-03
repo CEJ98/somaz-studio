@@ -85,6 +85,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
             muted
             loop
             playsInline
+            preload="auto"
             className="h-full w-full object-cover"
           />
         </motion.div>

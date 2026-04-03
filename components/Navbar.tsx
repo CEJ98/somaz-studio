@@ -86,9 +86,9 @@ export default function Navbar() {
           <Image
             src="/logos/logo-white.png"
             alt="Somaz Studio"
-            width={256}
-            height={64}
-            className="h-16 w-auto object-contain"
+            width={120}
+            height={120}
+            className="h-24 w-auto object-contain"
             priority
           />
         </Link>
