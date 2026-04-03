@@ -79,7 +79,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
       <section className="relative h-screen min-h-[700px] overflow-hidden flex flex-col justify-end">
         <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
           <video
-            src="/hero-reel.mp4"
+            src="https://gzfxdkrgeaadvabxitjk.supabase.co/storage/v1/object/public/media/hero-reel.mp4"
             autoPlay
             muted
             loop
