@@ -101,9 +101,9 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
                 { q: t('faq3Q'), a: t('faq3A') },
                 { q: t('faq4Q'), a: t('faq4A') },
               ].map(({ q, a }, i) => (
-                <div key={i} className="border-l border-border/30 pl-6">
-                  <p className="font-serif text-foreground/80 mb-3" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.1rem)' }}>{q}</p>
-                  <p className="font-sans font-light text-foreground/40 text-sm leading-relaxed">{a}</p>
+                <div key={i} className="border-l border-border/30 pl-6 hover:border-accent/60 transition-colors duration-300 group/faq">
+                  <p className="font-serif text-foreground/80 mb-3 group-hover/faq:text-foreground transition-colors duration-300" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.1rem)' }}>{q}</p>
+                  <p className="font-sans font-light text-foreground/40 group-hover/faq:text-foreground/55 text-sm leading-relaxed transition-colors duration-300">{a}</p>
                 </div>
               ))}
             </div>
