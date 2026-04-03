@@ -86,6 +86,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
             loop
             playsInline
             preload="auto"
+            poster="/projects/casa-marchetti/cover.jpg"
             className="h-full w-full object-cover"
           />
         </motion.div>
