@@ -57,15 +57,6 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
       transition={{ duration: 0.9, ease }}
       className="border-t border-border/40 pt-14 pb-20 group relative overflow-hidden"
     >
-      {/* Ghost number background */}
-      <span
-        className="absolute right-0 top-4 font-serif font-bold text-foreground/[0.03] select-none pointer-events-none leading-none"
-        style={{ fontSize: '7rem' }}
-        aria-hidden="true"
-      >
-        {service.number}
-      </span>
-
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
         {/* Left — service info */}
         <div className="md:col-span-5 relative z-10">

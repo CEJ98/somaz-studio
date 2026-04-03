@@ -20,7 +20,7 @@ export const services: Service[] = [
     number: '01',
     title: { en: '3D Visualization', es: 'Visualización 3D' },
     slug: '3d-visualization',
-    tagline: { en: 'See it before it exists.', es: 'Vélo antes de que exista.' },
+    tagline: { en: 'See it before it exists.', es: 'Visualízalo antes de que exista.' },
     description: {
       en: 'Turn blueprints into photorealistic images before construction begins. We help you sell, present, and get approved faster.',
       es: 'Convierte planos en imágenes fotorrealistas antes de que empiece la construcción. Te ayudamos a vender, presentar y obtener aprobaciones más rápido.',
