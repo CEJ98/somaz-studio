@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { motion, useInView, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
