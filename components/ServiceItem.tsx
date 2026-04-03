@@ -111,7 +111,6 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
                     <p className="font-sans text-[12px] text-foreground/30">{tl(pkg.description, locale)}</p>
                   )}
                 </div>
-                <p className="font-sans text-sm text-accent font-light ml-6 shrink-0">{tl(pkg.price, locale)}</p>
               </div>
             ))}
           </div>
