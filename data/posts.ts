@@ -19,7 +19,7 @@ export const posts: Post[] = [
     slug: 'why-light-is-the-first-material',
     date: '2024-11-20',
     category: 'Design Thinking',
-    coverImage: '/projects/casa-marchetti/cover.jpg',
+    coverImage: '/blog/why-light-is-the-first-material.jpg',
     excerpt: {
       en: 'Before we select a finish or specify a fixture, we design the light. Here is how we approach natural and artificial lighting as a foundational material in every project.',
       es: 'Antes de seleccionar un acabado o especificar una luminaria, diseñamos la luz. Así es como abordamos la iluminación natural y artificial como material fundacional en cada proyecto.',
@@ -57,7 +57,7 @@ El resultado son espacios que se sienten habitados antes de que se haya colocado
     slug: 'from-concept-to-render-process',
     date: '2024-09-08',
     category: 'Process',
-    coverImage: '/projects/iron-fitness-gym/cover.jpg',
+    coverImage: '/blog/from-concept-to-render-process.jpg',
     excerpt: {
       en: 'A transparent look at how we move from a client brief to a final deliverable — the decisions we make, the tools we use, and where most projects go wrong.',
       es: 'Una mirada transparente a cómo pasamos de un brief de cliente a un entregable final — las decisiones que tomamos, las herramientas que usamos y dónde fallan la mayoría de los proyectos.',
@@ -95,7 +95,7 @@ Los proyectos fallan casi siempre en la Fase 1 — cuando el brief se apresura o
     slug: 'casa-estancita-designing-for-silence',
     date: '2024-06-15',
     category: 'Projects',
-    coverImage: '/projects/casa-estancita/cover.jpg',
+    coverImage: '/blog/casa-estancita-designing-for-silence.jpg',
     excerpt: {
       en: 'A residential project in rural Argentina became an exercise in restraint — how to design a space that feels quiet, unhurried, and deeply connected to its landscape.',
       es: 'Un proyecto residencial en la Argentina rural se convirtió en un ejercicio de contención — cómo diseñar un espacio que se sienta tranquilo, sin prisa y profundamente conectado a su paisaje.',
@@ -133,7 +133,7 @@ El comentario del cliente tras el primer render: "Parece que lleva cincuenta añ
     slug: '3d-visualization-real-estate-developers',
     date: '2024-05-10',
     category: 'Design Thinking',
-    coverImage: '/projects/casa-kriger-miami/cover.jpg',
+    coverImage: '/blog/3d-visualization-real-estate-developers.jpg',
     excerpt: {
       en: 'How photorealistic renders help developers close funding, sell units, and get permits faster — and why quality visualization is an investment, not an expense.',
       es: 'Cómo los renders fotorrealistas ayudan a los desarrolladores a cerrar financiamiento, vender unidades y obtener permisos más rápido — y por qué la visualización de calidad es una inversión, no un gasto.',
@@ -171,7 +171,7 @@ La clave es trabajar con un estudio que entienda arquitectura, no solo software.
     slug: 'renders-accelerate-permit-approvals',
     date: '2024-04-22',
     category: 'Process',
-    coverImage: '/projects/casa-mariano-miami/cover.jpg',
+    coverImage: '/blog/renders-accelerate-permit-approvals.jpg',
     excerpt: {
       en: 'Municipal boards respond to clarity. Here is how we prepare visualization packages that reduce review cycles and minimize objections.',
       es: 'Las juntas municipales responden a la claridad. Así es como preparamos paquetes de visualización que reducen los ciclos de revisión y minimizan objeciones.',
@@ -209,7 +209,7 @@ El consejo práctico: incluir al menos dos vistas exteriores (nivel de calle y c
     slug: 'interior-design-miami-trends',
     date: '2024-03-18',
     category: 'Design Thinking',
-    coverImage: '/projects/casa-fabi-gaston/cover.jpg',
+    coverImage: '/blog/interior-design-miami-trends.jpg',
     excerpt: {
       en: 'What we are seeing in Miami residential interiors — from biophilic integration to material honesty — and what it means for clients planning their next project.',
       es: 'Lo que estamos viendo en interiores residenciales de Miami — desde integración biofílica hasta honestidad material — y qué significa para clientes que planean su próximo proyecto.',
@@ -247,7 +247,7 @@ Para clientes que planean un proyecto: los interiores que mejor envejecerán son
     slug: 'business-case-remote-design',
     date: '2024-02-05',
     category: 'Process',
-    coverImage: '/projects/cabanas-terraciello/cover.jpg',
+    coverImage: '/blog/business-case-remote-design.jpg',
     excerpt: {
       en: 'How remote-first design studios deliver better results at lower cost — and why geography no longer determines the quality of your project.',
       es: 'Cómo los estudios de diseño remote-first entregan mejores resultados a menor costo — y por qué la geografía ya no determina la calidad de tu proyecto.',
@@ -289,7 +289,7 @@ El resultado: clientes en Miami, Buenos Aires, Santiago, Montevideo y Bogotá re
     slug: 'materials-photograph-age-well',
     date: '2024-01-12',
     category: 'Design Thinking',
-    coverImage: '/projects/duplex-nati-sola/cover.jpg',
+    coverImage: '/blog/materials-photograph-age-well.jpg',
     excerpt: {
       en: 'The materials that look best in renders are often the same ones that improve with time. Here is how we think about material selection across visualization and interior design.',
       es: 'Los materiales que se ven mejor en renders son a menudo los mismos que mejoran con el tiempo. Así es como pensamos la selección de materiales en visualización y diseño de interiores.',
@@ -327,7 +327,7 @@ Los materiales que especificamos con más frecuencia: roble engineered en acabad
     slug: 'common-visualization-brief-mistakes',
     date: '2023-12-01',
     category: 'Process',
-    coverImage: '/projects/fabrica-nutrar/cover.jpg',
+    coverImage: '/blog/common-visualization-brief-mistakes.jpg',
     excerpt: {
       en: 'After fifty projects, we have noticed patterns in how briefs go wrong. Here are the five most common mistakes and how to avoid them.',
       es: 'Después de cincuenta proyectos, hemos notado patrones en cómo los briefs salen mal. Aquí están los cinco errores más comunes y cómo evitarlos.',
@@ -369,7 +369,7 @@ Los mejores briefs que recibimos son cortos, específicos y honestos sobre lo qu
     slug: 'commercial-spaces-brand-identity',
     date: '2023-11-05',
     category: 'Projects',
-    coverImage: '/projects/iron-fitness-gym/01.jpg',
+    coverImage: '/blog/commercial-spaces-brand-identity.jpg',
     excerpt: {
       en: 'How we approach commercial interior design differently from residential — and why brand alignment is the first design constraint, not the last.',
       es: 'Cómo abordamos el diseño de interiores comercial de manera diferente al residencial — y por qué la alineación de marca es la primera restricción de diseño, no la última.',

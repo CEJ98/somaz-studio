@@ -95,7 +95,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             className="hidden md:block h-full w-full object-cover"
           />
         </motion.div>

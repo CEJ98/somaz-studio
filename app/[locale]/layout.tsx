@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
@@ -35,6 +35,10 @@ export const metadata: Metadata = {
     description: 'Miami-based design studio. 3D visualization · Interior design · Spatial concepts.',
   },
   robots: { index: true, follow: true },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#1C1C1A',
 }
 
 export function generateStaticParams() {
