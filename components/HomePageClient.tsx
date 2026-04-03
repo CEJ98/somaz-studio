@@ -387,13 +387,6 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 transition={{ duration: 0.8, delay: i * 0.12, ease }}
                 className="relative border-t border-border/40 pt-10 pb-12 md:pr-16 overflow-hidden"
               >
-                <span
-                  className="absolute -top-4 -right-2 font-serif font-bold leading-none text-foreground/[0.03] select-none pointer-events-none"
-                  style={{ fontSize: '100px' }}
-                  aria-hidden="true"
-                >
-                  {item.step}
-                </span>
                 <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/70 mb-6">{item.step}</p>
                 <h3 className="font-serif text-3xl font-semibold text-foreground mb-5">{item.title}</h3>
                 <p className="font-sans font-light text-foreground/50 leading-relaxed">{item.description}</p>
