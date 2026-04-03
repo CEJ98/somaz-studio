@@ -79,6 +79,16 @@ export default function HomePageClient({ locale }: { locale: string }) {
       {/* HERO */}
       <section className="relative h-screen min-h-[700px] overflow-hidden flex flex-col justify-end">
         <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
+          {/* Mobile: poster estático */}
+          <Image
+            src="/projects/casa-marchetti/cover.jpg"
+            alt=""
+            fill
+            className="object-cover md:hidden"
+            priority
+            sizes="100vw"
+          />
+          {/* Desktop: video */}
           <video
             src="https://gzfxdkrgeaadvabxitjk.supabase.co/storage/v1/object/public/media/hero-reel.mp4"
             autoPlay
@@ -86,8 +96,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
             loop
             playsInline
             preload="auto"
-            poster="/projects/casa-marchetti/cover.jpg"
-            className="h-full w-full object-cover"
+            className="hidden md:block h-full w-full object-cover"
           />
         </motion.div>
 
