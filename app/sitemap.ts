@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     staticPaths.map(({ path, changeFrequency, priority }) => ({
       url: `${base}/${locale}${path}`,
-      lastModified: new Date('2025-01-01'),
+      lastModified: new Date(),
       changeFrequency,
       priority,
     }))
@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const projectRoutes: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     projects.map((p) => ({
       url: `${base}/${locale}/work/${p.slug}`,
-      lastModified: new Date('2025-01-01'),
+      lastModified: new Date(p.year, 0, 1),
       changeFrequency: 'yearly' as const,
       priority: 0.6,
     }))

@@ -10,13 +10,6 @@ vi.mock('@/lib/resend', () => ({
   getResend: vi.fn().mockReturnValue(null),
 }))
 
-const mockInsert = vi.fn().mockResolvedValue({ error: null })
-vi.mock('@/lib/supabase', () => ({
-  getSupabase: () => ({
-    from: () => ({ insert: mockInsert }),
-  }),
-}))
-
 function makeRequest(body: Record<string, unknown>) {
   return new NextRequest('http://localhost/api/contact', {
     method: 'POST',
@@ -38,7 +31,6 @@ const validBody = {
 describe('POST /api/contact', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    mockInsert.mockResolvedValue({ error: null })
   })
 
   it('returns 400 when required fields are missing', async () => {
@@ -53,12 +45,6 @@ describe('POST /api/contact', () => {
     expect(res.status).toBe(200)
     const json = await res.json()
     expect(json.success).toBe(true)
-  })
-
-  it('returns 500 when Supabase fails', async () => {
-    mockInsert.mockResolvedValueOnce({ error: { message: 'db error' } })
-    const res = await POST(makeRequest(validBody))
-    expect(res.status).toBe(500)
   })
 
   it('returns 429 when rate limited', async () => {

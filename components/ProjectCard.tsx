@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import type { Project } from '@/data/projects'
 import { ease } from '@/lib/motion'
@@ -29,7 +29,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
     >
       <div ref={cardRef} className={`relative overflow-hidden ${featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
         {/* Curtain reveal */}
-        <motion.div
+        <m.div
           className="absolute inset-0 bg-surface z-10 origin-top pointer-events-none"
           initial={{ scaleY: 1 }}
           animate={inView ? { scaleY: 0 } : {}}
@@ -88,7 +88,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
           {tc(project.category)}
         </p>
         <h3 className="font-serif text-xl font-semibold">{project.title}</h3>
-        <p className="font-sans text-sm text-foreground/40">
+        <p className="font-sans text-sm text-foreground/65">
           {project.location} — {project.year}
         </p>
       </div>

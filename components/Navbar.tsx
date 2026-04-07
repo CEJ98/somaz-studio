@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
-import { motion, useScroll } from 'framer-motion'
+import { m, useScroll } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { useLocale } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
@@ -86,9 +86,9 @@ export default function Navbar() {
           <Image
             src="/logos/logo-white.png"
             alt="Somaz Studio"
-            width={120}
-            height={120}
-            className="h-24 w-auto object-contain"
+            width={140}
+            height={36}
+            className="h-12 w-auto object-contain"
             priority
           />
         </Link>
@@ -116,7 +116,7 @@ export default function Navbar() {
           <li>
             <button
               onClick={toggleLocale}
-              className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
+              className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/65 hover:text-accent transition-colors duration-300"
               aria-label="Switch language"
             >
               {locale === 'en' ? 'ES' : 'EN'}
@@ -167,7 +167,7 @@ export default function Navbar() {
       >
         <ul className="flex flex-col px-6 py-8 gap-6">
           {links.map(({ href, label }, i) => (
-            <motion.li
+            <m.li
               key={href}
               initial={{ opacity: 0, x: -16 }}
               animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
@@ -181,21 +181,21 @@ export default function Navbar() {
               >
                 {label}
               </Link>
-            </motion.li>
+            </m.li>
           ))}
-          <motion.li
+          <m.li
             initial={{ opacity: 0, x: -16 }}
             animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
             transition={{ duration: 0.3, delay: links.length * 0.06, ease: ease }}
           >
             <button
               onClick={toggleLocale}
-              className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
+              className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/65 hover:text-accent transition-colors duration-300"
             >
               {locale === 'en' ? 'ES' : 'EN'}
             </button>
-          </motion.li>
-          <motion.li
+          </m.li>
+          <m.li
             initial={{ opacity: 0, x: -16 }}
             animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
             transition={{ duration: 0.3, delay: (links.length + 1) * 0.06, ease: ease }}
@@ -206,12 +206,12 @@ export default function Navbar() {
             >
               {t('startProject')}
             </Link>
-          </motion.li>
+          </m.li>
         </ul>
       </div>
 
       {/* Scroll progress bar */}
-      <motion.div
+      <m.div
         className="absolute bottom-0 left-0 h-px bg-accent/60 origin-left"
         style={{ scaleX: scrollYProgress }}
       />

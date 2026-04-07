@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { motion, useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion'
+import { m, useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -16,7 +16,7 @@ function FadeUp({ children, delay = 0, className }: { children: React.ReactNode;
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const reduced = useReducedMotion()
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={reduced ? false : { opacity: 0, y: 35 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -24,7 +24,7 @@ function FadeUp({ children, delay = 0, className }: { children: React.ReactNode;
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -49,9 +49,9 @@ function CounterStat({ value, suffix = '', label }: { value: string; suffix?: st
   return (
     <div ref={ref}>
       <p className="font-serif font-light text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-        {isNumeric ? <motion.span>{rounded}</motion.span> : value}{suffix}
+        {isNumeric ? <m.span>{rounded}</m.span> : value}{suffix}
       </p>
-      <p className="font-sans text-[10px] text-foreground/35 tracking-[0.25em] mt-3 uppercase">{label}</p>
+      <p className="font-sans text-[10px] text-foreground/55 tracking-[0.25em] mt-3 uppercase">{label}</p>
     </div>
   )
 }
@@ -61,65 +61,87 @@ export default function AboutClient() {
   const locale = useLocale()
 
   const differentiators = [
-    { label: t('diff1Label'), description: t('diff1Desc') },
-    { label: t('diff2Label'), description: t('diff2Desc') },
-    { label: t('diff3Label'), description: t('diff3Desc') },
+    { label: t('diff1Label'), description: t('diff1Desc'), icon: 'arrow_forward' as const },
+    { label: t('diff2Label'), description: t('diff2Desc'), icon: 'work' as const },
+    { label: t('diff3Label'), description: t('diff3Desc'), icon: 'chat' as const },
   ]
 
   return (
-    <div className="min-h-screen pt-32 pb-24">
-      {/* Hero — philosophy quote */}
-      <section className="px-6 md:px-10 pb-28 md:pb-40 border-b border-border/40">
-        <div className="max-w-7xl mx-auto">
-          <motion.p
-            className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease }}
-          >
-            {t('ourStory')}
-          </motion.p>
+    <div className="min-h-screen pt-0 pb-24">
+      {/* Hero — with background image */}
+      <section className="relative min-h-[70vh] flex items-end overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/about-hero.jpg"
+            alt="Somaz Studio — architectural space with refined materiality"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-            <motion.div
-              className="md:col-span-7"
-              initial={{ opacity: 0, y: 30 }}
+        <div className="relative z-10 w-full px-6 md:px-10 pb-20 md:pb-28 pt-40">
+          <div className="max-w-7xl mx-auto">
+            <m.p
+              className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.1, ease }}
+              transition={{ duration: 0.7, ease }}
             >
-              <h1
-                className="font-serif leading-[0.9] mb-12"
-                style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
-              >
-                <span className="block font-light italic text-foreground/60">{t('heading1')}</span>
-                <span className="block font-semibold text-foreground">{t('heading2')}</span>
-              </h1>
-              <p className="font-sans font-light text-foreground/55 leading-relaxed max-w-lg">
-                {t('intro')}
-              </p>
-            </motion.div>
+              {t('ourStory')}
+            </m.p>
 
-            <motion.div
-              className="md:col-span-4 md:col-start-9 flex flex-col justify-end pb-4"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease }}
-            >
-              <div className="architectural-line mb-8" />
-              <blockquote
-                className="font-serif italic text-foreground/40 leading-tight"
-                style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+              <m.div
+                className="md:col-span-7"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.1, ease }}
               >
-                {t('quote')}
-              </blockquote>
-            </motion.div>
+                <h1
+                  className="font-serif leading-[0.9] mb-12"
+                  style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
+                >
+                  <span className="block font-light italic text-foreground/60">{t('heading1')}</span>
+                  <span className="block font-semibold text-foreground">{t('heading2')}</span>
+                </h1>
+                <p className="font-sans font-light text-foreground/55 leading-relaxed max-w-lg">
+                  {t('intro')}
+                </p>
+              </m.div>
+
+              <m.div
+                className="md:col-span-4 md:col-start-9 flex flex-col justify-end pb-4"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, delay: 0.3, ease }}
+              >
+                <div className="architectural-line mb-8" />
+                <blockquote
+                  className="font-serif italic text-foreground/70 leading-tight"
+                  style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}
+                >
+                  {t('quote')}
+                </blockquote>
+              </m.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Differentiators */}
-      <section className="px-6 md:px-10 py-28 md:py-40 border-b border-border/40">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative px-6 md:px-10 py-28 md:py-40 border-b border-border/40 overflow-hidden">
+        <Image
+          src="/backgrounds/about-differentiators.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-background/95" />
+        <div className="relative z-10 max-w-7xl mx-auto">
           <FadeUp className="mb-20">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('whySomaz')}</p>
             <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
@@ -131,11 +153,14 @@ export default function AboutClient() {
             {differentiators.map((item, i) => (
               <FadeUp key={item.label} delay={i * 0.12}>
                 <div className="relative border-t border-border/40 pt-10 pb-12 md:pr-16 overflow-hidden">
-                  <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/60 mb-6">
-                    {String(i + 1).padStart(2, '0')}
-                  </p>
+                  <div className="flex items-end gap-4 mb-4">
+                    <p className="font-serif font-light text-accent/40 select-none" style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', lineHeight: 1 }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </p>
+                    <Icon name={item.icon} size={22} className="text-accent/50 mb-2" />
+                  </div>
                   <h3 className="font-serif text-2xl font-semibold text-foreground mb-5">{item.label}</h3>
-                  <p className="font-sans font-light text-foreground/50 leading-relaxed">{item.description}</p>
+                  <p className="font-sans font-light text-foreground/65 leading-relaxed">{item.description}</p>
                 </div>
               </FadeUp>
             ))}
@@ -144,8 +169,16 @@ export default function AboutClient() {
       </section>
 
       {/* Stats */}
-      <section className="px-6 md:px-10 py-28 md:py-40 border-b border-border/40 bg-surface/20">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative px-6 md:px-10 py-28 md:py-40 border-b border-border/40 overflow-hidden">
+        <Image
+          src="/backgrounds/about-stats.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-background/95" />
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="architectural-line mb-20" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {[
@@ -176,19 +209,19 @@ export default function AboutClient() {
             {team.map((member, i) => (
               <FadeUp key={member.name} delay={i * 0.15}>
                 <div className="flex flex-col md:flex-row gap-8 items-start">
-                  <div className="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0 overflow-hidden">
+                  <div className="relative w-40 md:w-48 flex-shrink-0 overflow-hidden" style={{ aspectRatio: '3/4' }}>
                     <Image
                       src={member.image}
                       alt={member.name}
                       fill
                       className="object-cover grayscale-[20%]"
-                      sizes="160px"
+                      sizes="192px"
                     />
                   </div>
                   <div>
                     <h3 className="font-serif text-xl font-semibold text-foreground mb-1">{member.name}</h3>
                     <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-4">{tl(member.role, locale)}</p>
-                    <p className="font-sans font-light text-foreground/50 leading-relaxed text-sm">{tl(member.bio, locale)}</p>
+                    <p className="font-sans font-light text-foreground/65 leading-relaxed text-sm">{tl(member.bio, locale)}</p>
                   </div>
                 </div>
               </FadeUp>

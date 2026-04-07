@@ -1,4 +1,10 @@
 {
+  "cookie": {
+    "ariaLabel": "Consentimiento de cookies",
+    "message": "Usamos cookies para medir el tráfico del sitio y mejorar tu experiencia. No vendemos datos personales.",
+    "accept": "Aceptar",
+    "decline": "Rechazar"
+  },
   "nav": {
     "work": "Trabajo",
     "services": "Servicios",
@@ -6,6 +12,7 @@
     "notes": "Notas",
     "contact": "Contacto",
     "startProject": "Iniciar Proyecto",
+    "freeConsult": "Reservar consulta gratuita de 15 min",
     "toggleMenu": "Abrir menú"
   },
   "footer": {
@@ -16,6 +23,7 @@
     "newsletter": "Newsletter",
     "newsletterCopy": "Actualizaciones del estudio, proyectos y reflexiones de diseño — directo a tu bandeja.",
     "subscribed": "Ya estás en la lista.",
+    "emailPlaceholder": "tu@email.com",
     "subscribe": "Suscribirse",
     "instagram": "Instagram",
     "linkedin": "LinkedIn",
@@ -28,8 +36,10 @@
     "badge": "Miami · Global · Est. 2022",
     "heroLine1": "El espacio es",
     "heroLine2": "el mensaje.",
+    "heroSubline": "Visualización 3D fotorrealista para arquitectos e interioristas. Miami, entrega en 2–3 semanas.",
     "viewOurWork": "Ver Nuestro Trabajo",
     "startProject": "Iniciar Proyecto",
+    "freeConsult": "Reservar consulta gratuita de 15 min",
     "scroll": "Desplazar",
     "selectedWork": "Trabajo Selecto",
     "spacesTagline": "Espacios que definen cultura.",
@@ -48,6 +58,9 @@
     "step02Desc": "Desarrollamos el concepto espacial, la paleta de materiales y la estrategia de visualización. Cada decisión es intencional y documentada.",
     "step03Title": "Entregar",
     "step03Desc": "Renders finales, planos o paquetes de diseño entregados a tiempo. Claros, completos, listos para usar.",
+    "statsProjects": "Proyectos Entregados",
+    "statsCountries": "Países Atendidos",
+    "statsResponse": "Tiempo de Respuesta",
     "testimonials": "Testimonios",
     "whatClientsSay": "Lo que dicen los clientes.",
     "startConversation": "Iniciar una conversación",
@@ -55,6 +68,10 @@
     "visionToLife": "visión a la realidad?",
     "viewOurWorkCta": "Ver Nuestro Trabajo",
     "viewProject": "Ver Proyecto",
+    "latestNotes": "Últimas Notas",
+    "insightsTagline": "Reflexiones de diseño.",
+    "readArticle": "Leer Artículo",
+    "viewAllNotes": "Ver Todas las Notas",
     "metaTitle": "Somaz Studio | Visualización 3D & Diseño de Interiores — Miami",
     "metaDesc": "Estudio de diseño con sede en Miami especializado en visualización 3D, diseño de interiores y conceptos espaciales. Trabajamos globalmente.",
     "ogDesc": "Visualización 3D · Diseño de interiores · Conceptos espaciales. Con base en Miami, entrega global."
@@ -66,7 +83,11 @@
     "projectPlural": "proyectos",
     "metaTitle": "Nuestro Trabajo",
     "metaDesc": "Proyectos seleccionados de Somaz Studio — visualización 3D, diseño de interiores y diseño conceptual en Miami, Latinoamérica y más allá.",
-    "ogDesc": "Una selección curada de proyectos de visualización 3D, diseño de interiores y diseño conceptual."
+    "ogDesc": "Una selección curada de proyectos de visualización 3D, diseño de interiores y diseño conceptual.",
+    "intro": "Una selección curada de proyectos de visualización 3D, diseño de interiores y diseño conceptual — cada uno moldeado por una visión distinta.",
+    "ctaLabel": "Iniciar un Proyecto",
+    "ctaHeading": "¿Listo para llevar tu visión a la realidad?",
+    "ctaButton": "Contáctanos"
   },
   "project": {
     "categoryLabel": "Categoría",
@@ -78,6 +99,7 @@
     "viewProject": "Ver Proyecto",
     "allWork": "Todo el Trabajo",
     "startProject": "Iniciar Proyecto",
+    "freeConsult": "Reservar consulta gratuita de 15 min",
     "outcomeLabel": "Resultado",
     "prevProject": "Proyecto Anterior",
     "closeGallery": "Cerrar",
@@ -95,12 +117,14 @@
     "subheading": "Cada proyecto es diferente. Estos paquetes te dan un punto de partida — adaptaremos el alcance a tus necesidades específicas.",
     "packages": "Paquetes",
     "startProject": "Iniciar Proyecto",
+    "freeConsult": "Reservar consulta gratuita de 15 min",
     "ctaQuestion": "¿No estás seguro qué servicio se adapta a tu proyecto?",
     "ctaSubtitle": "Cuéntanos sobre tu visión — lo resolveremos juntos.",
     "letsTalk": "Hablemos",
     "metaTitle": "Servicios de Diseño",
     "metaDesc": "Visualización 3D, diseño de interiores, diseño conceptual y consultoría. Paquetes claros, entrega remota, alcance global.",
     "ogDesc": "Visualización 3D, diseño de interiores, diseño conceptual y consultoría. Con base en Miami, entregando globalmente.",
+    "clientVoices": "Lo que dicen nuestros clientes",
     "faqHeading": "Preguntas Frecuentes",
     "faq1Q": "¿Cuánto tarda una visualización 3D?",
     "faq1A": "El tiempo de entrega depende del paquete. Esencial (1 vista) tarda 48–72 horas. Estándar (3 vistas) tarda 5–7 días hábiles. Premium (5+ vistas) se define por proyecto.",
@@ -156,7 +180,8 @@
     "ogDesc": "¿Listo para comenzar? Escríbenos y cuéntanos sobre tu proyecto.",
     "stat1": "Proyectos",
     "stat2": "Países",
-    "stat3": "Respuesta"
+    "stat3": "Respuesta",
+    "responseNote": "Respondemos en menos de 24 horas con una propuesta personalizada."
   },
   "form": {
     "marquee": "CONSULTAR\u2003—\u2003COLABORAR\u2003—\u2003CREAR\u2003—\u2003CONSULTAR\u2003—\u2003COLABORAR\u2003—\u2003CREAR\u2003—\u2003CONSULTAR\u2003—\u2003COLABORAR\u2003—\u2003CREAR\u2003—\u2003",
@@ -181,7 +206,10 @@
     "budgetUnder5k": "Menos de $5K",
     "budget5to15k": "$5K – $15K",
     "budget15to50k": "$15K – $50K",
-    "budget50kplus": "$50K+"
+    "budget50kplus": "$50K+",
+    "budgetNotSure": "No estoy seguro aún",
+    "formTime": "6 campos · 60 segundos",
+    "trustCopy": "Respuesta en 24h · Sin compromiso · NDA disponible"
   },
   "thankyou": {
     "sent": "Mensaje Enviado",

@@ -2,12 +2,13 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { motion, useInView, useScroll, useTransform, useReducedMotion } from 'framer-motion'
-import { useRef } from 'react'
+import { m, useInView, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { projects } from '@/data/projects'
 import { services } from '@/data/services'
 import { testimonials } from '@/data/testimonials'
+import { posts } from '@/data/posts'
 import { Icon } from '@/components/icons'
 import { t as tl } from '@/lib/locale'
 import { ease } from '@/lib/motion'
@@ -39,7 +40,7 @@ function AnimatedSection({ children, className, delay = 0 }: { children: React.R
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduced = useReducedMotion()
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={reduced ? false : { opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -47,7 +48,7 @@ function AnimatedSection({ children, className, delay = 0 }: { children: React.R
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -59,6 +60,13 @@ export default function HomePageClient({ locale }: { locale: string }) {
   const heroScale = useTransform(scrollY, [0, 600], reduced ? [1, 1] : [1, 1.08])
   const heroOpacity = useTransform(scrollY, [0, 500], reduced ? [1, 1] : [1, 0])
   const scrollIndicatorOpacity = useTransform(scrollY, [0, 150], reduced ? [1, 1] : [1, 0])
+
+  // Defer video mount until after LCP — avoids competing for bandwidth on initial load
+  const [videoReady, setVideoReady] = useState(false)
+  useEffect(() => {
+    const timer = setTimeout(() => setVideoReady(true), 1200)
+    return () => clearTimeout(timer)
+  }, [])
 
   const steps = [
     { step: '01', title: t('step01Title'), description: t('step01Desc') },
@@ -77,68 +85,82 @@ export default function HomePageClient({ locale }: { locale: string }) {
       />
 
       {/* HERO */}
-      <section className="relative h-screen min-h-[700px] overflow-hidden flex flex-col justify-end">
-        <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
-          {/* Mobile: poster estático */}
+      <section className="relative min-h-[100svh] min-h-[700px] overflow-hidden flex flex-col justify-end">
+        <m.div className="absolute inset-0" style={{ scale: heroScale }}>
+          {/* Poster como Next/Image para que sirva WebP/AVIF con priority */}
           <Image
-            src="/projects/casa-marchetti/cover.jpg"
+            src="/media/hero-home-poster.jpg"
             alt=""
             fill
-            className="object-cover md:hidden"
             priority
             sizes="100vw"
+            className="object-cover"
+            quality={75}
           />
-          {/* Desktop: video */}
-          <video
-            src="https://gzfxdkrgeaadvabxitjk.supabase.co/storage/v1/object/public/media/hero-reel.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            className="hidden md:block h-full w-full object-cover"
-          />
-        </motion.div>
+          {/* Video hero — se monta 1.2s después del LCP para no competir por ancho de banda */}
+          {videoReady && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="absolute inset-0 h-full w-full object-cover"
+            >
+              <source src="/media/hero-home-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
+              <source src="/media/hero-home.mp4" type="video/mp4" />
+            </video>
+          )}
+        </m.div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
 
-        <motion.div
+        <m.div
           className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-10 pb-20 md:pb-28"
           style={{ opacity: heroOpacity }}
         >
-          <motion.p
-            className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/80 mb-6"
+          <m.p
+            className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.2 }}
           >
             {t('badge')}
-          </motion.p>
+          </m.p>
 
           <h1 className="font-serif leading-[0.9] tracking-tight mb-8" style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)' }}>
             <div className="overflow-hidden">
-              <motion.span
+              <m.span
                 className="block font-light text-foreground/60 italic"
-                initial={{ y: '110%' }}
+                initial={false}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, ease, delay: 0.3 }}
               >
                 {t('heroLine1')}
-              </motion.span>
+              </m.span>
             </div>
             <div className="overflow-hidden">
-              <motion.span
+              <m.span
                 className="block font-semibold text-foreground"
-                initial={{ y: '110%' }}
+                initial={false}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, ease, delay: 0.42 }}
               >
                 {t('heroLine2')}
-              </motion.span>
+              </m.span>
             </div>
           </h1>
 
-          <motion.div
+          <m.p
+            className="font-sans text-sm font-light text-foreground/75 leading-relaxed mb-8 max-w-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 0.58 }}
+          >
+            {t('heroSubline')}
+          </m.p>
+
+          <m.div
             className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -153,30 +175,30 @@ export default function HomePageClient({ locale }: { locale: string }) {
             </Link>
             <Link
               href="/contact"
-              className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/50 hover:text-foreground border-b border-foreground/20 pb-0.5 hover:border-foreground transition-all duration-300"
+              className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/65 hover:text-foreground border-b border-foreground/30 pb-0.5 hover:border-foreground transition-all duration-300"
             >
               {t('startProject')}
             </Link>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="absolute bottom-8 right-8 md:right-10 flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 1 }}
           style={{ opacity: scrollIndicatorOpacity }}
         >
-          <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/30 [writing-mode:vertical-lr]">
+          <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 [writing-mode:vertical-lr]">
             {t('scroll')}
           </span>
-          <motion.div
+          <m.div
             className="w-px h-10 bg-gradient-to-b from-foreground/30 to-transparent"
             animate={{ scaleY: [1, 0.4, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             style={{ originY: 0 }}
           />
-        </motion.div>
+        </m.div>
       </section>
 
       {/* SELECTED WORK */}
@@ -190,7 +212,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
           </div>
           <Link
             href="/work"
-            className="hidden md:inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/30 hover:text-foreground transition-colors duration-300"
+            className="hidden md:inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 hover:text-foreground transition-colors duration-300"
           >
             {t('allProjects')}
             <Icon name="arrow_right_alt" size={14} />
@@ -199,7 +221,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
           {selectedProjects[0] && (
-            <motion.div
+            <m.div
               className="md:col-span-7"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -223,12 +245,12 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 </div>
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
               </Link>
-            </motion.div>
+            </m.div>
           )}
 
           <div className="md:col-span-5 flex flex-col gap-3">
             {selectedProjects[1] && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
@@ -249,10 +271,10 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   </div>
                   <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
                 </Link>
-              </motion.div>
+              </m.div>
             )}
             {selectedProjects[2] && (
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
@@ -273,12 +295,12 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   </div>
                   <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
                 </Link>
-              </motion.div>
+              </m.div>
             )}
           </div>
 
           {selectedProjects[3] && (
-            <motion.div
+            <m.div
               className="md:col-start-3 md:col-span-8"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -300,14 +322,14 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 </div>
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
               </Link>
-            </motion.div>
+            </m.div>
           )}
         </div>
 
         <AnimatedSection className="mt-10 flex justify-center">
           <Link
             href="/work"
-            className="inline-flex items-center gap-3 border border-foreground/15 text-foreground/50 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+            className="inline-flex items-center gap-3 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
           >
             {t('viewAllProjects')}
             <Icon name="arrow_right_alt" size={14} />
@@ -327,12 +349,12 @@ export default function HomePageClient({ locale }: { locale: string }) {
               >
                 {t('designQuote')}
               </blockquote>
-              <p className="font-sans font-light text-foreground/50 leading-relaxed mb-8">
+              <p className="font-sans font-light text-foreground/70 leading-relaxed mb-8">
                 {t('approachParagraph')}
               </p>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/40 hover:text-accent border-b border-foreground/20 pb-0.5 hover:border-accent transition-all duration-300"
+                className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/65 hover:text-accent border-b border-foreground/30 pb-0.5 hover:border-accent transition-all duration-300"
               >
                 {t('ourStory')}
                 <Icon name="north_east" size={14} />
@@ -342,7 +364,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
             <div className="md:col-span-7 md:col-start-6">
               <div className="architectural-line mb-12 hidden md:block" />
               {services.map((s, i) => (
-                <motion.div
+                <m.div
                   key={s.number}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -350,22 +372,22 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   transition={{ duration: 0.7, delay: i * 0.08, ease }}
                   className="flex items-start gap-6 py-6 border-b border-border/40 group"
                 >
-                  <span className="font-sans text-[10px] text-foreground/20 tracking-widest w-8 shrink-0 pt-1 group-hover:text-accent transition-colors duration-300">
+                  <span className="font-sans text-[10px] text-foreground/65 tracking-widest w-8 shrink-0 pt-1 group-hover:text-accent transition-colors duration-300">
                     {s.number}
                   </span>
                   <div className="flex-1 group-hover:translate-x-1 transition-transform duration-300">
-                    <span className="font-serif text-xl text-foreground/70 group-hover:text-foreground block mb-1 transition-colors duration-300">
+                    <span className="font-serif text-xl text-foreground/85 group-hover:text-foreground block mb-1 transition-colors duration-300">
                       {tl(s.title, locale)}
                     </span>
-                    <span className="font-sans text-sm font-light text-foreground/35 italic">{tl(s.tagline, locale)}</span>
+                    <span className="font-sans text-sm font-light text-foreground/60 italic">{tl(s.tagline, locale)}</span>
                   </div>
-                  <Icon name="arrow_right_alt" size={18} className="text-foreground/10 group-hover:text-accent transition-colors duration-300 mt-0.5" />
-                </motion.div>
+                  <Icon name="arrow_right_alt" size={18} className="text-foreground/55 group-hover:text-accent transition-colors duration-300 mt-0.5" />
+                </m.div>
               ))}
               <AnimatedSection className="mt-8" delay={0.3}>
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/30 hover:text-accent transition-colors duration-300"
+                  className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300"
                 >
                   {t('exploreServices')}
                   <Icon name="north_east" size={14} />
@@ -386,20 +408,70 @@ export default function HomePageClient({ locale }: { locale: string }) {
             </h2>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3">
+          {/* Progress line (desktop) */}
+          <div className="hidden md:block relative mb-16">
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-border/30" />
+            <div className="grid grid-cols-3 relative">
+              {steps.map((item, i) => (
+                <m.div
+                  key={`dot-${item.step}`}
+                  className="flex justify-center"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, delay: i * 0.2, ease }}
+                >
+                  <div className="w-3 h-3 rounded-full bg-accent/80 ring-4 ring-surface/30" />
+                </m.div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
             {steps.map((item, i) => (
-              <motion.div
+              <m.div
                 key={item.step}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.8, delay: i * 0.12, ease }}
-                className="relative border-t border-border/40 pt-10 pb-12 md:pr-16 overflow-hidden"
+                transition={{ duration: 0.8, delay: i * 0.2, ease }}
+                className="relative border-t border-border/40 pt-10 pb-12 md:pr-16 overflow-hidden group"
               >
+                <div className="absolute top-0 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-700" />
                 <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/70 mb-6">{item.step}</p>
                 <h3 className="font-serif text-3xl font-semibold text-foreground mb-5">{item.title}</h3>
-                <p className="font-sans font-light text-foreground/50 leading-relaxed">{item.description}</p>
-              </motion.div>
+                <p className="font-sans font-light text-foreground/70 leading-relaxed">{item.description}</p>
+              </m.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="border-t border-border/50 px-6 md:px-10 py-20 md:py-28 bg-surface/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-3 gap-px bg-border/30">
+            {[
+              { value: '50+', label: t('statsProjects') },
+              { value: '8+',  label: t('statsCountries') },
+              { value: '24h', label: t('statsResponse') },
+            ].map((stat, i) => (
+              <m.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.7, delay: i * 0.1, ease }}
+                className="bg-background px-8 py-12 text-center"
+              >
+                <p
+                  className="font-serif font-light text-accent leading-none mb-3"
+                  style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
+                >
+                  {stat.value}
+                </p>
+                <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-foreground/60">{stat.label}</p>
+              </m.div>
             ))}
           </div>
         </div>
@@ -417,7 +489,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30">
             {testimonials.map((testimonial, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -432,30 +504,94 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 >
                   &ldquo;
                 </span>
-                <p className="relative font-serif text-foreground/65 text-lg leading-relaxed italic mb-10">
+                <p className="relative font-serif text-foreground/80 text-lg leading-relaxed italic mb-10">
                   &ldquo;{tl(testimonial.quote, locale)}&rdquo;
                 </p>
                 <div className="border-t border-border/40 pt-6">
                   <p className="font-sans text-sm text-foreground font-medium">{testimonial.name}</p>
-                  <p className="font-sans text-[11px] text-foreground/35 tracking-wide mt-1">{tl(testimonial.role, locale)} — {testimonial.location}</p>
+                  <p className="font-sans text-[11px] text-foreground/60 tracking-wide mt-1">{tl(testimonial.role, locale)} — {testimonial.location}</p>
                   {testimonial.projectSlug && (
                     <Link
                       href={`/work/${testimonial.projectSlug}`}
-                      className="inline-flex items-center gap-1.5 mt-3 font-sans text-[9px] tracking-[0.2em] uppercase text-accent/60 hover:text-accent transition-colors duration-300"
+                      className="inline-flex items-center gap-1.5 mt-3 font-sans text-[10px] tracking-[0.2em] uppercase text-accent/80 hover:text-accent transition-colors duration-300"
                     >
                       {t('viewProject')}
                       <Icon name="north_east" size={10} />
                     </Link>
                   )}
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* LATEST NOTES */}
+      <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40 bg-surface/30">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection className="flex items-end justify-between mb-16">
+            <div>
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('latestNotes')}</p>
+              <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+                {t('insightsTagline')}
+              </h2>
+            </div>
+            <Link
+              href="/blog"
+              className="hidden md:inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 hover:text-foreground transition-colors duration-300"
+            >
+              {t('viewAllNotes')}
+              <Icon name="arrow_right_alt" size={14} />
+            </Link>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {posts.slice(0, 3).map((post, i) => (
+              <m.div
+                key={post.slug}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.8, delay: i * 0.1, ease }}
+              >
+                <Link href={`/blog/${post.slug}`} className="group block">
+                  <div className="relative aspect-[16/10] overflow-hidden mb-5">
+                    <Image
+                      src={post.coverImage}
+                      alt={tl(post.title, locale)}
+                      fill
+                      className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute bottom-0 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                  </div>
+                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent/80 mb-2">{post.category}</p>
+                  <h3 className="font-serif text-lg font-semibold text-foreground/90 group-hover:text-foreground transition-colors duration-300 mb-2 line-clamp-2">
+                    {tl(post.title, locale)}
+                  </h3>
+                  <p className="font-sans text-sm text-foreground/65 line-clamp-2">{tl(post.excerpt, locale)}</p>
+                </Link>
+              </m.div>
+            ))}
+          </div>
+
+          <AnimatedSection className="mt-10 flex justify-center md:hidden">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-3 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+            >
+              {t('viewAllNotes')}
+              <Icon name="arrow_right_alt" size={14} />
+            </Link>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="border-t border-border/50 px-6 md:px-10 py-32 md:py-48 bg-surface/20 relative overflow-hidden">
+      <section className="border-t border-border/50 px-6 md:px-10 py-32 md:py-48 relative overflow-hidden">
+        {/* Background gradient effect */}
+        <div className="absolute inset-0 bg-gradient-to-b from-surface/40 via-background to-surface/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/[0.03] via-transparent to-transparent" />
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
           <span
             className="ghost-text font-serif font-bold leading-none"
@@ -485,7 +621,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
               </Link>
               <Link
                 href="/work"
-                className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+                className="inline-flex items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
               >
                 {t('viewOurWorkCta')}
               </Link>

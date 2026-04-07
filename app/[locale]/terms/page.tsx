@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import PageFade from '@/components/PageFade'
 import { Link } from '@/i18n/navigation'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -11,6 +12,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
     title: t('metaTitle'),
     description: t('metaDesc'),
     robots: { index: false, follow: false },
+    alternates: buildAlternates('/terms', locale as 'en' | 'es'),
   }
 }
 

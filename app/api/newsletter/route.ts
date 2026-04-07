@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabase } from '@/lib/supabase'
 import { getResend } from '@/lib/resend'
 import { checkNewsletterRateLimit } from '@/lib/rate-limit'
 
@@ -16,16 +15,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Email required' }, { status: 400 })
     }
 
-    const supabase = getSupabase()
-    const { error } = await supabase.from('newsletter_subscribers').insert({ email })
-
-    if (error) {
-      // Unique constraint violation — already subscribed
-      if (error.code === '23505') {
-        return NextResponse.json({ error: 'Already subscribed' }, { status: 409 })
+    const resend = getResend()
+    if (resend && process.env.RESEND_AUDIENCE_ID) {
+      try {
+        const { error } = await resend.contacts.create({
+          audienceId: process.env.RESEND_AUDIENCE_ID,
+          email,
+          unsubscribed: false,
+        })
+        if (error && (error as { name?: string }).name === 'already_exists') {
+          return NextResponse.json({ error: 'Already subscribed' }, { status: 409 })
+        }
+      } catch (audienceErr) {
+        console.error('Resend audience error:', audienceErr)
       }
-      console.error('Supabase error:', error)
-      return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 })
     }
 
     // Send welcome email — non-blocking

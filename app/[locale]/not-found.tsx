@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
@@ -21,16 +21,16 @@ export default function NotFound() {
       </div>
 
       <div className="relative z-10">
-        <motion.p
+        <m.p
           className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-6"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease }}
         >
           {t('label')}
-        </motion.p>
+        </m.p>
 
-        <motion.h1
+        <m.h1
           className="font-serif font-light text-foreground mb-6 leading-[0.9]"
           style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)' }}
           initial={{ opacity: 0, y: 30 }}
@@ -39,9 +39,9 @@ export default function NotFound() {
         >
           <span className="block italic text-foreground/60">{t('heading1')}</span>
           <span className="block font-semibold">{t('heading2')}</span>
-        </motion.h1>
+        </m.h1>
 
-        <motion.div
+        <m.div
           className="architectural-line max-w-xs mx-auto mb-8"
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
@@ -49,16 +49,16 @@ export default function NotFound() {
           style={{ transformOrigin: 'left' }}
         />
 
-        <motion.p
+        <m.p
           className="font-sans font-light text-foreground/35 mb-12 max-w-sm leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease }}
         >
           {t('body')}
-        </motion.p>
+        </m.p>
 
-        <motion.div
+        <m.div
           className="flex flex-col sm:flex-row gap-4 justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,7 +78,7 @@ export default function NotFound() {
             {t('startProject')}
             <Icon name="north_east" size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
           </Link>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   )

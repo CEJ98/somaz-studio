@@ -4,6 +4,7 @@ import { projects } from '@/data/projects'
 import { locales } from '@/i18n/config'
 import { t } from '@/lib/locale'
 import ProjectPageClient from '@/components/ProjectPageClient'
+import { buildAlternates } from '@/lib/seo'
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>
@@ -35,10 +36,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       description: brief,
       images: [ogImage],
     },
-    alternates: {
-      canonical: `https://somazstudio.com/${locale}/work/${slug}`,
-      languages: { en: `https://somazstudio.com/en/work/${slug}`, es: `https://somazstudio.com/es/work/${slug}` },
-    },
+    alternates: buildAlternates(`/work/${slug}`, locale as 'en' | 'es'),
   }
 }
 

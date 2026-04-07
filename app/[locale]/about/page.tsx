@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import AboutClient from '@/components/AboutClient'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -10,10 +11,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
     title: t('metaTitle'),
     description: t('metaDesc'),
     openGraph: { title: t('ogTitle'), description: t('ogDesc') },
-    alternates: {
-      canonical: `https://somazstudio.com/${locale}/about`,
-      languages: { en: 'https://somazstudio.com/en/about', es: 'https://somazstudio.com/es/about' },
-    },
+    alternates: buildAlternates('/about', locale as 'en' | 'es'),
   }
 }
 

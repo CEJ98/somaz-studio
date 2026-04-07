@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -11,6 +12,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
     title: tp('title'),
     description: 'Privacy Policy for Somaz Studio LLC — how we collect, use, and protect your information.',
     robots: { index: false, follow: false },
+    alternates: buildAlternates('/privacy', locale as 'en' | 'es'),
   }
 }
 

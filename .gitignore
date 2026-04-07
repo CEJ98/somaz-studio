@@ -41,3 +41,4 @@ next-env.d.ts
 firebase-debug.log
 supabase/.temp/
 public/hero-reel.mp4
+test-results/

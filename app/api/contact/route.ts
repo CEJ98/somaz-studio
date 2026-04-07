@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getSupabase } from '@/lib/supabase'
 import { getResend } from '@/lib/resend'
 import { checkContactRateLimit } from '@/lib/rate-limit'
 
@@ -24,22 +23,6 @@ export async function POST(req: NextRequest) {
 
     if (!name || !email || !project_type || !budget || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
-    }
-
-    const supabase = getSupabase()
-    const { error } = await supabase.from('contact_submissions').insert({
-      name,
-      email,
-      phone: phone || null,
-      project_type,
-      budget,
-      sqft: sqft || null,
-      message,
-    })
-
-    if (error) {
-      console.error('Supabase error:', error)
-      return NextResponse.json({ error: 'Failed to save submission' }, { status: 500 })
     }
 
     // Send notification email — non-blocking

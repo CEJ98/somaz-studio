@@ -1,13 +1,22 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import type { Service } from '@/data/services'
 import { Icon } from '@/components/icons'
 import { t as tl } from '@/lib/locale'
 import { ease } from '@/lib/motion'
+import Image from 'next/image'
+import PricingTable from '@/components/PricingTable'
+
+const serviceImages: Record<string, string> = {
+  '3d-visualization': '/services/3d-visualization.jpg',
+  'interior-design': '/services/interior-design.jpg',
+  'conceptual-design': '/services/conceptual-design.jpg',
+  'design-consulting': '/services/consulting.jpg',
+}
 
 const serviceIcons: Record<string, React.ReactNode> = {
   '3d-visualization': (
@@ -49,7 +58,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <motion.div
+    <m.div
       id={service.slug}
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
@@ -61,7 +70,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
         {/* Left — service info */}
         <div className="md:col-span-5 relative z-10">
           <div className="flex items-center gap-3 mb-6">
-            <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/20 group-hover:text-accent transition-colors duration-300">
+            <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/65 group-hover:text-accent transition-colors duration-300">
               {service.number}
             </span>
             <div className="h-px flex-1 bg-border/30" />
@@ -69,7 +78,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
 
           <div className="flex items-center gap-3 mb-3">
             {serviceIcons[service.slug] ?? null}
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/80">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent">
               {tl(service.tagline, locale)}
             </p>
           </div>
@@ -81,41 +90,44 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
             <span className="absolute -bottom-1 left-0 h-px bg-accent transition-all duration-500 w-0 group-hover:w-full" />
           </div>
 
-          <p className="font-sans font-light text-foreground/55 leading-relaxed mb-8">
+          <p className="font-sans font-light text-foreground/70 leading-relaxed mb-8">
             {tl(service.description, locale)}
           </p>
 
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/35 hover:text-accent border-b border-foreground/15 pb-0.5 hover:border-accent transition-all duration-300"
+            className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/60 hover:text-accent border-b border-foreground/30 pb-0.5 hover:border-accent transition-all duration-300"
           >
             {ts('startProject')}
             <Icon name="north_east" size={14} />
           </Link>
         </div>
 
-        {/* Right — packages */}
+        {/* Right — image + packages */}
         <div className="md:col-span-6 md:col-start-7 relative z-10">
-          <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-6">{ts('packages')}</p>
-          <div className="space-y-0">
-            {service.packages.map((pkg, i) => (
-              <div
-                key={i}
-                className="flex items-start justify-between py-5 border-b border-border/30 group/pkg hover:border-accent/30 transition-colors duration-300"
-              >
-                <div>
-                  <p className="font-sans text-sm text-foreground/65 group-hover/pkg:text-foreground transition-colors duration-300 mb-0.5">
-                    {tl(pkg.name, locale)}
-                  </p>
-                  {pkg.description && (
-                    <p className="font-sans text-[12px] text-foreground/30">{tl(pkg.description, locale)}</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+          {serviceImages[service.slug] && (
+            <div className="relative w-full aspect-[16/9] mb-8 overflow-hidden">
+              <Image
+                src={serviceImages[service.slug]}
+                alt={tl(service.title, locale)}
+                fill
+                className="object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+            </div>
+          )}
+          <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{ts('packages')}</p>
+          <PricingTable packages={service.packages} locale={locale} />
+          <Link
+            href="/contact?type=consult"
+            className="inline-flex items-center gap-2 mt-6 font-sans text-[10px] tracking-[0.25em] uppercase text-accent/80 hover:text-accent border-b border-accent/30 pb-0.5 hover:border-accent transition-all duration-300"
+          >
+            {ts('freeConsult')}
+            <Icon name="north_east" size={14} />
+          </Link>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   )
 }

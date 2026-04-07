@@ -1,4 +1,10 @@
 {
+  "cookie": {
+    "ariaLabel": "Cookie consent",
+    "message": "We use cookies to measure site traffic and improve your experience. No personal data is sold.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
   "nav": {
     "work": "Work",
     "services": "Services",
@@ -6,6 +12,7 @@
     "notes": "Notes",
     "contact": "Contact",
     "startProject": "Start a Project",
+    "freeConsult": "Book a free 15-min consultation",
     "toggleMenu": "Toggle menu"
   },
   "footer": {
@@ -16,6 +23,7 @@
     "newsletter": "Newsletter",
     "newsletterCopy": "Studio updates, project reveals, and design thinking — straight to your inbox.",
     "subscribed": "You're on the list.",
+    "emailPlaceholder": "your@email.com",
     "subscribe": "Subscribe",
     "instagram": "Instagram",
     "linkedin": "LinkedIn",
@@ -28,8 +36,10 @@
     "badge": "Miami · Global · Est. 2022",
     "heroLine1": "Space is",
     "heroLine2": "the message.",
+    "heroSubline": "Photorealistic 3D visualization for architects & developers. Miami-based, globally delivered.",
     "viewOurWork": "View Our Work",
     "startProject": "Start a Project",
+    "freeConsult": "Book a free 15-min consultation",
     "scroll": "Scroll",
     "selectedWork": "Selected Work",
     "spacesTagline": "Spaces that define culture.",
@@ -48,6 +58,9 @@
     "step02Desc": "We develop the spatial concept, material palette, and visualization strategy. Every decision is intentional and documented.",
     "step03Title": "Deliver",
     "step03Desc": "Final renders, drawings, or design packages delivered on schedule. Clear, complete, ready to use.",
+    "statsProjects": "Projects Delivered",
+    "statsCountries": "Countries Served",
+    "statsResponse": "Response Time",
     "testimonials": "Testimonials",
     "whatClientsSay": "What clients say.",
     "startConversation": "Start a conversation",
@@ -55,6 +68,10 @@
     "visionToLife": "vision to life?",
     "viewOurWorkCta": "View Our Work",
     "viewProject": "View Project",
+    "latestNotes": "Latest Notes",
+    "insightsTagline": "Design insights.",
+    "readArticle": "Read Article",
+    "viewAllNotes": "View All Notes",
     "metaTitle": "Somaz Studio | 3D Visualization & Interior Design — Miami",
     "metaDesc": "Miami-based design studio specializing in 3D visualization, interior design, and spatial concepts. Working globally.",
     "ogDesc": "3D visualization · Interior design · Spatial concepts. Miami-based, globally delivered."
@@ -66,7 +83,11 @@
     "projectPlural": "projects",
     "metaTitle": "Our Work",
     "metaDesc": "Selected projects by Somaz Studio — 3D visualization, interior design, and conceptual design across Miami, Latin America, and beyond.",
-    "ogDesc": "A curated selection of 3D visualization, interior design, and conceptual design projects."
+    "ogDesc": "A curated selection of 3D visualization, interior design, and conceptual design projects.",
+    "intro": "A curated selection of 3D visualization, interior design, and conceptual projects — each one shaped by a distinct vision.",
+    "ctaLabel": "Start a Project",
+    "ctaHeading": "Ready to bring your vision to life?",
+    "ctaButton": "Get in Touch"
   },
   "project": {
     "categoryLabel": "Category",
@@ -78,6 +99,7 @@
     "viewProject": "View Project",
     "allWork": "All Work",
     "startProject": "Start a Project",
+    "freeConsult": "Book a free 15-min consultation",
     "outcomeLabel": "Outcome",
     "prevProject": "Previous Project",
     "closeGallery": "Close",
@@ -95,12 +117,14 @@
     "subheading": "Every project is different. These packages give you a starting point — we'll tailor the scope to your specific needs.",
     "packages": "Packages",
     "startProject": "Start a Project",
+    "freeConsult": "Book a free 15-min consultation",
     "ctaQuestion": "Not sure which service fits your project?",
     "ctaSubtitle": "Tell us about your vision — we'll figure it out together.",
     "letsTalk": "Let's Talk",
     "metaTitle": "Design Services",
     "metaDesc": "Full-service 3D visualization, interior design, conceptual design, and consulting. Clear packages, remote delivery, global reach.",
     "ogDesc": "3D visualization, interior design, conceptual design & consulting. Based in Miami, delivering globally.",
+    "clientVoices": "Client Voices",
     "faqHeading": "Frequently Asked Questions",
     "faq1Q": "How long does a 3D visualization take?",
     "faq1A": "Delivery depends on the package. Essential (1 view) takes 48–72 hours. Standard (3 views) takes 5–7 business days. Premium (5+ views) is scoped per project.",
@@ -156,7 +180,8 @@
     "ogDesc": "Ready to start? Reach out and tell us about your project.",
     "stat1": "Projects",
     "stat2": "Countries",
-    "stat3": "Response"
+    "stat3": "Response",
+    "responseNote": "We respond within 24 hours with a personalized proposal."
   },
   "form": {
     "marquee": "CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003",
@@ -181,7 +206,10 @@
     "budgetUnder5k": "Under $5K",
     "budget5to15k": "$5K – $15K",
     "budget15to50k": "$15K – $50K",
-    "budget50kplus": "$50K+"
+    "budget50kplus": "$50K+",
+    "budgetNotSure": "Not sure yet",
+    "formTime": "6 fields · 60 seconds",
+    "trustCopy": "24h response · No commitment · NDA available"
   },
   "thankyou": {
     "sent": "Message Sent",

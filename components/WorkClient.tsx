@@ -1,8 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+import { Link } from '@/i18n/navigation'
+import { Icon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
 import { projects, categories, type ProjectCategory } from '@/data/projects'
 import { ease } from '@/lib/motion'
@@ -22,29 +25,52 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
 
   return (
-    <div className="min-h-screen pt-32 pb-28 px-6 md:px-10">
+    <div className="min-h-screen pb-28">
+      {/* Hero section with background image */}
+      <section className="relative h-[50vh] min-h-[360px] flex items-end overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/work-hero.jpg"
+            alt="Selected portfolio work — 3D visualization and interior design projects"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
+        </div>
+        <div className="relative z-10 w-full px-6 md:px-10 pb-16">
+          <div className="max-w-7xl mx-auto">
+            <m.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease }}
+            >
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{tw('portfolio')}</p>
+              <h1
+                className="font-serif font-light italic text-foreground/80"
+                style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
+              >
+                {tw('selectedWork')}
+              </h1>
+            </m.div>
+          </div>
+        </div>
+      </section>
+
+      <div className="px-6 md:px-10 pt-12">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease }}
-          className="mb-20"
-        >
-          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{tw('portfolio')}</p>
-          <h1
-            className="font-serif font-light italic text-foreground/80"
-            style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
-          >
-            {tw('selectedWork')}
-          </h1>
-        </motion.div>
 
         {/* Architectural separator */}
         <div className="architectural-line mb-10" />
 
+        {/* Editorial intro */}
+        <p className="font-serif font-light italic text-foreground/65 mb-10 max-w-2xl" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.15rem)' }}>
+          {tw('intro')}
+        </p>
+
         {/* Filters */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease }}
@@ -58,7 +84,7 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
               className={`font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-2 border transition-all duration-300 ${
                 active === cat
                   ? 'border-accent text-accent'
-                  : 'border-border/50 text-foreground/35 hover:border-foreground/30 hover:text-foreground/60'
+                  : 'border-border/50 text-foreground/55 hover:border-foreground/30 hover:text-foreground/80'
               }`}
             >
               {active === cat && (
@@ -67,24 +93,24 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
               {tc(cat)}
             </button>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Project counter */}
-        <motion.p
+        <m.p
           key={filtered.length}
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease }}
-          className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 mb-10"
+          className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 mb-10"
         >
           {filtered.length} {filtered.length === 1 ? tw('projectSingular') : tw('projectPlural')}
-        </motion.p>
+        </m.p>
 
         {/* Editorial Grid — 12 columns */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-12 gap-2">
+        <m.div layout className="grid grid-cols-1 md:grid-cols-12 gap-2">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, i) => (
-              <motion.div
+              <m.div
                 key={project.slug}
                 layout
                 initial={{ opacity: 0, scale: 0.96 }}
@@ -97,11 +123,40 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
                 onMouseEnter={() => setHoveredSlug(project.slug)}
                 onMouseLeave={() => setHoveredSlug(null)}
               >
-                <ProjectCard project={project} priority={i < 3} featured={project.featured} />
-              </motion.div>
+                <ProjectCard project={project} priority={i === 0} featured={project.featured} />
+              </m.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </m.div>
+
+        {/* CTA section */}
+        <div className="mt-24 pt-16 border-t border-border/40 text-center relative overflow-hidden">
+          <video
+            src="/media/work-cta.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/media/work-cta-poster.jpg"
+            className="absolute inset-0 w-full h-full object-cover hidden md:block"
+          />
+          <div className="absolute inset-0 bg-background/90 hidden md:block" />
+          <div className="relative z-10 py-16">
+          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-6">{tw('ctaLabel')}</p>
+          <p className="font-serif font-light italic text-foreground/85 mb-10" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+            {tw('ctaHeading')}
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+          >
+            {tw('ctaButton')}
+            <Icon name="north_east" size={14} />
+          </Link>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   )

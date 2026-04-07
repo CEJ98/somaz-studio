@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import '../globals.css'
-import { cormorant, dmSans } from '@/lib/fonts'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Toaster } from 'sonner'
@@ -11,7 +9,8 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { locales } from '@/i18n/config'
 
-import { ClientOnlyCursor, ClientOnlyWhatsApp } from '@/components/ClientOnly'
+import { ClientOnlyCursor, ClientOnlyWhatsApp, ClientOnlyAnalytics, ClientOnlyCookieConsent } from '@/components/ClientOnly'
+import MotionProvider from '@/components/MotionProvider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://somazstudio.com'),
@@ -62,9 +61,8 @@ export default async function LocaleLayout(
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className={`${cormorant.variable} ${dmSans.variable}`}>
-      <body className="bg-background text-foreground font-sans antialiased">
-        <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider messages={messages}>
+      <MotionProvider>
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:text-background focus:px-4 focus:py-2 focus:font-sans focus:text-xs focus:tracking-widest focus:uppercase"
@@ -72,6 +70,8 @@ export default async function LocaleLayout(
             Skip to content
           </a>
           <ClientOnlyCursor />
+          <ClientOnlyAnalytics />
+          <ClientOnlyCookieConsent />
           <Navbar />
           <main id="main-content">{children}</main>
           <Footer />
@@ -88,10 +88,13 @@ export default async function LocaleLayout(
               },
             }}
           />
-          <Analytics />
-          <SpeedInsights />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+          {process.env.VERCEL === '1' && (
+            <>
+              <Analytics />
+              <SpeedInsights />
+            </>
+          )}
+      </MotionProvider>
+    </NextIntlClientProvider>
   )
 }

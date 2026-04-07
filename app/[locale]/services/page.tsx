@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import Image from 'next/image'
 import ServiceItem from '@/components/ServiceItem'
 import { services } from '@/data/services'
+import { testimonials } from '@/data/testimonials'
 import { Link } from '@/i18n/navigation'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -14,10 +17,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
     title: t('metaTitle'),
     description: t('metaDesc'),
     openGraph: { title: `${t('metaTitle')} | Somaz Studio`, description: t('ogDesc') },
-    alternates: {
-      canonical: `https://somazstudio.com/${locale}/services`,
-      languages: { en: 'https://somazstudio.com/en/services', es: 'https://somazstudio.com/es/services' },
-    },
+    alternates: buildAlternates('/services', locale as 'en' | 'es'),
   }
 }
 
@@ -73,16 +73,28 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
-      <PageFade className="min-h-screen pt-32 pb-28 px-6 md:px-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
+      <section className="relative min-h-[40vh] flex items-end overflow-hidden">
+        <Image
+          src="/services/3d-visualization.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-background/92" />
+        <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-14">
+          <div className="max-w-7xl mx-auto">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{t('whatWeDo')}</p>
             <h1 className="font-serif font-light italic text-foreground/80" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>
               {t('heading')}
             </h1>
-            <p className="font-sans font-light text-foreground/35 mt-6 max-w-xl leading-relaxed">{t('subheading')}</p>
+            <p className="font-sans font-light text-foreground/70 mt-6 max-w-xl leading-relaxed">{t('subheading')}</p>
           </div>
-
+        </div>
+      </section>
+      <PageFade className="pb-28 px-6 md:px-10 pt-16">
+        <div className="max-w-7xl mx-auto">
           <div className="architectural-line mb-4" />
 
           <div>
@@ -91,8 +103,44 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
             ))}
           </div>
 
-          {/* FAQ Section */}
+          {/* Testimonials */}
           <div className="mt-20 pt-16 border-t border-border/40">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-10">{t('clientVoices')}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border/30 mb-16">
+              {[testimonials[0], testimonials[1]].map((testimonial, i) => (
+                <div key={i} className="bg-background px-8 pt-12 pb-10 relative overflow-hidden">
+                  <span
+                    className="absolute top-4 left-6 font-serif text-accent/10 select-none pointer-events-none"
+                    style={{ fontSize: '70px', lineHeight: 1 }}
+                    aria-hidden="true"
+                  >
+                    &ldquo;
+                  </span>
+                  <p className="font-serif font-light italic text-foreground/65 leading-relaxed mb-8 relative z-10" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.15rem)' }}>
+                    &ldquo;{locale === 'es' ? testimonial.quote.es : testimonial.quote.en}&rdquo;
+                  </p>
+                  <div>
+                    <p className="font-sans text-sm text-foreground font-medium">{testimonial.name}</p>
+                    <p className="font-sans text-[11px] text-foreground/35 tracking-wide mt-1">
+                      {locale === 'es' ? testimonial.role.es : testimonial.role.en} — {testimonial.location}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FAQ Section */}
+          <div className="mt-0 pt-16 border-t border-border/40 relative overflow-hidden">
+            <Image
+              src="/backgrounds/services-faq.jpg"
+              alt=""
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-background/92" />
+            <div className="relative z-10">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-10">{t('faqHeading')}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 max-w-5xl">
               {[
@@ -101,11 +149,13 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
                 { q: t('faq3Q'), a: t('faq3A') },
                 { q: t('faq4Q'), a: t('faq4A') },
               ].map(({ q, a }, i) => (
-                <div key={i} className="border-l border-border/30 pl-6 hover:border-accent/60 transition-colors duration-300 group/faq">
+                <div key={i} className="border-l border-accent/30 pl-6 hover:border-accent/70 transition-colors duration-300 group/faq">
+                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/50 mb-2">0{i + 1}</p>
                   <p className="font-serif text-foreground/80 mb-3 group-hover/faq:text-foreground transition-colors duration-300" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.1rem)' }}>{q}</p>
                   <p className="font-sans font-light text-foreground/40 group-hover/faq:text-foreground/55 text-sm leading-relaxed transition-colors duration-300">{a}</p>
                 </div>
               ))}
+            </div>
             </div>
           </div>
 
@@ -129,6 +179,16 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
           </div>
         </div>
       </PageFade>
+      {/* Sticky mobile CTA */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border/40 px-6 py-4">
+        <Link
+          href="/contact"
+          className="flex items-center justify-center gap-3 w-full bg-accent text-background py-4 font-sans text-[10px] tracking-[0.25em] uppercase"
+        >
+          {t('letsTalk')}
+          <Icon name="north_east" size={16} />
+        </Link>
+      </div>
     </>
   )
 }

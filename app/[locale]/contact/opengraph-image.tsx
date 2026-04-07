@@ -1,0 +1,42 @@
+import { ImageResponse } from 'next/og'
+
+export const runtime = 'edge'
+export const alt = 'Contact — Somaz Studio'
+export const size = { width: 1200, height: 630 }
+export const contentType = 'image/png'
+
+export default async function Image() {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          background: '#1C1C1A',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: 'system-ui, sans-serif',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
+          <div style={{ fontSize: '18px', fontWeight: 300, color: '#C9A96E', letterSpacing: '6px', textTransform: 'uppercase' as const }}>
+            Let&rsquo;s Talk
+          </div>
+          <div style={{ fontSize: '88px', fontWeight: 700, color: '#F0EDE6', letterSpacing: '-2px' }}>
+            Contact
+          </div>
+          <div style={{ width: '60px', height: '2px', background: '#C9A96E' }} />
+          <div style={{ fontSize: '22px', fontWeight: 300, color: 'rgba(240, 237, 230, 0.65)', letterSpacing: '2px', textAlign: 'center' as const }}>
+            Tell us about your project — we reply within 24 hours
+          </div>
+          <div style={{ fontSize: '14px', fontWeight: 300, color: '#C9A96E', letterSpacing: '6px', textTransform: 'uppercase' as const, marginTop: '24px' }}>
+            hola@somazstudio.com
+          </div>
+        </div>
+      </div>
+    ),
+    { ...size }
+  )
+}

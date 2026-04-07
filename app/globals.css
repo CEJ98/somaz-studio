@@ -31,7 +31,7 @@ body {
 }
 
 /* Custom cursor — only on pointer devices with min 768px screen */
-@media (pointer: fine) and (min-width: 768px) {
+@media (pointer: fine) and (min-width: 768px) and (prefers-reduced-motion: no-preference) {
   * {
     cursor: none !important;
   }
@@ -65,7 +65,7 @@ body {
 
 /* Placeholder */
 ::placeholder {
-  color: rgba(240, 237, 230, 0.2);
+  color: rgba(240, 237, 230, 0.55);
   font-weight: 300;
 }
 

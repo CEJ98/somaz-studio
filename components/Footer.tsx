@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { m, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
@@ -71,7 +71,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
 
           {/* Col 1 — Brand */}
-          <motion.div
+          <m.div
             className="md:col-span-1"
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -85,25 +85,25 @@ export default function Footer() {
               className="h-10 w-auto object-contain mb-3"
               style={{ mixBlendMode: 'screen' }}
             />
-            <p className="font-sans text-sm font-light text-foreground/35 leading-relaxed mb-6">
+            <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed mb-6">
               {tf('tagline')}
             </p>
             <a
               href="mailto:hola@somazstudio.com"
-              className="font-sans text-xs text-foreground/35 hover:text-accent transition-colors duration-300 inline-block"
+              className="font-sans text-xs text-foreground/65 hover:text-accent transition-colors duration-300 inline-block"
             >
               hola@somazstudio.com
             </a>
-            <p className="font-sans text-xs text-foreground/20 mt-1">{tf('location')}</p>
-          </motion.div>
+            <p className="font-sans text-xs text-foreground/50 mt-1">{tf('location')}</p>
+          </m.div>
 
           {/* Col 2 — Navigate */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease }}
           >
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/25 mb-6">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
               {tf('navigate')}
             </p>
             <ul className="space-y-3">
@@ -119,15 +119,15 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
 
           {/* Col 3 — Services */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease }}
           >
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/25 mb-6">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
               {tf('services')}
             </p>
             <ul className="space-y-3">
@@ -143,18 +143,18 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
 
           {/* Col 4 — Newsletter */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3, ease }}
           >
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/25 mb-6">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
               {tf('newsletter')}
             </p>
-            <p className="font-sans text-sm font-light text-foreground/40 leading-relaxed mb-5">
+            <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed mb-5">
               {tf('newsletterCopy')}
             </p>
             {subscribed ? (
@@ -167,7 +167,7 @@ export default function Footer() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="tu@email.com"
+                  placeholder={tf('emailPlaceholder')}
                   required
                   className="w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-2 focus:outline-none focus:border-accent transition-colors duration-300"
                 />
@@ -191,18 +191,18 @@ export default function Footer() {
                 </button>
               </form>
             )}
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Bottom bar */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.5, ease }}
         >
           <div className="architectural-line mt-16 mb-8" />
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <p className="font-sans text-[10px] tracking-[0.2em] text-foreground/20">
+            <p className="font-sans text-[10px] tracking-[0.2em] text-foreground/50">
               © {new Date().getFullYear()} {tf('copyright')}
             </p>
             <div className="flex items-center gap-6">
@@ -210,7 +210,7 @@ export default function Footer() {
                 href="https://instagram.com/somazstudio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
+                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/50 hover:text-accent transition-colors duration-300"
               >
                 {tf('instagram')}
               </a>
@@ -218,28 +218,28 @@ export default function Footer() {
                 href="https://linkedin.com/company/somazstudio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
+                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/50 hover:text-accent transition-colors duration-300"
               >
                 {tf('linkedin')}
               </a>
               <Link
                 href="/privacy"
-                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
+                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/50 hover:text-accent transition-colors duration-300"
               >
                 {tf('privacy')}
               </Link>
               <Link
                 href="/terms"
-                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/20 hover:text-accent transition-colors duration-300"
+                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/50 hover:text-accent transition-colors duration-300"
               >
                 {tf('terms')}
               </Link>
-              <p className="font-sans text-[10px] text-foreground/15 italic">
+              <p className="font-sans text-[10px] text-foreground/55 italic">
                 {tf('disclaimer')}
               </p>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </footer>
   )

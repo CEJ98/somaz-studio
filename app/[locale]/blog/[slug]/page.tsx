@@ -8,6 +8,7 @@ import { t } from '@/lib/locale'
 import { getTranslations } from 'next-intl/server'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
+import { buildAlternates } from '@/lib/seo'
 
 interface Props { params: Promise<{ locale: string; slug: string }> }
 
@@ -37,10 +38,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       description: t(post.excerpt, locale),
       images: [ogImage],
     },
-    alternates: {
-      canonical: `https://somazstudio.com/${locale}/blog/${slug}`,
-      languages: { en: `https://somazstudio.com/en/blog/${slug}`, es: `https://somazstudio.com/es/blog/${slug}` },
-    },
+    alternates: buildAlternates(`/blog/${slug}`, locale as 'en' | 'es'),
   }
 }
 

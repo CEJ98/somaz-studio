@@ -10,13 +10,6 @@ vi.mock('@/lib/resend', () => ({
   getResend: vi.fn().mockReturnValue(null),
 }))
 
-const mockInsert = vi.fn().mockResolvedValue({ error: null })
-vi.mock('@/lib/supabase', () => ({
-  getSupabase: () => ({
-    from: () => ({ insert: mockInsert }),
-  }),
-}))
-
 function makeRequest(body: Record<string, unknown>) {
   return new NextRequest('http://localhost/api/newsletter', {
     method: 'POST',
@@ -28,7 +21,6 @@ function makeRequest(body: Record<string, unknown>) {
 describe('POST /api/newsletter', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    mockInsert.mockResolvedValue({ error: null })
   })
 
   it('returns 400 when email is missing', async () => {
@@ -43,20 +35,6 @@ describe('POST /api/newsletter', () => {
     expect(res.status).toBe(200)
     const json = await res.json()
     expect(json.success).toBe(true)
-  })
-
-  it('returns 409 for duplicate email', async () => {
-    mockInsert.mockResolvedValueOnce({ error: { code: '23505' } })
-    const res = await POST(makeRequest({ email: 'test@example.com' }))
-    expect(res.status).toBe(409)
-    const json = await res.json()
-    expect(json.error).toBe('Already subscribed')
-  })
-
-  it('returns 500 when Supabase fails', async () => {
-    mockInsert.mockResolvedValueOnce({ error: { code: 'OTHER', message: 'db error' } })
-    const res = await POST(makeRequest({ email: 'test@example.com' }))
-    expect(res.status).toBe(500)
   })
 
   it('returns 429 when rate limited', async () => {

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import Image from 'next/image'
 import ContactForm from '@/components/ContactForm'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -15,10 +17,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
       title: `${t('metaTitle')} | Somaz Studio`,
       description: t('ogDesc'),
     },
-    alternates: {
-      canonical: `https://somazstudio.com/${locale}/contact`,
-      languages: { en: 'https://somazstudio.com/en/contact', es: 'https://somazstudio.com/es/contact' },
-    },
+    alternates: buildAlternates('/contact', locale as 'en' | 'es'),
   }
 }
 
@@ -45,16 +44,30 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <PageFade className="min-h-screen pt-28 md:pt-32 pb-24">
-        <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <div className="mb-14 md:mb-20">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{t('getInTouch')}</p>
-            <h1 className="font-serif font-light leading-[0.9]" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>
-              <span className="block italic text-foreground/60">{t('letsTalk1')}</span>
-              <span className="block font-semibold text-foreground">{t('letsTalk2')}</span>
-            </h1>
+      <PageFade className="min-h-screen pb-24">
+        {/* Hero with background image */}
+        <section className="relative min-h-[45vh] flex items-end overflow-hidden">
+          <Image
+            src="/contact-bg.jpg"
+            alt="Somaz Studio contact — design studio space in Miami"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-background/85" />
+          <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-16">
+            <div className="max-w-7xl mx-auto">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{t('getInTouch')}</p>
+              <h1 className="font-serif font-light leading-[0.9]" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>
+                <span className="block italic text-foreground/60">{t('letsTalk1')}</span>
+                <span className="block font-semibold text-foreground">{t('letsTalk2')}</span>
+              </h1>
+            </div>
           </div>
+        </section>
 
+        <div className="max-w-7xl mx-auto px-6 md:px-10 pt-12">
           <div className="architectural-line mb-14" />
 
           {/* Trust signals */}
@@ -77,7 +90,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             <div className="md:col-span-4">
               <div className="space-y-0">
                 <div className="border-b border-border/40 pb-8 mb-8">
-                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-4">{t('emailLabel')}</p>
+                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{t('emailLabel')}</p>
                   <a
                     href="mailto:hola@somazstudio.com"
                     className="group font-serif text-xl text-foreground/80 hover:text-accent transition-colors duration-300"
@@ -90,7 +103,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                 </div>
 
                 <div className="border-b border-border/40 pb-8 mb-8">
-                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-4">{t('whatsappLabel')}</p>
+                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{t('whatsappLabel')}</p>
                   <a
                     href="https://wa.me/17865377682"
                     target="_blank"
@@ -102,7 +115,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                 </div>
 
                 <div className="border-b border-border/40 pb-8 mb-8">
-                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-4">{t('followLabel')}</p>
+                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{t('followLabel')}</p>
                   <div className="flex flex-col gap-4">
                     <a
                       href="https://instagram.com/somazstudio"
@@ -126,7 +139,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                 </div>
 
                 <div>
-                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/20 mb-3">{t('locationLabel')}</p>
+                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/50 mb-3">{t('locationLabel')}</p>
                   <p className="font-sans text-sm text-foreground/40 leading-relaxed">
                     {t('locationValue')}
                   </p>
@@ -135,6 +148,9 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             </div>
 
             <div className="md:col-span-7 md:col-start-6">
+              <p className="font-sans text-[11px] tracking-[0.15em] text-foreground/35 mb-8">
+                {t('responseNote')}
+              </p>
               <ContactForm />
             </div>
           </div>
