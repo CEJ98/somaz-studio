@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { m, useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
@@ -71,7 +71,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
 
           {/* Col 1 — Brand */}
-          <m.div
+          <motion.div
             className="md:col-span-1"
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -95,10 +95,10 @@ export default function Footer() {
               hola@somazstudio.com
             </a>
             <p className="font-sans text-xs text-foreground/50 mt-1">{tf('location')}</p>
-          </m.div>
+          </motion.div>
 
           {/* Col 2 — Navigate */}
-          <m.div
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease }}
@@ -119,10 +119,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </m.div>
+          </motion.div>
 
           {/* Col 3 — Services */}
-          <m.div
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease }}
@@ -143,10 +143,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </m.div>
+          </motion.div>
 
           {/* Col 4 — Newsletter */}
-          <m.div
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3, ease }}
@@ -191,11 +191,11 @@ export default function Footer() {
                 </button>
               </form>
             )}
-          </m.div>
+          </motion.div>
         </div>
 
         {/* Bottom bar */}
-        <m.div
+        <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.5, ease }}
@@ -239,7 +239,7 @@ export default function Footer() {
               </p>
             </div>
           </div>
-        </m.div>
+        </motion.div>
       </div>
     </footer>
   )

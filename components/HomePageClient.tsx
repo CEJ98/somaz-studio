@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { m, useInView, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { projects } from '@/data/projects'
@@ -40,7 +40,7 @@ function AnimatedSection({ children, className, delay = 0 }: { children: React.R
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduced = useReducedMotion()
   return (
-    <m.div
+    <motion.div
       ref={ref}
       initial={reduced ? false : { opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -48,7 +48,7 @@ function AnimatedSection({ children, className, delay = 0 }: { children: React.R
       className={className}
     >
       {children}
-    </m.div>
+    </motion.div>
   )
 }
 
@@ -86,7 +86,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
       {/* HERO */}
       <section className="relative min-h-[100svh] min-h-[700px] overflow-hidden flex flex-col justify-end">
-        <m.div className="absolute inset-0" style={{ scale: heroScale }}>
+        <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
           {/* Poster como Next/Image para que sirva WebP/AVIF con priority */}
           <Image
             src="/media/hero-home-poster.jpg"
@@ -111,56 +111,56 @@ export default function HomePageClient({ locale }: { locale: string }) {
               <source src="/media/hero-home.mp4" type="video/mp4" />
             </video>
           )}
-        </m.div>
+        </motion.div>
 
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
 
-        <m.div
+        <motion.div
           className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-10 pb-20 md:pb-28"
           style={{ opacity: heroOpacity }}
         >
-          <m.p
+          <motion.p
             className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.2 }}
           >
             {t('badge')}
-          </m.p>
+          </motion.p>
 
           <h1 className="font-serif leading-[0.9] tracking-tight mb-8" style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)' }}>
             <div className="overflow-hidden">
-              <m.span
+              <motion.span
                 className="block font-light text-foreground/60 italic"
                 initial={false}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, ease, delay: 0.3 }}
               >
                 {t('heroLine1')}
-              </m.span>
+              </motion.span>
             </div>
             <div className="overflow-hidden">
-              <m.span
+              <motion.span
                 className="block font-semibold text-foreground"
                 initial={false}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.1, ease, delay: 0.42 }}
               >
                 {t('heroLine2')}
-              </m.span>
+              </motion.span>
             </div>
           </h1>
 
-          <m.p
+          <motion.p
             className="font-sans text-sm font-light text-foreground/75 leading-relaxed mb-8 max-w-md"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.58 }}
           >
             {t('heroSubline')}
-          </m.p>
+          </motion.p>
 
-          <m.div
+          <motion.div
             className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -179,10 +179,10 @@ export default function HomePageClient({ locale }: { locale: string }) {
             >
               {t('startProject')}
             </Link>
-          </m.div>
-        </m.div>
+          </motion.div>
+        </motion.div>
 
-        <m.div
+        <motion.div
           className="absolute bottom-8 right-8 md:right-10 flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -192,13 +192,13 @@ export default function HomePageClient({ locale }: { locale: string }) {
           <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 [writing-mode:vertical-lr]">
             {t('scroll')}
           </span>
-          <m.div
+          <motion.div
             className="w-px h-10 bg-gradient-to-b from-foreground/30 to-transparent"
             animate={{ scaleY: [1, 0.4, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             style={{ originY: 0 }}
           />
-        </m.div>
+        </motion.div>
       </section>
 
       {/* SELECTED WORK */}
@@ -221,7 +221,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
           {selectedProjects[0] && (
-            <m.div
+            <motion.div
               className="md:col-span-7"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -245,12 +245,12 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 </div>
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
               </Link>
-            </m.div>
+            </motion.div>
           )}
 
           <div className="md:col-span-5 flex flex-col gap-3">
             {selectedProjects[1] && (
-              <m.div
+              <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
@@ -271,10 +271,10 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   </div>
                   <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
                 </Link>
-              </m.div>
+              </motion.div>
             )}
             {selectedProjects[2] && (
-              <m.div
+              <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-80px' }}
@@ -295,12 +295,12 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   </div>
                   <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
                 </Link>
-              </m.div>
+              </motion.div>
             )}
           </div>
 
           {selectedProjects[3] && (
-            <m.div
+            <motion.div
               className="md:col-start-3 md:col-span-8"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -322,7 +322,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 </div>
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
               </Link>
-            </m.div>
+            </motion.div>
           )}
         </div>
 
@@ -364,7 +364,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
             <div className="md:col-span-7 md:col-start-6">
               <div className="architectural-line mb-12 hidden md:block" />
               {services.map((s, i) => (
-                <m.div
+                <motion.div
                   key={s.number}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -382,7 +382,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
                     <span className="font-sans text-sm font-light text-foreground/60 italic">{tl(s.tagline, locale)}</span>
                   </div>
                   <Icon name="arrow_right_alt" size={18} className="text-foreground/55 group-hover:text-accent transition-colors duration-300 mt-0.5" />
-                </m.div>
+                </motion.div>
               ))}
               <AnimatedSection className="mt-8" delay={0.3}>
                 <Link
@@ -413,7 +413,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
             <div className="absolute top-1/2 left-0 right-0 h-px bg-border/30" />
             <div className="grid grid-cols-3 relative">
               {steps.map((item, i) => (
-                <m.div
+                <motion.div
                   key={`dot-${item.step}`}
                   className="flex justify-center"
                   initial={{ scale: 0 }}
@@ -422,14 +422,14 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   transition={{ duration: 0.5, delay: i * 0.2, ease }}
                 >
                   <div className="w-3 h-3 rounded-full bg-accent/80 ring-4 ring-surface/30" />
-                </m.div>
+                </motion.div>
               ))}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
             {steps.map((item, i) => (
-              <m.div
+              <motion.div
                 key={item.step}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -441,7 +441,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/70 mb-6">{item.step}</p>
                 <h3 className="font-serif text-3xl font-semibold text-foreground mb-5">{item.title}</h3>
                 <p className="font-sans font-light text-foreground/70 leading-relaxed">{item.description}</p>
-              </m.div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -456,7 +456,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
               { value: '8+',  label: t('statsCountries') },
               { value: '24h', label: t('statsResponse') },
             ].map((stat, i) => (
-              <m.div
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -471,7 +471,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   {stat.value}
                 </p>
                 <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-foreground/60">{stat.label}</p>
-              </m.div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -489,7 +489,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30">
             {testimonials.map((testimonial, i) => (
-              <m.div
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -520,7 +520,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
                     </Link>
                   )}
                 </div>
-              </m.div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -547,7 +547,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {posts.slice(0, 3).map((post, i) => (
-              <m.div
+              <motion.div
                 key={post.slug}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -571,7 +571,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   </h3>
                   <p className="font-sans text-sm text-foreground/65 line-clamp-2">{tl(post.excerpt, locale)}</p>
                 </Link>
-              </m.div>
+              </motion.div>
             ))}
           </div>
 

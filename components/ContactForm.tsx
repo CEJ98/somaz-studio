@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from '@/i18n/navigation'
 import { useSearchParams } from 'next/navigation'
-import { m } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
@@ -241,7 +241,7 @@ export default function ContactForm() {
             {status === 'loading' ? (
               <span className="flex gap-1">
                 {[0, 1, 2].map((i) => (
-                  <m.span
+                  <motion.span
                     key={i}
                     className="w-1 h-1 rounded-full bg-background inline-block"
                     animate={{ opacity: [0.3, 1, 0.3] }}

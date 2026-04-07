@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { m } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
@@ -21,16 +21,16 @@ export default function ThankYouContent() {
       </div>
 
       <div className="relative z-10">
-        <m.p
+        <motion.p
           className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-6"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease }}
         >
           {t('sent')}
-        </m.p>
+        </motion.p>
 
-        <m.h1
+        <motion.h1
           className="font-serif font-light text-foreground mb-6 leading-[0.9]"
           style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
           initial={{ opacity: 0, y: 30 }}
@@ -39,9 +39,9 @@ export default function ThankYouContent() {
         >
           <span className="block italic text-foreground/60">{t('headline1')}</span>
           <span className="block font-semibold">{t('headline2')}</span>
-        </m.h1>
+        </motion.h1>
 
-        <m.div
+        <motion.div
           className="architectural-line max-w-xs mx-auto mb-8"
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
@@ -49,16 +49,16 @@ export default function ThankYouContent() {
           style={{ transformOrigin: 'left' }}
         />
 
-        <m.p
+        <motion.p
           className="font-sans font-light text-foreground/70 mb-3 max-w-md leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease }}
         >
           {t('body')}
-        </m.p>
+        </motion.p>
 
-        <m.p
+        <motion.p
           className="font-sans text-sm text-foreground/55 mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -68,9 +68,9 @@ export default function ThankYouContent() {
           <a href="mailto:hola@somazstudio.com" className="text-accent hover:text-foreground transition-colors duration-300">
             hola@somazstudio.com
           </a>
-        </m.p>
+        </motion.p>
 
-        <m.div
+        <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function ThankYouContent() {
             {t('whatsapp')}
             <Icon name="chat" size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
           </a>
-        </m.div>
+        </motion.div>
       </div>
     </div>
   )

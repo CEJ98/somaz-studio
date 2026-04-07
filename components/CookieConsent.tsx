@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { m, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const CONSENT_KEY = 'somaz_cookie_consent'
 
@@ -36,7 +36,7 @@ export default function CookieConsent({ onAccept }: { onAccept?: () => void }) {
   return (
     <AnimatePresence>
       {visible && (
-        <m.div
+        <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
@@ -63,7 +63,7 @@ export default function CookieConsent({ onAccept }: { onAccept?: () => void }) {
               {t('decline')}
             </button>
           </div>
-        </m.div>
+        </motion.div>
       )}
     </AnimatePresence>
   )

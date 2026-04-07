@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { m, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
@@ -41,7 +41,7 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
         </div>
         <div className="relative z-10 w-full px-6 md:px-10 pb-16">
           <div className="max-w-7xl mx-auto">
-            <m.div
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease }}
@@ -53,7 +53,7 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
               >
                 {tw('selectedWork')}
               </h1>
-            </m.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -70,7 +70,7 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
         </p>
 
         {/* Filters */}
-        <m.div
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease }}
@@ -93,10 +93,10 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
               {tc(cat)}
             </button>
           ))}
-        </m.div>
+        </motion.div>
 
         {/* Project counter */}
-        <m.p
+        <motion.p
           key={filtered.length}
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -104,13 +104,13 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
           className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 mb-10"
         >
           {filtered.length} {filtered.length === 1 ? tw('projectSingular') : tw('projectPlural')}
-        </m.p>
+        </motion.p>
 
         {/* Editorial Grid — 12 columns */}
-        <m.div layout className="grid grid-cols-1 md:grid-cols-12 gap-2">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-12 gap-2">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, i) => (
-              <m.div
+              <motion.div
                 key={project.slug}
                 layout
                 initial={{ opacity: 0, scale: 0.96 }}
@@ -124,10 +124,10 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
                 onMouseLeave={() => setHoveredSlug(null)}
               >
                 <ProjectCard project={project} priority={i === 0} featured={project.featured} />
-              </m.div>
+              </motion.div>
             ))}
           </AnimatePresence>
-        </m.div>
+        </motion.div>
 
         {/* CTA section */}
         <div className="mt-24 pt-16 border-t border-border/40 text-center relative overflow-hidden">

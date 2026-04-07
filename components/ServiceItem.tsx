@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { m, useInView } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import type { Service } from '@/data/services'
@@ -58,7 +58,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <m.div
+    <motion.div
       id={service.slug}
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
@@ -128,6 +128,6 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
           </Link>
         </div>
       </div>
-    </m.div>
+    </motion.div>
   )
 }

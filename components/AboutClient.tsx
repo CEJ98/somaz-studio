@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { m, useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion'
+import { motion, useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -16,7 +16,7 @@ function FadeUp({ children, delay = 0, className }: { children: React.ReactNode;
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const reduced = useReducedMotion()
   return (
-    <m.div
+    <motion.div
       ref={ref}
       initial={reduced ? false : { opacity: 0, y: 35 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -24,7 +24,7 @@ function FadeUp({ children, delay = 0, className }: { children: React.ReactNode;
       className={className}
     >
       {children}
-    </m.div>
+    </motion.div>
   )
 }
 
@@ -49,7 +49,7 @@ function CounterStat({ value, suffix = '', label }: { value: string; suffix?: st
   return (
     <div ref={ref}>
       <p className="font-serif font-light text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-        {isNumeric ? <m.span>{rounded}</m.span> : value}{suffix}
+        {isNumeric ? <motion.span>{rounded}</motion.span> : value}{suffix}
       </p>
       <p className="font-sans text-[10px] text-foreground/55 tracking-[0.25em] mt-3 uppercase">{label}</p>
     </div>
@@ -84,17 +84,17 @@ export default function AboutClient() {
 
         <div className="relative z-10 w-full px-6 md:px-10 pb-20 md:pb-28 pt-40">
           <div className="max-w-7xl mx-auto">
-            <m.p
+            <motion.p
               className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease }}
             >
               {t('ourStory')}
-            </m.p>
+            </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-              <m.div
+              <motion.div
                 className="md:col-span-7"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -110,9 +110,9 @@ export default function AboutClient() {
                 <p className="font-sans font-light text-foreground/55 leading-relaxed max-w-lg">
                   {t('intro')}
                 </p>
-              </m.div>
+              </motion.div>
 
-              <m.div
+              <motion.div
                 className="md:col-span-4 md:col-start-9 flex flex-col justify-end pb-4"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -125,7 +125,7 @@ export default function AboutClient() {
                 >
                   {t('quote')}
                 </blockquote>
-              </m.div>
+              </motion.div>
             </div>
           </div>
         </div>

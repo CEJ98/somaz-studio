@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
-import { m, useScroll } from 'framer-motion'
+import { motion, useScroll } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { useLocale } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
@@ -167,7 +167,7 @@ export default function Navbar() {
       >
         <ul className="flex flex-col px-6 py-8 gap-6">
           {links.map(({ href, label }, i) => (
-            <m.li
+            <motion.li
               key={href}
               initial={{ opacity: 0, x: -16 }}
               animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
@@ -181,9 +181,9 @@ export default function Navbar() {
               >
                 {label}
               </Link>
-            </m.li>
+            </motion.li>
           ))}
-          <m.li
+          <motion.li
             initial={{ opacity: 0, x: -16 }}
             animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
             transition={{ duration: 0.3, delay: links.length * 0.06, ease: ease }}
@@ -194,8 +194,8 @@ export default function Navbar() {
             >
               {locale === 'en' ? 'ES' : 'EN'}
             </button>
-          </m.li>
-          <m.li
+          </motion.li>
+          <motion.li
             initial={{ opacity: 0, x: -16 }}
             animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
             transition={{ duration: 0.3, delay: (links.length + 1) * 0.06, ease: ease }}
@@ -206,12 +206,12 @@ export default function Navbar() {
             >
               {t('startProject')}
             </Link>
-          </m.li>
+          </motion.li>
         </ul>
       </div>
 
       {/* Scroll progress bar */}
-      <m.div
+      <motion.div
         className="absolute bottom-0 left-0 h-px bg-accent/60 origin-left"
         style={{ scaleX: scrollYProgress }}
       />
