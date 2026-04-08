@@ -52,6 +52,7 @@ export default async function BlogPostPage(props: Props) {
   const localizedTitle = t(post.title, locale)
   const localizedContent = t(post.content, locale)
   const localizedExcerpt = t(post.excerpt, locale)
+  const readingTime = Math.ceil(localizedContent.split(/\s+/).length / 200)
 
   const jsonLd = JSON.stringify([
     {
@@ -103,9 +104,15 @@ export default async function BlogPostPage(props: Props) {
           <h1 className="font-serif font-light text-foreground/80 mb-6" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
             {localizedTitle}
           </h1>
-          <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/25 mb-12">
-            {new Date(post.date).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </p>
+          <div className="flex items-center gap-4 mb-12">
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/25">
+              {new Date(post.date).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+            <span className="w-px h-3 bg-border/40" aria-hidden="true" />
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/25">
+              {readingTime} {locale === 'es' ? 'min de lectura' : 'min read'}
+            </p>
+          </div>
           <div className="relative aspect-[16/7] overflow-hidden mb-16">
             <Image src={post.coverImage} alt={localizedTitle} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 800px" />
           </div>

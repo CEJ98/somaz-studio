@@ -1,5 +1,6 @@
 import type { ServicePackage } from '@/data/services'
 import { t as tl } from '@/lib/locale'
+import Link from 'next/link'
 
 export default function PricingTable({
   packages,
@@ -17,10 +18,10 @@ export default function PricingTable({
         return (
           <div
             key={i}
-            className={`flex flex-col p-6 relative ${
+            className={`flex flex-col p-7 relative group transition-all duration-300 ${
               featured
                 ? 'bg-surface border border-accent/30'
-                : 'bg-background border border-border/20'
+                : 'bg-background border border-border/20 hover:border-accent/30'
             }`}
           >
             {featured && (
@@ -34,17 +35,41 @@ export default function PricingTable({
             </p>
 
             <p
-              className="font-serif font-light text-accent mb-4"
+              className="font-serif font-light text-accent mb-1"
               style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}
             >
               {tl(pkg.price, locale)}
             </p>
 
             {pkg.description && (
-              <p className="font-sans font-light text-foreground/65 text-sm leading-relaxed">
+              <p className="font-sans font-light text-foreground/65 text-sm leading-relaxed mb-5">
                 {tl(pkg.description, locale)}
               </p>
             )}
+
+            <div className="border-t border-border/30 mb-5" />
+
+            {pkg.features && pkg.features.length > 0 && (
+              <ul className="space-y-2 mb-7 flex-1">
+                {pkg.features.map((f, j) => (
+                  <li key={j} className="flex items-start gap-2 font-sans text-sm text-foreground/70">
+                    <span className="text-accent mt-0.5 text-xs">✦</span>
+                    {tl(f, locale)}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <Link
+              href="/contact"
+              className={
+                featured
+                  ? 'bg-accent text-background font-sans text-[10px] tracking-[0.25em] uppercase px-6 py-3 text-center hover:bg-accent/90 transition-all duration-300'
+                  : 'border border-foreground/30 text-foreground/65 font-sans text-[10px] tracking-[0.25em] uppercase px-6 py-3 text-center hover:border-accent hover:text-accent transition-all duration-300'
+              }
+            >
+              {locale === 'es' ? 'Comenzar' : 'Get Started'}
+            </Link>
           </div>
         )
       })}

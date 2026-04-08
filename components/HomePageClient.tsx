@@ -12,6 +12,12 @@ import { posts } from '@/data/posts'
 import { Icon } from '@/components/icons'
 import { t as tl } from '@/lib/locale'
 import { ease } from '@/lib/motion'
+import AnimatedCounter from '@/components/AnimatedCounter'
+import MagneticButton from '@/components/MagneticButton'
+import MarqueeStrip from '@/components/MarqueeStrip'
+import TrustBar from '@/components/TrustBar'
+import FAQSection from '@/components/FAQSection'
+import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 
 // Static JSON-LD — no user input, safe for dangerouslySetInnerHTML
 const jsonLd = JSON.stringify({
@@ -128,28 +134,45 @@ export default function HomePageClient({ locale }: { locale: string }) {
             {t('badge')}
           </motion.p>
 
-          <h1 className="font-serif leading-[0.9] tracking-tight mb-8" style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)' }}>
+          <motion.h1
+            className="font-serif leading-[0.9] tracking-tight mb-8"
+            style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)' }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } },
+            }}
+          >
             <div className="overflow-hidden">
-              <motion.span
-                className="block font-light text-foreground/60 italic"
-                initial={false}
-                animate={{ y: 0 }}
-                transition={{ duration: 1.1, ease, delay: 0.3 }}
-              >
-                {t('heroLine1')}
-              </motion.span>
+              {t('heroLine1').split(' ').map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block mr-[0.25em] font-light text-foreground/60 italic"
+                  variants={reduced ? {} : {
+                    hidden: { y: '110%', opacity: 0 },
+                    visible: { y: 0, opacity: 1, transition: { duration: 1.1, ease } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </div>
             <div className="overflow-hidden">
-              <motion.span
-                className="block font-semibold text-foreground"
-                initial={false}
-                animate={{ y: 0 }}
-                transition={{ duration: 1.1, ease, delay: 0.42 }}
-              >
-                {t('heroLine2')}
-              </motion.span>
+              {t('heroLine2').split(' ').map((word, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block mr-[0.25em] font-semibold text-foreground"
+                  variants={reduced ? {} : {
+                    hidden: { y: '110%', opacity: 0 },
+                    visible: { y: 0, opacity: 1, transition: { duration: 1.1, ease } },
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </div>
-          </h1>
+          </motion.h1>
 
           <motion.p
             className="font-sans text-sm font-light text-foreground/75 leading-relaxed mb-8 max-w-md"
@@ -166,13 +189,15 @@ export default function HomePageClient({ locale }: { locale: string }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.65 }}
           >
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
-            >
-              {t('viewOurWork')}
-              <Icon name="north_east" size={16} />
-            </Link>
+            <MagneticButton>
+              <Link
+                href="/work"
+                className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
+              >
+                {t('viewOurWork')}
+                <Icon name="north_east" size={16} />
+              </Link>
+            </MagneticButton>
             <Link
               href="/contact"
               className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/65 hover:text-foreground border-b border-foreground/30 pb-0.5 hover:border-foreground transition-all duration-300"
@@ -200,6 +225,8 @@ export default function HomePageClient({ locale }: { locale: string }) {
           />
         </motion.div>
       </section>
+
+      <TrustBar locale={locale} />
 
       {/* SELECTED WORK */}
       <section className="px-6 md:px-10 py-28 md:py-40 max-w-7xl mx-auto">
@@ -337,6 +364,8 @@ export default function HomePageClient({ locale }: { locale: string }) {
         </AnimatedSection>
       </section>
 
+      <MarqueeStrip />
+
       {/* PHILOSOPHY / EXPERTISE */}
       <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40">
         <div className="max-w-7xl mx-auto">
@@ -452,9 +481,9 @@ export default function HomePageClient({ locale }: { locale: string }) {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-3 gap-px bg-border/30">
             {[
-              { value: '50+', label: t('statsProjects') },
-              { value: '8+',  label: t('statsCountries') },
-              { value: '24h', label: t('statsResponse') },
+              { value: 50, suffix: '+', label: t('statsProjects') },
+              { value: 8,  suffix: '+', label: t('statsCountries') },
+              { value: 24, suffix: 'h', label: t('statsResponse') },
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -464,12 +493,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 transition={{ duration: 0.7, delay: i * 0.1, ease }}
                 className="bg-background px-8 py-12 text-center"
               >
-                <p
-                  className="font-serif font-light text-accent leading-none mb-3"
-                  style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
-                >
-                  {stat.value}
-                </p>
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-foreground/60">{stat.label}</p>
               </motion.div>
             ))}
@@ -525,6 +549,17 @@ export default function HomePageClient({ locale }: { locale: string }) {
           </div>
         </div>
       </section>
+
+      {/* BEFORE / AFTER */}
+      <BeforeAfterSlider
+        beforeSrc="/projects/casa-marchetti/cover.jpg"
+        afterSrc="/projects/casa-marchetti/01.jpg"
+        caption={locale === 'es'
+          ? 'Visualización 3D completa para una residencia privada. Desde el volumen espacial hasta el ray-tracing fotorrealista con integración final de materiales.'
+          : 'Full 3D visualization for a private residence. From spatial massing to photorealistic ray-tracing with final material integration.'}
+        project="Casa Marchetti · 2024"
+        locale={locale}
+      />
 
       {/* LATEST NOTES */}
       <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40 bg-surface/30">
@@ -587,6 +622,8 @@ export default function HomePageClient({ locale }: { locale: string }) {
         </div>
       </section>
 
+      <FAQSection locale={locale} />
+
       {/* CTA */}
       <section className="border-t border-border/50 px-6 md:px-10 py-32 md:py-48 relative overflow-hidden">
         {/* Background gradient effect */}
@@ -612,13 +649,15 @@ export default function HomePageClient({ locale }: { locale: string }) {
               <span className="italic text-foreground/60">{t('visionToLife')}</span>
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
-              >
-                {t('startProject')}
-                <Icon name="north_east" size={16} />
-              </Link>
+              <MagneticButton>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
+                >
+                  {t('startProject')}
+                  <Icon name="north_east" size={16} />
+                </Link>
+              </MagneticButton>
               <Link
                 href="/work"
                 className="inline-flex items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
