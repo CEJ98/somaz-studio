@@ -550,11 +550,11 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
       {/* BEFORE / AFTER */}
       <BeforeAfterSlider
-        beforeSrc="/projects/casa-marchetti/cover.jpg"
-        afterSrc="/projects/casa-marchetti/01.jpg"
+        beforeSrc="/slider-blueprint.jpg"
+        afterSrc="/slider-render.jpg"
         caption={locale === 'es'
-          ? 'Visualización 3D completa para una residencia privada. Desde el volumen espacial hasta el ray-tracing fotorrealista con integración final de materiales.'
-          : 'Full 3D visualization for a private residence. From spatial massing to photorealistic ray-tracing with final material integration.'}
+          ? 'Del plano al render fotorrealista. Así transformamos cada proyecto antes de construirlo.'
+          : 'From blueprint to photorealistic render. This is how we transform every project before it is built.'}
         project="Casa Marchetti · 2024"
         locale={locale}
       />
