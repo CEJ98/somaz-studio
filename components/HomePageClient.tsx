@@ -15,7 +15,6 @@ import { ease } from '@/lib/motion'
 import AnimatedCounter from '@/components/AnimatedCounter'
 import MagneticButton from '@/components/MagneticButton'
 import MarqueeStrip from '@/components/MarqueeStrip'
-import TrustBar from '@/components/TrustBar'
 import FAQSection from '@/components/FAQSection'
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 
@@ -225,8 +224,6 @@ export default function HomePageClient({ locale }: { locale: string }) {
           />
         </motion.div>
       </section>
-
-      <TrustBar locale={locale} />
 
       {/* SELECTED WORK */}
       <section className="px-6 md:px-10 py-28 md:py-40 max-w-7xl mx-auto">
