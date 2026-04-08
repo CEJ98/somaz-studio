@@ -84,63 +84,64 @@ export default function FAQSection({ locale }: Props) {
 
   return (
     <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40">
-      <div className="mb-16">
-        <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
-          {labelText}
-        </p>
-        <h2
-          className="font-serif font-light italic text-foreground/70"
-          style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
-        >
-          {headingText}
-        </h2>
-      </div>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24">
+        {/* Left — header */}
+        <div className="lg:col-span-1">
+          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
+            {labelText}
+          </p>
+          <h2
+            className="font-serif font-light italic text-foreground/70 mb-12"
+            style={{ fontSize: 'clamp(2rem, 3vw, 3rem)' }}
+          >
+            {headingText}
+          </h2>
+          <Link
+            href="/contact"
+            className="font-sans text-sm tracking-wide text-accent hover:text-foreground transition-colors duration-300"
+          >
+            {ctaText}
+          </Link>
+        </div>
 
-      <div className="max-w-3xl">
-        {faqs.map((faq, i) => (
-          <div key={i} className="border-b border-border/30">
-            <button
-              className="w-full flex items-center justify-between gap-4 py-6 text-left"
-              onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            >
-              <span className="font-serif text-xl text-foreground/85">
-                {tl(faq.q, locale)}
-              </span>
-              <motion.span
-                className="text-accent text-2xl leading-none shrink-0"
-                animate={{ rotate: openIndex === i ? 45 : 0 }}
-                transition={{ duration: reduced ? 0 : 0.3 }}
+        {/* Right — accordion */}
+        <div className="lg:col-span-2">
+          {faqs.map((faq, i) => (
+            <div key={i} className="border-b border-border/30">
+              <button
+                className="w-full flex items-center justify-between gap-4 py-6 text-left"
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
               >
-                +
-              </motion.span>
-            </button>
-            <motion.div
-              className="overflow-hidden"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{
-                height: openIndex === i ? 'auto' : 0,
-                opacity: openIndex === i ? 1 : 0,
-              }}
-              transition={{
-                duration: reduced ? 0 : 0.4,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <p className="font-sans font-light text-foreground/65 leading-relaxed text-sm pb-6">
-                {tl(faq.a, locale)}
-              </p>
-            </motion.div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-16">
-        <Link
-          href="/contact"
-          className="font-sans text-sm tracking-wide text-accent hover:text-foreground transition-colors duration-300"
-        >
-          {ctaText}
-        </Link>
+                <span className="font-serif text-xl text-foreground/85">
+                  {tl(faq.q, locale)}
+                </span>
+                <motion.span
+                  className="text-accent text-2xl leading-none shrink-0"
+                  animate={{ rotate: openIndex === i ? 45 : 0 }}
+                  transition={{ duration: reduced ? 0 : 0.3 }}
+                >
+                  +
+                </motion.span>
+              </button>
+              <motion.div
+                className="overflow-hidden"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{
+                  height: openIndex === i ? 'auto' : 0,
+                  opacity: openIndex === i ? 1 : 0,
+                }}
+                transition={{
+                  duration: reduced ? 0 : 0.4,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <p className="font-sans font-light text-foreground/65 leading-relaxed text-sm pb-6">
+                  {tl(faq.a, locale)}
+                </p>
+              </motion.div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
