@@ -141,10 +141,10 @@ export default function WorkClient({ locale: _locale }: { locale: string }) {
             poster="/media/work-cta-poster.jpg"
             className="absolute inset-0 w-full h-full object-cover hidden md:block"
           />
-          <div className="absolute inset-0 bg-background/90 hidden md:block" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/60" />
           <div className="relative z-10 py-16">
           <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-6">{tw('ctaLabel')}</p>
-          <p className="font-serif font-light italic text-foreground/85 mb-10" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+          <p className="font-serif font-light italic text-foreground mb-10" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
             {tw('ctaHeading')}
           </p>
           <Link

@@ -48,10 +48,10 @@ function CounterStat({ value, suffix = '', label }: { value: string; suffix?: st
 
   return (
     <div ref={ref}>
-      <p className="font-serif font-light text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
+      <p className="font-serif font-light text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
         {isNumeric ? <motion.span>{rounded}</motion.span> : value}{suffix}
       </p>
-      <p className="font-sans text-[10px] text-foreground/55 tracking-[0.25em] mt-3 uppercase">{label}</p>
+      <p className="font-sans text-[10px] text-foreground/80 tracking-[0.25em] mt-3 uppercase" style={{ textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}>{label}</p>
     </div>
   )
 }
@@ -140,11 +140,11 @@ export default function AboutClient() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/95 to-background" />
         <div className="relative z-10 max-w-7xl mx-auto">
           <FadeUp className="mb-20">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('whySomaz')}</p>
-            <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+            <h2 className="font-serif font-light italic text-foreground/90" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
               {t('whySomazSub')}
             </h2>
           </FadeUp>
@@ -159,8 +159,8 @@ export default function AboutClient() {
                     </p>
                     <Icon name={item.icon} size={22} className="text-accent/50 mb-2" />
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold text-foreground mb-5">{item.label}</h3>
-                  <p className="font-sans font-light text-foreground/65 leading-relaxed">{item.description}</p>
+                  <h3 className="font-serif text-2xl font-semibold text-foreground mb-5" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.6)' }}>{item.label}</h3>
+                  <p className="font-sans font-light text-foreground/85 leading-relaxed">{item.description}</p>
                 </div>
               </FadeUp>
             ))}
@@ -177,7 +177,7 @@ export default function AboutClient() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="architectural-line mb-20" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">

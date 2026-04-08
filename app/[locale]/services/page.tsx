@@ -82,14 +82,21 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-background/92" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-background/50" />
         <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-14">
           <div className="max-w-7xl mx-auto">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{t('whatWeDo')}</p>
-            <h1 className="font-serif font-light italic text-foreground/80" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>
+            <h1 className="font-serif font-light italic text-foreground" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
               {t('heading')}
             </h1>
-            <p className="font-sans font-light text-foreground/70 mt-6 max-w-xl leading-relaxed">{t('subheading')}</p>
+            <p className="font-sans font-light text-foreground/90 mt-6 max-w-xl leading-relaxed" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.6)' }}>{t('subheading')}</p>
+            <Link
+              href="/contact?type=consult"
+              className="inline-flex items-center gap-3 mt-8 border border-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase text-accent hover:bg-accent hover:text-background transition-all duration-300"
+            >
+              {t('freeConsult')}
+              <Icon name="north_east" size={14} />
+            </Link>
           </div>
         </div>
       </section>
