@@ -9,12 +9,12 @@ export interface TeamMember {
 
 export const team: TeamMember[] = [
   {
-    name: 'Jorge Costilla',
-    role: { en: 'Founder & Creative Director', es: 'Fundador & Director Creativo' },
+    name: 'Sofía Mazzucco',
+    role: { en: 'Architect & Interior Designer', es: 'Arquitecta & Diseñadora de Interiores' },
     bio: {
-      en: 'Architect and 3D visualization specialist with a passion for turning spatial ideas into photorealistic experiences. Born in Argentina, based in Miami — bridging Latin American design sensibility with a global perspective.',
-      es: 'Arquitecto y especialista en visualización 3D con pasión por transformar ideas espaciales en experiencias fotorrealistas. Nacido en Argentina, con base en Miami — conectando la sensibilidad del diseño latinoamericano con una perspectiva global.',
+      en: 'Architect with a refined eye for space, materiality, and light. Passionate about the intersection of Latin American design culture and contemporary visualization. Based in Miami, working globally.',
+      es: 'Arquitecta con sensibilidad para el espacio, la materialidad y la luz. Apasionada por la intersección entre la cultura de diseño latinoamericana y la visualización contemporánea. Con base en Miami, trabajando globalmente.',
     },
-    image: '/team/jorge-costilla.jpg',
+    image: '/team/sofia-mazzucco.jpg',
   },
 ]
