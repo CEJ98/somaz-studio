@@ -155,11 +155,11 @@ export default async function HomePage(props: { params: Promise<{ locale: string
     <>
       {/* JSON-LD structured data — static object, no user input */}
       <script type="application/ld+json" suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
+         
         dangerouslySetInnerHTML={{ __html: jsonLd }} />
       {/* FAQ JSON-LD structured data — static object, no user input */}
       <script type="application/ld+json" suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
+         
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <HomePageClient locale={locale} />
     </>

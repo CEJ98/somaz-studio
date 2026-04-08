@@ -1,15 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
 function useIsSpanish() {
-  const [isEs, setIsEs] = useState(false)
-  useEffect(() => {
-    const path = window.location.pathname
-    const lang = path.startsWith('/es') ? 'es' : navigator.language?.startsWith('es') ? 'es' : 'en'
-    setIsEs(lang === 'es')
-  }, [])
-  return isEs
+  if (typeof window === 'undefined') return false
+  const path = window.location.pathname
+  return path.startsWith('/es') || (!path.startsWith('/en') && !!navigator.language?.startsWith('es'))
 }
 
 const copy = {

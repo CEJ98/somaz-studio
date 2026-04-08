@@ -86,7 +86,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
+         
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
 

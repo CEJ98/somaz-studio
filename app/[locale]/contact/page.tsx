@@ -42,7 +42,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
+         
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <PageFade className="min-h-screen pb-24">

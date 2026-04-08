@@ -25,7 +25,7 @@ export default async function OGImage({ params }: { params: Promise<{ locale: st
   return new ImageResponse(
     <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: '#1C1C1A' }}>
       {/* Background image */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
+      { }
       <img
         src={imageUrl}
         alt=""

@@ -70,7 +70,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
+         
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <section className="relative min-h-[40vh] flex items-end overflow-hidden">

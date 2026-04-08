@@ -88,7 +88,7 @@ export default async function BlogPostPage(props: Props) {
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
+         
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <PageFade className="min-h-screen pt-32 pb-28 px-6 md:px-10">

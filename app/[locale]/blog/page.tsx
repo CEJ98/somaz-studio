@@ -49,7 +49,7 @@ export default async function BlogPage(props: { params: Promise<{ locale: string
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
+         
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <BlogClient posts={posts} locale={locale} />

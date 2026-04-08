@@ -33,9 +33,9 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [pathname])
+  // Close menu on route change — intentional side effect, not cascading
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setMenuOpen(false) }, [pathname])
 
   // Escape key + focus trap for mobile menu
   useEffect(() => {

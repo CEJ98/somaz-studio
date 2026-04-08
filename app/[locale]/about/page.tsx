@@ -49,7 +49,7 @@ export default function AboutPage() {
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
+         
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <AboutClient />
