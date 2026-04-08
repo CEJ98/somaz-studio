@@ -163,13 +163,6 @@ export default function BeforeAfterSlider({
             </svg>
           </div>
 
-          {/* Labels */}
-          <div className="absolute bottom-5 left-5 z-20 bg-background/80 backdrop-blur-sm px-4 py-2 pointer-events-none">
-            <span className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/80">{beforeLabel}</span>
-          </div>
-          <div className="absolute bottom-5 right-5 z-10 bg-background/80 backdrop-blur-sm px-4 py-2 pointer-events-none">
-            <span className="font-sans text-[9px] tracking-[0.2em] uppercase text-accent">{afterLabel}</span>
-          </div>
         </div>
 
         {/* Caption */}
