@@ -132,19 +132,11 @@ export default function AboutClient() {
       </section>
 
       {/* Differentiators */}
-      <section className="relative px-6 md:px-10 py-28 md:py-40 border-b border-border/40 overflow-hidden">
-        <Image
-          src="/backgrounds/about-differentiators.jpg"
-          alt=""
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/95 to-background" />
-        <div className="relative z-10 max-w-7xl mx-auto">
+      <section className="px-6 md:px-10 py-28 md:py-40 border-b border-border/40">
+        <div className="max-w-7xl mx-auto">
           <FadeUp className="mb-20">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('whySomaz')}</p>
-            <h2 className="font-serif font-light italic text-foreground/90" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
+            <h2 className="font-serif font-light italic text-foreground/90" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
               {t('whySomazSub')}
             </h2>
           </FadeUp>
@@ -159,7 +151,7 @@ export default function AboutClient() {
                     </p>
                     <Icon name={item.icon} size={22} className="text-accent/50 mb-2" />
                   </div>
-                  <h3 className="font-serif text-2xl font-semibold text-foreground mb-5" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.6)' }}>{item.label}</h3>
+                  <h3 className="font-serif text-2xl font-semibold text-foreground mb-5">{item.label}</h3>
                   <p className="font-sans font-light text-foreground/85 leading-relaxed">{item.description}</p>
                 </div>
               </FadeUp>
