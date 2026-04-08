@@ -138,16 +138,8 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
           </div>
 
           {/* FAQ Section */}
-          <div className="mt-0 pt-16 border-t border-border/40 relative overflow-hidden">
-            <Image
-              src="/backgrounds/services-faq.jpg"
-              alt=""
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-background/92" />
-            <div className="relative z-10">
+          <div className="mt-0 pt-16 border-t border-border/40">
+            <div>
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-10">{t('faqHeading')}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 max-w-5xl">
               {[
