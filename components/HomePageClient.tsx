@@ -244,7 +244,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
           </Link>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-3 gap-y-12">
           {selectedProjects[0] && (
             <motion.div
               className="md:col-span-7"
@@ -253,27 +253,31 @@ export default function HomePageClient({ locale }: { locale: string }) {
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.9, ease }}
             >
-              <Link href={`/work/${selectedProjects[0].slug}`} className="group block relative overflow-hidden aspect-[4/5]">
-                <Image
-                  src={selectedProjects[0].coverImage}
-                  alt={selectedProjects[0].title}
-                  fill
-                  className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 58vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">{selectedProjects[0].category}</p>
-                  <h3 className="font-serif text-2xl font-semibold text-foreground">{selectedProjects[0].title}</h3>
-                  <p className="font-sans text-sm text-foreground/60">{selectedProjects[0].location} — {selectedProjects[0].year}</p>
+              <Link href={`/work/${selectedProjects[0].slug}`} className="group block">
+                <div className="relative overflow-hidden aspect-[4/5] mb-5">
+                  <Image
+                    src={selectedProjects[0].coverImage}
+                    alt={selectedProjects[0].title}
+                    fill
+                    className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 58vw"
+                  />
+                  <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
                 </div>
-                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selectedProjects[0].category}</p>
+                    <h3 className="font-serif text-xl text-foreground group-hover:text-accent/80 transition-colors duration-300">{selectedProjects[0].title}</h3>
+                    <p className="font-sans text-[11px] text-foreground/35 mt-1">{selectedProjects[0].location} — {selectedProjects[0].year}</p>
+                  </div>
+                  <span className="font-serif font-light text-foreground/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>01</span>
+                </div>
               </Link>
             </motion.div>
           )}
 
-          <div className="md:col-span-5 flex flex-col gap-3">
+          <div className="md:col-span-5 flex flex-col gap-12">
             {selectedProjects[1] && (
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -281,20 +285,25 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.9, ease, delay: 0.1 }}
               >
-                <Link href={`/work/${selectedProjects[1].slug}`} className="group block relative overflow-hidden aspect-[4/3]">
-                  <Image
-                    src={selectedProjects[1].coverImage}
-                    alt={selectedProjects[1].title}
-                    fill
-                    className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
-                    sizes="(max-width: 768px) 100vw, 42vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">{selectedProjects[1].category}</p>
-                    <h3 className="font-serif text-xl font-semibold text-foreground">{selectedProjects[1].title}</h3>
+                <Link href={`/work/${selectedProjects[1].slug}`} className="group block">
+                  <div className="relative overflow-hidden aspect-[4/3] mb-4">
+                    <Image
+                      src={selectedProjects[1].coverImage}
+                      alt={selectedProjects[1].title}
+                      fill
+                      className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                      sizes="(max-width: 768px) 100vw, 42vw"
+                    />
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
                   </div>
-                  <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selectedProjects[1].category}</p>
+                      <h3 className="font-serif text-lg text-foreground group-hover:text-accent/80 transition-colors duration-300">{selectedProjects[1].title}</h3>
+                      <p className="font-sans text-[11px] text-foreground/35 mt-1">{selectedProjects[1].location} — {selectedProjects[1].year}</p>
+                    </div>
+                    <span className="font-serif font-light text-foreground/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>02</span>
+                  </div>
                 </Link>
               </motion.div>
             )}
@@ -305,20 +314,25 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 viewport={{ once: true, margin: '-80px' }}
                 transition={{ duration: 0.9, ease, delay: 0.2 }}
               >
-                <Link href={`/work/${selectedProjects[2].slug}`} className="group block relative overflow-hidden aspect-[4/3]">
-                  <Image
-                    src={selectedProjects[2].coverImage}
-                    alt={selectedProjects[2].title}
-                    fill
-                    className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
-                    sizes="(max-width: 768px) 100vw, 42vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">{selectedProjects[2].category}</p>
-                    <h3 className="font-serif text-xl font-semibold text-foreground">{selectedProjects[2].title}</h3>
+                <Link href={`/work/${selectedProjects[2].slug}`} className="group block">
+                  <div className="relative overflow-hidden aspect-[4/3] mb-4">
+                    <Image
+                      src={selectedProjects[2].coverImage}
+                      alt={selectedProjects[2].title}
+                      fill
+                      className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                      sizes="(max-width: 768px) 100vw, 42vw"
+                    />
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
                   </div>
-                  <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selectedProjects[2].category}</p>
+                      <h3 className="font-serif text-lg text-foreground group-hover:text-accent/80 transition-colors duration-300">{selectedProjects[2].title}</h3>
+                      <p className="font-sans text-[11px] text-foreground/35 mt-1">{selectedProjects[2].location} — {selectedProjects[2].year}</p>
+                    </div>
+                    <span className="font-serif font-light text-foreground/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>03</span>
+                  </div>
                 </Link>
               </motion.div>
             )}
@@ -332,20 +346,25 @@ export default function HomePageClient({ locale }: { locale: string }) {
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.9, ease, delay: 0.15 }}
             >
-              <Link href={`/work/${selectedProjects[3].slug}`} className="group block relative overflow-hidden aspect-[16/7]">
-                <Image
-                  src={selectedProjects[3].coverImage}
-                  alt={selectedProjects[3].title}
-                  fill
-                  className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
-                  sizes="(max-width: 768px) 100vw, 67vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-1">{selectedProjects[3].category}</p>
-                  <h3 className="font-serif text-2xl font-semibold text-foreground">{selectedProjects[3].title}</h3>
+              <Link href={`/work/${selectedProjects[3].slug}`} className="group block">
+                <div className="relative overflow-hidden aspect-[16/7] mb-5">
+                  <Image
+                    src={selectedProjects[3].coverImage}
+                    alt={selectedProjects[3].title}
+                    fill
+                    className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                    sizes="(max-width: 768px) 100vw, 67vw"
+                  />
+                  <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
                 </div>
-                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selectedProjects[3].category}</p>
+                    <h3 className="font-serif text-xl text-foreground group-hover:text-accent/80 transition-colors duration-300">{selectedProjects[3].title}</h3>
+                    <p className="font-sans text-[11px] text-foreground/35 mt-1">{selectedProjects[3].location} — {selectedProjects[3].year}</p>
+                  </div>
+                  <span className="font-serif font-light text-foreground/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>04</span>
+                </div>
               </Link>
             </motion.div>
           )}
