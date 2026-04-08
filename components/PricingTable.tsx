@@ -34,13 +34,6 @@ export default function PricingTable({
               {tl(pkg.name, locale)}
             </p>
 
-            <p
-              className="font-serif font-light text-accent mb-1"
-              style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}
-            >
-              {tl(pkg.price, locale)}
-            </p>
-
             {pkg.description && (
               <p className="font-sans font-light text-foreground/65 text-sm leading-relaxed mb-5">
                 {tl(pkg.description, locale)}
