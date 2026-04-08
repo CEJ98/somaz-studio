@@ -552,10 +552,6 @@ export default function HomePageClient({ locale }: { locale: string }) {
       <BeforeAfterSlider
         beforeSrc="/slider-blueprint.jpg"
         afterSrc="/slider-render.jpg"
-        caption={locale === 'es'
-          ? 'Del plano al render fotorrealista. Así transformamos cada proyecto antes de construirlo.'
-          : 'From blueprint to photorealistic render. This is how we transform every project before it is built.'}
-        project="Casa Marchetti · 2024"
         locale={locale}
       />
 
