@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
+import { Suspense } from 'react'
 import ContactForm from '@/components/ContactForm'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
@@ -151,7 +152,9 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
               <p className="font-sans text-[11px] tracking-[0.15em] text-foreground/35 mb-8">
                 {t('responseNote')}
               </p>
-              <ContactForm />
+              <Suspense fallback={null}>
+                <ContactForm />
+              </Suspense>
             </div>
           </div>
         </div>

@@ -180,6 +180,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
             fill
             className="object-cover cursor-zoom-in"
             priority
+            fetchPriority="high"
             sizes="100vw"
             onClick={() => setLightboxIndex(0)}
           />
