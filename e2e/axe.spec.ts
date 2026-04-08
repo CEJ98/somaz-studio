@@ -6,7 +6,8 @@ const PAGES = ['/en', '/en/services', '/en/contact']
 for (const path of PAGES) {
   test(`axe — ${path}`, async ({ page }) => {
     await page.goto(path)
-    await page.waitForLoadState('domcontentloaded')
+    await page.waitForLoadState('load')
+    await page.waitForTimeout(800)
 
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa'])
