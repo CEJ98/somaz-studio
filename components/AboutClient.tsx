@@ -145,12 +145,9 @@ export default function AboutClient() {
             {differentiators.map((item, i) => (
               <FadeUp key={item.label} delay={i * 0.12}>
                 <div className="relative border-t border-border/40 pt-10 pb-12 md:pr-16 overflow-hidden">
-                  <div className="flex items-end gap-4 mb-4">
-                    <p className="font-serif font-light text-accent/40 select-none" style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', lineHeight: 1 }}>
-                      {String(i + 1).padStart(2, '0')}
-                    </p>
-                    <Icon name={item.icon} size={22} className="text-accent/50 mb-2" />
-                  </div>
+                  <p className="font-serif font-light text-accent/40 select-none mb-4" style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', lineHeight: 1 }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </p>
                   <h3 className="font-serif text-2xl font-semibold text-foreground mb-5">{item.label}</h3>
                   <p className="font-sans font-light text-foreground/85 leading-relaxed">{item.description}</p>
                 </div>
