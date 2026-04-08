@@ -428,31 +428,12 @@ export default function HomePageClient({ locale }: { locale: string }) {
       {/* HOW WE WORK */}
       <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40 bg-surface/30">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="mb-20">
+          <AnimatedSection className="mb-12">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('process')}</p>
             <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
               {t('howWeWork')}
             </h2>
           </AnimatedSection>
-
-          {/* Progress line (desktop) */}
-          <div className="hidden md:block relative mb-16">
-            <div className="absolute top-1/2 left-0 right-0 h-px bg-border/30" />
-            <div className="grid grid-cols-3 relative">
-              {steps.map((item, i) => (
-                <motion.div
-                  key={`dot-${item.step}`}
-                  className="flex justify-center"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5, delay: i * 0.2, ease }}
-                >
-                  <div className="w-3 h-3 rounded-full bg-accent/80 ring-4 ring-surface/30" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
             {steps.map((item, i) => (
@@ -465,7 +446,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
                 className="relative border-t border-border/40 pt-10 pb-12 md:pr-16 overflow-hidden group"
               >
                 <div className="absolute top-0 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-700" />
-                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/70 mb-6">{item.step}</p>
+                <p className="font-serif font-light text-accent/25 select-none mb-4" style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', lineHeight: 1 }}>{item.step}</p>
                 <h3 className="font-serif text-3xl font-semibold text-foreground mb-5">{item.title}</h3>
                 <p className="font-sans font-light text-foreground/70 leading-relaxed">{item.description}</p>
               </motion.div>
