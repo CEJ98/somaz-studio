@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import Image from 'next/image'
 import { Suspense } from 'react'
 import ContactForm from '@/components/ContactForm'
 import PageFade from '@/components/PageFade'
@@ -46,18 +45,8 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <PageFade className="min-h-screen pb-24">
-        {/* Hero with background image */}
-        <section className="relative min-h-[45vh] flex items-end overflow-hidden">
-          <Image
-            src="/contact-bg.jpg"
-            alt="Somaz Studio contact — design studio space in Miami"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-background/85" />
-          <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-16">
+        <section className="min-h-[45vh] flex items-end">
+          <div className="w-full px-6 md:px-10 pt-28 md:pt-32 pb-16">
             <div className="max-w-7xl mx-auto">
               <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{t('getInTouch')}</p>
               <h1 className="font-serif font-light leading-[0.9]" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>

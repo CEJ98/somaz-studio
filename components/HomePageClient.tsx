@@ -199,9 +199,10 @@ export default function HomePageClient({ locale }: { locale: string }) {
             </MagneticButton>
             <Link
               href="/contact"
-              className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/65 hover:text-foreground border-b border-foreground/30 pb-0.5 hover:border-foreground transition-all duration-300"
+              className="inline-flex items-center gap-2 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
               {t('startProject')}
+              <Icon name="north_east" size={14} />
             </Link>
           </motion.div>
         </motion.div>
