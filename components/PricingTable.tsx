@@ -1,6 +1,6 @@
 import type { ServicePackage } from '@/data/services'
 import { t as tl } from '@/lib/locale'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 
 export default function PricingTable({
   packages,

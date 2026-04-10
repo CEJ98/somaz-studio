@@ -2,14 +2,12 @@
 
 import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { t as tl } from '@/lib/locale'
 
 interface Props {
   locale: string
 }
-
-const tl = (obj: { en: string; es: string }, locale: string) =>
-  locale === 'es' ? obj.es : obj.en
 
 const faqs = [
   {
