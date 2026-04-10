@@ -67,7 +67,7 @@ const localBusinessJsonLd = {
   url: 'https://somazstudio.com',
   telephone: '+17865377682',
   email: 'hola@somazstudio.com',
-  priceRange: '$$$',
+  priceRange: '$$',
   image: 'https://somazstudio.com/og-image.jpg',
   address: {
     '@type': 'PostalAddress',
