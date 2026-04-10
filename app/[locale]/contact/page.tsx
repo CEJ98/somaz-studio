@@ -26,14 +26,45 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
   const { locale } = params
   const t = await getTranslations({ locale, namespace: 'contact' })
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `https://somazstudio.com/${locale}` },
-      { '@type': 'ListItem', position: 2, name: 'Contact', item: `https://somazstudio.com/${locale}/contact` },
-    ],
-  }
+  const jsonLd = JSON.stringify([
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `https://somazstudio.com/${locale}` },
+        { '@type': 'ListItem', position: 2, name: 'Contact', item: `https://somazstudio.com/${locale}/contact` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      '@id': 'https://somazstudio.com/#business',
+      name: 'Somaz Studio',
+      description: '3D visualization, interior design, and conceptual design studio based in Miami, FL. Working globally.',
+      url: 'https://somazstudio.com',
+      telephone: '+17865377682',
+      email: 'hola@somazstudio.com',
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Miami',
+        addressRegion: 'FL',
+        addressCountry: 'US',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        telephone: '+17865377682',
+        email: 'hola@somazstudio.com',
+        availableLanguage: ['English', 'Spanish'],
+        contactOption: 'TollFree',
+      },
+      sameAs: [
+        'https://instagram.com/somazstudio',
+        'https://linkedin.com/company/somazstudio',
+      ],
+    },
+  ])
 
   return (
     <>
@@ -41,8 +72,8 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
       <script
         type="application/ld+json"
         suppressHydrationWarning
-         
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <PageFade className="min-h-screen pb-24">
         <section className="min-h-[45vh] flex items-end">
