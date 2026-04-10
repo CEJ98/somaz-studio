@@ -107,7 +107,10 @@ export default function FAQSection({ locale }: Props) {
           {faqs.map((faq, i) => (
             <div key={i} className="border-b border-border/30">
               <button
+                id={`faq-btn-${i}`}
                 className="w-full flex items-center justify-between gap-4 py-6 text-left"
+                aria-expanded={openIndex === i}
+                aria-controls={`faq-panel-${i}`}
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
               >
                 <span className="font-serif text-xl text-foreground/85">
@@ -115,6 +118,7 @@ export default function FAQSection({ locale }: Props) {
                 </span>
                 <motion.span
                   className="text-accent text-2xl leading-none shrink-0"
+                  aria-hidden="true"
                   animate={{ rotate: openIndex === i ? 45 : 0 }}
                   transition={{ duration: reduced ? 0 : 0.3 }}
                 >
@@ -122,6 +126,9 @@ export default function FAQSection({ locale }: Props) {
                 </motion.span>
               </button>
               <motion.div
+                id={`faq-panel-${i}`}
+                role="region"
+                aria-labelledby={`faq-btn-${i}`}
                 className="overflow-hidden"
                 initial={{ height: 0, opacity: 0 }}
                 animate={{
