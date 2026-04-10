@@ -101,7 +101,7 @@ export default function ThankYouContent() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8, ease }}
         >
-          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/35 mb-8 text-center">
+          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-8 text-center">
             {t('stepsHeading')}
           </p>
           <div>
@@ -118,7 +118,7 @@ export default function ThankYouContent() {
                   <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/60 mb-1">
                     {t(titleKey)}
                   </p>
-                  <p className="font-sans font-light text-foreground/40 text-sm leading-relaxed">
+                  <p className="font-sans font-light text-foreground/50 text-sm leading-relaxed">
                     {t(descKey)}
                   </p>
                 </div>

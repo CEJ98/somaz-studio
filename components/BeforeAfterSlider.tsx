@@ -174,7 +174,7 @@ export default function BeforeAfterSlider({
               </p>
             )}
             {project && (
-              <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/35 shrink-0 ml-8">
+              <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/50 shrink-0 ml-8">
                 {project}
               </p>
             )}

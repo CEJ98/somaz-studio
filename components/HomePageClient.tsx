@@ -240,9 +240,9 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   <div>
                     <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selectedProjects[0].category}</p>
                     <h3 className="font-serif text-xl text-foreground group-hover:text-accent/80 transition-colors duration-300">{selectedProjects[0].title}</h3>
-                    <p className="font-sans text-[11px] text-foreground/35 mt-1">{selectedProjects[0].location} — {selectedProjects[0].year}</p>
+                    <p className="font-sans text-[11px] text-foreground/55 mt-1">{selectedProjects[0].location} — {selectedProjects[0].year}</p>
                   </div>
-                  <span className="font-serif font-light text-foreground/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>01</span>
+                  <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>01</span>
                 </div>
               </Link>
             </motion.div>
@@ -271,9 +271,9 @@ export default function HomePageClient({ locale }: { locale: string }) {
                     <div>
                       <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selectedProjects[1].category}</p>
                       <h3 className="font-serif text-lg text-foreground group-hover:text-accent/80 transition-colors duration-300">{selectedProjects[1].title}</h3>
-                      <p className="font-sans text-[11px] text-foreground/35 mt-1">{selectedProjects[1].location} — {selectedProjects[1].year}</p>
+                      <p className="font-sans text-[11px] text-foreground/55 mt-1">{selectedProjects[1].location} — {selectedProjects[1].year}</p>
                     </div>
-                    <span className="font-serif font-light text-foreground/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>02</span>
+                    <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>02</span>
                   </div>
                 </Link>
               </motion.div>
@@ -300,9 +300,9 @@ export default function HomePageClient({ locale }: { locale: string }) {
                     <div>
                       <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selectedProjects[2].category}</p>
                       <h3 className="font-serif text-lg text-foreground group-hover:text-accent/80 transition-colors duration-300">{selectedProjects[2].title}</h3>
-                      <p className="font-sans text-[11px] text-foreground/35 mt-1">{selectedProjects[2].location} — {selectedProjects[2].year}</p>
+                      <p className="font-sans text-[11px] text-foreground/55 mt-1">{selectedProjects[2].location} — {selectedProjects[2].year}</p>
                     </div>
-                    <span className="font-serif font-light text-foreground/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>03</span>
+                    <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>03</span>
                   </div>
                 </Link>
               </motion.div>
@@ -332,9 +332,9 @@ export default function HomePageClient({ locale }: { locale: string }) {
                   <div>
                     <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selectedProjects[3].category}</p>
                     <h3 className="font-serif text-xl text-foreground group-hover:text-accent/80 transition-colors duration-300">{selectedProjects[3].title}</h3>
-                    <p className="font-sans text-[11px] text-foreground/35 mt-1">{selectedProjects[3].location} — {selectedProjects[3].year}</p>
+                    <p className="font-sans text-[11px] text-foreground/55 mt-1">{selectedProjects[3].location} — {selectedProjects[3].year}</p>
                   </div>
-                  <span className="font-serif font-light text-foreground/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>04</span>
+                  <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>04</span>
                 </div>
               </Link>
             </motion.div>

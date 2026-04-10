@@ -30,7 +30,7 @@ export default function TrustBar({ locale }: Props) {
         viewport={{ once: true }}
         transition={{ duration: reduced ? 0 : 1 }}
       >
-        <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/40 mr-6 shrink-0">
+        <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/50 mr-6 shrink-0">
           {locale === 'es' ? 'Presente en' : 'Trusted in'}
         </span>
         <span className="flex flex-wrap items-baseline">
