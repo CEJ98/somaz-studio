@@ -19,6 +19,12 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json()
+
+    // Honeypot: si el campo "website" viene relleno es un bot
+    if (body.website) {
+      return NextResponse.json({ success: true })
+    }
+
     const { name, email, phone, project_type, budget, sqft, message } = body
 
     if (!name || !email || !project_type || !budget || !message) {

@@ -176,6 +176,16 @@ export default function ContactForm() {
 
       <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/65 mb-4">{tf('formTime')}</p>
       <form onSubmit={handleSubmit} className="space-y-10">
+        {/* Honeypot anti-spam: invisible para humanos, atractivo para bots */}
+        <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0 }}>
+          <input
+            type="text"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+            aria-label="Do not fill this field"
+          />
+        </div>
         {/* Row 1: Name + Email */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <FloatingInput id="name" name="name" label={tf('name')} required />
