@@ -18,27 +18,6 @@ import MarqueeStrip from '@/components/MarqueeStrip'
 import FAQSection from '@/components/FAQSection'
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 
-// Static JSON-LD — no user input, safe for dangerouslySetInnerHTML
-const jsonLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Somaz Studio',
-  description: 'Miami-based design studio specializing in 3D visualization, interior design, and spatial concepts.',
-  url: 'https://somazstudio.com',
-  email: 'hola@somazstudio.com',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Miami',
-    addressRegion: 'FL',
-    addressCountry: 'US',
-  },
-  areaServed: 'Worldwide',
-  serviceType: ['3D Visualization', 'Interior Design', 'Conceptual Design', 'Design Consulting'],
-  sameAs: [
-    'https://instagram.com/somazstudio',
-    'https://linkedin.com/company/somazstudio',
-  ],
-})
 
 function AnimatedSection({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null)
@@ -81,14 +60,6 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
   return (
     <>
-      {/* JSON-LD structured data — static object, no user input */}
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-         
-        dangerouslySetInnerHTML={{ __html: jsonLd }}
-      />
-
       {/* HERO */}
       <section className="relative min-h-[100svh] min-h-[700px] overflow-hidden flex flex-col justify-end">
         <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
