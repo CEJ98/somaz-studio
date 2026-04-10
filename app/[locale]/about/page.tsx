@@ -4,8 +4,7 @@ import AboutClient from '@/components/AboutClient'
 import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const params = await props.params;
-  const { locale } = params
+  const { locale } = await props.params
   const t = await getTranslations({ locale, namespace: 'about' })
   return {
     title: t('metaTitle'),
@@ -33,6 +32,32 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
         'https://instagram.com/somazstudio',
         'https://linkedin.com/company/somazstudio',
       ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Sofía Mazzucco',
+      jobTitle: 'Architect & Interior Designer',
+      description: 'Argentine architect and interior designer based in Miami, FL. Founder of Somaz Studio. Specializing in 3D visualization, interior design, and spatial conceptualization with projects across the US and Latin America.',
+      url: `https://somazstudio.com/${locale}/about`,
+      image: 'https://somazstudio.com/about-hero.jpg',
+      email: 'hola@somazstudio.com',
+      telephone: '+17865377682',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Miami',
+        addressRegion: 'FL',
+        addressCountry: 'US',
+      },
+      sameAs: [
+        'https://instagram.com/somazstudio',
+        'https://linkedin.com/company/somazstudio',
+      ],
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Somaz Studio',
+        url: 'https://somazstudio.com',
+      },
     },
     {
       '@context': 'https://schema.org',
