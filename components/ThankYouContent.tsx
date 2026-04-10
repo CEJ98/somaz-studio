@@ -93,6 +93,39 @@ export default function ThankYouContent() {
             <Icon name="chat" size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
           </a>
         </motion.div>
+
+        {/* Next steps timeline */}
+        <motion.div
+          className="mt-16 max-w-sm mx-auto w-full"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.8, ease }}
+        >
+          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/35 mb-8 text-center">
+            {t('stepsHeading')}
+          </p>
+          <div>
+            {([
+              { num: '01', titleKey: 'step1Title', descKey: 'step1Desc' },
+              { num: '02', titleKey: 'step2Title', descKey: 'step2Desc' },
+              { num: '03', titleKey: 'step3Title', descKey: 'step3Desc' },
+            ] as const).map(({ num, titleKey, descKey }) => (
+              <div key={num} className="flex gap-6 py-5 border-b border-border/20 text-left">
+                <span className="font-serif font-light text-accent/25 text-3xl leading-none w-8 shrink-0 select-none">
+                  {num}
+                </span>
+                <div>
+                  <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/60 mb-1">
+                    {t(titleKey)}
+                  </p>
+                  <p className="font-sans font-light text-foreground/40 text-sm leading-relaxed">
+                    {t(descKey)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </div>
   )

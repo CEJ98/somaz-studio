@@ -224,7 +224,14 @@
     "viewWork": "View Our Work",
     "whatsapp": "WhatsApp Us",
     "metaTitle": "Thank You",
-    "metaDesc": "We received your message and will get back to you within 24–48 hours."
+    "metaDesc": "We received your message and will get back to you within 24–48 hours.",
+    "stepsHeading": "What happens next",
+    "step1Title": "Within 24h",
+    "step1Desc": "Sofía reviews your brief and prepares tailored questions.",
+    "step2Title": "Discovery call",
+    "step2Desc": "We schedule a 30-min call to align on vision, scope, and timeline.",
+    "step3Title": "Your proposal",
+    "step3Desc": "You receive a detailed quote within 48h of the call."
   },
   "blog": {
     "label": "Notes",

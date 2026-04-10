@@ -224,7 +224,14 @@
     "viewWork": "Ver Nuestro Trabajo",
     "whatsapp": "Escríbenos por WhatsApp",
     "metaTitle": "Gracias",
-    "metaDesc": "Recibimos tu mensaje y te responderemos en 24–48 horas."
+    "metaDesc": "Recibimos tu mensaje y te responderemos en 24–48 horas.",
+    "stepsHeading": "Qué pasa ahora",
+    "step1Title": "En menos de 24h",
+    "step1Desc": "Sofía revisa tu brief y prepara preguntas específicas.",
+    "step2Title": "Llamada de discovery",
+    "step2Desc": "Agendamos una llamada de 30 min para alinear visión, alcance y tiempos.",
+    "step3Title": "Tu propuesta",
+    "step3Desc": "Recibirás un presupuesto detallado dentro de las 48h de la llamada."
   },
   "blog": {
     "label": "Notas",
