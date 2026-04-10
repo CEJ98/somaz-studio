@@ -6,12 +6,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const CONSENT_KEY = 'somaz_cookie_consent'
 
-export function hasConsent(): boolean {
+function hasConsent(): boolean {
   if (typeof window === 'undefined') return false
   return localStorage.getItem(CONSENT_KEY) === 'accepted'
 }
 
-export default function CookieConsent({ onAccept }: { onAccept?: () => void }) {
+export default function CookieConsent() {
   const t = useTranslations('cookie')
   const [visible, setVisible] = useState(false)
 
@@ -25,7 +25,6 @@ export default function CookieConsent({ onAccept }: { onAccept?: () => void }) {
   function accept() {
     localStorage.setItem(CONSENT_KEY, 'accepted')
     setVisible(false)
-    onAccept?.()
   }
 
   function decline() {

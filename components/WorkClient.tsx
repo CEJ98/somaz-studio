@@ -16,7 +16,7 @@ const sizeToSpan: Record<string, string> = {
   small: 'md:col-span-4',
 }
 
-export default function WorkClient({ locale: _locale }: { locale: string }) {
+export default function WorkClient() {
   const tw = useTranslations('work')
   const tc = useTranslations('categories')
   const [active, setActive] = useState<ProjectCategory>('All')

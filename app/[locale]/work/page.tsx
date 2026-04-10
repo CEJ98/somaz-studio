@@ -40,7 +40,7 @@ export default async function WorkPage(props: { params: Promise<{ locale: string
          
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
-      <WorkClient locale={locale} />
+      <WorkClient />
     </>
   )
 }

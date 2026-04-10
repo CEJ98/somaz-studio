@@ -14,12 +14,6 @@ declare global {
   }
 }
 
-export function trackEvent(eventName: string, params?: Record<string, unknown>) {
-  if (typeof window === 'undefined') return
-  window.gtag?.('event', eventName, params)
-  window.fbq?.('trackCustom', eventName, params)
-}
-
 export function trackLead(params?: Record<string, unknown>) {
   if (typeof window === 'undefined') return
   window.gtag?.('event', 'generate_lead', params)
