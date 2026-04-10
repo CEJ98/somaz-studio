@@ -10,7 +10,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { locales } from '@/i18n/config'
 
 import { ClientOnlyCursor, ClientOnlyWhatsApp, ClientOnlyAnalytics, ClientOnlyCookieConsent } from '@/components/ClientOnly'
-import MotionProvider from '@/components/MotionProvider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://somazstudio.com'),
@@ -62,8 +61,8 @@ export default async function LocaleLayout(
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <MotionProvider>
-          <a
+      <>
+          <
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent focus:text-background focus:px-4 focus:py-2 focus:font-sans focus:text-xs focus:tracking-widest focus:uppercase"
           >
@@ -94,7 +93,7 @@ export default async function LocaleLayout(
               <SpeedInsights />
             </>
           )}
-      </MotionProvider>
+      </>
     </NextIntlClientProvider>
   )
 }
