@@ -15,7 +15,8 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   }
 }
 
-export default function AboutPage() {
+export default async function AboutPage(props: { params: Promise<{ locale: string }> }) {
+  const { locale } = await props.params
   const jsonLd = JSON.stringify([
     {
       '@context': 'https://schema.org',
@@ -37,8 +38,8 @@ export default function AboutPage() {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://somazstudio.com' },
-        { '@type': 'ListItem', position: 2, name: 'About', item: 'https://somazstudio.com/about' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `https://somazstudio.com/${locale}` },
+        { '@type': 'ListItem', position: 2, name: 'About', item: `https://somazstudio.com/${locale}/about` },
       ],
     },
   ])
