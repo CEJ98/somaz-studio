@@ -98,6 +98,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                     href="https://wa.me/17865377682"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Chat via WhatsApp at +1 786 537-7682"
                     className="font-serif text-xl text-foreground/80 hover:text-accent transition-colors duration-300"
                   >
                     +1 (786) 537-7682

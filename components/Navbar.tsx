@@ -141,16 +141,19 @@ export default function Navbar() {
           aria-expanded={menuOpen}
         >
           <span
+            aria-hidden="true"
             className={`block h-px w-6 bg-foreground transition-all duration-300 ${
               menuOpen ? 'rotate-45 translate-y-2.5' : ''
             }`}
           />
           <span
+            aria-hidden="true"
             className={`block h-px w-6 bg-foreground transition-all duration-300 ${
               menuOpen ? 'opacity-0' : ''
             }`}
           />
           <span
+            aria-hidden="true"
             className={`block h-px w-6 bg-foreground transition-all duration-300 ${
               menuOpen ? '-rotate-45 -translate-y-2.5' : ''
             }`}
@@ -190,6 +193,7 @@ export default function Navbar() {
           >
             <button
               onClick={toggleLocale}
+              aria-label={locale === 'en' ? 'Switch language to Español' : 'Switch language to English'}
               className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/65 hover:text-accent transition-colors duration-300"
             >
               {locale === 'en' ? 'ES' : 'EN'}
