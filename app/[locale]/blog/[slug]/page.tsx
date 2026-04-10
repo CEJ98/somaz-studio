@@ -17,8 +17,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-  const { locale, slug } = params
+  const { locale, slug } = await props.params
   const post = posts.find((p) => p.slug === slug)
   if (!post) return {}
   const ogImage = `https://somazstudio.com${post.coverImage}`
@@ -43,8 +42,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage(props: Props) {
-  const params = await props.params;
-  const { locale, slug } = params
+  const { locale, slug } = await props.params
   const post = posts.find((p) => p.slug === slug)
   if (!post) notFound()
   const tb = await getTranslations({ locale, namespace: 'blog' })
@@ -66,7 +64,13 @@ export default async function BlogPostPage(props: Props) {
       image: `https://somazstudio.com${post.coverImage}`,
       articleSection: post.category,
       wordCount: localizedContent.split(' ').length,
-      author: { '@type': 'Organization', name: 'Somaz Studio', url: 'https://somazstudio.com' },
+      author: {
+        '@type': 'Person',
+        name: 'Sofía Mazzucco',
+        url: 'https://somazstudio.com/en/about',
+        jobTitle: 'Architect & Interior Designer',
+        worksFor: { '@type': 'Organization', name: 'Somaz Studio', url: 'https://somazstudio.com' },
+      },
       publisher: { '@type': 'Organization', name: 'Somaz Studio', url: 'https://somazstudio.com', logo: { '@type': 'ImageObject', url: 'https://somazstudio.com/logos/logo-smz.png' } },
     },
     {
