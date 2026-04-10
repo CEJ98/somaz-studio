@@ -108,7 +108,9 @@ export default function ContactForm() {
   const router = useRouter()
   const tf = useTranslations('form')
   const searchParams = useSearchParams()
-  const preselectedType = searchParams.get('type') === 'consult' ? 'consulting' : ''
+  const VALID_TYPES = ['3d-visualization', 'interior-design', 'conceptual-design', 'consulting', 'full-studio-partnership', 'other']
+  const rawType = searchParams.get('type') ?? ''
+  const preselectedType = VALID_TYPES.includes(rawType) ? rawType : (rawType === 'consult' ? 'consulting' : '')
   const [status, setStatus] = useState<Status>('idle')
   const [msgLen, setMsgLen] = useState(0)
   const [emailError, setEmailError] = useState('')

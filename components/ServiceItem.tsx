@@ -11,6 +11,13 @@ import { ease } from '@/lib/motion'
 import Image from 'next/image'
 import PricingTable from '@/components/PricingTable'
 
+const slugToProjectType: Record<string, string> = {
+  '3d-visualization': '3d-visualization',
+  'interior-design': 'interior-design',
+  'conceptual-design': 'conceptual-design',
+  'design-consulting': 'consulting',
+}
+
 const serviceImages: Record<string, string> = {
   '3d-visualization': '/services/3d-visualization.jpg',
   'interior-design': '/services/interior-design.jpg',
@@ -95,7 +102,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
           </p>
 
           <Link
-            href="/contact"
+            href={`/contact?type=${slugToProjectType[service.slug] ?? 'other'}`}
             className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/60 hover:text-accent border-b border-foreground/30 pb-0.5 hover:border-accent transition-all duration-300"
           >
             {ts('startProject')}
