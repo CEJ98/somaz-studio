@@ -142,6 +142,12 @@ export default function BeforeAfterSlider({
           {/* Drag handle */}
           <div
             className="absolute z-30 top-1/2 flex items-center justify-center"
+            role="slider"
+            tabIndex={0}
+            aria-label="Slide to compare before and after"
+            aria-valuenow={Math.round(position)}
+            aria-valuemin={5}
+            aria-valuemax={95}
             style={{
               left: `${position}%`,
               transform: 'translate(-50%, -50%)',
@@ -156,6 +162,10 @@ export default function BeforeAfterSlider({
             }}
             onMouseDown={onMouseDown}
             onTouchStart={onTouchStart}
+            onKeyDown={(e) => {
+              if (e.key === 'ArrowRight') setPosition((p) => Math.min(95, p + 5))
+              if (e.key === 'ArrowLeft') setPosition((p) => Math.max(5, p - 5))
+            }}
           >
             <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
               <path d="M5 1L1 5L5 9" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
