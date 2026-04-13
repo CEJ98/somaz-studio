@@ -1,23 +1,6 @@
 'use client'
 
-function useIsSpanish() {
-  if (typeof window === 'undefined') return false
-  const path = window.location.pathname
-  return path.startsWith('/es') || (!path.startsWith('/en') && !!navigator.language?.startsWith('es'))
-}
-
-const copy = {
-  en: {
-    heading: 'Something went wrong.',
-    body: 'An unexpected error occurred. Try again or write to us at hola@somazstudio.com.',
-    button: 'Try again',
-  },
-  es: {
-    heading: 'Algo salió mal.',
-    body: 'Ocurrió un error inesperado. Intenta de nuevo o escríbenos a hola@somazstudio.com.',
-    button: 'Reintentar',
-  },
-}
+import { useEffect, useState } from 'react'
 
 export default function Error({
   reset,
@@ -25,8 +8,26 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
-  const isEs = useIsSpanish()
-  const t = isEs ? copy.es : copy.en
+  const [isEs, setIsEs] = useState(false)
+
+  useEffect(() => {
+    const path = window.location.pathname
+    setIsEs(path.startsWith('/es') || (!path.startsWith('/en') && !!navigator.language?.startsWith('es')))
+  }, [])
+
+  const t = isEs
+    ? {
+        heading: 'Algo salió mal.',
+        body: 'Ocurrió un error inesperado. Intenta de nuevo o escríbenos a hola@somazstudio.com.',
+        button: 'Reintentar',
+        home: 'Volver al inicio',
+      }
+    : {
+        heading: 'Something went wrong.',
+        body: 'An unexpected error occurred. Try again or write to us at hola@somazstudio.com.',
+        button: 'Try again',
+        home: 'Back to home',
+      }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
@@ -37,15 +38,23 @@ export default function Error({
       >
         {t.heading}
       </h1>
-      <p className="font-sans font-light text-foreground/40 mb-10 max-w-md">
+      <p className="font-sans font-light text-foreground/50 mb-10 max-w-md">
         {t.body}
       </p>
-      <button
-        onClick={reset}
-        className="inline-flex items-center gap-3 border border-foreground/25 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300"
-      >
-        {t.button}
-      </button>
+      <div className="flex flex-col items-center gap-4">
+        <button
+          onClick={reset}
+          className="inline-flex items-center gap-3 border border-foreground/25 text-foreground px-8 py-4 font-sans text-sm tracking-widest uppercase hover:border-accent hover:text-accent transition-all duration-300"
+        >
+          {t.button}
+        </button>
+        <a
+          href="/"
+          className="font-sans text-xs tracking-widest uppercase text-foreground/50 hover:text-accent transition-colors duration-300"
+        >
+          {t.home}
+        </a>
+      </div>
     </div>
   )
 }

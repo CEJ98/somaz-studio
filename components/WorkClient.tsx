@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
@@ -21,6 +21,7 @@ export default function WorkClient() {
   const tc = useTranslations('categories')
   const [active, setActive] = useState<ProjectCategory>('All')
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null)
+  const reduced = useReducedMotion()
 
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
 
@@ -42,7 +43,7 @@ export default function WorkClient() {
         <div className="relative z-10 w-full px-6 md:px-10 pb-16">
           <div className="max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={reduced ? false : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease }}
             >
@@ -71,7 +72,7 @@ export default function WorkClient() {
 
         {/* Filters */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduced ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease }}
           className="flex flex-wrap gap-2 mb-4"
@@ -81,7 +82,7 @@ export default function WorkClient() {
               key={cat}
               onClick={() => setActive(cat)}
               aria-pressed={active === cat}
-              className={`font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-2 border transition-all duration-300 ${
+              className={`font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-3 border transition-all duration-300 ${
                 active === cat
                   ? 'border-accent text-accent'
                   : 'border-border/50 text-foreground/55 hover:border-foreground/30 hover:text-foreground/80'
@@ -98,7 +99,7 @@ export default function WorkClient() {
         {/* Project counter */}
         <motion.p
           key={filtered.length}
-          initial={{ opacity: 0, y: -8 }}
+          initial={reduced ? false : { opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease }}
           className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 mb-10"
@@ -113,10 +114,10 @@ export default function WorkClient() {
               <motion.div
                 key={project.slug}
                 layout
-                initial={{ opacity: 0, scale: 0.96 }}
+                initial={reduced ? false : { opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.45, delay: i * 0.05, ease }}
+                exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.45, delay: reduced ? 0 : i * 0.05, ease }}
                 className={`${sizeToSpan[project.size] || 'md:col-span-4'} transition-opacity duration-500 ${
                   hoveredSlug && hoveredSlug !== project.slug ? 'opacity-30' : 'opacity-100'
                 }`}

@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import type { Service } from '@/data/services'
@@ -63,13 +63,14 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
   const ts = useTranslations('services')
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+  const reduced = useReducedMotion()
 
   return (
     <motion.div
       id={service.slug}
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      initial={reduced ? false : { opacity: 0, y: 40 }}
+      animate={inView || reduced ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.9, ease }}
       className="border-t border-border/40 pt-14 pb-20 group relative overflow-hidden"
     >

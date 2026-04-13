@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
-import { motion, useScroll } from 'framer-motion'
+import { motion, useScroll, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { useLocale } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
@@ -18,6 +18,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { scrollYProgress } = useScroll()
   const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const reduced = useReducedMotion()
 
   const links = [
     { href: '/work', label: t('work') },
@@ -172,9 +173,9 @@ export default function Navbar() {
           {links.map(({ href, label }, i) => (
             <motion.li
               key={href}
-              initial={{ opacity: 0, x: -16 }}
-              animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-              transition={{ duration: 0.3, delay: i * 0.06, ease: ease }}
+              initial={reduced ? false : { opacity: 0, x: -16 }}
+              animate={menuOpen ? { opacity: 1, x: 0 } : (reduced ? {} : { opacity: 0, x: -16 })}
+              transition={{ duration: 0.3, delay: reduced ? 0 : i * 0.06, ease: ease }}
             >
               <Link
                 href={href}
@@ -187,9 +188,9 @@ export default function Navbar() {
             </motion.li>
           ))}
           <motion.li
-            initial={{ opacity: 0, x: -16 }}
-            animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-            transition={{ duration: 0.3, delay: links.length * 0.06, ease: ease }}
+            initial={reduced ? false : { opacity: 0, x: -16 }}
+            animate={menuOpen ? { opacity: 1, x: 0 } : (reduced ? {} : { opacity: 0, x: -16 })}
+            transition={{ duration: 0.3, delay: reduced ? 0 : links.length * 0.06, ease: ease }}
           >
             <button
               onClick={toggleLocale}
@@ -200,9 +201,9 @@ export default function Navbar() {
             </button>
           </motion.li>
           <motion.li
-            initial={{ opacity: 0, x: -16 }}
-            animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-            transition={{ duration: 0.3, delay: (links.length + 1) * 0.06, ease: ease }}
+            initial={reduced ? false : { opacity: 0, x: -16 }}
+            animate={menuOpen ? { opacity: 1, x: 0 } : (reduced ? {} : { opacity: 0, x: -16 })}
+            transition={{ duration: 0.3, delay: reduced ? 0 : (links.length + 1) * 0.06, ease: ease }}
           >
             <Link
               href="/contact"

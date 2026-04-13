@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
@@ -18,6 +18,7 @@ export default function Footer() {
   const [isLoading, setIsLoading] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
+  const reduced = useReducedMotion()
 
   const navLinks = [
     { href: '/work', label: tn('work') },
@@ -73,8 +74,8 @@ export default function Footer() {
           {/* Col 1 — Brand */}
           <motion.div
             className="md:col-span-1"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            initial={reduced ? false : { opacity: 0, y: 30 }}
+            animate={inView || reduced ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0, ease }}
           >
             <Image
@@ -99,8 +100,8 @@ export default function Footer() {
 
           {/* Col 2 — Navigate */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            initial={reduced ? false : { opacity: 0, y: 30 }}
+            animate={inView || reduced ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease }}
           >
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
@@ -123,8 +124,8 @@ export default function Footer() {
 
           {/* Col 3 — Services */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            initial={reduced ? false : { opacity: 0, y: 30 }}
+            animate={inView || reduced ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease }}
           >
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
@@ -147,8 +148,8 @@ export default function Footer() {
 
           {/* Col 4 — Newsletter */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            initial={reduced ? false : { opacity: 0, y: 30 }}
+            animate={inView || reduced ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3, ease }}
           >
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
@@ -168,6 +169,7 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={tf('emailPlaceholder')}
+                  aria-label={tf('emailPlaceholder')}
                   required
                   className="w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-2 focus:outline-none focus:border-accent transition-colors duration-300"
                 />
@@ -196,8 +198,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
+          initial={reduced ? false : { opacity: 0 }}
+          animate={inView || reduced ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.5, ease }}
         >
           <div className="architectural-line mt-16 mb-8" />

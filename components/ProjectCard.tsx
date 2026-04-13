@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import type { Project } from '@/data/projects'
 import { ease } from '@/lib/motion'
@@ -19,6 +19,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef(null)
   const inView = useInView(cardRef, { once: true, margin: '-80px' })
+  const reduced = useReducedMotion()
 
   return (
     <Link
@@ -31,7 +32,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
         {/* Curtain reveal */}
         <motion.div
           className="absolute inset-0 bg-surface z-10 origin-top pointer-events-none"
-          initial={{ scaleY: 1 }}
+          initial={{ scaleY: reduced ? 0 : 1 }}
           animate={inView ? { scaleY: 0 } : {}}
           transition={{ duration: 1.1, ease }}
           aria-hidden="true"

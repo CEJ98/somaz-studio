@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import type { Post } from '@/data/posts'
 import { t as tl } from '@/lib/locale'
@@ -15,12 +15,13 @@ interface Props {
 
 export default function BlogClient({ posts, locale }: Props) {
   const tb = useTranslations('blog')
+  const reduced = useReducedMotion()
   return (
     <div className="min-h-screen pt-32 pb-28 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={reduced ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease }}
           className="mb-20"
@@ -45,10 +46,10 @@ export default function BlogClient({ posts, locale }: Props) {
               <motion.article
                 key={post.slug}
                 className={isFirst ? 'md:col-span-12' : 'md:col-span-6'}
-                initial={{ opacity: 0, y: 30 }}
+                initial={reduced ? false : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.8, delay: i * 0.08, ease }}
+                transition={{ duration: 0.8, delay: reduced ? 0 : i * 0.08, ease }}
               >
                 <Link href={`/blog/${post.slug}`} className="group block">
                   <div className={`relative overflow-hidden mb-6 ${isFirst ? 'aspect-[16/6]' : 'aspect-[4/3]'}`}>

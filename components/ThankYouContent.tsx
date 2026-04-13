@@ -1,13 +1,14 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
 
 export default function ThankYouContent() {
   const t = useTranslations('thankyou')
+  const reduced = useReducedMotion()
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
       {/* Ghost background */}
@@ -23,7 +24,7 @@ export default function ThankYouContent() {
       <div className="relative z-10">
         <motion.p
           className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-6"
-          initial={{ opacity: 0, y: -10 }}
+          initial={reduced ? false : { opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease }}
         >
@@ -33,9 +34,9 @@ export default function ThankYouContent() {
         <motion.h1
           className="font-serif font-light text-foreground mb-6 leading-[0.9]"
           style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
-          initial={{ opacity: 0, y: 30 }}
+          initial={reduced ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.1, ease }}
+          transition={{ duration: 0.9, delay: reduced ? 0 : 0.1, ease }}
         >
           <span className="block italic text-foreground/60">{t('headline1')}</span>
           <span className="block font-semibold">{t('headline2')}</span>
@@ -43,26 +44,26 @@ export default function ThankYouContent() {
 
         <motion.div
           className="architectural-line max-w-xs mx-auto mb-8"
-          initial={{ opacity: 0, scaleX: 0 }}
+          initial={reduced ? false : { opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.3, ease }}
+          transition={{ duration: 0.8, delay: reduced ? 0 : 0.3, ease }}
           style={{ transformOrigin: 'left' }}
         />
 
         <motion.p
           className="font-sans font-light text-foreground/70 mb-3 max-w-md leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduced ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease }}
+          transition={{ duration: 0.7, delay: reduced ? 0 : 0.4, ease }}
         >
           {t('body')}
         </motion.p>
 
         <motion.p
           className="font-sans text-sm text-foreground/55 mb-12"
-          initial={{ opacity: 0 }}
+          initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.5, ease }}
+          transition={{ duration: 0.7, delay: reduced ? 0 : 0.5, ease }}
         >
           {t('orReachUs')}{' '}
           <a href="mailto:hola@somazstudio.com" className="text-accent hover:text-foreground transition-colors duration-300">
@@ -72,9 +73,9 @@ export default function ThankYouContent() {
 
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduced ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6, ease }}
+          transition={{ duration: 0.7, delay: reduced ? 0 : 0.6, ease }}
         >
           <Link
             href="/work"
@@ -97,9 +98,9 @@ export default function ThankYouContent() {
         {/* Next steps timeline */}
         <motion.div
           className="mt-16 max-w-sm mx-auto w-full"
-          initial={{ opacity: 0, y: 20 }}
+          initial={reduced ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.8, ease }}
+          transition={{ duration: 0.7, delay: reduced ? 0 : 0.8, ease }}
         >
           <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-8 text-center">
             {t('stepsHeading')}

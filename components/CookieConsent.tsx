@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 
 const CONSENT_KEY = 'somaz_cookie_consent'
 
@@ -14,6 +14,7 @@ function hasConsent(): boolean {
 export default function CookieConsent() {
   const t = useTranslations('cookie')
   const [visible, setVisible] = useState(false)
+  const reduced = useReducedMotion()
 
   useEffect(() => {
     if (!hasConsent()) {
@@ -36,9 +37,9 @@ export default function CookieConsent() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 24 }}
+          exit={reduced ? { opacity: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="fixed bottom-6 left-6 right-6 md:left-auto md:right-8 md:max-w-sm z-[90] bg-surface border border-border/60 px-6 py-5 backdrop-blur-sm"
           role="dialog"

@@ -231,7 +231,6 @@ export default function HomePageClient({ locale }: { locale: string }) {
                     alt={selectedProjects[0].title}
                     fill
                     className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
-                    priority
                     sizes="(max-width: 768px) 100vw, 58vw"
                   />
                   <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />

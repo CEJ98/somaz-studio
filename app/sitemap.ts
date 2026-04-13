@@ -3,7 +3,7 @@ import { projects } from '@/data/projects'
 import { posts } from '@/data/posts'
 import { locales } from '@/i18n/config'
 
-const SITE_LAST_UPDATED = new Date('2025-04-01')
+const SITE_LAST_UPDATED = new Date('2026-04-13')
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://somazstudio.com'

@@ -33,6 +33,11 @@ export const metadata: Metadata = {
     description: 'Miami-based design studio. 3D visualization · Interior design · Spatial concepts.',
   },
   robots: { index: true, follow: true },
+  alternates: {
+    types: {
+      'application/rss+xml': 'https://somazstudio.com/feed.xml',
+    },
+  },
 }
 
 export const viewport: Viewport = {

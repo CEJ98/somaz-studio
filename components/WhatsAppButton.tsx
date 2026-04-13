@@ -1,10 +1,11 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { usePathname } from '@/i18n/navigation'
 
 export default function WhatsAppButton() {
   const pathname = usePathname()
+  const reduced = useReducedMotion()
   if (pathname === '/contact') return null
 
   return (
@@ -14,10 +15,10 @@ export default function WhatsAppButton() {
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
       className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full border border-accent/30 bg-surface/80 backdrop-blur flex items-center justify-center hover:border-accent transition-colors duration-300 group"
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={reduced ? false : { opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ scale: 1.08 }}
+      transition={{ duration: 0.5, delay: reduced ? 0 : 1.5, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={reduced ? undefined : { scale: 1.08 }}
     >
       <svg
         viewBox="0 0 24 24"

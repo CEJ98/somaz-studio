@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from '@/i18n/navigation'
 import { useSearchParams } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { toast } from 'sonner'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
@@ -63,12 +63,14 @@ function FloatingInput({
   label,
   type = 'text',
   required,
+  maxLength,
 }: {
   id: string
   name: string
   label: string
   type?: string
   required?: boolean
+  maxLength?: number
 }) {
   const [focused, setFocused] = useState(false)
   const [hasValue, setHasValue] = useState(false)
@@ -89,6 +91,7 @@ function FloatingInput({
         name={name}
         type={type}
         required={required}
+        maxLength={maxLength}
         aria-label={label}
         onFocus={() => setFocused(true)}
         onBlur={(e) => {
@@ -114,6 +117,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle')
   const [msgLen, setMsgLen] = useState(0)
   const [emailError, setEmailError] = useState('')
+  const reduced = useReducedMotion()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -203,8 +207,8 @@ export default function ContactForm() {
 
         {/* Row 2: Phone + Project Size */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FloatingInput id="phone" name="phone" label={tf('phone')} type="tel" />
-          <FloatingInput id="sqft" name="sqft" label={tf('sqft')} />
+          <FloatingInput id="phone" name="phone" label={tf('phone')} type="tel" maxLength={30} />
+          <FloatingInput id="sqft" name="sqft" label={tf('sqft')} maxLength={20} />
         </div>
 
         {/* Row 3: Project Type + Budget */}
@@ -253,12 +257,16 @@ export default function ContactForm() {
             {status === 'loading' ? (
               <span className="flex gap-1">
                 {[0, 1, 2].map((i) => (
-                  <motion.span
-                    key={i}
-                    className="w-1 h-1 rounded-full bg-background inline-block"
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-                  />
+                  reduced ? (
+                    <span key={i} className="w-1 h-1 rounded-full bg-background inline-block opacity-60" />
+                  ) : (
+                    <motion.span
+                      key={i}
+                      className="w-1 h-1 rounded-full bg-background inline-block"
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                    />
+                  )
                 ))}
               </span>
             ) : (
@@ -267,6 +275,7 @@ export default function ContactForm() {
                 <Icon name="north_east" size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
               </>
             )}
+
           </button>
           <p className="font-sans text-[10px] text-foreground/55 tracking-wide">
             {tf('trustCopy')}

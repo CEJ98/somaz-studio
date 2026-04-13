@@ -31,6 +31,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!EMAIL_RE.test(email)) {
+      return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
+    }
+    if (message.length > 2000) {
+      return NextResponse.json({ error: 'Message too long' }, { status: 400 })
+    }
+    if (phone && String(phone).length > 30) {
+      return NextResponse.json({ error: 'Phone too long' }, { status: 400 })
+    }
+
     // Send notification email — non-blocking
     try {
       const resend = getResend()
