@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
+import { useRef, useEffect } from 'react'
+import { useReducedMotion } from 'framer-motion'
 
 interface Props {
   children: React.ReactNode
@@ -11,46 +11,35 @@ interface Props {
 
 export default function MagneticButton({ children, strength = 0.4, className }: Props) {
   const ref = useRef<HTMLDivElement>(null)
-  const [isPointerFine, setIsPointerFine] = useState(false)
   const reduced = useReducedMotion()
 
   useEffect(() => {
-    setIsPointerFine(window.matchMedia('(pointer: fine)').matches)
-  }, [])
-
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const springX = useSpring(x, { stiffness: 300, damping: 20 })
-  const springY = useSpring(y, { stiffness: 300, damping: 20 })
-
-  if (!isPointerFine || reduced) {
-    return <div className={className}>{children}</div>
-  }
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const el = ref.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    x.set((e.clientX - centerX) * strength)
-    y.set((e.clientY - centerY) * strength)
-  }
+    if (!el || reduced || !window.matchMedia('(pointer: fine)').matches) return
 
-  function handleMouseLeave() {
-    x.set(0)
-    y.set(0)
-  }
+    function handleMouseMove(e: MouseEvent) {
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const dx = (e.clientX - (rect.left + rect.width / 2)) * strength
+      const dy = (e.clientY - (rect.top + rect.height / 2)) * strength
+      el.style.transform = `translate(${dx}px, ${dy}px)`
+    }
+
+    function handleMouseLeave() {
+      if (el) el.style.transform = ''
+    }
+
+    el.addEventListener('mousemove', handleMouseMove)
+    el.addEventListener('mouseleave', handleMouseLeave)
+    return () => {
+      el.removeEventListener('mousemove', handleMouseMove)
+      el.removeEventListener('mouseleave', handleMouseLeave)
+    }
+  }, [strength, reduced])
 
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      style={{ x: springX, y: springY }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div ref={ref} className={className} style={{ transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)' }}>
       {children}
-    </motion.div>
+    </div>
   )
 }

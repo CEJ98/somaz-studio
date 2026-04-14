@@ -42,3 +42,6 @@ firebase-debug.log
 supabase/.temp/
 public/hero-reel.mp4
 test-results/
+
+# git worktrees
+.worktrees/
