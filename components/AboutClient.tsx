@@ -225,7 +225,7 @@ export default function AboutClient() {
             </h2>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+              className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
             >
               {t('getInTouch')}
               <Icon name="north_east" size={14} />
