@@ -8,6 +8,7 @@ import { Link } from '@/i18n/navigation'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
 import { buildAlternates, metadataBase } from '@/lib/seo'
+import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -137,6 +138,16 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
               ))}
             </div>
           </div>
+
+          {/* Before/After Slider */}
+          <BeforeAfterSlider
+            beforeSrc="/services/before-slider.jpg"
+            afterSrc="/services/after-slider.jpg"
+            beforeLabel={locale === 'es' ? 'Plano técnico' : 'Blueprint'}
+            afterLabel={locale === 'es' ? 'Render final' : 'Final render'}
+            caption={locale === 'es' ? 'De la documentación técnica al render fotorrealista — el mismo proyecto, dos mundos.' : 'From technical documentation to photorealistic render — same project, two worlds.'}
+            locale={locale}
+          />
 
           {/* FAQ Section */}
           <div className="mt-0 pt-16 border-t border-border/40">
