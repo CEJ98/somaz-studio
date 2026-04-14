@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, type HTMLMotionProps, type Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
 import { ease } from '@/lib/motion'

@@ -10,23 +10,7 @@ import { ease } from '@/lib/motion'
 import { team } from '@/data/team'
 import { t as tl } from '@/lib/locale'
 import { useLocale } from 'next-intl'
-
-function FadeUp({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  const reduced = useReducedMotion()
-  return (
-    <motion.div
-      ref={ref}
-      initial={reduced ? false : { opacity: 0, y: 35 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={reduced ? { duration: 0 } : { duration: 0.9, delay, ease }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  )
-}
+import FadeUp from '@/components/FadeUp'
 
 function CounterStat({ value, suffix = '', label }: { value: string; suffix?: string; label: string }) {
   const ref = useRef(null)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 
 interface Props {
@@ -11,10 +11,12 @@ interface Props {
 
 export default function MagneticButton({ children, strength = 0.4, className }: Props) {
   const ref = useRef<HTMLDivElement>(null)
-  const [isPointerFine] = useState(() =>
-    typeof window !== 'undefined' ? window.matchMedia('(pointer: fine)').matches : false
-  )
+  const [isPointerFine, setIsPointerFine] = useState(false)
   const reduced = useReducedMotion()
+
+  useEffect(() => {
+    setIsPointerFine(window.matchMedia('(pointer: fine)').matches)
+  }, [])
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)

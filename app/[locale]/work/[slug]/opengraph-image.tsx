@@ -2,7 +2,6 @@ import { ImageResponse } from 'next/og'
 import { projects } from '@/data/projects'
 import { t } from '@/lib/locale'
 
-export const runtime = 'edge'
 export const alt = 'Somaz Studio'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'

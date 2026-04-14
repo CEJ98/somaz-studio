@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from 'framer-motion'
-import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
