@@ -104,6 +104,7 @@ export default function BeforeAfterSlider({
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 80vw"
+              quality={75}
               draggable={false}
             />
           </div>
@@ -120,6 +121,7 @@ export default function BeforeAfterSlider({
               className="object-cover"
               style={{ filter: 'grayscale(100%) contrast(1.05) brightness(0.6)' }}
               sizes="(max-width: 768px) 100vw, 80vw"
+              quality={75}
               draggable={false}
             />
             {/* Architectural grid overlay */}
