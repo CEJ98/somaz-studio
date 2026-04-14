@@ -76,8 +76,23 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <PageFade className="min-h-screen pb-24">
-        <section className="min-h-[45vh] flex items-end">
-          <div className="w-full px-6 md:px-10 pt-28 md:pt-32 pb-16">
+        <section className="relative min-h-[45vh] flex items-end overflow-hidden">
+          {/* Video background */}
+          <div className="absolute inset-0">
+            <video
+              src="/media/contact-hero.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="w-full h-full object-cover opacity-40"
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
+          </div>
+
+          <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-16">
             <div className="max-w-7xl mx-auto">
               <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{t('getInTouch')}</p>
               <h1 className="font-serif font-light leading-[0.9]" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>
