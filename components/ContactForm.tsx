@@ -146,7 +146,6 @@ export default function ContactForm() {
       if (res.ok) {
         trackLead({
           project_type: payload.project_type,
-          budget: payload.budget,
           ...utms,
         })
         router.push('/contact/thank-you')
@@ -205,39 +204,23 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Row 2: Phone + Project Size */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FloatingInput id="phone" name="phone" label={tf('phone')} type="tel" maxLength={30} />
-          <FloatingInput id="sqft" name="sqft" label={tf('sqft')} maxLength={20} />
-        </div>
+        {/* Row 2: Project Type */}
+        <FloatingSelect id="project_type" name="project_type" label={tf('projectType')} required defaultValue={preselectedType}>
+          <option value="3d-visualization">{tf('opt3dViz')}</option>
+          <option value="interior-design">{tf('optInterior')}</option>
+          <option value="conceptual-design">{tf('optConceptual')}</option>
+          <option value="consulting">{tf('optConsulting')}</option>
+          <option value="full-studio-partnership">{tf('optPartnership')}</option>
+          <option value="other">{tf('optOther')}</option>
+        </FloatingSelect>
 
-        {/* Row 3: Project Type + Budget */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FloatingSelect id="project_type" name="project_type" label={tf('projectType')} required defaultValue={preselectedType}>
-            <option value="3d-visualization">{tf('opt3dViz')}</option>
-            <option value="interior-design">{tf('optInterior')}</option>
-            <option value="conceptual-design">{tf('optConceptual')}</option>
-            <option value="consulting">{tf('optConsulting')}</option>
-            <option value="full-studio-partnership">{tf('optPartnership')}</option>
-            <option value="other">{tf('optOther')}</option>
-          </FloatingSelect>
-          <FloatingSelect id="budget" name="budget" label={tf('budgetRange')} required>
-            <option value="under-5k">{tf('budgetUnder5k')}</option>
-            <option value="5k-15k">{tf('budget5to15k')}</option>
-            <option value="15k-50k">{tf('budget15to50k')}</option>
-            <option value="50k-plus">{tf('budget50kplus')}</option>
-            <option value="not-sure">{tf('budgetNotSure')}</option>
-          </FloatingSelect>
-        </div>
-
-        {/* Row 4: Message */}
+        {/* Row 3: Message (opcional) */}
         <div>
           <label htmlFor="message" className={labelClass}>{tf('message')}</label>
           <textarea
             id="message"
             name="message"
-            rows={5}
-            required
+            rows={4}
             maxLength={2000}
             placeholder={tf('messagePlaceholder')}
             className={`${inputClass} resize-none`}

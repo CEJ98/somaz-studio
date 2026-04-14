@@ -191,6 +191,23 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
               <Suspense fallback={null}>
                 <ContactForm />
               </Suspense>
+
+              {/* WhatsApp inline */}
+              <div className="mt-16 pt-12 border-t border-border/30 text-center">
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-6">
+                  {t('orViaWhatsApp')}
+                </p>
+                <a
+                  href="https://wa.me/17865377682"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+                  aria-label="Chat via WhatsApp"
+                >
+                  {t('writeOnWhatsApp')}
+                  <Icon name="chat" size={14} />
+                </a>
+              </div>
             </div>
           </div>
         </div>

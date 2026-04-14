@@ -189,7 +189,9 @@
     "stat1": "Projects",
     "stat2": "Countries",
     "stat3": "Response",
-    "responseNote": "We respond within 24 hours with a personalized proposal."
+    "responseNote": "We respond within 24 hours with a personalized proposal.",
+    "orViaWhatsApp": "Or reach us on WhatsApp",
+    "writeOnWhatsApp": "Write on WhatsApp"
   },
   "form": {
     "marquee": "CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003CONSULT\u2003—\u2003COLLABORATE\u2003—\u2003CREATE\u2003—\u2003",
