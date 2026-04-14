@@ -7,7 +7,6 @@ import { useRef, useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { projects } from '@/data/projects'
 import { services } from '@/data/services'
-import { testimonials } from '@/data/testimonials'
 import { posts } from '@/data/posts'
 import { Icon } from '@/components/icons'
 import { t as tl } from '@/lib/locale'
@@ -17,6 +16,7 @@ import MagneticButton from '@/components/MagneticButton'
 import MarqueeStrip from '@/components/MarqueeStrip'
 import FAQSection from '@/components/FAQSection'
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
+import TestimonialsSection from '@/components/TestimonialsSection'
 
 
 function AnimatedSection({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -470,53 +470,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="mb-16">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('testimonials')}</p>
-            <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
-              {t('whatClientsSay')}
-            </h2>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30">
-            {testimonials.map((testimonial, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.8, delay: i * 0.1, ease }}
-                className="relative bg-background px-8 pt-14 pb-10 flex flex-col justify-between overflow-hidden"
-              >
-                <span
-                  className="absolute top-4 left-6 font-serif text-accent/10 select-none pointer-events-none"
-                  style={{ fontSize: '80px', lineHeight: 1 }}
-                  aria-hidden="true"
-                >
-                  &ldquo;
-                </span>
-                <p className="relative font-serif text-foreground/80 text-lg leading-relaxed italic mb-10">
-                  &ldquo;{tl(testimonial.quote, locale)}&rdquo;
-                </p>
-                <div className="border-t border-border/40 pt-6">
-                  <p className="font-sans text-sm text-foreground font-medium">{testimonial.name}</p>
-                  <p className="font-sans text-[11px] text-foreground/60 tracking-wide mt-1">{tl(testimonial.role, locale)} — {testimonial.location}</p>
-                  {testimonial.projectSlug && (
-                    <Link
-                      href={`/work/${testimonial.projectSlug}`}
-                      className="inline-flex items-center gap-1.5 mt-3 font-sans text-[10px] tracking-[0.2em] uppercase text-accent/80 hover:text-accent transition-colors duration-300"
-                    >
-                      {t('viewProject')}
-                      <Icon name="north_east" size={10} />
-                    </Link>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection />
 
       {/* BEFORE / AFTER */}
       <BeforeAfterSlider
