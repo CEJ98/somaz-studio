@@ -71,7 +71,7 @@ export default function BlogClient({ posts, locale }: Props) {
                     </p>
                     <span className="w-px h-3 bg-border/60" aria-hidden="true" />
                     <p className="font-sans text-[10px] tracking-[0.15em] text-foreground/65">
-                      {Math.ceil(post.content[locale as 'en' | 'es'].split(/\s+/).length / 200)}{locale === 'es' ? ' min' : ' min'}
+                      {Math.ceil(post.content[locale === 'es' ? 'es' : 'en'].split(/\s+/).length / 200)} min
                     </p>
                   </div>
                   <h2 className={`font-serif text-foreground/85 group-hover:text-foreground transition-colors duration-300 mb-3 leading-tight ${isFirst ? 'font-light text-3xl md:text-4xl' : 'font-light text-2xl'}`}>

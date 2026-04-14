@@ -84,7 +84,7 @@ function Lightbox({
         <button
           onClick={(e) => { e.stopPropagation(); goPrev() }}
           className="absolute left-4 md:left-8 z-10 text-foreground/55 hover:text-foreground transition-colors duration-300"
-          aria-label="Previous"
+          aria-label={tp('prevImage')}
         >
           <Icon name="arrow_back" size={28} />
         </button>
@@ -95,7 +95,7 @@ function Lightbox({
         <button
           onClick={(e) => { e.stopPropagation(); goNext() }}
           className="absolute right-4 md:right-8 z-10 text-foreground/55 hover:text-foreground transition-colors duration-300"
-          aria-label="Next"
+          aria-label={tp('nextImage')}
         >
           <Icon name="arrow_forward" size={28} />
         </button>
@@ -180,7 +180,6 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
             fill
             className="object-cover cursor-zoom-in"
             priority
-            fetchPriority="high"
             sizes="100vw"
             onClick={() => setLightboxIndex(0)}
           />

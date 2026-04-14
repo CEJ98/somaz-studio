@@ -26,6 +26,10 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
   const { locale } = params
   const t = await getTranslations({ locale, namespace: 'services' })
 
+  function minPrice(service: (typeof services)[number]): string {
+    return String(parseInt(service.packages[0].price.en.replace(/[^0-9]/g, ''), 10))
+  }
+
   const jsonLd = JSON.stringify([
     {
       '@context': 'https://schema.org',
@@ -37,10 +41,10 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
         '@type': 'OfferCatalog',
         name: 'Design Services',
         itemListElement: [
-          { '@type': 'Offer', price: '350', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '350', priceCurrency: 'USD', minPrice: '350' }, itemOffered: { '@type': 'Service', name: '3D Visualization', description: 'Photorealistic architectural renders from blueprints and plans.' } },
-          { '@type': 'Offer', price: '1200', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '1200', priceCurrency: 'USD', minPrice: '1200' }, itemOffered: { '@type': 'Service', name: 'Interior Design', description: 'Full interior design from concept to material specification.' } },
-          { '@type': 'Offer', price: '800', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '800', priceCurrency: 'USD', minPrice: '800' }, itemOffered: { '@type': 'Service', name: 'Conceptual Design', description: 'Spatial concept development and design direction.' } },
-          { '@type': 'Offer', price: '120', priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '120', priceCurrency: 'USD', unitText: 'HOUR' }, itemOffered: { '@type': 'Service', name: 'Design Consulting', description: 'Expert design guidance billed hourly.' } },
+          { '@type': 'Offer', price: minPrice(services[0]), priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: minPrice(services[0]), priceCurrency: 'USD', minPrice: minPrice(services[0]) }, itemOffered: { '@type': 'Service', name: '3D Visualization', description: 'Photorealistic architectural renders from blueprints and plans.' } },
+          { '@type': 'Offer', price: minPrice(services[1]), priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: minPrice(services[1]), priceCurrency: 'USD', minPrice: minPrice(services[1]) }, itemOffered: { '@type': 'Service', name: 'Interior Design', description: 'Full interior design from concept to material specification.' } },
+          { '@type': 'Offer', price: minPrice(services[2]), priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: minPrice(services[2]), priceCurrency: 'USD', minPrice: minPrice(services[2]) }, itemOffered: { '@type': 'Service', name: 'Conceptual Design', description: 'Spatial concept development and design direction.' } },
+          { '@type': 'Offer', price: minPrice(services[3]), priceCurrency: 'USD', priceSpecification: { '@type': 'UnitPriceSpecification', price: minPrice(services[3]), priceCurrency: 'USD', unitText: 'HOUR' }, itemOffered: { '@type': 'Service', name: 'Design Consulting', description: 'Expert design guidance billed hourly.' } },
         ],
       },
     },
@@ -76,7 +80,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
       <section className="relative min-h-[40vh] flex items-end overflow-hidden">
         <Image
           src="/services/3d-visualization.jpg"
-          alt=""
+          alt="Somaz Studio — architectural visualization and interior design services"
           fill
           className="object-cover"
           priority

@@ -86,6 +86,11 @@ export default async function BlogPostPage(props: Props) {
 
   const paragraphs = localizedContent.split('\n\n').filter(Boolean)
 
+  const sortedPosts = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const currentIndex = sortedPosts.findIndex((p) => p.slug === slug)
+  const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null
+  const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
+
   return (
     <>
       {/* JSON-LD structured data — static object, no user input */}
@@ -125,9 +130,31 @@ export default async function BlogPostPage(props: Props) {
               <p key={i} className="font-sans font-light text-foreground/60 text-base leading-[1.85]">{para}</p>
             ))}
           </div>
+          {/* Prev / Next navigation */}
+          {(prevPost || nextPost) && (
+            <nav aria-label="Post navigation" className="flex justify-between gap-4 mt-16 pt-8 border-t border-border">
+              {prevPost && (
+                <Link href={`/blog/${prevPost.slug}`} className="group flex flex-col gap-1 max-w-[45%]">
+                  <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/40">← {tb('prevPost')}</span>
+                  <span className="font-sans text-sm text-foreground/70 group-hover:text-foreground transition-colors line-clamp-2">
+                    {t(prevPost.title, locale)}
+                  </span>
+                </Link>
+              )}
+              {nextPost && (
+                <Link href={`/blog/${nextPost.slug}`} className="group flex flex-col gap-1 max-w-[45%] items-end ml-auto text-right">
+                  <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/40">{tb('nextPost')} →</span>
+                  <span className="font-sans text-sm text-foreground/70 group-hover:text-foreground transition-colors line-clamp-2">
+                    {t(nextPost.title, locale)}
+                  </span>
+                </Link>
+              )}
+            </nav>
+          )}
+
           {/* CTA */}
           <div className="mt-20 mb-16 py-16 px-8 border border-border/30 text-center">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{tb('ctaButton')}</p>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{tb('ctaLabel')}</p>
             <h3
               className="font-serif font-light text-foreground leading-tight mb-8"
               style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}

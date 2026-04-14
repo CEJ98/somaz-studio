@@ -7,7 +7,8 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
-import { projects, categories, type ProjectCategory } from '@/data/projects'
+import ProjectModal from '@/components/ProjectModal'
+import { projects, categories, type Project, type ProjectCategory } from '@/data/projects'
 import { ease } from '@/lib/motion'
 
 const sizeToSpan: Record<string, string> = {
@@ -21,6 +22,7 @@ export default function WorkClient() {
   const tc = useTranslations('categories')
   const [active, setActive] = useState<ProjectCategory>('All')
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const reduced = useReducedMotion()
 
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
@@ -124,7 +126,7 @@ export default function WorkClient() {
                 onMouseEnter={() => setHoveredSlug(project.slug)}
                 onMouseLeave={() => setHoveredSlug(null)}
               >
-                <ProjectCard project={project} priority={i === 0} featured={project.featured} />
+                <ProjectCard project={project} priority={i === 0} featured={project.featured} onView={setSelectedProject} />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -159,6 +161,8 @@ export default function WorkClient() {
         </div>
       </div>
       </div>
+
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </div>
   )
 }

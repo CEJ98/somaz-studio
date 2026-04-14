@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import { Link } from '@/i18n/navigation'
 import { useState, useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
@@ -12,21 +11,29 @@ interface ProjectCardProps {
   project: Project
   priority?: boolean
   featured?: boolean
+  onView?: (project: Project) => void
 }
 
-export default function ProjectCard({ project, priority = false, featured = false }: ProjectCardProps) {
+export default function ProjectCard({ project, priority = false, featured = false, onView }: ProjectCardProps) {
   const tc = useTranslations('categories')
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef(null)
   const inView = useInView(cardRef, { once: true, margin: '-80px' })
   const reduced = useReducedMotion()
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (onView) {
+      e.preventDefault()
+      onView(project)
+    }
+  }
+
   return (
-    <Link
-      href={`/work/${project.slug}`}
-      className="group block relative overflow-hidden bg-surface"
+    <div
+      className="group block relative overflow-hidden bg-surface cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={handleClick}
     >
       <div ref={cardRef} className={`relative overflow-hidden ${featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
         {/* Curtain reveal */}
@@ -93,6 +100,6 @@ export default function ProjectCard({ project, priority = false, featured = fals
           {project.location} — {project.year}
         </p>
       </div>
-    </Link>
+    </div>
   )
 }

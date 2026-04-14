@@ -1,6 +1,9 @@
+'use client'
+
 import type { ServicePackage } from '@/data/services'
 import { t as tl } from '@/lib/locale'
 import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 
 export default function PricingTable({
   packages,
@@ -9,6 +12,7 @@ export default function PricingTable({
   packages: ServicePackage[]
   locale: string
 }) {
+  const t = useTranslations('services')
   const midIdx = Math.floor(packages.length / 2)
 
   return (
@@ -26,12 +30,15 @@ export default function PricingTable({
           >
             {featured && (
               <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-background font-sans text-[9px] tracking-[0.3em] uppercase px-3 py-1">
-                Most Popular
+                {t('mostPopular')}
               </span>
             )}
 
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-3">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-1">
               {tl(pkg.name, locale)}
+            </p>
+            <p className="font-serif text-lg text-accent font-light mb-3">
+              {tl(pkg.price, locale)}
             </p>
 
             {pkg.description && (
@@ -61,7 +68,7 @@ export default function PricingTable({
                   : 'border border-foreground/30 text-foreground/65 font-sans text-[10px] tracking-[0.25em] uppercase px-6 py-3 text-center hover:border-accent hover:text-accent transition-all duration-300'
               }
             >
-              {locale === 'es' ? 'Comenzar' : 'Get Started'}
+              {t('getStarted')}
             </Link>
           </div>
         )

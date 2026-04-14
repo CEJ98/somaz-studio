@@ -27,7 +27,7 @@ const serviceImages: Record<string, string> = {
 
 const serviceIcons: Record<string, React.ReactNode> = {
   '3d-visualization': (
-    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgba(201,169,110,0.6)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-accent/60" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="10,2 18,6 18,14 10,18 2,14 2,6" />
       <line x1="10" y1="2" x2="10" y2="18" />
       <line x1="2" y1="6" x2="18" y2="6" />
@@ -38,20 +38,20 @@ const serviceIcons: Record<string, React.ReactNode> = {
     </svg>
   ),
   'interior-design': (
-    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgba(201,169,110,0.6)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-accent/60" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 17 Q3 9 10 5 Q17 9 17 17" />
       <line x1="3" y1="17" x2="17" y2="17" />
     </svg>
   ),
   'conceptual-design': (
-    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgba(201,169,110,0.6)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-accent/60" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="10" cy="8" r="4.5" />
       <line x1="10" y1="12.5" x2="10" y2="17" />
       <line x1="8" y1="15" x2="12" y2="15" />
     </svg>
   ),
   'design-consulting': (
-    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgba(201,169,110,0.6)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-accent/60" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="3" width="16" height="11" rx="2" />
       <path d="M7 14 L5 18" />
       <path d="M13 14 L15 18" />

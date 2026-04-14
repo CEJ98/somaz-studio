@@ -106,7 +106,9 @@
     "freeConsult": "Reservar consulta gratuita de 15 min",
     "outcomeLabel": "Resultado",
     "prevProject": "Proyecto Anterior",
-    "closeGallery": "Cerrar",
+    "closeGallery": "Cerrar galería",
+    "prevImage": "Imagen anterior",
+    "nextImage": "Imagen siguiente",
     "imageOf": "de"
   },
   "categories": {
@@ -137,7 +139,9 @@
     "faq3Q": "¿Qué archivos necesito proporcionar?",
     "faq3A": "Para visualización 3D necesitamos planos de planta (PDF o CAD) y alzados si están disponibles. Para diseño de interiores, también son útiles las medidas detalladas o una visita al lugar.",
     "faq4Q": "¿Puedo solicitar cambios después de la entrega?",
-    "faq4A": "Sí. Todos los paquetes incluyen al menos una ronda de revisiones. Rondas adicionales se pueden agregar a tarifa por hora."
+    "faq4A": "Sí. Todos los paquetes incluyen al menos una ronda de revisiones. Rondas adicionales se pueden agregar a tarifa por hora.",
+    "mostPopular": "Más Popular",
+    "getStarted": "Comenzar"
   },
   "about": {
     "ourStory": "Nuestra Historia",
@@ -245,7 +249,10 @@
     "ogDesc": "Proceso, materiales y reflexión de diseño desde un estudio con sede en Miami.",
     "ctaHeading": "¿Listo para visualizar tu",
     "ctaHighlight": "próximo proyecto?",
-    "ctaButton": "Iniciar una Conversación"
+    "ctaLabel": "Hablemos",
+    "ctaButton": "Iniciar una Conversación",
+    "prevPost": "Anterior",
+    "nextPost": "Siguiente"
   },
   "notfound": {
     "label": "Página no encontrada",

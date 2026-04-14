@@ -10,6 +10,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { locales } from '@/i18n/config'
 
 import { ClientOnlyCursor, ClientOnlyWhatsApp, ClientOnlyAnalytics, ClientOnlyCookieConsent } from '@/components/ClientOnly'
+import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
+import LocalBusinessJsonLd from '@/components/seo/LocalBusinessJsonLd'
+import FAQJsonLd from '@/components/seo/FAQJsonLd'
+import HowToJsonLd from '@/components/seo/HowToJsonLd'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://somazstudio.com'),
@@ -26,11 +30,16 @@ export const metadata: Metadata = {
     siteName: 'Somaz Studio',
     title: 'Somaz Studio — 3D Visualization & Interior Design',
     description: 'Miami-based design studio. 3D visualization · Interior design · Spatial concepts.',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Somaz Studio' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Somaz Studio',
     description: 'Miami-based design studio. 3D visualization · Interior design · Spatial concepts.',
+    images: ['/og-image.jpg'],
+  },
+  icons: {
+    apple: '/apple-touch-icon.png',
   },
   robots: { index: true, follow: true },
   alternates: {
@@ -98,6 +107,10 @@ export default async function LocaleLayout(
               <SpeedInsights />
             </>
           )}
+          <OrganizationJsonLd />
+          <LocalBusinessJsonLd />
+          <FAQJsonLd />
+          <HowToJsonLd />
       </>
     </NextIntlClientProvider>
   )
