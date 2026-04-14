@@ -153,7 +153,7 @@ export default async function BlogPostPage(props: Props) {
           )}
 
           {/* CTA */}
-          <div className="mt-20 mb-16 py-16 px-8 border border-border/30 text-center">
+          <div className="mt-20 mb-16 py-16 px-8 bg-surface/30 border-l-2 border-accent text-center">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{tb('ctaLabel')}</p>
             <h3
               className="font-serif font-light text-foreground leading-tight mb-8"
@@ -164,7 +164,7 @@ export default async function BlogPostPage(props: Props) {
             </h3>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+              className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
             >
               {tb('ctaButton')}
               <Icon name="north_east" size={14} />
