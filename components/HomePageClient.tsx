@@ -15,7 +15,6 @@ import AnimatedCounter from '@/components/AnimatedCounter'
 import MagneticButton from '@/components/MagneticButton'
 import MarqueeStrip from '@/components/MarqueeStrip'
 import FAQSection from '@/components/FAQSection'
-import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 import TestimonialsSection from '@/components/TestimonialsSection'
 
 
@@ -161,18 +160,18 @@ export default function HomePageClient({ locale }: { locale: string }) {
           >
             <MagneticButton>
               <Link
-                href="/work"
+                href="/contact"
                 className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
               >
-                {t('viewOurWork')}
+                {t('startProject')}
                 <Icon name="north_east" size={16} />
               </Link>
             </MagneticButton>
             <Link
-              href="/contact"
+              href="/work"
               className="inline-flex items-center gap-2 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
-              {t('startProject')}
+              {t('viewOurWork')}
               <Icon name="north_east" size={14} />
             </Link>
           </motion.div>
@@ -218,7 +217,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-x-3 gap-y-12">
           {selectedProjects[0] && (
             <motion.div
-              className="md:col-span-7"
+              className="md:col-span-8"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -247,7 +246,7 @@ export default function HomePageClient({ locale }: { locale: string }) {
             </motion.div>
           )}
 
-          <div className="md:col-span-5 flex flex-col gap-12">
+          <div className="md:col-span-4 flex flex-col gap-12">
             {selectedProjects[1] && (
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -471,13 +470,6 @@ export default function HomePageClient({ locale }: { locale: string }) {
 
       {/* TESTIMONIALS */}
       <TestimonialsSection />
-
-      {/* BEFORE / AFTER */}
-      <BeforeAfterSlider
-        beforeSrc="/slider-blueprint.jpg"
-        afterSrc="/slider-render.jpg"
-        locale={locale}
-      />
 
       {/* LATEST NOTES */}
       <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40 bg-surface/30">
