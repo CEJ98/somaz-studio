@@ -61,7 +61,7 @@ export default function TestimonialsSection() {
                 <p className="font-sans text-sm font-medium text-foreground/90 tracking-wide">
                   {testimonial.name}
                 </p>
-                <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45 mt-1">
+                <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 mt-1">
                   {t(testimonial.role, locale)} — {testimonial.location}
                 </p>
                 {testimonial.projectSlug && (
@@ -126,7 +126,7 @@ function Quote({ testimonial, locale }: { testimonial: Testimonial; locale: 'en'
         <p className="font-sans text-sm font-medium text-foreground/90 tracking-wide">
           {testimonial.name}
         </p>
-        <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45 mt-1">
+        <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 mt-1">
           {t(testimonial.role, locale)} — {testimonial.location}
         </p>
         {testimonial.projectSlug && (
