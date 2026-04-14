@@ -27,8 +27,7 @@ export default function FadeUp({
   clipPath = false,
 }: FadeUpProps) {
   const ref = useRef(null)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const inView = useInView(ref, { once, margin: margin as any })
+  const inView = useInView(ref, { once, margin })
   const reduced = useReducedMotion()
 
   if (reduced) {

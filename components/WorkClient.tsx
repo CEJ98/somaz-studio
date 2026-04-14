@@ -162,7 +162,7 @@ export default function WorkClient() {
       </div>
       </div>
 
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <ProjectModal key={selectedProject?.slug ?? ''} project={selectedProject} onClose={() => setSelectedProject(null)} />
     </div>
   )
 }

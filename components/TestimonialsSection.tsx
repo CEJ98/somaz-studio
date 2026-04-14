@@ -50,11 +50,11 @@ export default function TestimonialsSection() {
               className="absolute inset-0 flex flex-col justify-between"
             >
               {/* Opening quote mark */}
-              <span className="font-serif text-accent/30 text-8xl leading-none -mt-6 select-none">"</span>
+              <span className="font-serif text-accent/30 text-8xl leading-none -mt-6 select-none">&ldquo;</span>
 
               {/* Text */}
               <p className="font-serif text-xl md:text-2xl font-light italic text-foreground/85 leading-relaxed text-center px-4">
-                "{t(testimonial.quote, locale)}"
+                &ldquo;{t(testimonial.quote, locale)}&rdquo;
               </p>
 
               {/* Attribution */}
@@ -119,9 +119,9 @@ export default function TestimonialsSection() {
 function Quote({ testimonial, locale }: { testimonial: Testimonial; locale: 'en' | 'es' }) {
   return (
     <blockquote className="flex flex-col justify-between h-full">
-      <span className="font-serif text-accent/30 text-8xl leading-none -mt-6 select-none">"</span>
+      <span className="font-serif text-accent/30 text-8xl leading-none -mt-6 select-none">&ldquo;</span>
       <p className="font-serif text-xl md:text-2xl font-light italic text-foreground/85 leading-relaxed text-center px-4">
-        "{t(testimonial.quote, locale)}"
+        &ldquo;{t(testimonial.quote, locale)}&rdquo;
       </p>
       <footer className="text-center mt-4">
         <p className="font-sans text-sm font-medium text-foreground/90 tracking-wide">

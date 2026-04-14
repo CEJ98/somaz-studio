@@ -19,12 +19,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const reduced = useReducedMotion()
 
   useEffect(() => {
-    if (project) {
-      setActiveIndex(0)
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = project ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [project])
 

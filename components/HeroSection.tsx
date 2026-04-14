@@ -27,7 +27,7 @@ export default function HeroSection({
   posterSrc,
   locale = 'en',
 }: HeroSectionProps) {
-  const [videoReady, setVideoReady] = useState(false)
+  const [videoReady, setVideoReady] = useState(!videoSrc)
   const [wordRevealed, setWordRevealed] = useState(false)
   const heroRef = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
@@ -36,10 +36,9 @@ export default function HeroSection({
   const textY = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
 
   useEffect(() => {
-    if (!videoSrc) setVideoReady(true)
     const timer = setTimeout(() => setWordRevealed(true), 600)
     return () => clearTimeout(timer)
-  }, [videoSrc])
+  }, [])
 
   const words = headline
     ? (headline[locale as 'en' | 'es'] ?? headline.en).split(' ')

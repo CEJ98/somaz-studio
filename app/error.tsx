@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Error({
   reset,
@@ -8,12 +9,11 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
-  const [isEs, setIsEs] = useState(false)
-
-  useEffect(() => {
+  const [isEs] = useState(() => {
+    if (typeof window === 'undefined') return false
     const path = window.location.pathname
-    setIsEs(path.startsWith('/es') || (!path.startsWith('/en') && !!navigator.language?.startsWith('es')))
-  }, [])
+    return path.startsWith('/es') || (!path.startsWith('/en') && !!navigator.language?.startsWith('es'))
+  })
 
   const t = isEs
     ? {
@@ -48,12 +48,12 @@ export default function Error({
         >
           {t.button}
         </button>
-        <a
+        <Link
           href="/"
           className="font-sans text-xs tracking-widest uppercase text-foreground/50 hover:text-accent transition-colors duration-300"
         >
           {t.home}
-        </a>
+        </Link>
       </div>
     </div>
   )
