@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useLocale } from 'next-intl'
+import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
 import { testimonials, type Testimonial } from '@/data/testimonials'
 import { t } from '@/lib/locale'
@@ -63,6 +65,15 @@ export default function TestimonialsSection() {
                 <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45 mt-1">
                   {t(testimonial.role, locale)} — {testimonial.location}
                 </p>
+                {testimonial.projectSlug && (
+                  <Link
+                    href={`/work/${testimonial.projectSlug}`}
+                    className="inline-flex items-center gap-1.5 mt-3 font-sans text-[10px] tracking-[0.2em] uppercase text-accent/80 hover:text-accent transition-colors duration-300"
+                  >
+                    View Project
+                    <Icon name="north_east" size={10} />
+                  </Link>
+                )}
               </footer>
             </motion.blockquote>
           </AnimatePresence>
@@ -119,6 +130,15 @@ function Quote({ testimonial, locale }: { testimonial: Testimonial; locale: 'en'
         <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45 mt-1">
           {t(testimonial.role, locale)} — {testimonial.location}
         </p>
+        {testimonial.projectSlug && (
+          <Link
+            href={`/work/${testimonial.projectSlug}`}
+            className="inline-flex items-center gap-1.5 mt-3 font-sans text-[10px] tracking-[0.2em] uppercase text-accent/80 hover:text-accent transition-colors duration-300"
+          >
+            View Project
+            <Icon name="north_east" size={10} />
+          </Link>
+        )}
       </footer>
     </blockquote>
   )

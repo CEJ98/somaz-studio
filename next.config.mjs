@@ -6,7 +6,7 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 const nextConfig = {
   poweredByHeader: false,
   experimental: {
-    optimizePackageImports: ['framer-motion'],
+    optimizePackageImports: ['framer-motion', '@vercel/analytics', 'sonner'],
   },
   images: {
     formats: ['image/avif', 'image/webp'],

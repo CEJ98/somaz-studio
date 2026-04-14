@@ -10,6 +10,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { locales } from '@/i18n/config'
 
 import { ClientOnlyCursor, ClientOnlyWhatsApp, ClientOnlyAnalytics, ClientOnlyCookieConsent } from '@/components/ClientOnly'
+import ScrollToTop from '@/components/ScrollToTop'
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import LocalBusinessJsonLd from '@/components/seo/LocalBusinessJsonLd'
 import FAQJsonLd from '@/components/seo/FAQJsonLd'
@@ -89,6 +90,7 @@ export default async function LocaleLayout(
           <main id="main-content">{children}</main>
           <Footer />
           <ClientOnlyWhatsApp />
+          <ScrollToTop />
           <Toaster
             theme="dark"
             position="bottom-right"
