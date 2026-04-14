@@ -22,6 +22,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const brief = t(project.brief, locale)
   const ogImage = `https://somazstudio.com${project.coverImage}`
   return {
+    metadataBase,
     title: project.title,
     description: brief,
     openGraph: {
