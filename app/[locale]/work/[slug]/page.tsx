@@ -4,7 +4,7 @@ import { projects } from '@/data/projects'
 import { locales } from '@/i18n/config'
 import { t } from '@/lib/locale'
 import ProjectPageClient from '@/components/ProjectPageClient'
-import { buildAlternates } from '@/lib/seo'
+import { buildAlternates, metadataBase } from '@/lib/seo'
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>

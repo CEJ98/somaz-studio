@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import WorkClient from '@/components/WorkClient'
-import { buildAlternates } from '@/lib/seo'
+import { buildAlternates, metadataBase } from '@/lib/seo'
 import { projects } from '@/data/projects'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -9,6 +9,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const { locale } = params
   const t = await getTranslations({ locale, namespace: 'work' })
   return {
+    metadataBase,
     title: t('metaTitle'),
     description: t('metaDesc'),
     openGraph: {

@@ -4,13 +4,14 @@ import { Suspense } from 'react'
 import ContactForm from '@/components/ContactForm'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
-import { buildAlternates } from '@/lib/seo'
+import { buildAlternates, metadataBase } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
   const { locale } = params
   const t = await getTranslations({ locale, namespace: 'contact' })
   return {
+    metadataBase,
     title: t('metaTitle'),
     description: t('metaDesc'),
     openGraph: {

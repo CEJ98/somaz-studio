@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import AboutClient from '@/components/AboutClient'
-import { buildAlternates } from '@/lib/seo'
+import { buildAlternates, metadataBase } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await props.params
   const t = await getTranslations({ locale, namespace: 'about' })
   return {
+    metadataBase,
     title: t('metaTitle'),
     description: t('metaDesc'),
     openGraph: { title: t('ogTitle'), description: t('ogDesc') },

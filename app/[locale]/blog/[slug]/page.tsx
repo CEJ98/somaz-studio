@@ -8,7 +8,7 @@ import { t } from '@/lib/locale'
 import { getTranslations } from 'next-intl/server'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
-import { buildAlternates } from '@/lib/seo'
+import { buildAlternates, metadataBase } from '@/lib/seo'
 
 interface Props { params: Promise<{ locale: string; slug: string }> }
 
@@ -22,6 +22,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   if (!post) return {}
   const ogImage = `https://somazstudio.com${post.coverImage}`
   return {
+    metadataBase,
     title: t(post.title, locale),
     description: t(post.excerpt, locale),
     openGraph: {
