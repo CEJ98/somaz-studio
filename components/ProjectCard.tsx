@@ -11,10 +11,11 @@ interface ProjectCardProps {
   project: Project
   priority?: boolean
   featured?: boolean
+  aspectRatio?: string
   onView?: (project: Project) => void
 }
 
-export default function ProjectCard({ project, priority = false, featured = false, onView }: ProjectCardProps) {
+export default function ProjectCard({ project, priority = false, featured = false, aspectRatio, onView }: ProjectCardProps) {
   const tc = useTranslations('categories')
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef(null)
@@ -28,6 +29,8 @@ export default function ProjectCard({ project, priority = false, featured = fals
     }
   }
 
+  const resolvedAspect = aspectRatio ?? (featured ? 'aspect-[16/9]' : 'aspect-[4/3]')
+
   return (
     <div
       className="group block relative overflow-hidden bg-surface cursor-pointer"
@@ -35,7 +38,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
       onMouseLeave={() => setHovered(false)}
       onClick={handleClick}
     >
-      <div ref={cardRef} className={`relative overflow-hidden ${featured ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}>
+      <div ref={cardRef} className={`relative overflow-hidden ${resolvedAspect}`}>
         {/* Curtain reveal */}
         <motion.div
           className="absolute inset-0 bg-surface z-10 origin-top pointer-events-none"

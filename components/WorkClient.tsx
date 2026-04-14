@@ -11,11 +11,11 @@ import ProjectModal from '@/components/ProjectModal'
 import { projects, categories, type Project, type ProjectCategory } from '@/data/projects'
 import { ease } from '@/lib/motion'
 
-const sizeToSpan: Record<string, string> = {
-  large: 'md:col-span-8',
-  medium: 'md:col-span-6',
-  small: 'md:col-span-4',
-}
+const editorialPattern = [
+  { span: 'md:col-span-12', aspect: 'aspect-[21/9]' },
+  { span: 'md:col-span-7', aspect: 'aspect-[4/3]' },
+  { span: 'md:col-span-5', aspect: 'aspect-[4/5]' },
+] as const
 
 export default function WorkClient() {
   const tw = useTranslations('work')
@@ -120,13 +120,13 @@ export default function WorkClient() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.45, delay: reduced ? 0 : i * 0.05, ease }}
-                className={`${sizeToSpan[project.size] || 'md:col-span-4'} transition-opacity duration-500 ${
+                className={`${editorialPattern[i % 3].span} transition-opacity duration-500 ${
                   hoveredSlug && hoveredSlug !== project.slug ? 'opacity-30' : 'opacity-100'
                 }`}
                 onMouseEnter={() => setHoveredSlug(project.slug)}
                 onMouseLeave={() => setHoveredSlug(null)}
               >
-                <ProjectCard project={project} priority={i === 0} featured={project.featured} onView={setSelectedProject} />
+                <ProjectCard project={project} priority={i === 0} aspectRatio={editorialPattern[i % 3].aspect} onView={setSelectedProject} />
               </motion.div>
             ))}
           </AnimatePresence>
@@ -152,7 +152,7 @@ export default function WorkClient() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+            className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
           >
             {tw('ctaButton')}
             <Icon name="north_east" size={14} />
