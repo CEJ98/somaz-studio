@@ -27,7 +27,7 @@ export default function FadeUp({
   clipPath = false,
 }: FadeUpProps) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once, margin })
+  const inView = useInView(ref, { once, margin: margin as any })
   const reduced = useReducedMotion()
 
   if (reduced) {
