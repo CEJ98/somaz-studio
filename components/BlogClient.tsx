@@ -59,6 +59,7 @@ export default function BlogClient({ posts, locale }: Props) {
                       fill
                       className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
                       sizes={isFirst ? '100vw' : '(max-width: 768px) 100vw, 50vw'}
+                      {...(isFirst ? { priority: true } : {})}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
