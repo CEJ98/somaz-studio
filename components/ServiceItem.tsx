@@ -9,7 +9,6 @@ import { Icon } from '@/components/icons'
 import { t as tl } from '@/lib/locale'
 import { ease } from '@/lib/motion'
 import Image from 'next/image'
-import PricingTable from '@/components/PricingTable'
 
 const slugToProjectType: Record<string, string> = {
   '3d-visualization': '3d-visualization',
@@ -111,7 +110,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
           </Link>
         </div>
 
-        {/* Right — image + packages */}
+        {/* Right — image + CTA */}
         <div className="md:col-span-6 md:col-start-7 relative z-10">
           {serviceImages[service.slug] && (
             <div className="relative w-full aspect-[16/9] mb-8 overflow-hidden">
@@ -125,13 +124,11 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
           )}
-          <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{ts('packages')}</p>
-          <PricingTable packages={service.packages} locale={locale} />
           <Link
-            href="/contact?type=consult"
-            className="inline-flex items-center gap-2 mt-6 font-sans text-[10px] tracking-[0.25em] uppercase text-accent/80 hover:text-accent border-b border-accent/30 pb-0.5 hover:border-accent transition-all duration-300"
+            href={`/contact?type=${slugToProjectType[service.slug] ?? 'other'}`}
+            className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
           >
-            {ts('freeConsult')}
+            {ts('startProject')}
             <Icon name="north_east" size={14} />
           </Link>
         </div>
