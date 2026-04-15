@@ -142,6 +142,7 @@ export default function Navbar() {
           className="md:hidden flex flex-col gap-1.5 p-2"
           aria-label={t('toggleMenu')}
           aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
           <span
             aria-hidden="true"
@@ -166,7 +167,10 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
+        id="mobile-menu"
         ref={mobileMenuRef}
+        role="navigation"
+        aria-label="Mobile navigation"
         className={`md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50 transition-all duration-500 overflow-hidden ${
           menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}

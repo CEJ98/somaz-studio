@@ -109,7 +109,8 @@
     "closeGallery": "Close gallery",
     "prevImage": "Previous image",
     "nextImage": "Next image",
-    "imageOf": "of"
+    "imageOf": "of",
+    "wantSimilar": "I want something similar"
   },
   "categories": {
     "All": "All",

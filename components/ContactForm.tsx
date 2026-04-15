@@ -64,6 +64,7 @@ function FloatingInput({
   type = 'text',
   required,
   maxLength,
+  validate,
 }: {
   id: string
   name: string
@@ -71,17 +72,26 @@ function FloatingInput({
   type?: string
   required?: boolean
   maxLength?: number
+  validate?: (value: string) => string
 }) {
   const [focused, setFocused] = useState(false)
   const [hasValue, setHasValue] = useState(false)
+  const [error, setError] = useState('')
   const active = focused || hasValue
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const v = e.target.value
+    setHasValue(v.length > 0)
+    if (validate && v.length > 0) setError(validate(v))
+    else setError('')
+  }
 
   return (
     <div className="relative pt-4">
       <label
         htmlFor={id}
         className={`absolute left-0 font-sans tracking-widest uppercase transition-all duration-200 pointer-events-none ${
-          active ? '-top-0 text-accent text-[10px]' : 'top-7 text-foreground/50 text-xs'
+          active ? '-top-0 text-[10px] ' + (error ? 'text-red-400' : 'text-accent') : 'top-7 text-foreground/50 text-xs'
         }`}
       >
         {label}
@@ -93,16 +103,23 @@ function FloatingInput({
         required={required}
         maxLength={maxLength}
         aria-label={label}
+        aria-describedby={error ? `${id}-error` : undefined}
+        aria-invalid={error ? true : undefined}
         onFocus={() => setFocused(true)}
         onBlur={(e) => {
           setFocused(false)
           setHasValue(e.target.value.length > 0)
         }}
-        className="w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-3 focus:outline-none focus:border-accent transition-colors duration-300"
+        onChange={handleChange}
+        className={`w-full bg-transparent border-b text-foreground font-sans text-sm py-3 focus:outline-none transition-colors duration-300 ${
+          error ? 'border-red-400/60 focus:border-red-400' : 'border-border focus:border-accent'
+        }`}
       />
-      {hasValue && !focused && (
+      {error ? (
+        <p id={`${id}-error`} role="alert" className="font-sans text-[10px] text-red-400 mt-1">{error}</p>
+      ) : hasValue && !focused ? (
         <span className="absolute right-0 top-7 text-accent text-xs">✓</span>
-      )}
+      ) : null}
     </div>
   )
 }
@@ -116,18 +133,13 @@ export default function ContactForm() {
   const preselectedType = VALID_TYPES.includes(rawType) ? rawType : (rawType === 'consult' ? 'consulting' : '')
   const [status, setStatus] = useState<Status>('idle')
   const [msgLen, setMsgLen] = useState(0)
-  const [emailError, setEmailError] = useState('')
   const reduced = useReducedMotion()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
     const email = (form.elements.namedItem('email') as HTMLInputElement).value
-    if (!EMAIL_RE.test(email)) {
-      setEmailError(tf('emailError'))
-      return
-    }
-    setEmailError('')
+    if (!EMAIL_RE.test(email)) return
     setStatus('loading')
     const data = new FormData(form)
     const utms: Record<string, string> = {}
@@ -195,12 +207,14 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <FloatingInput id="name" name="name" label={tf('name')} required />
           <div>
-            <FloatingInput id="email" name="email" label={tf('email')} type="email" required />
-            <div aria-live="polite">
-              {emailError && (
-                <p className="font-sans text-[10px] text-red-400 mt-1">{emailError}</p>
-              )}
-            </div>
+            <FloatingInput
+              id="email"
+              name="email"
+              label={tf('email')}
+              type="email"
+              required
+              validate={(v) => (EMAIL_RE.test(v) ? '' : tf('emailError'))}
+            />
           </div>
         </div>
 

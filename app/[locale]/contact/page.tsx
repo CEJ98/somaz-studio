@@ -5,6 +5,7 @@ import ContactForm from '@/components/ContactForm'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
 import { buildAlternates, metadataBase } from '@/lib/seo'
+import LazyVideo from '@/components/LazyVideo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -80,15 +81,10 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         <section className="relative min-h-[45vh] flex items-end overflow-hidden">
           {/* Video background */}
           <div className="absolute inset-0">
-            <video
+            <LazyVideo
               src="/media/contact-hero.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
+              webmSrc="/media/contact-hero.webm"
               className="w-full h-full object-cover opacity-40"
-              aria-hidden="true"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
           </div>

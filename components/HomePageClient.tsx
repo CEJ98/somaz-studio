@@ -82,7 +82,9 @@ export default function HomePageClient({ locale }: { locale: string }) {
               preload="auto"
               className="absolute inset-0 h-full w-full object-cover"
             >
+              <source src="/media/hero-home-mobile.webm" media="(max-width: 767px)" type="video/webm" />
               <source src="/media/hero-home-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
+              <source src="/media/hero-home.webm" type="video/webm" />
               <source src="/media/hero-home.mp4" type="video/mp4" />
             </video>
           )}

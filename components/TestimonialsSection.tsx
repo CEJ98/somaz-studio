@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import { testimonials, type Testimonial } from '@/data/testimonials'
@@ -11,6 +11,7 @@ import { ease } from '@/lib/motion'
 
 export default function TestimonialsSection() {
   const locale = useLocale() as 'en' | 'es'
+  const tp = useTranslations('project')
   const [active, setActive] = useState(0)
   const reduced = useReducedMotion()
 
@@ -23,7 +24,7 @@ export default function TestimonialsSection() {
     return (
       <section className="py-24 px-6 md:px-10">
         <div className="max-w-4xl mx-auto">
-          <Quote testimonial={testimonial} locale={locale} />
+          <Quote testimonial={testimonial} locale={locale} viewProjectLabel={tp('viewProject')} />
         </div>
       </section>
     )
@@ -69,7 +70,7 @@ export default function TestimonialsSection() {
                     href={`/work/${testimonial.projectSlug}`}
                     className="inline-flex items-center gap-1.5 mt-3 font-sans text-[10px] tracking-[0.2em] uppercase text-accent/80 hover:text-accent transition-colors duration-300"
                   >
-                    View Project
+                    {tp('viewProject')}
                     <Icon name="north_east" size={10} />
                   </Link>
                 )}
@@ -115,7 +116,7 @@ export default function TestimonialsSection() {
   )
 }
 
-function Quote({ testimonial, locale }: { testimonial: Testimonial; locale: 'en' | 'es' }) {
+function Quote({ testimonial, locale, viewProjectLabel }: { testimonial: Testimonial; locale: 'en' | 'es'; viewProjectLabel: string }) {
   return (
     <blockquote className="flex flex-col justify-between h-full">
       <span className="font-serif text-accent/30 text-8xl leading-none -mt-6 select-none">&ldquo;</span>
@@ -134,7 +135,7 @@ function Quote({ testimonial, locale }: { testimonial: Testimonial; locale: 'en'
             href={`/work/${testimonial.projectSlug}`}
             className="inline-flex items-center gap-1.5 mt-3 font-sans text-[10px] tracking-[0.2em] uppercase text-accent/80 hover:text-accent transition-colors duration-300"
           >
-            View Project
+            {viewProjectLabel}
             <Icon name="north_east" size={10} />
           </Link>
         )}

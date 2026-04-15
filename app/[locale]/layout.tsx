@@ -44,6 +44,12 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: {
+    canonical: 'https://somazstudio.com/en',
+    languages: {
+      en: 'https://somazstudio.com/en',
+      es: 'https://somazstudio.com/es',
+      'x-default': 'https://somazstudio.com/en',
+    },
     types: {
       'application/rss+xml': 'https://somazstudio.com/feed.xml',
     },

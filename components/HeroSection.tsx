@@ -15,6 +15,7 @@ interface HeroSectionProps {
   videoSrc?: string
   posterSrc?: string
   locale?: string
+  viewWorkLabel?: string
 }
 
 export default function HeroSection({
@@ -25,6 +26,7 @@ export default function HeroSection({
   videoSrc,
   posterSrc,
   locale = 'en',
+  viewWorkLabel = 'View our work',
 }: HeroSectionProps) {
   const [videoReady, setVideoReady] = useState(!videoSrc)
   const [wordRevealed, setWordRevealed] = useState(false)
@@ -52,17 +54,20 @@ export default function HeroSection({
       >
         {videoSrc ? (
           <video
-            src={videoSrc}
             poster={posterSrc}
             autoPlay
             muted
             loop
             playsInline
+            preload="none"
             onCanPlay={() => setVideoReady(true)}
             className={`w-full h-full object-cover transition-opacity duration-1000 ${
               videoReady ? 'opacity-100' : 'opacity-0'
             }`}
-          />
+          >
+            <source src={videoSrc.replace(/\.mp4$/, '.webm')} type="video/webm" />
+            <source src={videoSrc} type="video/mp4" />
+          </video>
         ) : (
           <Image
             src={posterSrc ?? '/hero-poster.jpg'}
@@ -158,7 +163,7 @@ export default function HeroSection({
               href="/work"
               className="inline-flex items-center gap-2 border border-foreground/25 text-foreground/70 hover:border-accent/50 hover:text-foreground px-8 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
-              View our work
+              {viewWorkLabel}
             </Link>
           </motion.div>
         </div>

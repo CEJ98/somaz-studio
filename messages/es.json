@@ -109,7 +109,8 @@
     "closeGallery": "Cerrar galería",
     "prevImage": "Imagen anterior",
     "nextImage": "Imagen siguiente",
-    "imageOf": "de"
+    "imageOf": "de",
+    "wantSimilar": "Quiero algo similar"
   },
   "categories": {
     "All": "Todos",

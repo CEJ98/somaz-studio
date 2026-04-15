@@ -49,8 +49,7 @@ export const projects: Project[] = [
     size: 'large',
   },
   {
-    title: 'Iron Fitness Gym',
-    slug: 'iron-fitness-gym',
+    title: 'Iron Fitness Gym',    slug: 'iron-fitness-gym',
     category: '3D Visualization',
     location: 'Argentina',
     year: 2024,
@@ -59,8 +58,6 @@ export const projects: Project[] = [
       '/projects/iron-fitness-gym/cover.jpg',
       '/projects/iron-fitness-gym/01.jpg',
       '/projects/iron-fitness-gym/02.jpg',
-      '/projects/iron-fitness-gym/03.jpg',
-      '/projects/iron-fitness-gym/04.jpg',
     ],
     brief: {
       en: 'Commercial 3D visualization for a multi-level fitness center.',
@@ -97,6 +94,7 @@ export const projects: Project[] = [
       en: 'Interior design for a warm, countryside residence with an artisan material palette.',
       es: 'Diseño de interiores para una residencia campestre cálida con una paleta de materiales artesanales.',
     },
+    featured: true,
     description: {
       en: 'A countryside residence that draws on natural materials — exposed wood, stone, and warm textiles — to create an atmosphere of relaxed sophistication. The interior design covered the full living, dining, and bedroom program, with custom furniture specifications and a carefully curated lighting scheme. The project balances the informality of rural living with considered, precise design decisions.',
       es: 'Una residencia campestre que recurre a materiales naturales — madera vista, piedra y textiles cálidos — para crear una atmósfera de sofisticación relajada. El diseño de interiores cubrió todo el programa de living, comedor y dormitorios, con especificaciones de mobiliario a medida y un esquema de iluminación cuidadosamente curado. El proyecto equilibra la informalidad del campo con decisiones de diseño precisas e intencionadas.',
@@ -142,6 +140,7 @@ export const projects: Project[] = [
     images: [
       '/projects/casa-kriger-miami/cover.jpg',
       '/projects/casa-kriger-miami/01.jpg',
+      '/projects/casa-kriger-miami/02.jpg',
     ],
     brief: {
       en: 'Exterior visualization for a modern two-story residence in Miami.',
@@ -169,12 +168,12 @@ export const projects: Project[] = [
       '/projects/cabanas-terraciello/01.jpg',
       '/projects/cabanas-terraciello/02.jpg',
       '/projects/cabanas-terraciello/03.jpg',
-      '/projects/cabanas-terraciello/04.jpg',
     ],
     brief: {
       en: 'Interior design for a cabin complex with a rustic-modern aesthetic.',
       es: 'Diseño de interiores para un complejo de cabañas con estética rústico-moderna.',
     },
+    featured: true,
     description: {
       en: 'A collection of guest cabins in a natural setting, designed to offer a premium hospitality experience without departing from the rawness of the landscape. The interior concept combines exposed timber, stone, and artisan textiles with deliberate contemporary details — warm lighting, carefully chosen furniture, and a restrained color palette. Each cabin was treated as a self-contained environment that feels both sheltered and connected to the outdoors.',
       es: 'Una colección de cabañas para huéspedes en un entorno natural, diseñadas para ofrecer una experiencia de hospitalidad premium sin alejarse de la crudeza del paisaje. El concepto interior combina madera vista, piedra y textiles artesanales con detalles contemporáneos deliberados — iluminación cálida, mobiliario cuidadosamente seleccionado y una paleta de colores contenida. Cada cabaña fue tratada como un entorno autónomo que se siente resguardado y conectado al exterior.',
@@ -192,9 +191,6 @@ export const projects: Project[] = [
     images: [
       '/projects/duplex-nati-sola/cover.jpg',
       '/projects/duplex-nati-sola/01.jpg',
-      '/projects/duplex-nati-sola/02.jpg',
-      '/projects/duplex-nati-sola/03.jpg',
-      '/projects/duplex-nati-sola/04.jpg',
     ],
     brief: {
       en: 'Conceptual design for a compact modern duplex with efficient spatial organization.',
@@ -238,7 +234,6 @@ export const projects: Project[] = [
       '/projects/casa-tiago/cover.jpg',
       '/projects/casa-tiago/01.jpg',
       '/projects/casa-tiago/02.jpg',
-      '/projects/casa-tiago/03.jpg',
     ],
     brief: {
       en: 'Visualization for a contemporary mountain residence with an outdoor living focus.',
@@ -260,6 +255,7 @@ export const projects: Project[] = [
     images: [
       '/projects/casa-fabi-gaston/cover.jpg',
       '/projects/casa-fabi-gaston/01.jpg',
+      '/projects/casa-fabi-gaston/02.jpg',
     ],
     brief: {
       en: 'Residential interior design for a private family home.',
@@ -270,6 +266,52 @@ export const projects: Project[] = [
       es: 'Un proyecto de diseño de interiores para una residencia familiar privada, enfocado en crear espacios cohesivos y habitables que reflejan la estética personal del cliente. El alcance cubrió las áreas sociales principales y el programa privado, con atención a la continuidad de materiales, selección de mobiliario y diseño de iluminación.',
     },
     size: 'small',
+  },
+  {
+    title: 'Cabaña Concepción',
+    slug: 'cabana-concepcion',
+    category: 'Interior Design',
+    location: 'Concepción del Uruguay, Argentina',
+    year: 2024,
+    coverImage: '/projects/cabana-concepcion/cover.jpg',
+    images: [
+      '/projects/cabana-concepcion/cover.jpg',
+      '/projects/cabana-concepcion/01.jpg',
+      '/projects/cabana-concepcion/02.jpg',
+      '/projects/cabana-concepcion/03.jpg',
+    ],
+    brief: {
+      en: 'Interior design for a cabin in the Entre Ríos countryside.',
+      es: 'Diseño de interiores para una cabaña en el campo entrerriano.',
+    },
+    featured: true,
+    description: {
+      en: 'A cabin project in the Entre Ríos countryside, designed around natural materials and a warm, intimate atmosphere. The interior combines exposed wood, stone, and artisan textiles to create a self-contained space that feels connected to the surrounding landscape.',
+      es: 'Un proyecto de cabaña en el campo de Entre Ríos, diseñado en torno a materiales naturales y una atmósfera cálida e íntima. El interior combina madera vista, piedra y textiles artesanales para crear un espacio autónomo que se siente conectado al paisaje circundante.',
+    },
+    size: 'medium',
+  },
+  {
+    title: 'Tres Patios',
+    slug: 'tres-patios',
+    category: 'Conceptual Design',
+    location: 'Argentina',
+    year: 2024,
+    coverImage: '/projects/tres-patios/cover.jpg',
+    images: [
+      '/projects/tres-patios/cover.jpg',
+      '/projects/tres-patios/01.jpg',
+      '/projects/tres-patios/02.jpg',
+    ],
+    brief: {
+      en: 'Conceptual residential design organized around three interior patios.',
+      es: 'Diseño residencial conceptual organizado en torno a tres patios interiores.',
+    },
+    description: {
+      en: 'A conceptual residential project structured around three patios that organize the program and bring natural light deep into the plan. The design explores the relationship between enclosed outdoor space and interior living, using the patios as the primary organizing element of the spatial sequence.',
+      es: 'Un proyecto residencial conceptual estructurado en torno a tres patios que organizan el programa y llevan luz natural al interior de la planta. El diseño explora la relación entre el espacio exterior contenido y la vida interior, utilizando los patios como elemento organizador principal de la secuencia espacial.',
+    },
+    size: 'medium',
   },
 ]
 
