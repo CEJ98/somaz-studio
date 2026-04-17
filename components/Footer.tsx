@@ -224,6 +224,14 @@ export default function Footer() {
               >
                 {tf('linkedin')}
               </a>
+              <a
+                href="https://tiktok.com/@somazstudio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/50 hover:text-accent transition-colors duration-300"
+              >
+                TikTok
+              </a>
               <Link
                 href="/privacy"
                 className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/50 hover:text-accent transition-colors duration-300"

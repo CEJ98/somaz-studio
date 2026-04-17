@@ -169,38 +169,64 @@ export default function AboutClient() {
       </section>
 
       {/* Team */}
-      <section className="px-6 md:px-10 py-28 md:py-40 border-b border-border/40">
-        <div className="max-w-7xl mx-auto">
-          <FadeUp className="mb-20">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('theTeam')}</p>
-            <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
-              {t('whoWeAre')}
-            </h2>
-          </FadeUp>
+      <section className="border-b border-border/40 overflow-hidden">
+        <FadeUp className="px-6 md:px-10 pt-28 md:pt-40 pb-16 max-w-7xl mx-auto">
+          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('theTeam')}</p>
+          <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+            {t('whoWeAre')}
+          </h2>
+        </FadeUp>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            {team.map((member, i) => (
-              <FadeUp key={member.name} delay={i * 0.15}>
-                <div className="flex flex-col md:flex-row gap-8 items-start">
-                  <div className="relative w-40 md:w-48 flex-shrink-0 overflow-hidden" style={{ aspectRatio: '3/4' }}>
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover grayscale-[20%]"
-                      sizes="192px"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-xl font-semibold text-foreground mb-1">{member.name}</h3>
-                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-4">{tl(member.role, locale)}</p>
-                    <p className="font-sans font-light text-foreground/65 leading-relaxed text-sm">{tl(member.bio, locale)}</p>
-                  </div>
+        {team.map((member, i) => (
+          <FadeUp key={member.name} delay={i * 0.1}>
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {/* Photo — full editorial */}
+              <div className="relative overflow-hidden" style={{ aspectRatio: '4/5', minHeight: '480px' }}>
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-cover object-top grayscale-[15%]"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/30 hidden md:block" />
+                {/* Name overlay on mobile */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 md:hidden bg-gradient-to-t from-background/80 to-transparent">
+                  <h3 className="font-serif text-2xl font-semibold text-foreground">{member.name}</h3>
+                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mt-1">{tl(member.role, locale)}</p>
                 </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
+              </div>
+
+              {/* Content */}
+              <div className="flex flex-col justify-center px-8 md:px-16 py-16 md:py-20 bg-surface/20">
+                <div className="architectural-line mb-12 hidden md:block" />
+                <h3 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-2 hidden md:block">{member.name}</h3>
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8 hidden md:block">{tl(member.role, locale)}</p>
+                <p className="font-sans font-light text-foreground/65 leading-relaxed" style={{ fontSize: 'clamp(0.875rem, 1.2vw, 1rem)' }}>
+                  {tl(member.bio, locale)}
+                </p>
+                <div className="mt-10 pt-8 border-t border-border/30 flex flex-col gap-3">
+                  <a
+                    href="mailto:hola@somazstudio.com"
+                    className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300"
+                  >
+                    <span className="h-px w-5 bg-current" />
+                    hola@somazstudio.com
+                  </a>
+                  <a
+                    href="https://instagram.com/somazstudio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300"
+                  >
+                    <span className="h-px w-5 bg-current" />
+                    @somazstudio
+                  </a>
+                </div>
+              </div>
+            </div>
+          </FadeUp>
+        ))}
       </section>
 
       {/* CTA */}

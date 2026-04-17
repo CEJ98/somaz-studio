@@ -106,7 +106,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
           {/* Trust signals */}
           <div className="grid grid-cols-3 gap-4 mb-14 max-w-sm">
             <div>
-              <p className="font-serif text-2xl font-light text-foreground/80">40+</p>
+              <p className="font-serif text-2xl font-light text-foreground/80">50+</p>
               <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/25 mt-1">{t('stat1')}</p>
             </div>
             <div>
@@ -168,6 +168,15 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                     >
                       <Icon name="work" size={16} />
                       {t('linkedinHandle')}
+                    </a>
+                    <a
+                      href="https://tiktok.com/@somazstudio"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 font-sans text-sm text-foreground/55 hover:text-foreground transition-colors duration-300"
+                    >
+                      <Icon name="play_circle" size={16} />
+                      @somazstudio
                     </a>
                   </div>
                 </div>

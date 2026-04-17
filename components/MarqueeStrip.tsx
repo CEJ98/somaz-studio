@@ -3,14 +3,14 @@
 import { useReducedMotion } from 'framer-motion'
 
 const ITEMS = [
-  '3D Visualization',
+  'Where Space Becomes Vision',
+  '3D Architectural Visualization',
   'Interior Design',
-  'Conceptual Design',
-  'Design Consulting',
-  'Miami · Global',
-  'Est. 2022',
-  'Photorealistic Renders',
-  'Spaces That Define Culture',
+  '48–72h Delivery',
+  'Miami · Worldwide',
+  '50+ Projects · 8+ Countries',
+  'Remote-First Studio · Est. 2022',
+  'Design Is the Language Space Speaks',
 ]
 
 const allItems = [...ITEMS, ...ITEMS]
