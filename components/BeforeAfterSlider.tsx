@@ -129,7 +129,7 @@ export default function BeforeAfterSlider({
               className="absolute inset-0 pointer-events-none"
               style={{
                 backgroundImage:
-                  'linear-gradient(to right, rgba(201,169,110,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(201,169,110,0.06) 1px, transparent 1px)',
+                  'linear-gradient(to right, rgba(138,122,90,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(138,122,90,0.06) 1px, transparent 1px)',
                 backgroundSize: '40px 40px',
               }}
             />
@@ -138,7 +138,7 @@ export default function BeforeAfterSlider({
           {/* Divider line */}
           <div
             className="absolute inset-y-0 z-20 pointer-events-none w-px bg-accent"
-            style={{ left: `${position}%`, boxShadow: '0 0 12px rgba(201,169,110,0.4)' }}
+            style={{ left: `${position}%`, boxShadow: '0 0 12px rgba(138,122,90,0.4)' }}
           />
 
           {/* Drag handle */}
@@ -156,9 +156,9 @@ export default function BeforeAfterSlider({
               width: 40,
               height: 40,
               borderRadius: '50%',
-              border: '1px solid #C9A96E',
-              background: '#1C1C1A',
-              boxShadow: dragging ? '0 0 20px rgba(201,169,110,0.5)' : '0 0 10px rgba(201,169,110,0.2)',
+              border: '1px solid var(--accent)',
+              background: 'var(--background)',
+              boxShadow: dragging ? '0 0 20px rgba(138,122,90,0.5)' : '0 0 10px rgba(138,122,90,0.2)',
               cursor: 'ew-resize',
               transition: 'box-shadow 0.2s ease',
             }}
@@ -170,8 +170,8 @@ export default function BeforeAfterSlider({
             }}
           >
             <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
-              <path d="M5 1L1 5L5 9" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M11 1L15 5L11 9" stroke="#C9A96E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M5 1L1 5L5 9" stroke="var(--accent)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M11 1L15 5L11 9" stroke="var(--accent)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
 

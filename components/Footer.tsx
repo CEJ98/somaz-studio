@@ -79,12 +79,11 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0, ease }}
           >
             <Image
-              src="/logos/logo-white.png"
+              src="/logos/logo-smz.png"
               alt="Somaz Studio"
               width={170}
               height={40}
               className="h-10 w-auto object-contain mb-3"
-              style={{ mixBlendMode: 'screen' }}
             />
             <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed mb-6">
               {tf('tagline')}
@@ -94,6 +93,14 @@ export default function Footer() {
               className="font-sans text-xs text-foreground/65 hover:text-accent transition-colors duration-300 inline-block"
             >
               hola@somazstudio.com
+            </a>
+            <a
+              href="https://wa.me/17865377682"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-xs text-foreground/65 hover:text-accent transition-colors duration-300 inline-block mt-1"
+            >
+              +1 786 537 7682
             </a>
             <p className="font-sans text-xs text-foreground/50 mt-1">{tf('location')}</p>
           </motion.div>

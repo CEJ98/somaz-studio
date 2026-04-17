@@ -85,7 +85,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/logos/logo-white.png"
+            src="/logos/logo-smz.png"
             alt="Somaz Studio"
             width={200}
             height={52}

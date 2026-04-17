@@ -4,7 +4,7 @@ export default function LocalBusinessJsonLd() {
     '@type': 'LocalBusiness',
     name: 'Somaz Studio',
     description: 'Miami-based design studio specializing in 3D architectural visualization, interior design, and spatial concepts. Working globally in English and Spanish.',
-    image: 'https://somazstudio.com/logos/logo-white.png',
+    image: 'https://somazstudio.com/logos/logo-smz.png',
     url: 'https://somazstudio.com',
     telephone: '+1-786-537-7682',
     email: 'hola@somazstudio.com',

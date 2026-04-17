@@ -32,10 +32,10 @@ function CounterStat({ value, suffix = '', label }: { value: string; suffix?: st
 
   return (
     <div ref={ref}>
-      <p className="font-serif font-light text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', textShadow: '0 2px 20px rgba(0,0,0,0.7)' }}>
+      <p className="font-serif font-light text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
         {isNumeric ? <motion.span>{rounded}</motion.span> : value}{suffix}
       </p>
-      <p className="font-sans text-[10px] text-foreground/80 tracking-[0.25em] mt-3 uppercase" style={{ textShadow: '0 1px 12px rgba(0,0,0,0.6)' }}>{label}</p>
+      <p className="font-sans text-[10px] text-foreground/80 tracking-[0.25em] mt-3 uppercase">{label}</p>
     </div>
   )
 }

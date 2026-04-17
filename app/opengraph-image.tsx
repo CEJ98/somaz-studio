@@ -28,7 +28,7 @@ export default async function Image() {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to top, rgba(28,28,26,0.92) 0%, rgba(28,28,26,0.5) 50%, rgba(28,28,26,0.3) 100%)',
+            background: 'linear-gradient(to top, rgba(248,246,242,0.95) 0%, rgba(248,246,242,0.5) 50%, transparent 100%)',
           }}
         />
         {/* Content */}
@@ -45,12 +45,12 @@ export default async function Image() {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '32px', height: '1px', background: '#C9A96E' }} />
-            <div style={{ fontSize: '12px', fontWeight: 300, color: '#C9A96E', letterSpacing: '5px', textTransform: 'uppercase' }}>
+            <div style={{ width: '32px', height: '1px', background: '#8A7A5A' }} />
+            <div style={{ fontSize: '12px', fontWeight: 300, color: '#8A7A5A', letterSpacing: '5px', textTransform: 'uppercase' }}>
               3D Visualization · Interior Design
             </div>
           </div>
-          <div style={{ fontSize: '64px', fontWeight: 700, color: '#F0EDE6', letterSpacing: '-2px', lineHeight: 1.1 }}>
+          <div style={{ fontSize: '64px', fontWeight: 700, color: '#1A1A1A', letterSpacing: '-2px', lineHeight: 1.1, fontFamily: 'Georgia, serif' }}>
             Somaz Studio
           </div>
           <div style={{ fontSize: '18px', fontWeight: 300, color: 'rgba(240,237,230,0.55)', letterSpacing: '1px' }}>

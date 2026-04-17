@@ -15,6 +15,6 @@ export const siteConfig = {
     latitude: 25.7617,
     longitude: -80.1918,
   },
-  logo: 'https://somazstudio.com/logos/logo-white.png',
+  logo: 'https://somazstudio.com/logos/logo-smz.png',
   priceRange: '$$',
 }

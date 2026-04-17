@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1C1C1A',
+  themeColor: '#F8F6F2',
 }
 
 export function generateStaticParams() {
@@ -98,13 +98,13 @@ export default async function LocaleLayout(
           <ClientOnlyWhatsApp />
           <ScrollToTop />
           <Toaster
-            theme="dark"
+            theme="light"
             position="bottom-right"
             toastOptions={{
               style: {
-                background: '#2E2E2B',
-                border: '1px solid #3A3A37',
-                color: '#F0EDE6',
+                background: '#EAE7E0',
+                border: '1px solid #C8C3B8',
+                color: '#1A1A1A',
                 fontFamily: 'var(--font-dm-sans)',
               },
             }}

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import HomePageClient from '@/components/HomePageClient'
-import { buildAlternates } from '@/lib/seo'
+import { buildAlternates, metadataBase } from '@/lib/seo'
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -136,6 +136,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   const { locale } = params
   const t = await getTranslations({ locale, namespace: 'home' })
   return {
+    metadataBase,
     title: t('metaTitle'),
     description: t('metaDesc'),
     openGraph: {

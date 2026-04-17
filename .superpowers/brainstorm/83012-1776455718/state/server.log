@@ -1,0 +1,6 @@
+{"type":"server-started","port":52632,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:52632","screen_dir":"/Users/jorgecostilla/Documents/SomazStudio/.superpowers/brainstorm/83012-1776455718/content","state_dir":"/Users/jorgecostilla/Documents/SomazStudio/.superpowers/brainstorm/83012-1776455718/state"}
+{"type":"screen-added","file":"/Users/jorgecostilla/Documents/SomazStudio/.superpowers/brainstorm/83012-1776455718/content/scope.html"}
+{"source":"user-event","type":"click","text":"C\n    \n      Redesign completo del sitio\n      Cada página rediseñada desde cero: homepage, trabajo, servicios, about, blog, contacto. El sistema de identidad V2 aplicado en todo. Mayor impacto, mayor tiempo.","choice":"C","id":null,"timestamp":1776455800193}
+{"source":"user-event","type":"click","text":"C\n    \n      Redesign completo del sitio\n      Cada página rediseñada desde cero: homepage, trabajo, servicios, about, blog, contacto. El sistema de identidad V2 aplicado en todo. Mayor impacto, mayor tiempo.","choice":"C","id":null,"timestamp":1776455815866}
+{"type":"screen-added","file":"/Users/jorgecostilla/Documents/SomazStudio/.superpowers/brainstorm/83012-1776455718/content/waiting.html"}
+{"type":"server-stopped","reason":"idle timeout"}

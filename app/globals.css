@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #1C1C1A;
-  --foreground: #F0EDE6;
-  --accent: #C9A96E;
-  --surface: #2E2E2B;
-  --border: #3A3A37;
+  --background: #F8F6F2;
+  --foreground: #1A1A1A;
+  --accent: #8A7A5A;
+  --surface: #EAE7E0;
+  --border: #C8C3B8;
 }
 
 * {
@@ -53,8 +53,8 @@ body {
 
 /* Selection color */
 ::selection {
-  background: #C9A96E;
-  color: #1C1C1A;
+  background: #8A7A5A;
+  color: #F8F6F2;
 }
 
 /* Scrollbar */
@@ -62,15 +62,15 @@ body {
   width: 2px;
 }
 ::-webkit-scrollbar-track {
-  background: #1C1C1A;
+  background: #F8F6F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C9A96E;
+  background: #8A7A5A;
 }
 
 /* Placeholder */
 ::placeholder {
-  color: rgba(240, 237, 230, 0.55);
+  color: rgba(26, 26, 26, 0.55);
   font-weight: 300;
 }
 
@@ -119,10 +119,10 @@ body {
     text-wrap: balance;
   }
   .font-display {
-    font-family: var(--font-cormorant), Georgia, serif;
+    font-family: var(--font-bodoni), Georgia, serif;
   }
   .text-gradient {
-    background: linear-gradient(135deg, #C9A96E 0%, #F0EDE6 60%);
+    background: linear-gradient(135deg, #8A7A5A 0%, #1A1A1A 60%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -130,7 +130,7 @@ body {
 
   /* Stitch design system utilities */
   .ghost-text {
-    -webkit-text-stroke: 1px rgba(240, 237, 230, 0.08);
+    -webkit-text-stroke: 1px rgba(26, 26, 26, 0.08);
     color: transparent;
     user-select: none;
   }
@@ -142,12 +142,12 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
   }
   .ghost-text-accent {
-    -webkit-text-stroke: 1px rgba(201, 169, 110, 0.15);
+    -webkit-text-stroke: 1px rgba(138, 122, 90, 0.15);
     color: transparent;
     user-select: none;
   }
   .architectural-line {
-    background: linear-gradient(90deg, rgba(77, 70, 57, 0.4) 0%, rgba(77, 70, 57, 0) 100%);
+    background: linear-gradient(90deg, rgba(26, 26, 26, 0.4) 0%, rgba(26, 26, 26, 0) 100%);
     height: 1px;
     width: 100%;
     animation: line-reveal 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -158,7 +158,7 @@ body {
     to { transform: scaleX(1); transform-origin: left; }
   }
   .architectural-line-v {
-    background: linear-gradient(180deg, rgba(77, 70, 57, 0.4) 0%, rgba(77, 70, 57, 0) 100%);
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0.4) 0%, rgba(26, 26, 26, 0) 100%);
     width: 1px;
     height: 100%;
   }

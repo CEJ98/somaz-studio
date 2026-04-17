@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Miami-based design studio. 3D visualization, interior design, and spatial concepts.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#1C1C1A',
-    theme_color: '#1C1C1A',
+    background_color: '#F8F6F2',
+    theme_color: '#F8F6F2',
     icons: [
       {
         src: '/logos/icon-192.png',

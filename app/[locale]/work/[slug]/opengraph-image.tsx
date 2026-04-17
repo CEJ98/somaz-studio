@@ -11,7 +11,7 @@ export default async function OGImage({ params }: { params: Promise<{ locale: st
   const project = projects.find((p) => p.slug === slug)
   if (!project) {
     return new ImageResponse(
-      <div style={{ width: '100%', height: '100%', display: 'flex', background: '#1C1C1A', alignItems: 'center', justifyContent: 'center', color: '#F0EDE6', fontSize: 48 }}>
+      <div style={{ width: '100%', height: '100%', display: 'flex', background: '#F8F6F2', alignItems: 'center', justifyContent: 'center', color: '#1A1A1A', fontSize: 48 }}>
         Somaz Studio
       </div>,
       { ...size }
@@ -22,7 +22,7 @@ export default async function OGImage({ params }: { params: Promise<{ locale: st
   const imageUrl = `https://somazstudio.com${project.coverImage}`
 
   return new ImageResponse(
-    <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: '#1C1C1A' }}>
+    <div style={{ width: '100%', height: '100%', display: 'flex', position: 'relative', background: '#F8F6F2' }}>
       {/* Background image */}
       { }
       <img
@@ -35,12 +35,12 @@ export default async function OGImage({ params }: { params: Promise<{ locale: st
       {/* Content */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '60px', display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-          <div style={{ width: '32px', height: '2px', background: '#C9A96E' }} />
-          <span style={{ fontFamily: 'sans-serif', fontSize: '14px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#C9A96E' }}>
+          <div style={{ width: '32px', height: '2px', background: '#8A7A5A' }} />
+          <span style={{ fontFamily: 'sans-serif', fontSize: '14px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#8A7A5A' }}>
             {project.category}
           </span>
         </div>
-        <h1 style={{ fontFamily: 'serif', fontSize: '64px', fontWeight: 600, color: '#F0EDE6', lineHeight: 1, margin: '0 0 16px' }}>
+        <h1 style={{ fontFamily: 'serif', fontSize: '64px', fontWeight: 600, color: '#1A1A1A', lineHeight: 1, margin: '0 0 16px' }}>
           {project.title}
         </h1>
         <p style={{ fontFamily: 'sans-serif', fontSize: '20px', color: 'rgba(240,237,230,0.55)', margin: '0 0 24px', maxWidth: '700px', lineHeight: 1.5 }}>
@@ -50,7 +50,7 @@ export default async function OGImage({ params }: { params: Promise<{ locale: st
           <span style={{ fontFamily: 'sans-serif', fontSize: '14px', color: 'rgba(240,237,230,0.35)' }}>
             {project.location} — {project.year}
           </span>
-          <span style={{ fontFamily: 'sans-serif', fontSize: '14px', letterSpacing: '0.2em', color: '#C9A96E' }}>
+          <span style={{ fontFamily: 'sans-serif', fontSize: '14px', letterSpacing: '0.2em', color: '#8A7A5A' }}>
             SOMAZ STUDIO
           </span>
         </div>

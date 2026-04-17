@@ -4,7 +4,7 @@ export default function OrganizationJsonLd() {
     '@type': 'Organization',
     name: 'Somaz Studio',
     url: 'https://somazstudio.com',
-    logo: 'https://somazstudio.com/logos/logo-white.png',
+    logo: 'https://somazstudio.com/logos/logo-smz.png',
     description: 'Miami-based design studio specializing in 3D visualization, interior design, and spatial concepts.',
     email: 'hola@somazstudio.com',
     address: {

@@ -66,7 +66,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
           className={`absolute inset-0 transition-opacity duration-500 flex flex-col justify-end p-5 md:p-6 ${
             hovered ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ background: 'linear-gradient(to top, rgba(28,28,26,0.85) 0%, transparent 60%)' }}
+          style={{ background: 'linear-gradient(to top, rgba(248,246,242,0.96) 0%, rgba(248,246,242,0.6) 55%, transparent 100%)' }}
         >
           <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-2">
             {tc(project.category)}
@@ -86,7 +86,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
         {/* Glow on hover */}
         <div
           className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${hovered ? 'opacity-100' : 'opacity-0'}`}
-          style={{ boxShadow: 'inset 0 0 60px rgba(201, 169, 110, 0.06)' }}
+          style={{ boxShadow: 'inset 0 0 60px rgba(138,122,90,0.08)' }}
         />
 
         {/* Accent line bottom */}

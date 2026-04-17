@@ -1,9 +1,10 @@
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import { Bodoni_Moda, DM_Sans } from 'next/font/google'
 
-export const cormorant = Cormorant_Garamond({
+export const bodoniModa = Bodoni_Moda({
   subsets: ['latin'],
-  variable: '--font-cormorant',
-  weight: ['300', '400', '600', '700'],
+  variable: '--font-bodoni',
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
   display: 'swap',
 })
 

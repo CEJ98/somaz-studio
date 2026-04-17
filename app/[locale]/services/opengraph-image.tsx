@@ -9,7 +9,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: '#1C1C1A',
+          background: '#F8F6F2',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -20,17 +20,17 @@ export default async function Image() {
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
-          <div style={{ fontSize: '18px', fontWeight: 300, color: '#C9A96E', letterSpacing: '6px', textTransform: 'uppercase' as const }}>
+          <div style={{ fontSize: '18px', fontWeight: 300, color: '#8A7A5A', letterSpacing: '6px', textTransform: 'uppercase' as const }}>
             What We Do
           </div>
-          <div style={{ fontSize: '88px', fontWeight: 700, color: '#F0EDE6', letterSpacing: '-2px' }}>
+          <div style={{ fontSize: '88px', fontWeight: 700, color: '#1A1A1A', letterSpacing: '-2px' }}>
             Services
           </div>
-          <div style={{ width: '60px', height: '2px', background: '#C9A96E' }} />
+          <div style={{ width: '60px', height: '2px', background: '#8A7A5A' }} />
           <div style={{ fontSize: '22px', fontWeight: 300, color: 'rgba(240, 237, 230, 0.65)', letterSpacing: '2px', textAlign: 'center' as const }}>
             3D Visualization · Interior Design · Conceptual · Consulting
           </div>
-          <div style={{ fontSize: '14px', fontWeight: 300, color: '#C9A96E', letterSpacing: '6px', textTransform: 'uppercase' as const, marginTop: '24px' }}>
+          <div style={{ fontSize: '14px', fontWeight: 300, color: '#8A7A5A', letterSpacing: '6px', textTransform: 'uppercase' as const, marginTop: '24px' }}>
             Somaz Studio · Miami
           </div>
         </div>
