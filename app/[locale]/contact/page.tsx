@@ -59,11 +59,11 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         telephone: '+17865377682',
         email: 'hola@somazstudio.com',
         availableLanguage: ['English', 'Spanish'],
-        contactOption: 'TollFree',
       },
       sameAs: [
         'https://instagram.com/somazstudio',
         'https://linkedin.com/company/somazstudio',
+        'https://tiktok.com/@somazstudio',
       ],
     },
   ])

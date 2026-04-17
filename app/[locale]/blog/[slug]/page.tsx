@@ -69,7 +69,7 @@ export default async function BlogPostPage(props: Props) {
         '@type': 'Person',
         name: 'Sofía Mazzucco',
         url: 'https://somazstudio.com/en/about',
-        jobTitle: 'Architect & Interior Designer',
+        jobTitle: 'Space Designer & Interior Designer',
         worksFor: { '@type': 'Organization', name: 'Somaz Studio', url: 'https://somazstudio.com' },
       },
       publisher: { '@type': 'Organization', name: 'Somaz Studio', url: 'https://somazstudio.com', logo: { '@type': 'ImageObject', url: 'https://somazstudio.com/logos/logo-smz.png' } },
