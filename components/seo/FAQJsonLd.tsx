@@ -1,5 +1,3 @@
-import Script from 'next/script'
-
 const faqs = [
   {
     question: 'What is 3D architectural visualization?',
@@ -38,11 +36,6 @@ export default function FAQJsonLd() {
   }
 
   return (
-    <Script
-      id="faq-ldjson"
-      type="application/ld+json"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
   )
 }

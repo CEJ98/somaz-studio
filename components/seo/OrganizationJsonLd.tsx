@@ -1,5 +1,3 @@
-import Script from 'next/script'
-
 export default function OrganizationJsonLd() {
   const schema = {
     '@context': 'https://schema.org',
@@ -18,6 +16,7 @@ export default function OrganizationJsonLd() {
     sameAs: [
       'https://www.instagram.com/somazstudio',
       'https://www.linkedin.com/company/somazstudio',
+      'https://www.tiktok.com/@somazstudio',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
@@ -28,11 +27,6 @@ export default function OrganizationJsonLd() {
   }
 
   return (
-    <Script
-      id="organization-ldjson"
-      type="application/ld+json"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
   )
 }

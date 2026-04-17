@@ -38,8 +38,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Sofía Mazzucco',
-      jobTitle: 'Architect & Interior Designer',
-      description: 'Argentine architect and interior designer based in Miami, FL. Founder of Somaz Studio. Specializing in 3D visualization, interior design, and spatial conceptualization with projects across the US and Latin America.',
+      jobTitle: 'Space Designer & Interior Designer',
+      description: 'Founder of Somaz Studio. Space designer and interior designer based in Miami, FL, with over 5 years of experience in 3D architectural visualization and interior design. Projects across the US, Latin America, and the Middle East.',
       url: `https://somazstudio.com/${locale}/about`,
       image: 'https://somazstudio.com/about-hero.jpg',
       email: 'hola@somazstudio.com',
@@ -53,6 +53,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
       sameAs: [
         'https://instagram.com/somazstudio',
         'https://linkedin.com/company/somazstudio',
+        'https://tiktok.com/@somazstudio',
       ],
       worksFor: {
         '@type': 'Organization',

@@ -14,6 +14,16 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.somazstudio.com' }],
+        destination: 'https://somazstudio.com/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       {

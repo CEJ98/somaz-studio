@@ -1,10 +1,9 @@
-import Script from 'next/script'
-
 export default function LocalBusinessJsonLd() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Somaz Studio',
+    description: 'Miami-based design studio specializing in 3D architectural visualization, interior design, and spatial concepts. Working globally in English and Spanish.',
     image: 'https://somazstudio.com/logos/logo-white.png',
     url: 'https://somazstudio.com',
     telephone: '+1-786-537-7682',
@@ -34,13 +33,18 @@ export default function LocalBusinessJsonLd() {
       '@type': 'Place',
       name: 'Worldwide',
     },
+    sameAs: [
+      'https://www.instagram.com/somazstudio',
+      'https://www.linkedin.com/company/somazstudio',
+      'https://www.tiktok.com/@somazstudio',
+    ],
   }
 
+  // Hardcoded JSON-LD — no user input, safe for dangerouslySetInnerHTML
   return (
-    <Script
-      id="local-business-ldjson"
+    <script
       type="application/ld+json"
-      strategy="afterInteractive"
+      suppressHydrationWarning
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   )

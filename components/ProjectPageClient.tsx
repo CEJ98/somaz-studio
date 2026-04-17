@@ -121,7 +121,7 @@ function Lightbox({
       >
         <Image
           src={images[current]}
-          alt={`${projectTitle} — ${current + 1}`}
+          alt={`${projectTitle} — photo ${current + 1} of ${images.length}`}
           fill
           className="object-contain"
           sizes="90vw"
@@ -176,7 +176,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
         <motion.div className="absolute inset-0 scale-110" style={{ y: heroY }}>
           <Image
             src={project.images[0]}
-            alt={project.title}
+            alt={`${project.title} — ${project.category} · ${project.location}`}
             fill
             className="object-cover cursor-zoom-in"
             priority
@@ -284,7 +284,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
                 >
                   <Image
                     src={img}
-                    alt={`${project.title} — view ${i + 2}`}
+                    alt={`${project.title} — ${project.category} · ${project.location}`}
                     fill
                     className="object-cover hover:scale-[1.02] transition-transform duration-500"
                     sizes={isFullWidth ? '100vw' : '(max-width: 768px) 100vw, 50vw'}

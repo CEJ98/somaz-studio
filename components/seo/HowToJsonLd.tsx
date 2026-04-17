@@ -1,7 +1,3 @@
-'use client'
-
-import Script from 'next/script'
-
 export default function HowToJsonLd() {
   const schema = {
     '@context': 'https://schema.org',
@@ -34,11 +30,6 @@ export default function HowToJsonLd() {
   }
 
   return (
-    <Script
-      id="howto-ldjson"
-      type="application/ld+json"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
   )
 }
