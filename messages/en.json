@@ -9,7 +9,7 @@
     "work": "Work",
     "services": "Services",
     "about": "About",
-    "notes": "Notes",
+    "notes": "Blog",
     "contact": "Contact",
     "startProject": "Start a Project",
     "freeConsult": "Book a free 15-min consultation",
@@ -34,12 +34,14 @@
   },
   "home": {
     "badge": "Miami · Global · Est. 2022",
-    "heroLine1": "Space is",
-    "heroLine2": "the message.",
-    "heroSubline": "We make spaces speak before they exist.",
+    "heroLine1": "3D Visualization &",
+    "heroLine2": "Interior Design.",
+    "heroSubline": "Miami-based design studio. Photorealistic renders delivered in 48–72h.",
     "viewOurWork": "View Our Work",
     "startProject": "Start a Project",
     "freeConsult": "Book a free 15-min consultation",
+    "getEstimate": "Get a free estimate →",
+    "availability": "Now accepting projects for Q2 · Q3 2025",
     "scroll": "Scroll",
     "selectedWork": "Selected Work",
     "spacesTagline": "Spaces that define culture.",
@@ -59,8 +61,10 @@
     "step03Title": "Deliver",
     "step03Desc": "Final renders, drawings, or design packages delivered on schedule. Clear, complete, ready to use.",
     "statsProjects": "Projects Delivered",
+    "statsProjectsHint": "Residential · Commercial · Hospitality",
     "statsCountries": "Countries Served",
     "statsResponse": "Response Time",
+    "statsResponseHint": "Guaranteed first reply",
     "testimonials": "Testimonials",
     "whatClientsSay": "What clients say.",
     "startConversation": "Start a conversation",
@@ -91,7 +95,8 @@
     "intro": "A curated selection of 3D visualization, interior design, and conceptual projects — each one shaped by a distinct vision.",
     "ctaLabel": "Start a Project",
     "ctaHeading": "Ready to bring your vision to life?",
-    "ctaButton": "Get in Touch"
+    "ctaButton": "Get in Touch",
+    "marketAll": "All Markets"
   },
   "project": {
     "categoryLabel": "Category",
@@ -110,7 +115,8 @@
     "prevImage": "Previous image",
     "nextImage": "Next image",
     "imageOf": "of",
-    "wantSimilar": "I want something similar"
+    "wantSimilar": "I want something similar",
+    "relatedWork": "Related Work"
   },
   "categories": {
     "All": "All",
@@ -219,6 +225,11 @@
     "budget15to50k": "$15K – $50K",
     "budget50kplus": "$50K+",
     "budgetNotSure": "Not sure yet",
+    "timeline": "Timeline",
+    "timelineUrgent": "Urgent (under 2 weeks)",
+    "timelineNormal": "2–6 weeks",
+    "timelineFlexible": "Flexible",
+    "timelineNotSure": "Not sure yet",
     "formTime": "6 fields · 60 seconds",
     "trustCopy": "24h response · No commitment · NDA available"
   },
@@ -255,7 +266,11 @@
     "ctaLabel": "Turn your vision into reality",
     "ctaButton": "Let's talk about your project",
     "prevPost": "Previous",
-    "nextPost": "Next"
+    "nextPost": "Next",
+    "relatedServiceProcess": "Explore our process & services",
+    "relatedServiceProjects": "See our portfolio",
+    "relatedServiceThinking": "How we apply this in every project",
+    "relatedServiceAction": "See how →"
   },
   "notfound": {
     "label": "Page not found",

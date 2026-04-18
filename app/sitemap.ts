@@ -14,8 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/services', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: SITE_LAST_UPDATED },
     { path: '/about', changeFrequency: 'yearly' as const, priority: 0.7, lastMod: new Date('2024-06-01') },
     { path: '/contact', changeFrequency: 'yearly' as const, priority: 0.8, lastMod: new Date('2024-06-01') },
-    { path: '/privacy', changeFrequency: 'yearly' as const, priority: 0.3, lastMod: new Date('2024-01-01') },
-    { path: '/terms', changeFrequency: 'yearly' as const, priority: 0.3, lastMod: new Date('2024-01-01') },
     { path: '/blog', changeFrequency: 'monthly' as const, priority: 0.7, lastMod: SITE_LAST_UPDATED },
   ]
 

@@ -11,9 +11,9 @@ export default function SocialProof() {
   const reduced = useReducedMotion()
 
   const stats = [
-    { value: 50, suffix: '+', label: t('statsProjects') },
-    { value: 8,  suffix: '+', label: t('statsCountries') },
-    { value: 24, suffix: 'h', label: t('statsResponse') },
+    { value: 50, suffix: '+', label: t('statsProjects'), hint: t('statsProjectsHint') },
+    { value: 8,  suffix: '+', label: t('statsCountries'), hint: 'AR · US · MX · CO · PE · UY · ES · UAE' },
+    { value: 24, suffix: 'h', label: t('statsResponse'), hint: t('statsResponseHint') },
   ]
 
   return (
@@ -32,6 +32,7 @@ export default function SocialProof() {
               >
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-foreground/60">{stat.label}</p>
+                <p className="font-sans text-[9px] tracking-[0.15em] text-foreground/30 mt-2 hidden md:block">{stat.hint}</p>
               </motion.div>
             ))}
           </div>

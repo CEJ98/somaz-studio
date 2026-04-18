@@ -9,6 +9,12 @@ import { Icon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
 import ProjectModal from '@/components/ProjectModal'
 import { projects, categories, type Project, type ProjectCategory } from '@/data/projects'
+
+type ProjectMarket = 'All' | 'Miami' | 'LATAM'
+const markets: ProjectMarket[] = ['All', 'Miami', 'LATAM']
+function getMarket(location: string): 'Miami' | 'LATAM' {
+  return location.toLowerCase().includes('miami') ? 'Miami' : 'LATAM'
+}
 import { ease } from '@/lib/motion'
 
 const editorialPattern = [
@@ -21,6 +27,7 @@ export default function WorkClient() {
   const tw = useTranslations('work')
   const tc = useTranslations('categories')
   const [active, setActive] = useState<ProjectCategory>('All')
+  const [activeMarket, setActiveMarket] = useState<ProjectMarket>('All')
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const reduced = useReducedMotion()
@@ -38,7 +45,11 @@ export default function WorkClient() {
     return () => observer.disconnect()
   }, [])
 
-  const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
+  const filtered = projects.filter((p) => {
+    const matchesCategory = active === 'All' || p.category === active
+    const matchesMarket = activeMarket === 'All' || getMarket(p.location) === activeMarket
+    return matchesCategory && matchesMarket
+  })
 
   return (
     <div className="min-h-screen pb-28">
@@ -85,7 +96,30 @@ export default function WorkClient() {
           {tw('intro')}
         </p>
 
-        {/* Filters */}
+        {/* Market filter */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15, ease }}
+          className="flex flex-wrap gap-2 mb-3"
+        >
+          {markets.map((market) => (
+            <button
+              key={market}
+              onClick={() => setActiveMarket(market)}
+              aria-pressed={activeMarket === market}
+              className={`font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-2 transition-all duration-300 ${
+                activeMarket === market
+                  ? 'text-foreground bg-foreground/8 border-b border-foreground/40'
+                  : 'text-foreground/40 hover:text-foreground/70'
+              }`}
+            >
+              {market === 'All' ? tw('marketAll') : market}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Category filters */}
         <motion.div
           initial={reduced ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -20,7 +20,7 @@ export default function OrganizationJsonLd() {
     ],
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+1-786-537-7682',
+      telephone: '+17865377682',
       contactType: 'customer service',
       availableLanguage: ['English', 'Spanish'],
     },

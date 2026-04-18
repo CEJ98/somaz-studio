@@ -9,7 +9,7 @@
     "work": "Trabajo",
     "services": "Servicios",
     "about": "Nosotros",
-    "notes": "Notas",
+    "notes": "Blog",
     "contact": "Contacto",
     "startProject": "Iniciar Proyecto",
     "freeConsult": "Reservar consulta gratuita de 15 min",
@@ -34,12 +34,14 @@
   },
   "home": {
     "badge": "Miami · Global · Est. 2022",
-    "heroLine1": "El espacio es",
-    "heroLine2": "el mensaje.",
-    "heroSubline": "Hacemos que los espacios hablen antes de existir.",
+    "heroLine1": "Visualización 3D y",
+    "heroLine2": "Diseño de Interiores.",
+    "heroSubline": "Estudio en Miami. Renders fotorrealistas entregados en 48–72h.",
     "viewOurWork": "Ver Nuestro Trabajo",
     "startProject": "Iniciar Proyecto",
     "freeConsult": "Reservar consulta gratuita de 15 min",
+    "getEstimate": "Obtener estimado gratis →",
+    "availability": "Aceptando proyectos para Q2 · Q3 2025",
     "scroll": "Desplazar",
     "selectedWork": "Trabajo Selecto",
     "spacesTagline": "Espacios que definen cultura.",
@@ -59,8 +61,10 @@
     "step03Title": "Entregar",
     "step03Desc": "Renders finales, planos o paquetes de diseño entregados a tiempo. Claros, completos, listos para usar.",
     "statsProjects": "Proyectos Entregados",
+    "statsProjectsHint": "Residencial · Comercial · Hotelería",
     "statsCountries": "Países Atendidos",
     "statsResponse": "Tiempo de Respuesta",
+    "statsResponseHint": "Primera respuesta garantizada",
     "testimonials": "Testimonios",
     "whatClientsSay": "Lo que dicen los clientes.",
     "startConversation": "Iniciar una conversación",
@@ -91,7 +95,8 @@
     "intro": "Una selección curada de proyectos de visualización 3D, diseño de interiores y diseño conceptual — cada uno moldeado por una visión distinta.",
     "ctaLabel": "Iniciar un Proyecto",
     "ctaHeading": "¿Listo para llevar tu visión a la realidad?",
-    "ctaButton": "Contáctanos"
+    "ctaButton": "Contáctanos",
+    "marketAll": "Todos los Mercados"
   },
   "project": {
     "categoryLabel": "Categoría",
@@ -110,7 +115,8 @@
     "prevImage": "Imagen anterior",
     "nextImage": "Imagen siguiente",
     "imageOf": "de",
-    "wantSimilar": "Quiero algo similar"
+    "wantSimilar": "Quiero algo similar",
+    "relatedWork": "Trabajo Relacionado"
   },
   "categories": {
     "All": "Todos",
@@ -219,6 +225,11 @@
     "budget15to50k": "$15K – $50K",
     "budget50kplus": "$50K+",
     "budgetNotSure": "No estoy seguro aún",
+    "timeline": "Timeline",
+    "timelineUrgent": "Urgente (menos de 2 semanas)",
+    "timelineNormal": "2–6 semanas",
+    "timelineFlexible": "Flexible",
+    "timelineNotSure": "No sé aún",
     "formTime": "6 campos · 60 segundos",
     "trustCopy": "Respuesta en 24h · Sin compromiso · NDA disponible"
   },
@@ -255,7 +266,11 @@
     "ctaLabel": "Convertí tu visión en realidad",
     "ctaButton": "Hablemos de tu proyecto",
     "prevPost": "Anterior",
-    "nextPost": "Siguiente"
+    "nextPost": "Siguiente",
+    "relatedServiceProcess": "Explorá nuestros servicios",
+    "relatedServiceProjects": "Ver nuestro portfolio",
+    "relatedServiceThinking": "Cómo aplicamos esto en cada proyecto",
+    "relatedServiceAction": "Ver cómo →"
   },
   "notfound": {
     "label": "Página no encontrada",

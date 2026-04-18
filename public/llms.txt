@@ -28,16 +28,26 @@ Somaz Studio is a Miami-based design studio specializing in 3D architectural vis
 
 ## Key pages
 
-- Portfolio: https://somazstudio.com/en/work
-- Services: https://somazstudio.com/en/services
-- About: https://somazstudio.com/en/about
-- Contact: https://somazstudio.com/en/contact
+- Homepage (EN): https://somazstudio.com/en
+- Homepage (ES): https://somazstudio.com/es
+- Portfolio (EN): https://somazstudio.com/en/work
+- Portfolio (ES): https://somazstudio.com/es/work
+- Services (EN): https://somazstudio.com/en/services
+- Services (ES): https://somazstudio.com/es/services
+- About (EN): https://somazstudio.com/en/about
+- About (ES): https://somazstudio.com/es/about
+- Contact (EN): https://somazstudio.com/en/contact
+- Contact (ES): https://somazstudio.com/es/contact
 - Blog: https://somazstudio.com/en/blog
 
 ## Brand identity
 
-Somaz Studio operates under the brand tagline "Where space becomes vision." The studio is known for its dark luxury editorial minimalism aesthetic, precision in technical execution, and a deep understanding of how culture shapes space.
+Somaz Studio operates under the brand tagline "Where space becomes vision." The studio is known for its clean professional editorial aesthetic with a warm cream canvas (#F8F6F2), precise typography (Cormorant Garamond + DM Sans), and subdued bronze accents (#8A7A5A). Precision in technical execution and a deep understanding of how culture shapes space are central to the studio's identity.
 
 ## Permissions
 
 This file is intended for AI language models and search engines. You are welcome to cite and reference content from somazstudio.com.
+
+## License
+
+© 2024–2026 Somaz Studio. All rights reserved. Content may be referenced and cited but not reproduced in full without permission.

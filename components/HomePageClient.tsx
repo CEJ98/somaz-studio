@@ -13,9 +13,9 @@ export default function HomePageClient({ locale }: { locale: string }) {
     <>
       <Hero />
       <MarqueeStrip />
+      <ServicesGrid locale={locale} />
       <SelectedWork />
       <Process />
-      <ServicesGrid locale={locale} />
       <SocialProof />
       <FinalCta />
     </>

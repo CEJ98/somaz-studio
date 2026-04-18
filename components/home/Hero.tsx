@@ -58,14 +58,20 @@ export default function Hero() {
         className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-10 pb-20 md:pb-28"
         style={{ opacity: heroOpacity }}
       >
-        <motion.p
-          className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent mb-6"
+        <motion.div
+          className="flex flex-wrap items-center gap-4 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.2 }}
         >
-          {t('badge')}
-        </motion.p>
+          <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent">
+            {t('badge')}
+          </p>
+          <span className="hidden sm:inline-flex items-center gap-1.5 border border-accent/30 px-3 py-1 font-sans text-[9px] tracking-[0.2em] uppercase text-accent/70">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent/60 animate-pulse" />
+            {t('availability')}
+          </span>
+        </motion.div>
 
         <motion.h1
           className="font-serif leading-[0.9] tracking-tight mb-8"
@@ -117,26 +123,34 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
+          className="flex flex-col items-start gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.65 }}
         >
-          <MagneticButton>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <MagneticButton>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
+              >
+                {t('startProject')}
+                <Icon name="north_east" size={16} />
+              </Link>
+            </MagneticButton>
             <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
+              href="/work"
+              className="inline-flex items-center gap-2 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
-              {t('startProject')}
-              <Icon name="north_east" size={16} />
+              {t('viewOurWork')}
+              <Icon name="north_east" size={14} />
             </Link>
-          </MagneticButton>
+          </div>
           <Link
-            href="/work"
-            className="inline-flex items-center gap-2 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+            href="/contact?type=quote"
+            className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
           >
-            {t('viewOurWork')}
-            <Icon name="north_east" size={14} />
+            {t('getEstimate')}
           </Link>
         </motion.div>
       </motion.div>

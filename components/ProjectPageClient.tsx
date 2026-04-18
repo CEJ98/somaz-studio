@@ -296,6 +296,40 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
         </div>
       )}
 
+      {/* Related Work */}
+      {(() => {
+        const related = allProjects
+          .filter((p) => p.slug !== project.slug && p.category === project.category)
+          .slice(0, 3)
+        if (related.length === 0) return null
+        return (
+          <div className="max-w-7xl mx-auto px-6 md:px-10 mb-24">
+            <div className="border-t border-border/30 pt-14 mb-10">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/40">{tp('relatedWork')}</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
+              {related.map((p) => (
+                <Link key={p.slug} href={`/work/${p.slug}`} className="group relative block overflow-hidden aspect-[4/3]">
+                  <Image
+                    src={p.coverImage}
+                    alt={p.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                  />
+                  <div className="absolute inset-0 bg-background/60 group-hover:bg-background/40 transition-colors duration-500" />
+                  <div className="absolute bottom-0 left-0 p-5">
+                    <p className="font-sans text-[9px] tracking-[0.25em] uppercase text-accent/80 mb-1">{catLabel(p.category)}</p>
+                    <p className="font-serif text-lg text-foreground">{p.title}</p>
+                    <p className="font-sans text-xs text-foreground/50 mt-0.5">{p.location} — {p.year}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )
+      })()}
+
       {/* Previous / Next Project */}
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Prev */}

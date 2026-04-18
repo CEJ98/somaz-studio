@@ -122,6 +122,10 @@ export default async function BlogPostPage(props: Props) {
             <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/25">
               {readingTime} {locale === 'es' ? 'min de lectura' : 'min read'}
             </p>
+            <span className="w-px h-3 bg-border/40" aria-hidden="true" />
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/25">
+              Sofía Mazzucco
+            </p>
           </div>
           <div className="relative aspect-[16/7] overflow-hidden mb-16">
             <Image src={post.coverImage} alt={localizedTitle} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 800px" />
@@ -131,6 +135,29 @@ export default async function BlogPostPage(props: Props) {
               <p key={i} className="font-sans font-light text-foreground/60 text-base leading-[1.85]">{para}</p>
             ))}
           </div>
+
+          {/* Service callout — contextual internal link */}
+          {(() => {
+            const isProjects = post.category === 'Projects'
+            const href = isProjects ? '/work' : '/services'
+            const label = isProjects
+              ? tb('relatedServiceProjects')
+              : post.category === 'Process'
+              ? tb('relatedServiceProcess')
+              : tb('relatedServiceThinking')
+            return (
+              <div className="mt-12 border-t border-border/30 pt-8 flex items-center justify-between gap-4">
+                <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/40">{label}</p>
+                <Link
+                  href={href}
+                  className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent hover:text-accent/70 transition-colors duration-300 shrink-0"
+                >
+                  {tb('relatedServiceAction')}
+                </Link>
+              </div>
+            )
+          })()}
+
           {/* Prev / Next navigation */}
           {(prevPost || nextPost) && (
             <nav aria-label="Post navigation" className="flex justify-between gap-4 mt-16 pt-8 border-t border-border">

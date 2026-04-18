@@ -130,7 +130,7 @@ export default function ContactForm() {
   const searchParams = useSearchParams()
   const VALID_TYPES = ['3d-visualization', 'interior-design', 'conceptual-design', 'consulting', 'full-studio-partnership', 'other']
   const rawType = searchParams.get('type') ?? ''
-  const preselectedType = VALID_TYPES.includes(rawType) ? rawType : (rawType === 'consult' ? 'consulting' : '')
+  const preselectedType = VALID_TYPES.includes(rawType) ? rawType : (rawType === 'consult' ? 'consulting' : rawType === 'quote' ? '3d-visualization' : '')
   const [status, setStatus] = useState<Status>('idle')
   const [msgLen, setMsgLen] = useState(0)
   const reduced = useReducedMotion()
@@ -228,7 +228,24 @@ export default function ContactForm() {
           <option value="other">{tf('optOther')}</option>
         </FloatingSelect>
 
-        {/* Row 3: Message (opcional) */}
+        {/* Row 3: Budget + Timeline */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <FloatingSelect id="budget_range" name="budget_range" label={tf('budgetRange')}>
+            <option value="under-5k">{tf('budgetUnder5k')}</option>
+            <option value="5k-15k">{tf('budget5to15k')}</option>
+            <option value="15k-50k">{tf('budget15to50k')}</option>
+            <option value="50k-plus">{tf('budget50kplus')}</option>
+            <option value="not-sure">{tf('budgetNotSure')}</option>
+          </FloatingSelect>
+          <FloatingSelect id="timeline" name="timeline" label={tf('timeline')}>
+            <option value="urgent">{tf('timelineUrgent')}</option>
+            <option value="normal">{tf('timelineNormal')}</option>
+            <option value="flexible">{tf('timelineFlexible')}</option>
+            <option value="not-sure">{tf('timelineNotSure')}</option>
+          </FloatingSelect>
+        </div>
+
+        {/* Row 4: Message (opcional) */}
         <div>
           <label htmlFor="message" className={labelClass}>{tf('message')}</label>
           <textarea

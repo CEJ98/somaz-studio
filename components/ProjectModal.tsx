@@ -2,10 +2,11 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
+import { t as tr } from '@/lib/locale'
 import type { Project } from '@/data/projects'
 
 interface ProjectModalProps {
@@ -15,6 +16,8 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const tc = useTranslations('categories')
+  const tp = useTranslations('project')
+  const locale = useLocale()
   const [activeIndex, setActiveIndex] = useState(0)
   const reduced = useReducedMotion()
 
@@ -77,8 +80,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             {activeIndex + 1} / {project.images.length}
           </div>
 
-          {/* Main image */}
-          <div className="relative z-10 w-full max-w-6xl px-6 md:px-16">
+          {/* Main content */}
+          <div className="relative z-10 w-full max-w-6xl px-6 md:px-16 overflow-y-auto max-h-[90vh] py-14 md:py-16 scrollbar-thin">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`${project.slug}-${activeIndex}`}
@@ -149,6 +152,30 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   {project.location} — {project.year}
                   {project.area && ` — ${project.area}`}
                 </p>
+              </div>
+            </div>
+
+            {/* Case study: brief → description → outcome */}
+            <div className="mt-8 border-t border-border/30 pt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="md:col-span-1">
+                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/35 mb-3">Brief</p>
+                <p className="font-sans font-light text-foreground/60 text-sm leading-relaxed">
+                  {tr(project.brief, locale)}
+                </p>
+              </div>
+              <div className="md:col-span-2">
+                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/35 mb-3">Overview</p>
+                <p className="font-sans font-light text-foreground/60 text-sm leading-relaxed">
+                  {tr(project.description, locale)}
+                </p>
+                {project.outcome && (
+                  <div className="mt-6 border-l-2 border-accent/40 pl-4">
+                    <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/60 mb-2">{tp('outcomeLabel')}</p>
+                    <p className="font-sans font-light text-foreground/55 text-sm leading-relaxed italic">
+                      {tr(project.outcome, locale)}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
