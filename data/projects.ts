@@ -20,10 +20,10 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Casa Marchetti',
-    slug: 'casa-marchetti',
+    title: 'Casa Concepción',
+    slug: 'casa-concepcion',
     category: '3D Visualization',
-    location: 'Concepción del Uruguay, Argentina',
+    location: 'Catamarca, Argentina',
     year: 2024,
     coverImage: '/projects/casa-marchetti/cover.jpg',
     images: [
@@ -34,12 +34,12 @@ export const projects: Project[] = [
       '/projects/casa-marchetti/04.jpg',
     ],
     brief: {
-      en: 'Full 3D visualization for a private residence in the Entre Ríos countryside.',
-      es: 'Visualización 3D completa para una residencia privada en el campo de Entre Ríos.',
+      en: 'Full 3D visualization for a private residence in the Catamarca countryside.',
+      es: 'Visualización 3D completa para una residencia privada en el campo de Catamarca.',
     },
     description: {
-      en: 'A residential project set in the rolling landscape of Concepción del Uruguay. The design integrates large glass openings that frame the surrounding terrain, creating a continuous dialogue between interior space and the natural environment. We delivered a complete set of photorealistic renders covering the exterior, main living areas, and key architectural details.',
-      es: 'Un proyecto residencial en el ondulado paisaje de Concepción del Uruguay. El diseño integra grandes aperturas de vidrio que enmarcan el terreno circundante, creando un diálogo continuo entre el espacio interior y el entorno natural. Entregamos un conjunto completo de renders fotorrealistas del exterior, las áreas principales y los detalles arquitectónicos clave.',
+      en: 'A residential project set in the landscape of Catamarca. The design integrates large glass openings that frame the surrounding terrain, creating a continuous dialogue between interior space and the natural environment. We delivered a complete set of photorealistic renders covering the exterior, main living areas, and key architectural details.',
+      es: 'Un proyecto residencial en el paisaje de Catamarca. El diseño integra grandes aperturas de vidrio que enmarcan el terreno circundante, creando un diálogo continuo entre el espacio interior y el entorno natural. Entregamos un conjunto completo de renders fotorrealistas del exterior, las áreas principales y los detalles arquitectónicos clave.',
     },
     outcome: {
       en: 'Full render set delivered in 5 business days — client used images for bank financing approval.',
