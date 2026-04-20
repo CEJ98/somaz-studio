@@ -106,7 +106,7 @@ export default function SelectedWork() {
             transition={{ duration: 0.9, ease, delay: 0.15 }}
           >
             <Link href={`/work/${selected[3].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[16/7] mb-5">
+              <div className="relative overflow-hidden aspect-[16/9] mb-5">
                 <Image
                   src={selected[3].coverImage}
                   alt={selected[3].title}

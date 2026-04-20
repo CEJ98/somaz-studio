@@ -106,10 +106,10 @@ export const projects: Project[] = [
     location: 'Argentina',
     year: 2024,
     area: '180 m²',
-    coverImage: '/projects/casa-estancita/cover.jpg',
+    coverImage: '/projects/casa-estancita/01.jpg',
     images: [
-      '/projects/casa-estancita/cover.jpg',
       '/projects/casa-estancita/01.jpg',
+      '/projects/casa-estancita/cover.jpg',
       '/projects/casa-estancita/02.jpg',
       '/projects/casa-estancita/03.jpg',
       '/projects/casa-estancita/04.jpg',
@@ -228,10 +228,10 @@ export const projects: Project[] = [
     location: 'Argentina',
     year: 2024,
     area: '120 m²',
-    coverImage: '/projects/duplex-nati-sola/cover.jpg',
+    coverImage: '/projects/duplex-nati-sola/01.jpg',
     images: [
-      '/projects/duplex-nati-sola/cover.jpg',
       '/projects/duplex-nati-sola/01.jpg',
+      '/projects/duplex-nati-sola/cover.jpg',
     ],
     brief: {
       en: 'Conceptual design for a compact modern duplex with efficient spatial organization.',
@@ -270,10 +270,10 @@ export const projects: Project[] = [
     category: 'Conceptual Design',
     location: 'Argentina',
     year: 2024,
-    coverImage: '/projects/tres-patios/cover.jpg',
+    coverImage: '/projects/tres-patios/01.jpg',
     images: [
-      '/projects/tres-patios/cover.jpg',
       '/projects/tres-patios/01.jpg',
+      '/projects/tres-patios/cover.jpg',
       '/projects/tres-patios/02.jpg',
     ],
     brief: {

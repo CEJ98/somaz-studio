@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
 import { t as tr } from '@/lib/locale'
@@ -153,6 +154,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   {project.area && ` — ${project.area}`}
                 </p>
               </div>
+              <Link
+                href={`/work/${project.slug}`}
+                onClick={onClose}
+                className="shrink-0 inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300 mt-1"
+              >
+                {tp('viewProject')}
+                <Icon name="north_east" size={12} />
+              </Link>
             </div>
 
             {/* Case study: brief → description → outcome */}
