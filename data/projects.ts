@@ -181,8 +181,8 @@ export const projects: Project[] = [
     size: 'medium',
   },
   {
-    title: 'Dúplex Nati Sola',
-    slug: 'duplex-nati-sola',
+    title: 'Dúplex Mia',
+    slug: 'duplex-mia',
     category: 'Conceptual Design',
     location: 'Argentina',
     year: 2024,
@@ -246,8 +246,8 @@ export const projects: Project[] = [
     size: 'medium',
   },
   {
-    title: 'Casa Fabi & Gastón',
-    slug: 'casa-fabi-gaston',
+    title: 'Casa F&G',
+    slug: 'casa-f-g',
     category: 'Interior Design',
     location: 'Argentina',
     year: 2024,
