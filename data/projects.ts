@@ -102,8 +102,8 @@ export const projects: Project[] = [
     size: 'small',
   },
   {
-    title: 'Casa Mariano — Miami',
-    slug: 'casa-mariano-miami',
+    title: 'Casa M',
+    slug: 'casa-m',
     category: '3D Visualization',
     location: 'Miami, FL',
     year: 2025,
