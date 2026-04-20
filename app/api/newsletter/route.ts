@@ -15,6 +15,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Email required' }, { status: 400 })
     }
 
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!EMAIL_RE.test(email)) {
+      return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
+    }
+
     const resend = getResend()
     if (resend && process.env.RESEND_AUDIENCE_ID) {
       try {

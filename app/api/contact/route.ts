@@ -25,9 +25,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true })
     }
 
-    const { name, email, phone, project_type, budget, sqft, message } = body
+    const { name, email, phone, project_type, budget_range, sqft, message } = body
 
-    if (!name || !email || !project_type || !budget || !message) {
+    if (!name || !email || !project_type || !budget_range) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       const eEmail = escapeHtml(email)
       const ePhone = phone ? escapeHtml(phone) : ''
       const eProjectType = escapeHtml(project_type)
-      const eBudget = escapeHtml(budget)
+      const eBudget = escapeHtml(budget_range)
       const eSqft = sqft ? escapeHtml(String(sqft)) : ''
       const eMessage = escapeHtml(message).replace(/\n/g, '<br>')
       await resend.emails.send({
