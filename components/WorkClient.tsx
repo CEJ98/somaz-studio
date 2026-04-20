@@ -17,11 +17,6 @@ function getMarket(location: string): 'Miami' | 'LATAM' {
 }
 import { ease } from '@/lib/motion'
 
-const editorialPattern = [
-  { span: 'md:col-span-12', aspect: 'aspect-[21/9]' },
-  { span: 'md:col-span-7', aspect: 'aspect-[4/3]' },
-  { span: 'md:col-span-5', aspect: 'aspect-[4/5]' },
-] as const
 
 export default function WorkClient() {
   const tw = useTranslations('work')
@@ -156,26 +151,35 @@ export default function WorkClient() {
           {filtered.length} {filtered.length === 1 ? tw('projectSingular') : tw('projectPlural')}
         </motion.p>
 
-        {/* Editorial Grid — 12 columns */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-12 gap-2">
+        {/* Editorial Grid */}
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <motion.div
-                key={project.slug}
-                layout
-                initial={reduced ? false : { opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.45, delay: reduced ? 0 : i * 0.05, ease }}
-                className={`${editorialPattern[i % 3].span} transition-opacity duration-500 ${
-                  hoveredSlug && hoveredSlug !== project.slug ? 'opacity-30' : 'opacity-100'
-                }`}
-                onMouseEnter={() => setHoveredSlug(project.slug)}
-                onMouseLeave={() => setHoveredSlug(null)}
-              >
-                <ProjectCard project={project} priority={i === 0} aspectRatio={editorialPattern[i % 3].aspect} onView={setSelectedProject} />
-              </motion.div>
-            ))}
+            {filtered.map((project, i) => {
+              const isWide = project.size === 'large'
+              return (
+                <motion.div
+                  key={project.slug}
+                  layout
+                  initial={reduced ? false : { opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.45, delay: reduced ? 0 : i * 0.05, ease }}
+                  className={`${isWide ? 'md:col-span-2' : ''} transition-opacity duration-500 ${
+                    hoveredSlug && hoveredSlug !== project.slug ? 'opacity-30' : 'opacity-100'
+                  }`}
+                  onMouseEnter={() => setHoveredSlug(project.slug)}
+                  onMouseLeave={() => setHoveredSlug(null)}
+                >
+                  <ProjectCard
+                    project={project}
+                    priority={i === 0}
+                    aspectRatio={isWide ? 'aspect-[16/9]' : 'aspect-[3/2]'}
+                    isWide={isWide}
+                    onView={setSelectedProject}
+                  />
+                </motion.div>
+              )
+            })}
           </AnimatePresence>
         </motion.div>
 

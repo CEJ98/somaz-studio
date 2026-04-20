@@ -12,10 +12,11 @@ interface ProjectCardProps {
   priority?: boolean
   featured?: boolean
   aspectRatio?: string
+  isWide?: boolean
   onView?: (project: Project) => void
 }
 
-export default function ProjectCard({ project, priority = false, featured = false, aspectRatio, onView }: ProjectCardProps) {
+export default function ProjectCard({ project, priority = false, featured = false, aspectRatio, isWide = false, onView }: ProjectCardProps) {
   const tc = useTranslations('categories')
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef(null)
@@ -52,7 +53,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
           src={project.coverImage}
           alt={project.title}
           fill
-          sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
+          sizes={isWide ? '100vw' : '(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 672px'}
           className={`object-cover transition-all duration-700 ease-out ${
             hovered
               ? 'scale-[1.04] grayscale-0'
