@@ -8,6 +8,7 @@ import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
 import ProjectModal from '@/components/ProjectModal'
+import ImageCursorTrail from '@/components/ImageCursorTrail'
 import { projects, categories, type Project, type ProjectCategory } from '@/data/projects'
 
 type ProjectMarket = 'All' | 'Miami' | 'LATAM'
@@ -46,8 +47,13 @@ export default function WorkClient() {
     return matchesCategory && matchesMarket
   })
 
+  const hoveredCoverImage = hoveredSlug
+    ? (projects.find((p) => p.slug === hoveredSlug)?.coverImage ?? null)
+    : null
+
   return (
     <div className="min-h-screen pb-28">
+      <ImageCursorTrail src={hoveredCoverImage} />
       {/* Hero section with background image */}
       <section className="relative h-[50vh] min-h-[360px] flex items-end overflow-hidden">
         <div className="absolute inset-0">

@@ -30,6 +30,9 @@ export default function TestimonialsSection() {
     )
   }
 
+  const quoteText = t(testimonial.quote, locale)
+  const words = quoteText.split(' ')
+
   return (
     <section className="py-24 px-6 md:px-10">
       <div className="max-w-4xl mx-auto relative">
@@ -39,26 +42,52 @@ export default function TestimonialsSection() {
         </p>
 
         {/* Quote */}
-        <div className="relative h-[300px] md:h-[240px]">
+        <div className="relative min-h-[260px] md:min-h-[220px]">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={active}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -24 }}
-              transition={{ duration: 0.5, ease }}
-              className="absolute inset-0 flex flex-col justify-between"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.3, ease }}
+              className="flex flex-col items-center"
             >
               {/* Opening quote mark */}
-              <span className="font-serif text-accent/30 text-8xl leading-none -mt-6 select-none">&ldquo;</span>
+              <motion.span
+                className="font-serif text-accent/30 text-8xl leading-none -mt-6 mb-2 select-none self-start"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease }}
+              >
+                &ldquo;
+              </motion.span>
 
-              {/* Text */}
-              <p className="font-serif text-xl md:text-2xl font-light italic text-foreground/85 leading-relaxed text-center px-4">
-                &ldquo;{t(testimonial.quote, locale)}&rdquo;
+              {/* Word-by-word reveal */}
+              <p className="font-serif text-xl md:text-2xl font-light italic text-foreground/85 leading-relaxed text-center px-4 flex flex-wrap justify-center gap-x-[0.28em] gap-y-1">
+                {words.map((word, i) => (
+                  <motion.span
+                    key={`${active}-${i}`}
+                    custom={i}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: i * 0.035,
+                      duration: 0.45,
+                      ease,
+                    }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
               </p>
 
               {/* Attribution */}
-              <footer className="text-center mt-4">
+              <motion.footer
+                className="text-center mt-6"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: words.length * 0.035 + 0.1, duration: 0.4, ease }}
+              >
                 <p className="font-sans text-sm font-medium text-foreground/90 tracking-wide">
                   {testimonial.name}
                 </p>
@@ -74,7 +103,7 @@ export default function TestimonialsSection() {
                     <Icon name="north_east" size={10} />
                   </Link>
                 )}
-              </footer>
+              </motion.footer>
             </motion.blockquote>
           </AnimatePresence>
         </div>
@@ -92,11 +121,16 @@ export default function TestimonialsSection() {
           {/* Dots */}
           <div className="flex items-center gap-2">
             {testimonials.map((_, i) => (
-              <button
+              <motion.button
                 key={i}
                 onClick={() => setActive(i)}
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  i === active ? 'bg-accent w-6' : 'bg-foreground/25 hover:bg-foreground/50'
+                animate={i === active
+                  ? { scaleY: 1.4, backgroundColor: 'var(--color-accent)' }
+                  : { scaleY: 1, backgroundColor: 'rgba(26,26,26,0.25)' }
+                }
+                transition={{ duration: 0.25, ease }}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === active ? 'w-6' : 'w-1.5 hover:bg-foreground/50'
                 }`}
                 aria-label={`Go to testimonial ${i + 1}`}
               />
@@ -118,7 +152,7 @@ export default function TestimonialsSection() {
 
 function Quote({ testimonial, locale, viewProjectLabel }: { testimonial: Testimonial; locale: 'en' | 'es'; viewProjectLabel: string }) {
   return (
-    <blockquote className="flex flex-col justify-between h-full">
+    <blockquote className="flex flex-col justify-between">
       <span className="font-serif text-accent/30 text-8xl leading-none -mt-6 select-none">&ldquo;</span>
       <p className="font-serif text-xl md:text-2xl font-light italic text-foreground/85 leading-relaxed text-center px-4">
         &ldquo;{t(testimonial.quote, locale)}&rdquo;

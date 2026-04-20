@@ -13,7 +13,8 @@ export default function Hero() {
   const t = useTranslations('home')
   const reduced = useReducedMotion()
   const { scrollY } = useScroll()
-  const heroScale = useTransform(scrollY, [0, 600], reduced ? [1, 1] : [1, 1.08])
+  const heroScale = useTransform(scrollY, [0, 500], reduced ? [1, 1] : [0.93, 1])
+  const heroBorderRadius = useTransform(scrollY, [0, 300], reduced ? [0, 0] : [14, 0])
   const heroOpacity = useTransform(scrollY, [0, 500], reduced ? [1, 1] : [1, 0])
   const scrollIndicatorOpacity = useTransform(scrollY, [0, 150], reduced ? [1, 1] : [1, 0])
 
@@ -25,7 +26,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[100svh] min-h-[700px] overflow-hidden flex flex-col justify-end">
-      <motion.div className="absolute inset-0" style={{ scale: heroScale }}>
+      <motion.div className="absolute inset-0" style={{ scale: heroScale, borderRadius: heroBorderRadius }}>
         <Image
           src="/media/hero-home-poster.jpg"
           alt=""

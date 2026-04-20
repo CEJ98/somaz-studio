@@ -2,16 +2,39 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { projects } from '@/data/projects'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
 import AnimatedSection from '@/components/AnimatedSection'
 
+function ScrollCard({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const reduced = useReducedMotion()
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'center center'],
+  })
+  const y = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [60, 0])
+  const opacity = useTransform(scrollYProgress, [0, 0.4], reduced ? [1, 1] : [0, 1])
+
+  return (
+    <motion.div ref={ref} style={{ y, opacity }} className={className}>
+      {children}
+    </motion.div>
+  )
+}
+
 export default function SelectedWork() {
   const t = useTranslations('home')
-  const reduced = useReducedMotion()
   const selected = projects.slice(0, 4)
 
   return (
@@ -34,13 +57,7 @@ export default function SelectedWork() {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-x-3 gap-y-12">
         {selected[0] && (
-          <motion.div
-            className="md:col-span-8"
-            initial={reduced ? false : { opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.9, ease }}
-          >
+          <ScrollCard className="md:col-span-8">
             <Link href={`/work/${selected[0].slug}`} className="group block">
               <div className="relative overflow-hidden aspect-[4/5] mb-5">
                 <Image
@@ -61,18 +78,12 @@ export default function SelectedWork() {
                 <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>01</span>
               </div>
             </Link>
-          </motion.div>
+          </ScrollCard>
         )}
 
         <div className="md:col-span-4 flex flex-col gap-12">
           {[selected[1], selected[2]].map((proj, i) => proj && (
-            <motion.div
-              key={proj.slug}
-              initial={reduced ? false : { opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.9, ease, delay: (i + 1) * 0.1 }}
-            >
+            <ScrollCard key={proj.slug}>
               <Link href={`/work/${proj.slug}`} className="group block">
                 <div className="relative overflow-hidden aspect-[4/3] mb-4">
                   <Image
@@ -93,18 +104,12 @@ export default function SelectedWork() {
                   <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>0{i + 2}</span>
                 </div>
               </Link>
-            </motion.div>
+            </ScrollCard>
           ))}
         </div>
 
         {selected[3] && (
-          <motion.div
-            className="md:col-start-3 md:col-span-8"
-            initial={reduced ? false : { opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.9, ease, delay: 0.15 }}
-          >
+          <ScrollCard className="md:col-start-3 md:col-span-8">
             <Link href={`/work/${selected[3].slug}`} className="group block">
               <div className="relative overflow-hidden aspect-[16/9] mb-5">
                 <Image
@@ -125,7 +130,7 @@ export default function SelectedWork() {
                 <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>04</span>
               </div>
             </Link>
-          </motion.div>
+          </ScrollCard>
         )}
       </div>
 
