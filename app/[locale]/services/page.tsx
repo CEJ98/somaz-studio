@@ -203,8 +203,8 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
           {/* FAQ Section */}
           <div className="mt-0 pt-16 border-t border-border/40">
             <div>
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-10">{t('faqHeading')}</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 max-w-5xl">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-10 text-center">{t('faqHeading')}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 max-w-5xl mx-auto">
               {[
                 { q: t('faq1Q'), a: t('faq1A') },
                 { q: t('faq2Q'), a: t('faq2A') },

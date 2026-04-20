@@ -67,10 +67,6 @@ export default function Hero() {
           <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent">
             {t('badge')}
           </p>
-          <span className="hidden sm:inline-flex items-center gap-1.5 border border-accent/30 px-3 py-1 font-sans text-[9px] tracking-[0.2em] uppercase text-accent/70">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent/60 animate-pulse" />
-            {t('availability')}
-          </span>
         </motion.div>
 
         <motion.h1
