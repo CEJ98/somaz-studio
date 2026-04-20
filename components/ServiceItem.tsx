@@ -101,13 +101,6 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
             {tl(service.description, locale)}
           </p>
 
-          <Link
-            href={`/contact?type=${slugToProjectType[service.slug] ?? 'other'}`}
-            className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/60 hover:text-accent border-b border-foreground/30 pb-0.5 hover:border-accent transition-all duration-300"
-          >
-            {ts('startProject')}
-            <Icon name="north_east" size={14} />
-          </Link>
         </div>
 
         {/* Right — image + CTA */}

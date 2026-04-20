@@ -18,7 +18,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
     metadataBase,
     title: t('metaTitle'),
     description: t('metaDesc'),
-    openGraph: { title: `${t('metaTitle')} | Somaz Studio`, description: t('ogDesc') },
+    openGraph: { title: t('metaTitle'), description: t('ogDesc') },
     alternates: buildAlternates('/services', locale as 'en' | 'es'),
   }
 }

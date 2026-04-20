@@ -162,9 +162,6 @@ export default function Hero() {
         transition={{ delay: 1.5, duration: 1 }}
         style={{ opacity: scrollIndicatorOpacity }}
       >
-        <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 [writing-mode:vertical-lr]">
-          {t('scroll')}
-        </span>
         <motion.div
           className="w-px h-10 bg-gradient-to-b from-foreground/30 to-transparent"
           animate={reduced ? {} : { scaleY: [1, 0.4, 1] }}

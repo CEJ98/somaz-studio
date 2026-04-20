@@ -98,7 +98,7 @@ export default function Footer() {
               href="https://wa.me/17865377682"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-sans text-xs text-foreground/65 hover:text-accent transition-colors duration-300 inline-block mt-1"
+              className="font-sans text-xs text-foreground/65 hover:text-accent transition-colors duration-300 block mt-1"
             >
               +1 786 537 7682
             </a>
