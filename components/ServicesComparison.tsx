@@ -10,7 +10,6 @@ export default function ServicesComparison({ locale }: Props) {
     service: isEs ? 'Servicio' : 'Service',
     includes: isEs ? 'Incluye' : 'Includes',
     turnaround: isEs ? 'Entrega' : 'Turnaround',
-    starting: isEs ? 'Desde' : 'Starting at',
   }
 
   const rows = [
@@ -20,7 +19,6 @@ export default function ServicesComparison({ locale }: Props) {
         ? 'Renders fotorrealistas, 1–5 vistas, 1 ronda de revisiones'
         : 'Photorealistic renders, 1–5 views, 1 revision round',
       turnaround: isEs ? '48–72h (Essential) · 5–7 días (Standard)' : '48–72h (Essential) · 5–7 days (Standard)',
-      starting: 'USD 480',
     },
     {
       name: 'Interior Design',
@@ -28,7 +26,6 @@ export default function ServicesComparison({ locale }: Props) {
         ? 'Plan espacial, materiales, mobiliario, mood boards'
         : 'Space plan, materials, furniture, mood boards',
       turnaround: isEs ? '3–5 semanas' : '3–5 weeks',
-      starting: 'USD 2.400',
     },
     {
       name: 'Conceptual Design',
@@ -36,7 +33,6 @@ export default function ServicesComparison({ locale }: Props) {
         ? 'Concepto espacial, dirección de diseño, esquemas'
         : 'Spatial concept, design direction, schematics',
       turnaround: isEs ? '2–3 semanas' : '2–3 weeks',
-      starting: 'USD 1.600',
     },
     {
       name: 'Design Consulting',
@@ -44,7 +40,6 @@ export default function ServicesComparison({ locale }: Props) {
         ? 'Sesión 1:1, decisiones, materiales, dirección'
         : '1:1 session, decisions, materials, direction',
       turnaround: isEs ? 'Inmediato' : 'Immediate',
-      starting: isEs ? 'USD 180/hora' : 'USD 180/hour',
     },
   ]
 
@@ -62,7 +57,6 @@ export default function ServicesComparison({ locale }: Props) {
               <th className="text-left px-6 py-4 text-[10px] tracking-[0.25em] uppercase text-foreground/55 font-normal">{headings.service}</th>
               <th className="text-left px-6 py-4 text-[10px] tracking-[0.25em] uppercase text-foreground/55 font-normal">{headings.includes}</th>
               <th className="text-left px-6 py-4 text-[10px] tracking-[0.25em] uppercase text-foreground/55 font-normal">{headings.turnaround}</th>
-              <th className="text-left px-6 py-4 text-[10px] tracking-[0.25em] uppercase text-foreground/55 font-normal">{headings.starting}</th>
             </tr>
           </thead>
           <tbody>
@@ -71,7 +65,6 @@ export default function ServicesComparison({ locale }: Props) {
                 <td className="px-6 py-5 font-serif italic text-foreground">{row.name}</td>
                 <td className="px-6 py-5 font-light text-foreground/65">{row.includes}</td>
                 <td className="px-6 py-5 font-light text-foreground/65">{row.turnaround}</td>
-                <td className="px-6 py-5 text-accent">{row.starting}</td>
               </tr>
             ))}
           </tbody>
@@ -91,10 +84,6 @@ export default function ServicesComparison({ locale }: Props) {
               <div>
                 <span className="text-foreground/45 uppercase tracking-[0.2em] text-[9px] mr-2">{headings.turnaround}:</span>
                 <span className="text-foreground/70">{row.turnaround}</span>
-              </div>
-              <div>
-                <span className="text-foreground/45 uppercase tracking-[0.2em] text-[9px] mr-2">{headings.starting}:</span>
-                <span className="text-accent">{row.starting}</span>
               </div>
             </div>
           </div>

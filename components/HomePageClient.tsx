@@ -7,7 +7,7 @@ import ServicesGrid from '@/components/home/ServicesGrid'
 import SocialProof from '@/components/home/SocialProof'
 import FinalCta from '@/components/home/FinalCta'
 import FAQSection from '@/components/FAQSection'
-import LeadMagnet from '@/components/home/LeadMagnet'
+
 
 export default function HomePageClient({ locale }: { locale: string }) {
   return (
@@ -17,7 +17,6 @@ export default function HomePageClient({ locale }: { locale: string }) {
       <SelectedWork />
       <Process />
       <SocialProof />
-      <LeadMagnet locale={locale} />
       <FAQSection locale={locale} />
       <FinalCta />
     </>

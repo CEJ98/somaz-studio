@@ -9,9 +9,7 @@ import { Link } from '@/i18n/navigation'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
 import { buildAlternates, metadataBase } from '@/lib/seo'
-import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 import ServicesComparison from '@/components/ServicesComparison'
-import ParallaxStorySection from '@/components/ParallaxStorySection'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -185,19 +183,6 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
         </div>
       </PageFade>
 
-      {/* Editorial story break */}
-      <ParallaxStorySection
-        imageSlug="interior-living-luxury-01"
-        eyebrow={locale === 'es' ? 'Nuestro enfoque' : 'Our approach'}
-        title={locale === 'es' ? 'Cada espacio comienza\ncon un brief.' : 'Every space starts\nwith a brief.'}
-        body={locale === 'es'
-          ? 'No fabricamos renders — interpretamos espacios. Cada proyecto parte de entender qué quiere decir el espacio antes de decidir cómo se ve.'
-          : "We don't manufacture renders — we interpret spaces. Every project starts from understanding what the space wants to say before deciding how it looks."}
-        align="right"
-        height="80vh"
-        overlay={0.6}
-      />
-
       <PageFade className="pb-28 px-6 md:px-10">
         <div className="max-w-7xl mx-auto">
 
@@ -227,16 +212,6 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
               ))}
             </div>
           </div>
-
-          {/* Before/After Slider */}
-          <BeforeAfterSlider
-            beforeSrc="/services/before-slider.jpg"
-            afterSrc="/services/after-slider.jpg"
-            beforeLabel={locale === 'es' ? 'Plano técnico' : 'Blueprint'}
-            afterLabel={locale === 'es' ? 'Render final' : 'Final render'}
-            caption={locale === 'es' ? 'De la documentación técnica al render fotorrealista — el mismo proyecto, dos mundos.' : 'From technical documentation to photorealistic render — same project, two worlds.'}
-            locale={locale}
-          />
 
           {/* FAQ Section */}
           <div className="mt-0 pt-16 border-t border-border/40">

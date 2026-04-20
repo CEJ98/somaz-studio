@@ -1,11 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from '@/i18n/navigation'
 import { t as tl } from '@/lib/locale'
-import { pickBySlug } from '@/data/imageLibrary'
 
 interface Props {
   locale: string
@@ -77,32 +75,16 @@ const faqs = [
 export default function FAQSection({ locale }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const reduced = useReducedMotion()
-  const bgImg = pickBySlug('interior-detail-warm-02')
 
   const labelText = locale === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'
   const headingText = locale === 'es' ? 'Respondemos tus dudas.' : 'We answer your questions.'
   const ctaText = locale === 'es' ? '¿Más preguntas? Hablemos.' : 'Still have questions? Let\'s talk.'
 
   return (
-    <section className="border-t border-border/50 relative overflow-hidden">
-      {/* Subtle background texture */}
-      {bgImg && (
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <Image
-            src={bgImg.src}
-            alt=""
-            fill
-            sizes="100vw"
-            placeholder="blur"
-            blurDataURL={bgImg.blurDataURL}
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-background/[0.92]" />
-        </div>
-      )}
-
-      <div className="relative z-10 px-6 md:px-10 py-28 md:py-40">
+    <section className="border-t border-border/50">
+      <div className="px-6 md:px-10 py-28 md:py-40">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24">
+
           {/* Left — header */}
           <div className="lg:col-span-1">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">

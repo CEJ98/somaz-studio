@@ -40,11 +40,7 @@ export default function ServicesGrid({ locale }: Props) {
               {t('designQuote')}
             </blockquote>
           </AnimatedSection>
-          <AnimatedSection className="md:col-span-6 md:col-start-7" delay={0.15}>
-            <p className="font-sans font-light text-foreground/65 leading-relaxed">
-              {t('approachParagraph')}
-            </p>
-          </AnimatedSection>
+
         </div>
 
         <div className="architectural-line mb-12" />
