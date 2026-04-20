@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
 
@@ -9,6 +9,7 @@ interface ImageCursorTrailProps {
 }
 
 export default function ImageCursorTrail({ src }: ImageCursorTrailProps) {
+  const [enabled, setEnabled] = useState(false)
   const mouseX = useMotionValue(-200)
   const mouseY = useMotionValue(-200)
 
@@ -16,13 +17,25 @@ export default function ImageCursorTrail({ src }: ImageCursorTrailProps) {
   const springY = useSpring(mouseY, { stiffness: 110, damping: 22, mass: 0.5 })
 
   useEffect(() => {
+    // Only enable on devices with fine pointer (mouse/trackpad), not touch
+    const mq = window.matchMedia('(hover: hover) and (pointer: fine)')
+    setEnabled(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setEnabled(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
+    if (!enabled) return
     const move = (e: MouseEvent) => {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
     }
     window.addEventListener('mousemove', move)
     return () => window.removeEventListener('mousemove', move)
-  }, [mouseX, mouseY])
+  }, [enabled, mouseX, mouseY])
+
+  if (!enabled) return null
 
   return (
     <motion.div

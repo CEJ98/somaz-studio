@@ -60,13 +60,22 @@ export default function Hero() {
         style={{ opacity: heroOpacity }}
       >
         <motion.div
-          className="flex flex-wrap items-center gap-4 mb-6"
+          className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.2 }}
         >
           <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent">
             {t('badge')}
+          </p>
+          <span className="hidden sm:inline-block w-px h-3 bg-foreground/20" aria-hidden />
+          <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-foreground/55 inline-flex items-center gap-1.5">
+            <span className="text-accent">★★★★★</span>
+            <span>5.0 · 6 {t('reviewsLabel')}</span>
+          </p>
+          <span className="hidden md:inline-block w-px h-3 bg-foreground/20" aria-hidden />
+          <p className="hidden md:inline-block font-sans text-[11px] tracking-[0.2em] uppercase text-foreground/55">
+            50+ {t('projectsLabel')}
           </p>
         </motion.div>
 
@@ -136,19 +145,22 @@ export default function Hero() {
               </Link>
             </MagneticButton>
             <Link
-              href="/work"
+              href="/contact?type=consult"
               className="inline-flex items-center gap-2 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
-              {t('viewOurWork')}
+              {t('freeConsult')}
               <Icon name="north_east" size={14} />
             </Link>
           </div>
-          <Link
-            href="/contact?type=quote"
-            className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/40 hover:text-accent transition-colors duration-300"
-          >
-            {t('getEstimate')}
-          </Link>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-1">
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45">
+              {t('startingPrice')}
+            </p>
+            <span className="hidden sm:inline-block w-px h-3 bg-foreground/15" aria-hidden />
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent/80">
+              {t('availability')}
+            </p>
+          </div>
         </motion.div>
       </motion.div>
 

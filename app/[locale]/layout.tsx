@@ -13,6 +13,7 @@ import { ClientOnlyCursor, ClientOnlyWhatsApp, ClientOnlyAnalytics, ClientOnlyCo
 import ScrollToTop from '@/components/ScrollToTop'
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import LocalBusinessJsonLd from '@/components/seo/LocalBusinessJsonLd'
+import ServiceJsonLd from '@/components/seo/ServiceJsonLd'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://somazstudio.com'),
@@ -115,6 +116,7 @@ export default async function LocaleLayout(
           )}
           <OrganizationJsonLd />
           <LocalBusinessJsonLd />
+          <ServiceJsonLd />
       </>
     </NextIntlClientProvider>
   )
