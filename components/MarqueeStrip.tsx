@@ -4,15 +4,10 @@ import { useReducedMotion } from 'framer-motion'
 
 const ITEMS = [
   'Where Space Becomes Vision',
-  '3D Architectural Visualization',
+  '3D Visualization',
   'Interior Design',
-  '48–72h Delivery',
-  'Starting at USD $350',
   'Miami · Worldwide',
-  '50+ Projects · 8+ Countries',
-  '5★ · Verified Reviews',
-  'Remote-First Studio · Est. 2022',
-  'Design Is the Language Space Speaks',
+  'Est. 2022',
 ]
 
 const allItems = [...ITEMS, ...ITEMS]

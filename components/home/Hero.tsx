@@ -60,25 +60,14 @@ export default function Hero() {
         className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-10 pb-20 md:pb-28"
         style={{ opacity: heroOpacity }}
       >
-        <motion.div
-          className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6"
+        <motion.p
+          className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.2 }}
         >
-          <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent">
-            {t('badge')}
-          </p>
-          <span className="hidden sm:inline-block w-px h-3 bg-foreground/20" aria-hidden />
-          <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-foreground/55 inline-flex items-center gap-1.5">
-            <span className="text-accent">★★★★★</span>
-            <span>5.0 · 6 {t('reviewsLabel')}</span>
-          </p>
-          <span className="hidden md:inline-block w-px h-3 bg-foreground/20" aria-hidden />
-          <p className="hidden md:inline-block font-sans text-[11px] tracking-[0.2em] uppercase text-foreground/55">
-            50+ {t('projectsLabel')}
-          </p>
-        </motion.div>
+          {t('badge')}
+        </motion.p>
 
         <motion.h1
           className="font-serif leading-[0.9] tracking-tight mb-8"
@@ -135,37 +124,19 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.65 }}
         >
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <MagneticButton>
-              <Link
-                href="/contact"
-                onClick={() => trackCtaClick('hero', 'start_project')}
-                className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
-              >
-                {t('startProject')}
-                <Icon name="north_east" size={16} />
-              </Link>
-            </MagneticButton>
-            <a
-              href="https://wa.me/17865377682?text=Hi%20Somaz%20Studio%2C%20I%27d%20like%20a%20quick%2015-min%20consultation%20about%20my%20project."
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackCtaClick('hero', 'consult_whatsapp')}
-              className="inline-flex items-center gap-2 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+          <MagneticButton>
+            <Link
+              href="/contact"
+              onClick={() => trackCtaClick('hero', 'start_project')}
+              className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
             >
-              {t('freeConsult')}
-              <Icon name="chat" size={14} />
-            </a>
-          </div>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-1">
-            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45">
-              {t('startingPrice')}
-            </p>
-            <span className="hidden sm:inline-block w-px h-3 bg-foreground/15" aria-hidden />
-            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent/80">
-              {t('availability')}
-            </p>
-          </div>
+              {t('startProject')}
+              <Icon name="north_east" size={16} />
+            </Link>
+          </MagneticButton>
+          <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45 mt-1">
+            {t('availability')}
+          </p>
         </motion.div>
       </motion.div>
 
