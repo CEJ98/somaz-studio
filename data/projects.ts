@@ -28,8 +28,8 @@ export const projects: Project[] = [
     year: 2024,
     coverImage: '/projects/iron-fitness-gym/01.jpg',
     images: [
-      '/projects/iron-fitness-gym/cover.jpg',
       '/projects/iron-fitness-gym/01.jpg',
+      '/projects/iron-fitness-gym/cover.jpg',
       '/projects/iron-fitness-gym/02.jpg',
     ],
     brief: {
@@ -83,8 +83,8 @@ export const projects: Project[] = [
     year: 2025,
     coverImage: '/projects/casa-tiago/01.jpg',
     images: [
-      '/projects/casa-tiago/cover.jpg',
       '/projects/casa-tiago/01.jpg',
+      '/projects/casa-tiago/cover.jpg',
       '/projects/casa-tiago/02.jpg',
     ],
     brief: {

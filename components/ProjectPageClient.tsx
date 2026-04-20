@@ -274,7 +274,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
                 <motion.div
                   key={img}
                   className={`relative overflow-hidden cursor-zoom-in ${
-                    isFullWidth ? 'md:col-span-2 aspect-[16/7]' : 'aspect-[4/3]'
+                    isFullWidth ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
                   }`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
