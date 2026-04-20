@@ -20,35 +20,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Casa Concepción',
-    slug: 'casa-concepcion',
-    category: '3D Visualization',
-    location: 'Catamarca, Argentina',
-    year: 2024,
-    coverImage: '/projects/casa-marchetti/cover.jpg',
-    images: [
-      '/projects/casa-marchetti/cover.jpg',
-      '/projects/casa-marchetti/01.jpg',
-      '/projects/casa-marchetti/02.jpg',
-      '/projects/casa-marchetti/03.jpg',
-      '/projects/casa-marchetti/04.jpg',
-    ],
-    brief: {
-      en: 'Full 3D visualization for a private residence in the Catamarca countryside.',
-      es: 'Visualización 3D completa para una residencia privada en el campo de Catamarca.',
-    },
-    description: {
-      en: 'A residential project set in the landscape of Catamarca. The design integrates large glass openings that frame the surrounding terrain, creating a continuous dialogue between interior space and the natural environment. We delivered a complete set of photorealistic renders covering the exterior, main living areas, and key architectural details.',
-      es: 'Un proyecto residencial en el paisaje de Catamarca. El diseño integra grandes aperturas de vidrio que enmarcan el terreno circundante, creando un diálogo continuo entre el espacio interior y el entorno natural. Entregamos un conjunto completo de renders fotorrealistas del exterior, las áreas principales y los detalles arquitectónicos clave.',
-    },
-    outcome: {
-      en: 'Full render set delivered in 5 business days — client used images for bank financing approval.',
-      es: 'Set completo de renders entregado en 5 días hábiles — el cliente usó las imágenes para la aprobación de financiamiento bancario.',
-    },
-    featured: true,
-    size: 'large',
-  },
-  {
     title: 'Iron Fitness Gym',    slug: 'iron-fitness-gym',
     category: '3D Visualization',
     location: 'Argentina',
@@ -131,8 +102,8 @@ export const projects: Project[] = [
     size: 'large',
   },
   {
-    title: 'Casa Kriger — Miami',
-    slug: 'casa-kriger-miami',
+    title: 'Casa K',
+    slug: 'casa-k',
     category: '3D Visualization',
     location: 'Miami, FL',
     year: 2025,
