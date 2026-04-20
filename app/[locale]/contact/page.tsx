@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { Suspense } from 'react'
+import Image from 'next/image'
 import ContactForm from '@/components/ContactForm'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
 import { buildAlternates, metadataBase } from '@/lib/seo'
-import LazyVideo from '@/components/LazyVideo'
+import ContactParallaxHero from '@/components/ContactParallaxHero'
+import { pickBySlug } from '@/data/imageLibrary'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -27,6 +29,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
   const params = await props.params;
   const { locale } = params
   const t = await getTranslations({ locale, namespace: 'contact' })
+  const lifestyleImg = pickBySlug('lifestyle-studio-03')
 
   const jsonLd = JSON.stringify([
     {
@@ -78,16 +81,9 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <PageFade className="min-h-screen pb-24">
-        <section className="relative min-h-[45vh] flex items-end overflow-hidden">
-          {/* Video background */}
-          <div className="absolute inset-0">
-            <LazyVideo
-              src="/media/contact-hero.mp4"
-              webmSrc="/media/contact-hero.webm"
-              className="w-full h-full object-cover opacity-40"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
-          </div>
+        <section className="relative min-h-[55vh] flex items-end overflow-hidden">
+          {/* Video background with parallax */}
+          <ContactParallaxHero />
 
           <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-16">
             <div className="max-w-7xl mx-auto">
@@ -121,6 +117,27 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8">
             <div className="md:col-span-4">
+              {/* Lifestyle image panel */}
+              {lifestyleImg && (
+                <div className="relative mb-10 overflow-hidden" style={{ aspectRatio: '3/4' }}>
+                  <Image
+                    src={lifestyleImg.src}
+                    alt="Somaz Studio design studio"
+                    fill
+                    placeholder="blur"
+                    blurDataURL={lifestyleImg.blurDataURL}
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+                  <div className="absolute bottom-5 left-5">
+                    <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/60 bg-background/40 backdrop-blur-sm px-3 py-1.5">
+                      Somaz Studio · Miami
+                    </span>
+                  </div>
+                </div>
+              )}
+
               <div className="space-y-0">
                 <div className="border-b border-border/40 pb-8 mb-8">
                   <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/50 mb-4">{t('emailLabel')}</p>

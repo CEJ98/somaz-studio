@@ -2,7 +2,7 @@
 
 import { Link } from '@/i18n/navigation'
 import { motion, useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Icon } from '@/components/icons'
@@ -11,6 +11,9 @@ import { team } from '@/data/team'
 import { t as tl } from '@/lib/locale'
 import { useLocale } from 'next-intl'
 import FadeUp from '@/components/FadeUp'
+import { byCategory, pickBySlug } from '@/data/imageLibrary'
+import BeforeAfterSlider from '@/components/BeforeAfterSlider'
+import ParallaxStorySection from '@/components/ParallaxStorySection'
 
 function CounterStat({ value, suffix = '', label }: { value: string; suffix?: string; label: string }) {
   const ref = useRef(null)
@@ -50,9 +53,47 @@ export default function AboutClient() {
     { label: t('diff3Label'), description: t('diff3Desc'), icon: 'chat' as const },
   ]
 
+  const [videoReady, setVideoReady] = useState(false)
+  useEffect(() => {
+    const timer = setTimeout(() => setVideoReady(true), 800)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const studioImages = byCategory.lifestyle.slice(0, 3)
+
+  const beforeImg = pickBySlug('material-texture-01')
+  const afterImg = pickBySlug('interior-luxury-03')
+
+  const values = [
+    {
+      number: '01',
+      title: locale === 'es' ? 'Precisión' : 'Precision',
+      desc: locale === 'es'
+        ? 'Cada material, proporción y fuente de luz se considera desde el día uno — antes de que exista una sola línea construida.'
+        : 'Every material, proportion, and light source is considered from day one — before a single line is built.',
+      slug: 'interior-detail-warm-01',
+    },
+    {
+      number: '02',
+      title: locale === 'es' ? 'Claridad' : 'Clarity',
+      desc: locale === 'es'
+        ? 'Los clientes siempre saben en qué etapa están y por qué se toma cada decisión. El proceso es tan transparente como el resultado.'
+        : 'Clients always know what stage they are in and why each decision is made. The process is as transparent as the result.',
+      slug: 'lifestyle-studio-02',
+    },
+    {
+      number: '03',
+      title: locale === 'es' ? 'Oficio' : 'Craft',
+      desc: locale === 'es'
+        ? 'Diseño real, no solo render. Pensamos como diseñadores, no como un proveedor de imágenes — esa diferencia se ve en cada entrega.'
+        : 'Real design, not just rendering. We think like designers, not image providers — that difference shows in every delivery.',
+      slug: 'interior-luxury-02',
+    },
+  ]
+
   return (
     <div className="min-h-screen pt-0 pb-24">
-      {/* Hero — with background image */}
+      {/* Hero — video loop */}
       <section className="relative min-h-[70vh] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
@@ -63,6 +104,21 @@ export default function AboutClient() {
             priority
             sizes="100vw"
           />
+          {videoReady && (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="absolute inset-0 w-full h-full object-cover"
+              aria-hidden="true"
+              poster="/library/video/about-loop-poster.jpg"
+            >
+              <source src="/library/video/about-loop-720.webm" type="video/webm" />
+              <source src="/library/video/about-loop-1080.mp4" type="video/mp4" />
+            </video>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
         </div>
 
@@ -140,6 +196,112 @@ export default function AboutClient() {
           </div>
         </div>
       </section>
+
+      {/* Studio grid — lifestyle imagery */}
+      {studioImages.length > 0 && (
+        <section className="px-6 md:px-10 py-16 md:py-24 border-b border-border/40">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {studioImages.map((img, i) => (
+                <FadeUp key={img.slug} delay={i * 0.1}>
+                  <div className="relative overflow-hidden bg-surface" style={{ aspectRatio: i === 1 ? '3/4' : '4/5' }}>
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                      placeholder="blur"
+                      blurDataURL={img.blurDataURL}
+                      className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+                    />
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Values */}
+      <section className="px-6 md:px-10 py-24 md:py-36 border-b border-border/40">
+        <div className="max-w-7xl mx-auto">
+          <FadeUp className="mb-16">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
+              {locale === 'es' ? 'Nuestros valores' : 'Our values'}
+            </p>
+            <h2 className="font-serif font-light italic text-foreground/80" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
+              {locale === 'es' ? 'Lo que guía cada decisión.' : 'What guides every decision.'}
+            </h2>
+          </FadeUp>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30">
+            {values.map((v, i) => {
+              const vImg = pickBySlug(v.slug)
+              return (
+                <FadeUp key={v.number} delay={i * 0.1}>
+                  <div className="bg-background group relative overflow-hidden">
+                    {vImg && (
+                      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4/3' }}>
+                        <Image
+                          src={vImg.src}
+                          alt={v.title}
+                          fill
+                          placeholder="blur"
+                          blurDataURL={vImg.blurDataURL}
+                          className="object-cover grayscale-[25%] group-hover:grayscale-0 group-hover:scale-[1.04] transition-all duration-700"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                      </div>
+                    )}
+                    <div className="px-8 pt-8 pb-10">
+                      <p className="font-serif font-light text-accent/30 text-5xl leading-none mb-4 select-none">{v.number}</p>
+                      <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">{v.title}</h3>
+                      <p className="font-sans font-light text-foreground/65 leading-relaxed text-sm">{v.desc}</p>
+                    </div>
+                  </div>
+                </FadeUp>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Before / After */}
+      {beforeImg && afterImg && (
+        <section className="px-6 md:px-10 py-16 md:py-24 border-b border-border/40">
+          <div className="max-w-7xl mx-auto">
+            <FadeUp className="mb-10">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
+                {locale === 'es' ? 'Del concepto al espacio' : 'From concept to space'}
+              </p>
+            </FadeUp>
+            <BeforeAfterSlider
+              beforeSrc={beforeImg.src}
+              afterSrc={afterImg.src}
+              beforeLabel={locale === 'es' ? 'Material base' : 'Raw material'}
+              afterLabel={locale === 'es' ? 'Espacio final' : 'Final space'}
+              caption={locale === 'es'
+                ? 'Del material crudo a la atmósfera terminada — la diferencia que hace el diseño.'
+                : 'From raw material to finished atmosphere — the difference design makes.'
+              }
+              locale={locale}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* Editorial story break */}
+      <ParallaxStorySection
+        imageSlug="exterior-modern-night-01"
+        eyebrow={locale === 'es' ? 'Miami · Global' : 'Miami · Global'}
+        title={locale === 'es' ? 'Diseño sin fronteras,\nentregado con precisión.' : 'Design without borders,\ndelivered with precision.'}
+        body={locale === 'es'
+          ? 'Fundado en Miami, trabajamos con clientes en LATAM, Estados Unidos y Medio Oriente — siempre en inglés o español, siempre en USD.'
+          : 'Founded in Miami, we work with clients across Latin America, the United States, and the Middle East — always in English or Spanish, always in USD.'}
+        align="left"
+        height="75vh"
+        overlay={0.58}
+      />
 
       {/* Stats */}
       <section className="relative px-6 md:px-10 py-28 md:py-40 border-b border-border/40 overflow-hidden">

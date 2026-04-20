@@ -6,7 +6,8 @@ import Process from '@/components/home/Process'
 import ServicesGrid from '@/components/home/ServicesGrid'
 import SocialProof from '@/components/home/SocialProof'
 import FinalCta from '@/components/home/FinalCta'
-import MarqueeStrip from '@/components/MarqueeStrip'
+import TextureMarquee from '@/components/TextureMarquee'
+import HorizontalScrollGallery from '@/components/HorizontalScrollGallery'
 import FAQSection from '@/components/FAQSection'
 import LeadMagnet from '@/components/home/LeadMagnet'
 
@@ -14,10 +15,11 @@ export default function HomePageClient({ locale }: { locale: string }) {
   return (
     <>
       <Hero />
-      <MarqueeStrip />
+      <TextureMarquee />
       <ServicesGrid locale={locale} />
       <SelectedWork />
       <Process />
+      <HorizontalScrollGallery />
       <SocialProof />
       <LeadMagnet locale={locale} />
       <FAQSection locale={locale} />

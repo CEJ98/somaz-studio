@@ -4,6 +4,8 @@ import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import { buildAlternates, metadataBase } from '@/lib/seo'
 import PageFade from '@/components/PageFade'
+import ParallaxStorySection from '@/components/ParallaxStorySection'
+import { pickBySlug } from '@/data/imageLibrary'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params
@@ -78,6 +80,8 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
     aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', reviewCount: '6', bestRating: '5', worstRating: '1' },
   })
 
+  const libraryHero = pickBySlug('interior-living-luxury-01')
+
   return (
     <>
       {/* JSON-LD structured data — static literal, safe */}
@@ -89,14 +93,27 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
       />
 
       <section className="relative min-h-[60vh] flex items-end overflow-hidden">
-        <Image
-          src="/projects/casa-mariano-miami/cover.jpg"
-          alt="Somaz Studio — 3D visualization and interior design in Miami"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
+        {libraryHero ? (
+          <Image
+            src={libraryHero.src}
+            alt="Somaz Studio — 3D visualization and interior design in Miami"
+            fill
+            priority
+            placeholder="blur"
+            blurDataURL={libraryHero.blurDataURL}
+            className="object-cover"
+            sizes="100vw"
+          />
+        ) : (
+          <Image
+            src="/projects/casa-mariano-miami/cover.jpg"
+            alt="Somaz Studio — 3D visualization and interior design in Miami"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/40" />
         <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-16">
           <div className="max-w-7xl mx-auto">
@@ -169,6 +186,23 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
             </div>
           </div>
 
+        </div>
+      </PageFade>
+
+      <ParallaxStorySection
+        imageSlug="exterior-modern-01"
+        eyebrow="South Florida"
+        title={isEs ? 'Proyectos que hablan\npor sí solos.' : 'Projects that speak\nfor themselves.'}
+        body={isEs
+          ? 'Desde Brickell hasta Coral Gables — renders que convencen a bancos, HOAs y clientes antes de que se pose la primera piedra.'
+          : 'From Brickell to Coral Gables — renders that convince banks, HOAs, and clients before the first stone is laid.'}
+        align="left"
+        height="70vh"
+        overlay={0.62}
+      />
+
+      <PageFade className="pb-28 px-6 md:px-10">
+        <div className="max-w-7xl mx-auto">
           <div className="mt-20 pt-16 border-t border-border/40 text-center">
             <p className="font-serif italic text-foreground/55 mb-2" style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)' }}>
               {labels.finalQ}
