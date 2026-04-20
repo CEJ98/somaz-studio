@@ -1,41 +1,24 @@
 'use client'
 
-import Image from 'next/image'
 import { useRef } from 'react'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { ease } from '@/lib/motion'
-import { pickBySlug } from '@/data/imageLibrary'
 import AnimatedSection from '@/components/AnimatedSection'
-
-const STEP_IMAGES = [
-  'lifestyle-desk-01',
-  'interior-detail-warm-01',
-  'exterior-modern-01',
-]
 
 function StepCard({
   step,
   title,
   description,
-  imageSlug,
   index,
 }: {
   step: string
   title: string
   description: string
-  imageSlug: string
   index: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
-  const img = pickBySlug(imageSlug)
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'center center'],
-  })
-  const imgY = useTransform(scrollYProgress, [0, 1], reduced ? ['0%', '0%'] : ['8%', '-8%'])
 
   return (
     <motion.div
@@ -44,11 +27,10 @@ function StepCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.8, delay: index * 0.18, ease }}
-      className="relative border-t border-border/40 pt-10 pb-12 md:pr-10 overflow-hidden group"
+      className="relative border-t border-border/40 pt-10 pb-12 md:pr-10 group"
     >
       <div className="absolute top-0 left-0 h-px bg-accent w-0 group-hover:w-full transition-all duration-700" />
 
-      {/* Step number ghost */}
       <p
         className="font-serif font-light text-accent/20 select-none mb-4"
         style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', lineHeight: 1 }}
@@ -57,24 +39,7 @@ function StepCard({
       </p>
 
       <h3 className="font-serif text-3xl font-semibold text-foreground mb-5">{title}</h3>
-      <p className="font-sans font-light text-foreground/70 leading-relaxed mb-8">{description}</p>
-
-      {/* Image with parallax */}
-      {img && (
-        <div className="relative h-48 md:h-56 overflow-hidden bg-surface">
-          <motion.div className="absolute inset-0 -top-[8%] -bottom-[8%]" style={{ y: imgY }}>
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              placeholder="blur"
-              blurDataURL={img.blurDataURL}
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
-      )}
+      <p className="font-sans font-light text-foreground/70 leading-relaxed">{description}</p>
     </motion.div>
   )
 }
@@ -105,7 +70,6 @@ export default function Process() {
               step={item.step}
               title={item.title}
               description={item.description}
-              imageSlug={STEP_IMAGES[i]}
               index={i}
             />
           ))}
