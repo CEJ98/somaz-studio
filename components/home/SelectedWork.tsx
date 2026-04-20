@@ -55,11 +55,12 @@ export default function SelectedWork() {
         </Link>
       </AnimatedSection>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-x-3 gap-y-12">
+      {/* Row 1: large left + small right */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-3">
         {selected[0] && (
-          <ScrollCard className="md:col-span-8">
+          <ScrollCard className="md:col-span-7">
             <Link href={`/work/${selected[0].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/5] mb-5">
+              <div className="relative overflow-hidden aspect-[4/3] mb-4">
                 <Image
                   src={selected[0].coverImage}
                   alt={selected[0].title}
@@ -75,49 +76,73 @@ export default function SelectedWork() {
                   <h3 className="font-serif text-xl text-foreground group-hover:text-accent/80 transition-colors duration-300">{selected[0].title}</h3>
                   <p className="font-sans text-[11px] text-foreground/55 mt-1">{selected[0].location} — {selected[0].year}</p>
                 </div>
-                <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>01</span>
+                <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>01</span>
               </div>
             </Link>
           </ScrollCard>
         )}
-
-        <div className="md:col-span-4 flex flex-col gap-12">
-          {[selected[1], selected[2]].map((proj, i) => proj && (
-            <ScrollCard key={proj.slug}>
-              <Link href={`/work/${proj.slug}`} className="group block">
-                <div className="relative overflow-hidden aspect-[4/3] mb-4">
-                  <Image
-                    src={proj.coverImage}
-                    alt={proj.title}
-                    fill
-                    className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
-                    sizes="(max-width: 768px) 100vw, 42vw"
-                  />
-                  <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+        {selected[1] && (
+          <ScrollCard className="md:col-span-5">
+            <Link href={`/work/${selected[1].slug}`} className="group block">
+              <div className="relative overflow-hidden aspect-[4/3] mb-4">
+                <Image
+                  src={selected[1].coverImage}
+                  alt={selected[1].title}
+                  fill
+                  className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                />
+                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+              </div>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selected[1].category}</p>
+                  <h3 className="font-serif text-xl text-foreground group-hover:text-accent/80 transition-colors duration-300">{selected[1].title}</h3>
+                  <p className="font-sans text-[11px] text-foreground/55 mt-1">{selected[1].location} — {selected[1].year}</p>
                 </div>
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{proj.category}</p>
-                    <h3 className="font-serif text-lg text-foreground group-hover:text-accent/80 transition-colors duration-300">{proj.title}</h3>
-                    <p className="font-sans text-[11px] text-foreground/55 mt-1">{proj.location} — {proj.year}</p>
-                  </div>
-                  <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>0{i + 2}</span>
-                </div>
-              </Link>
-            </ScrollCard>
-          ))}
-        </div>
+                <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>02</span>
+              </div>
+            </Link>
+          </ScrollCard>
+        )}
+      </div>
 
+      {/* Row 2: small left + large right */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+        {selected[2] && (
+          <ScrollCard className="md:col-span-5">
+            <Link href={`/work/${selected[2].slug}`} className="group block">
+              <div className="relative overflow-hidden aspect-[4/3] mb-4">
+                <Image
+                  src={selected[2].coverImage}
+                  alt={selected[2].title}
+                  fill
+                  className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
+                  sizes="(max-width: 768px) 100vw, 42vw"
+                />
+                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+              </div>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/70 mb-1">{selected[2].category}</p>
+                  <h3 className="font-serif text-xl text-foreground group-hover:text-accent/80 transition-colors duration-300">{selected[2].title}</h3>
+                  <p className="font-sans text-[11px] text-foreground/55 mt-1">{selected[2].location} — {selected[2].year}</p>
+                </div>
+                <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>03</span>
+              </div>
+            </Link>
+          </ScrollCard>
+        )}
         {selected[3] && (
-          <ScrollCard className="md:col-start-3 md:col-span-8">
+          <ScrollCard className="md:col-span-7">
             <Link href={`/work/${selected[3].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[16/9] mb-5">
+              <div className="relative overflow-hidden aspect-[4/3] mb-4">
                 <Image
                   src={selected[3].coverImage}
                   alt={selected[3].title}
                   fill
                   className="object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-[1.03] transition-all duration-700"
-                  sizes="(max-width: 768px) 100vw, 67vw"
+                  sizes="(max-width: 768px) 100vw, 58vw"
                 />
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
               </div>
@@ -127,14 +152,14 @@ export default function SelectedWork() {
                   <h3 className="font-serif text-xl text-foreground group-hover:text-accent/80 transition-colors duration-300">{selected[3].title}</h3>
                   <p className="font-sans text-[11px] text-foreground/55 mt-1">{selected[3].location} — {selected[3].year}</p>
                 </div>
-                <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '3rem', lineHeight: 1 }}>04</span>
+                <span className="font-serif font-light text-accent/10 select-none shrink-0 mt-1" style={{ fontSize: '2.5rem', lineHeight: 1 }}>04</span>
               </div>
             </Link>
           </ScrollCard>
         )}
       </div>
 
-      <AnimatedSection className="mt-10 flex justify-center">
+      <AnimatedSection className="mt-14 flex justify-center">
         <Link
           href="/work"
           className="inline-flex items-center gap-3 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
