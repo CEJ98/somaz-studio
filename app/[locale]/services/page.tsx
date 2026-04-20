@@ -9,6 +9,7 @@ import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
 import { buildAlternates, metadataBase } from '@/lib/seo'
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
+import ServicesComparison from '@/components/ServicesComparison'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -162,6 +163,9 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
               <ServiceItem key={service.slug} service={service} locale={locale} />
             ))}
           </div>
+
+          {/* Comparison table */}
+          <ServicesComparison locale={locale} />
 
           {/* Testimonials */}
           <div className="mt-20 pt-16 border-t border-border/40">

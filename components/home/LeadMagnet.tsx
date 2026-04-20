@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { toast } from 'sonner'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
+import { trackLead } from '@/components/Analytics'
 
 interface Props {
   locale: string
@@ -17,14 +18,14 @@ export default function LeadMagnet({ locale }: Props) {
 
   const isEs = locale === 'es'
   const labels = {
-    badge: isEs ? 'Recurso Gratuito' : 'Free Resource',
-    title: isEs ? 'Brief Template para tu próximo proyecto.' : 'Brief template for your next project.',
+    badge: isEs ? 'Newsletter del Estudio' : 'Studio Newsletter',
+    title: isEs ? 'Procesos, materiales y proyectos — al inbox.' : 'Process, materials, and projects — straight to your inbox.',
     desc: isEs
-      ? 'PDF editable de 6 páginas con todo lo que necesitamos para empezar — planos, referencias, paleta, timeline. Te lo enviamos al instante.'
-      : '6-page editable PDF with everything we need to start — plans, references, palette, timeline. Sent to your inbox instantly.',
+      ? 'Una vez al mes: un proyecto en detalle, materiales que estamos usando, y un proceso de diseño paso a paso. Sin ruido.'
+      : 'Once a month: one project in depth, materials we are exploring, and a step-by-step design process. No noise.',
     placeholder: isEs ? 'tu@email.com' : 'your@email.com',
-    cta: isEs ? 'Enviar PDF' : 'Send PDF',
-    success: isEs ? '¡Listo! Revisá tu inbox en los próximos minutos.' : 'Done! Check your inbox in the next few minutes.',
+    cta: isEs ? 'Suscribirme' : 'Subscribe',
+    success: isEs ? '¡Listo! Te llega el primer envío pronto.' : 'Done! First issue lands soon.',
     error: isEs ? 'Hubo un error. Probá de nuevo o escribinos a hola@somazstudio.com' : 'Something went wrong. Try again or write to hola@somazstudio.com',
     privacy: isEs ? 'Sin spam. Cancelá cuando quieras.' : 'No spam. Unsubscribe anytime.',
   }
@@ -37,9 +38,10 @@ export default function LeadMagnet({ locale }: Props) {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'lead-magnet-brief-template' }),
+        body: JSON.stringify({ email, source: 'home-newsletter' }),
       })
       if (!res.ok) throw new Error('failed')
+      trackLead({ source: 'home-newsletter' })
       toast.success(labels.success)
       setEmail('')
     } catch {

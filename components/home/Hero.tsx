@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
 import MagneticButton from '@/components/MagneticButton'
+import { trackCtaClick } from '@/components/Analytics'
 
 export default function Hero() {
   const t = useTranslations('home')
@@ -138,19 +139,23 @@ export default function Hero() {
             <MagneticButton>
               <Link
                 href="/contact"
+                onClick={() => trackCtaClick('hero', 'start_project')}
                 className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
               >
                 {t('startProject')}
                 <Icon name="north_east" size={16} />
               </Link>
             </MagneticButton>
-            <Link
-              href="/contact?type=consult"
+            <a
+              href="https://wa.me/17865377682?text=Hi%20Somaz%20Studio%2C%20I%27d%20like%20a%20quick%2015-min%20consultation%20about%20my%20project."
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackCtaClick('hero', 'consult_whatsapp')}
               className="inline-flex items-center gap-2 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
               {t('freeConsult')}
-              <Icon name="north_east" size={14} />
-            </Link>
+              <Icon name="chat" size={14} />
+            </a>
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-1">
             <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45">

@@ -20,6 +20,15 @@ export function trackLead(params?: Record<string, unknown>) {
   window.fbq?.('track', 'Lead', params)
 }
 
+export function trackEvent(name: string, params?: Record<string, unknown>) {
+  if (typeof window === 'undefined') return
+  window.gtag?.('event', name, params)
+}
+
+export function trackCtaClick(location: string, label: string) {
+  trackEvent('cta_click', { cta_location: location, cta_label: label })
+}
+
 export default function Analytics() {
   useEffect(() => {
     const url = new URL(window.location.href)

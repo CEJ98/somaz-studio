@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '', changeFrequency: 'monthly' as const, priority: 1, lastMod: SITE_LAST_UPDATED },
     { path: '/work', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: SITE_LAST_UPDATED },
     { path: '/services', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: SITE_LAST_UPDATED },
+    { path: '/services/miami', changeFrequency: 'monthly' as const, priority: 0.85, lastMod: SITE_LAST_UPDATED },
     { path: '/about', changeFrequency: 'yearly' as const, priority: 0.7, lastMod: new Date('2024-06-01') },
     { path: '/contact', changeFrequency: 'yearly' as const, priority: 0.8, lastMod: new Date('2024-06-01') },
     { path: '/blog', changeFrequency: 'monthly' as const, priority: 0.7, lastMod: SITE_LAST_UPDATED },

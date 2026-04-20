@@ -11,6 +11,7 @@ import { locales } from '@/i18n/config'
 
 import { ClientOnlyCursor, ClientOnlyWhatsApp, ClientOnlyAnalytics, ClientOnlyCookieConsent } from '@/components/ClientOnly'
 import ScrollToTop from '@/components/ScrollToTop'
+import StickyCta from '@/components/StickyCta'
 import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import LocalBusinessJsonLd from '@/components/seo/LocalBusinessJsonLd'
 import ServiceJsonLd from '@/components/seo/ServiceJsonLd'
@@ -96,6 +97,7 @@ export default async function LocaleLayout(
           <Footer />
           <ClientOnlyWhatsApp />
           <ScrollToTop />
+          <StickyCta />
           <Toaster
             theme="light"
             position="bottom-right"
