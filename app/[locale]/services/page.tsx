@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Image from 'next/image'
-import { pickBySlug } from '@/data/imageLibrary'
 import ServiceItem from '@/components/ServiceItem'
 import { services } from '@/data/services'
 import { testimonials } from '@/data/testimonials'
@@ -11,7 +10,6 @@ import { Icon } from '@/components/icons'
 import { buildAlternates, metadataBase } from '@/lib/seo'
 import BeforeAfterSlider from '@/components/BeforeAfterSlider'
 import ServicesComparison from '@/components/ServicesComparison'
-import ParallaxStorySection from '@/components/ParallaxStorySection'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -30,7 +28,6 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
   const params = await props.params;
   const { locale } = params
   const t = await getTranslations({ locale, namespace: 'services' })
-  const heroImg = pickBySlug('interior-luxury-03')
 
   const jsonLd = JSON.stringify([
     {
@@ -130,29 +127,16 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
          
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
-      <section className="relative min-h-[60vh] flex items-end overflow-hidden">
-        {heroImg ? (
-          <Image
-            src={heroImg.src}
-            alt="Somaz Studio — architectural visualization and interior design services"
-            fill
-            placeholder="blur"
-            blurDataURL={heroImg.blurDataURL}
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-        ) : (
-          <Image
-            src="/services/3d-visualization.jpg"
-            alt="Somaz Studio — architectural visualization and interior design services"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
+      <section className="relative min-h-[40vh] flex items-end overflow-hidden">
+        <Image
+          src="/services/3d-visualization.jpg"
+          alt="Somaz Studio — architectural visualization and interior design services"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-background/50" />
         <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-14">
           <div className="max-w-7xl mx-auto">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{t('whatWeDo')}</p>
@@ -182,24 +166,6 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
 
           {/* Comparison table */}
           <ServicesComparison locale={locale} />
-        </div>
-      </PageFade>
-
-      {/* Editorial story break */}
-      <ParallaxStorySection
-        imageSlug="interior-living-luxury-01"
-        eyebrow={locale === 'es' ? 'Nuestro enfoque' : 'Our approach'}
-        title={locale === 'es' ? 'Cada espacio comienza\ncon un brief.' : 'Every space starts\nwith a brief.'}
-        body={locale === 'es'
-          ? 'No fabricamos renders — interpretamos espacios. Cada proyecto parte de entender qué quiere decir el espacio antes de decidir cómo se ve.'
-          : "We don't manufacture renders — we interpret spaces. Every project starts from understanding what the space wants to say before deciding how it looks."}
-        align="right"
-        height="80vh"
-        overlay={0.6}
-      />
-
-      <PageFade className="pb-28 px-6 md:px-10">
-        <div className="max-w-7xl mx-auto">
 
           {/* Testimonials */}
           <div className="mt-20 pt-16 border-t border-border/40">

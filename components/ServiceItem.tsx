@@ -9,7 +9,6 @@ import { Icon } from '@/components/icons'
 import { t as tl } from '@/lib/locale'
 import { ease } from '@/lib/motion'
 import Image from 'next/image'
-import { pickBySlug } from '@/data/imageLibrary'
 
 const slugToProjectType: Record<string, string> = {
   '3d-visualization': '3d-visualization',
@@ -18,11 +17,11 @@ const slugToProjectType: Record<string, string> = {
   'design-consulting': 'consulting',
 }
 
-const SERVICE_LIBRARY_IMAGES: Record<string, string> = {
-  '3d-visualization':  'exterior-modern-02',
-  'interior-design':   'interior-living-luxury-01',
-  'conceptual-design': 'interior-luxury-02',
-  'design-consulting': 'lifestyle-studio-02',
+const serviceImages: Record<string, string> = {
+  '3d-visualization': '/services/3d-visualization.jpg',
+  'interior-design': '/services/interior-design.jpg',
+  'conceptual-design': '/services/conceptual-design.jpg',
+  'design-consulting': '/services/consulting.jpg',
 }
 
 const serviceIcons: Record<string, React.ReactNode> = {
@@ -64,7 +63,6 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const reduced = useReducedMotion()
-  const libImg = pickBySlug(SERVICE_LIBRARY_IMAGES[service.slug] ?? '')
 
   return (
     <motion.div
@@ -107,14 +105,12 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
 
         {/* Right — image + CTA */}
         <div className="md:col-span-6 md:col-start-7 relative z-10">
-          {libImg && (
+          {serviceImages[service.slug] && (
             <div className="relative w-full aspect-[16/9] mb-8 overflow-hidden">
               <Image
-                src={libImg.src}
-                alt={libImg.alt}
+                src={serviceImages[service.slug]}
+                alt={tl(service.title, locale)}
                 fill
-                placeholder="blur"
-                blurDataURL={libImg.blurDataURL}
                 className="object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />

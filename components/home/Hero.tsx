@@ -17,7 +17,6 @@ export default function Hero() {
   const heroScale = useTransform(scrollY, [0, 500], reduced ? [1, 1] : [0.93, 1])
   const heroBorderRadius = useTransform(scrollY, [0, 300], reduced ? [0, 0] : [14, 0])
   const heroOpacity = useTransform(scrollY, [0, 500], reduced ? [1, 1] : [1, 0])
-  const titleY = useTransform(scrollY, [0, 600], reduced ? ['0%', '0%'] : ['0%', '14%'])
   const scrollIndicatorOpacity = useTransform(scrollY, [0, 150], reduced ? [1, 1] : [1, 0])
 
   const [videoReady, setVideoReady] = useState(false)
@@ -72,7 +71,7 @@ export default function Hero() {
 
         <motion.h1
           className="font-serif leading-[0.9] tracking-tight mb-8"
-          style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)', y: titleY }}
+          style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)' }}
           initial="hidden"
           animate="visible"
           variants={{
