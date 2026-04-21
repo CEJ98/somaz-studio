@@ -70,7 +70,10 @@ export default function Hero() {
           {t('badge')}
         </m.p>
 
-        <m.h1
+        <m.div
+          role="heading"
+          aria-level={1}
+          aria-hidden="true"
           className="font-serif leading-[0.9] tracking-tight mb-8"
           style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)', y: titleY }}
           initial="hidden"
@@ -108,7 +111,7 @@ export default function Hero() {
               </m.span>
             ))}
           </div>
-        </m.h1>
+        </m.div>
 
         <m.p
           className="font-sans text-sm font-light text-foreground/75 leading-relaxed mb-8 max-w-md"

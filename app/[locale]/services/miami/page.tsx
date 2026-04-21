@@ -77,7 +77,6 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
       { '@type': 'AdministrativeArea', name: 'South Florida' },
     ],
     priceRange: '$$$',
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', reviewCount: '6', bestRating: '5', worstRating: '1' },
   })
 
   const libraryHero = pickBySlug('interior-living-luxury-01')

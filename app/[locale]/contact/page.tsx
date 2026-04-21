@@ -186,6 +186,46 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
               <p className="font-sans text-[11px] tracking-[0.15em] text-foreground/35 mb-8">
                 {t('responseNote')}
               </p>
+
+              {/* SXO pre-conversion checklist — helps users know what to prepare */}
+              <div className="border border-border/40 bg-surface/40 p-6 mb-10">
+                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent mb-4">
+                  {locale === 'es' ? 'Qué preparar' : 'What to prepare'}
+                </p>
+                <ul className="space-y-2">
+                  {(locale === 'es' ? [
+                    'Plano o boceto del espacio (PDF o CAD)',
+                    'Imágenes de referencia de estilo',
+                    'Descripción breve del proyecto y plazo',
+                  ] : [
+                    'Floor plan or sketch (PDF or CAD)',
+                    'Style reference images',
+                    'Brief project description and deadline',
+                  ]).map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 font-sans text-sm text-foreground/55">
+                      <span className="font-serif text-accent/60 mt-0.5 shrink-0">—</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="font-sans text-[10px] text-foreground/30 mt-5 pt-4 border-t border-border/30">
+                  {locale === 'es'
+                    ? 'Necesitas resultados hoy? Rush 24h disponible — escribinos por WhatsApp.'
+                    : 'Need it today? 24h Rush available — message us on WhatsApp.'}
+                  {' '}
+                  <a
+                    href={locale === 'es'
+                      ? 'https://wa.me/17865377682?text=Hola%20Somaz%2C%20necesito%20un%20render%20urgente%20(Rush%2024h).'
+                      : 'https://wa.me/17865377682?text=Hi%20Somaz%2C%20I%20need%20a%20render%20urgently%20(Rush%2024h).'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent hover:underline"
+                  >
+                    {locale === 'es' ? 'WhatsApp →' : 'WhatsApp →'}
+                  </a>
+                </p>
+              </div>
+
               <Suspense fallback={null}>
                 <ContactForm />
               </Suspense>

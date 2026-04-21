@@ -160,7 +160,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
               ].map(({ q, a }, i) => (
                 <div key={i} className="border-l border-accent/30 pl-6 hover:border-accent/70 transition-colors duration-300 group/faq">
                   <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/50 mb-2">0{i + 1}</p>
-                  <p className="font-serif text-foreground/80 mb-3 group-hover/faq:text-foreground transition-colors duration-300" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.1rem)' }}>{q}</p>
+                  <h2 className="font-serif text-foreground/80 mb-3 group-hover/faq:text-foreground transition-colors duration-300" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.1rem)', fontWeight: 'normal' }}>{q}</h2>
                   <p className="font-sans font-light text-foreground/40 group-hover/faq:text-foreground/55 text-sm leading-relaxed transition-colors duration-300">{a}</p>
                 </div>
               ))}

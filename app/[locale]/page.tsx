@@ -78,12 +78,20 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 export default async function HomePage(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
   const { locale } = params
+  const t = await getTranslations({ locale, namespace: 'home' })
   return (
     <>
       {/* FAQ JSON-LD structured data — static object, no user input */}
       <script type="application/ld+json" suppressHydrationWarning
-         
+
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      {/* SSR-rendered hero text for AI crawlers (ChatGPT, Perplexity, Google AI Overviews).
+          The animated Hero below overlays this visually after hydration. */}
+      <div className="sr-only" aria-hidden="true">
+        <h1>{t('heroLine1')} {t('heroLine2')}</h1>
+        <p>{t('heroSubline')}</p>
+        <p>{t('badge')}</p>
+      </div>
       <HomePageClient locale={locale} />
     </>
   )
