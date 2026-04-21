@@ -10,7 +10,7 @@ export default function ServiceJsonLd() {
       name: '3D Visualization Essential',
       description:
         'Photorealistic 3D renders of architectural spaces — exterior, interior, single or multi-view. Standard delivery in 48–72h, rush 24h available.',
-      provider: { '@type': 'ProfessionalService', '@id': 'https://somazstudio.com' },
+      provider: { '@type': 'ProfessionalService', '@id': 'https://somazstudio.com/#business' },
       areaServed: [
         { '@type': 'Place', name: 'Miami' },
         { '@type': 'Place', name: 'United States' },
@@ -33,7 +33,7 @@ export default function ServiceJsonLd() {
       name: 'Interior Design — Remote',
       description:
         'Full remote interior design service — space planning, material selection, furniture layouts, mood boards. Delivered as a complete spec package.',
-      provider: { '@type': 'ProfessionalService', '@id': 'https://somazstudio.com' },
+      provider: { '@type': 'ProfessionalService', '@id': 'https://somazstudio.com/#business' },
       areaServed: [
         { '@type': 'Place', name: 'Miami' },
         { '@type': 'Place', name: 'Worldwide' },
@@ -54,7 +54,7 @@ export default function ServiceJsonLd() {
       name: 'Conceptual Design',
       description:
         'Spatial concepts, volumetric studies, floor plan optimization and isometric representations for residential and commercial typologies.',
-      provider: { '@type': 'ProfessionalService', '@id': 'https://somazstudio.com' },
+      provider: { '@type': 'ProfessionalService', '@id': 'https://somazstudio.com/#business' },
       areaServed: [{ '@type': 'Place', name: 'Worldwide' }],
       offers: {
         '@type': 'Offer',

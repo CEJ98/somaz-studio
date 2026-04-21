@@ -1,8 +1,8 @@
 export default function LocalBusinessJsonLd() {
-  const schema = {
+  const businessSchema = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
-    '@id': 'https://somazstudio.com',
+    '@id': 'https://somazstudio.com/#business',
     name: 'Somaz Studio',
     description: '3D visualization, interior design, and conceptual design studio based in Miami, FL. Working globally.',
     url: 'https://somazstudio.com',
@@ -13,73 +13,77 @@ export default function LocalBusinessJsonLd() {
     logo: 'https://somazstudio.com/logos/logo-smz.png',
     address: {
       '@type': 'PostalAddress',
+      streetAddress: 'Miami, FL (Service Area Business — remote-first)',
       addressLocality: 'Miami',
       addressRegion: 'FL',
+      postalCode: '33131',
       addressCountry: 'US',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 25.7617,
-      longitude: -80.1918,
+      latitude: 25.76170,
+      longitude: -80.19180,
     },
+    areaServed: [
+      { '@type': 'City', name: 'Miami' },
+      { '@type': 'State', name: 'Florida' },
+      { '@type': 'Country', name: 'United States' },
+    ],
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '18:00',
+      },
+    ],
     sameAs: [
-      'https://instagram.com/somazstudio',
-      'https://linkedin.com/company/somazstudio',
+      'https://www.instagram.com/somazstudio',
+      'https://www.linkedin.com/company/somazstudio',
       'https://www.tiktok.com/@somazstudio',
     ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5',
-      reviewCount: '6',
-      bestRating: '5',
-      worstRating: '1',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Design Services',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '3D Visualization', description: 'Photorealistic architectural renders. Essential (1 view) in 48–72h, Rush 24h available.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Interior Design', description: 'Full interior design from concept to material specification.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Conceptual Design', description: 'Spatial concept development and design direction.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Design Consulting', description: 'Expert design guidance billed hourly.' } },
+      ],
     },
-    review: [
-      {
-        '@type': 'Review',
-        author: { '@type': 'Person', name: 'Michael Kriger' },
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-        reviewBody: 'Somaz Studio turned our blueprints into renders so realistic that investors thought we were showing photos of a finished project. We closed funding two months ahead of schedule.',
+  }
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://somazstudio.com/#website',
+    url: 'https://somazstudio.com',
+    name: 'Somaz Studio',
+    publisher: { '@id': 'https://somazstudio.com/#business' },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://somazstudio.com/en/blog?q={search_term_string}',
       },
-      {
-        '@type': 'Review',
-        author: { '@type': 'Person', name: 'Paula Marchetti' },
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-        reviewBody: 'They redesigned our penthouse remotely — every material, every detail felt intentional. The finished space matched the renders almost perfectly.',
-      },
-      {
-        '@type': 'Review',
-        author: { '@type': 'Person', name: 'Tomás Mazzucco' },
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-        reviewBody: 'Fast, precise, and incredibly professional. Our gym rebranding needed photorealistic visuals in under a week — Somaz delivered in four days.',
-      },
-      {
-        '@type': 'Review',
-        author: { '@type': 'Person', name: 'Rodrigo Estévez' },
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-        reviewBody: 'The 3D visualization helped us sell 60% of units before breaking ground.',
-      },
-      {
-        '@type': 'Review',
-        author: { '@type': 'Person', name: 'Carolina Vega' },
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-        reviewBody: 'Their conceptual design process helped us discover possibilities we never considered. What started as a simple renovation became the home we always dreamed of.',
-      },
-      {
-        '@type': 'Review',
-        author: { '@type': 'Person', name: 'Diego Ferraro' },
-        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-        reviewBody: 'The attention to lighting in their renders is unmatched. Every scene looked like a photograph from a design magazine.',
-      },
-    ],
+      'query-input': 'required name=search_term_string',
+    },
   }
 
   // Hardcoded JSON-LD — no user input, safe for dangerouslySetInnerHTML
   return (
-    <script
-      type="application/ld+json"
-      suppressHydrationWarning
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+    </>
   )
 }

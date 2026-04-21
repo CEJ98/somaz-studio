@@ -3,19 +3,19 @@ import { projects } from '@/data/projects'
 import { posts } from '@/data/posts'
 import { locales } from '@/i18n/config'
 
-const SITE_LAST_UPDATED = new Date('2026-04-20')
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://somazstudio.com'
 
   const staticPaths = [
-    { path: '', changeFrequency: 'monthly' as const, priority: 1, lastMod: SITE_LAST_UPDATED },
-    { path: '/work', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: SITE_LAST_UPDATED },
-    { path: '/services', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: SITE_LAST_UPDATED },
-    { path: '/services/miami', changeFrequency: 'monthly' as const, priority: 0.85, lastMod: SITE_LAST_UPDATED },
+    { path: '', changeFrequency: 'monthly' as const, priority: 1, lastMod: new Date('2026-04-20') },
+    { path: '/work', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: new Date('2026-04-20') },
+    { path: '/services', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: new Date('2026-03-15') },
+    { path: '/services/miami', changeFrequency: 'monthly' as const, priority: 0.85, lastMod: new Date('2026-04-20') },
     { path: '/about', changeFrequency: 'yearly' as const, priority: 0.7, lastMod: new Date('2024-06-01') },
     { path: '/contact', changeFrequency: 'yearly' as const, priority: 0.8, lastMod: new Date('2024-06-01') },
-    { path: '/blog', changeFrequency: 'monthly' as const, priority: 0.7, lastMod: SITE_LAST_UPDATED },
+    { path: '/blog', changeFrequency: 'monthly' as const, priority: 0.7, lastMod: new Date('2026-04-20') },
+    { path: '/privacy', changeFrequency: 'yearly' as const, priority: 0.3, lastMod: new Date('2024-01-01') },
+    { path: '/terms', changeFrequency: 'yearly' as const, priority: 0.3, lastMod: new Date('2024-01-01') },
   ]
 
   const staticRoutes: MetadataRoute.Sitemap = locales.flatMap((locale) =>

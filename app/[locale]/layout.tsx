@@ -12,7 +12,6 @@ import { locales } from '@/i18n/config'
 import { ClientOnlyCursor, ClientOnlyWhatsApp, ClientOnlyAnalytics, ClientOnlyCookieConsent } from '@/components/ClientOnly'
 import ScrollToTop from '@/components/ScrollToTop'
 import StickyCta from '@/components/StickyCta'
-import OrganizationJsonLd from '@/components/seo/OrganizationJsonLd'
 import LocalBusinessJsonLd from '@/components/seo/LocalBusinessJsonLd'
 import ServiceJsonLd from '@/components/seo/ServiceJsonLd'
 
@@ -44,11 +43,11 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: {
-    canonical: 'https://somazstudio.com/en',
+    canonical: 'https://somazstudio.com',
     languages: {
       en: 'https://somazstudio.com/en',
       es: 'https://somazstudio.com/es',
-      'x-default': 'https://somazstudio.com/en',
+      'x-default': 'https://somazstudio.com',
     },
     types: {
       'application/rss+xml': 'https://somazstudio.com/feed.xml',
@@ -116,7 +115,6 @@ export default async function LocaleLayout(
               <SpeedInsights />
             </>
           )}
-          <OrganizationJsonLd />
           <LocalBusinessJsonLd />
           <ServiceJsonLd />
       </>
