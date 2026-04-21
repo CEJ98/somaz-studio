@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
@@ -39,7 +39,7 @@ export default function StickyCta() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
+        <m.div
           initial={reduced ? false : { y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={reduced ? { opacity: 0 } : { y: 80, opacity: 0 }}
@@ -64,7 +64,7 @@ export default function StickyCta() {
           >
             <Icon name="close" size={14} />
           </button>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

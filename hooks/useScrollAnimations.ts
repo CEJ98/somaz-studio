@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
+import { m, useInView, useReducedMotion, type Variants } from 'framer-motion'
 
 export function useReducedMotionOption() {
   return useReducedMotion()

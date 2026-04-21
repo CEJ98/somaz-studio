@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState, useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { m, useInView, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import type { Project } from '@/data/projects'
 import { ease } from '@/lib/motion'
@@ -41,7 +41,7 @@ export default function ProjectCard({ project, priority = false, featured = fals
     >
       <div ref={cardRef} className={`relative overflow-hidden ${resolvedAspect}`}>
         {/* Curtain reveal */}
-        <motion.div
+        <m.div
           className="absolute inset-0 bg-surface z-10 origin-top pointer-events-none"
           initial={{ scaleY: reduced ? 0 : 1 }}
           animate={inView ? { scaleY: 0 } : {}}

@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
-import { motion, useScroll, useReducedMotion } from 'framer-motion'
+import { m, useScroll, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { useLocale } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
@@ -177,7 +177,7 @@ export default function Navbar() {
       >
         <ul className="flex flex-col px-6 py-8 gap-6">
           {links.map(({ href, label }, i) => (
-            <motion.li
+            <m.li
               key={href}
               initial={reduced ? false : { opacity: 0, x: -16 }}
               animate={menuOpen ? { opacity: 1, x: 0 } : (reduced ? {} : { opacity: 0, x: -16 })}
@@ -191,9 +191,9 @@ export default function Navbar() {
               >
                 {label}
               </Link>
-            </motion.li>
+            </m.li>
           ))}
-          <motion.li
+          <m.li
             initial={reduced ? false : { opacity: 0, x: -16 }}
             animate={menuOpen ? { opacity: 1, x: 0 } : (reduced ? {} : { opacity: 0, x: -16 })}
             transition={{ duration: 0.3, delay: reduced ? 0 : links.length * 0.06, ease: ease }}
@@ -205,8 +205,8 @@ export default function Navbar() {
             >
               {locale === 'en' ? 'ES' : 'EN'}
             </button>
-          </motion.li>
-          <motion.li
+          </m.li>
+          <m.li
             initial={reduced ? false : { opacity: 0, x: -16 }}
             animate={menuOpen ? { opacity: 1, x: 0 } : (reduced ? {} : { opacity: 0, x: -16 })}
             transition={{ duration: 0.3, delay: reduced ? 0 : (links.length + 1) * 0.06, ease: ease }}
@@ -217,12 +217,12 @@ export default function Navbar() {
             >
               {t('startProject')}
             </Link>
-          </motion.li>
+          </m.li>
         </ul>
       </div>
 
       {/* Scroll progress bar */}
-      <motion.div
+      <m.div
         className="absolute bottom-0 left-0 h-px bg-accent/60 origin-left"
         style={{ scaleX: scrollYProgress }}
       />

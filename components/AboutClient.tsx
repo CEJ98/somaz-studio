@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { motion, useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion'
+import { m, useInView, useMotionValue, useTransform, animate, useReducedMotion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
@@ -33,7 +33,7 @@ function CounterStat({ value, suffix = '', label }: { value: string; suffix?: st
   return (
     <div ref={ref}>
       <p className="font-serif font-light text-accent" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}>
-        {isNumeric ? <motion.span>{rounded}</motion.span> : value}{suffix}
+        {isNumeric ? <m.span>{rounded}</m.span> : value}{suffix}
       </p>
       <p className="font-sans text-[10px] text-foreground/80 tracking-[0.25em] mt-3 uppercase">{label}</p>
     </div>
@@ -113,17 +113,17 @@ export default function AboutClient() {
 
         <div className="relative z-10 w-full px-6 md:px-10 pb-20 md:pb-28 pt-40">
           <div className="max-w-7xl mx-auto">
-            <motion.p
+            <m.p
               className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease }}
             >
               {t('ourStory')}
-            </motion.p>
+            </m.p>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-              <motion.div
+              <m.div
                 className="md:col-span-7"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -139,9 +139,9 @@ export default function AboutClient() {
                 <p className="font-sans font-light text-foreground/55 leading-relaxed max-w-lg">
                   {t('intro')}
                 </p>
-              </motion.div>
+              </m.div>
 
-              <motion.div
+              <m.div
                 className="md:col-span-4 md:col-start-9 flex flex-col justify-end pb-4"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -154,7 +154,7 @@ export default function AboutClient() {
                 >
                   {t('quote')}
                 </blockquote>
-              </motion.div>
+              </m.div>
             </div>
           </div>
         </div>

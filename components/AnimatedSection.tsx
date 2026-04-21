@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { m, useInView, useReducedMotion } from 'framer-motion'
 import { ease } from '@/lib/motion'
 
 interface Props {
@@ -15,7 +15,7 @@ export default function AnimatedSection({ children, className, delay = 0 }: Prop
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduced = useReducedMotion()
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={reduced ? false : { opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -23,6 +23,6 @@ export default function AnimatedSection({ children, className, delay = 0 }: Prop
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }

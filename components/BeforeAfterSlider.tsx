@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useCallback, useEffect } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import { ease } from '@/lib/motion'
 
@@ -66,7 +66,7 @@ export default function BeforeAfterSlider({
   }, [dragging, updatePosition])
 
   return (
-    <motion.section
+    <m.section
       className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40"
       initial={reduced ? false : { opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -193,6 +193,6 @@ export default function BeforeAfterSlider({
           </div>
         )}
       </div>
-    </motion.section>
+    </m.section>
   )
 }

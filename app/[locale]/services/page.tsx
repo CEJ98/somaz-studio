@@ -90,9 +90,11 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
               {t('heading')}
             </h1>
             <p className="font-sans font-light text-foreground/90 mt-6 max-w-xl leading-relaxed">{t('subheading')}</p>
+            <p className="font-sans text-[11px] tracking-[0.15em] uppercase text-accent/80 mt-4 mb-2">{t('pricingPill')}</p>
+            <p className="font-sans text-sm text-foreground/60 max-w-lg leading-relaxed mb-6">{t('audienceLine')}</p>
             <Link
               href="/contact?type=consult"
-              className="inline-flex items-center gap-3 mt-8 border border-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase text-accent hover:bg-accent hover:text-background transition-all duration-300"
+              className="inline-flex items-center gap-3 mt-2 border border-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase text-accent hover:bg-accent hover:text-background transition-all duration-300"
             >
               {t('freeConsult')}
               <Icon name="north_east" size={14} />

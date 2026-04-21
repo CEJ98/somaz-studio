@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { m, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { projects } from '@/data/projects'
@@ -27,9 +27,9 @@ function ScrollCard({
   const opacity = useTransform(scrollYProgress, [0, 0.4], reduced ? [1, 1] : [0, 1])
 
   return (
-    <motion.div ref={ref} style={{ y, opacity }} className={className}>
+    <m.div ref={ref} style={{ y, opacity }} className={className}>
       {children}
-    </motion.div>
+    </m.div>
   )
 }
 

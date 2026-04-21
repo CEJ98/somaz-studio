@@ -14,6 +14,7 @@ import ScrollToTop from '@/components/ScrollToTop'
 import StickyCta from '@/components/StickyCta'
 import LocalBusinessJsonLd from '@/components/seo/LocalBusinessJsonLd'
 import ServiceJsonLd from '@/components/seo/ServiceJsonLd'
+import MotionProvider from '@/components/MotionProvider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://somazstudio.com'),
@@ -81,6 +82,7 @@ export default async function LocaleLayout(
 
   return (
     <NextIntlClientProvider messages={messages}>
+      <MotionProvider>
       <>
           <a
             href="#main-content"
@@ -118,6 +120,7 @@ export default async function LocaleLayout(
           <LocalBusinessJsonLd />
           <ServiceJsonLd />
       </>
+      </MotionProvider>
     </NextIntlClientProvider>
   )
 }

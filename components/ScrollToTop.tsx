@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { usePathname } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
@@ -21,7 +21,7 @@ export default function ScrollToTop() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.button
+        <m.button
           onClick={scrollUp}
           aria-label="Scroll to top"
           className="fixed bottom-24 right-6 z-50 w-12 h-12 rounded-full border border-border/40 bg-surface/80 backdrop-blur flex items-center justify-center hover:border-accent transition-colors duration-300"
@@ -32,7 +32,7 @@ export default function ScrollToTop() {
           whileHover={reduced ? undefined : { scale: 1.08 }}
         >
           <Icon name="north" size={18} className="text-foreground/60" />
-        </motion.button>
+        </m.button>
       )}
     </AnimatePresence>
   )

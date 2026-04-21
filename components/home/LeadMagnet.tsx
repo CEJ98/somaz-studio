@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { toast } from 'sonner'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
@@ -59,7 +59,7 @@ export default function LeadMagnet({ locale }: Props) {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2">
         {/* Visual side */}
         {sideImg && (
-          <motion.div
+          <m.div
             className="relative h-64 md:h-auto min-h-[320px] overflow-hidden"
             initial={reduced ? false : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -81,12 +81,12 @@ export default function LeadMagnet({ locale }: Props) {
                 Somaz Studio · Miami
               </span>
             </div>
-          </motion.div>
+          </m.div>
         )}
 
         {/* Form side */}
         <div className="px-8 md:px-12 py-16 md:py-20 flex flex-col justify-center">
-          <motion.div
+          <m.div
             initial={reduced ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
@@ -105,9 +105,9 @@ export default function LeadMagnet({ locale }: Props) {
             <p className="font-sans font-light text-sm text-foreground/65 leading-relaxed">
               {labels.desc}
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.form
+          <m.form
             onSubmit={handleSubmit}
             initial={reduced ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -137,7 +137,7 @@ export default function LeadMagnet({ locale }: Props) {
             <p className="font-sans text-[10px] tracking-[0.15em] uppercase text-foreground/35">
               {labels.privacy}
             </p>
-          </motion.form>
+          </m.form>
         </div>
       </div>
     </section>

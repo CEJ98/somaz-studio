@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { ease } from '@/lib/motion'
 import AnimatedCounter from '@/components/AnimatedCounter'
@@ -23,7 +23,7 @@ export default function SocialProof() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-3 gap-px bg-border/30">
               {stats.map((stat, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={reduced ? false : { opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function SocialProof() {
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   <p className="font-sans text-[11px] tracking-[0.3em] uppercase text-foreground/60">{stat.label}</p>
                   <p className="font-sans text-[9px] tracking-[0.15em] text-foreground/30 mt-2 hidden md:block">{stat.hint}</p>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>

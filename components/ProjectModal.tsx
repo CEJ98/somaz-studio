@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 import { useTranslations, useLocale } from 'next-intl'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
@@ -51,7 +51,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   return (
     <AnimatePresence>
       {project && (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-[100] flex items-center justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -59,7 +59,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           transition={{ duration: 0.3 }}
         >
           {/* Backdrop */}
-          <motion.div
+          <m.div
             className="absolute inset-0 bg-background/95 backdrop-blur-md"
             onClick={onClose}
             initial={{ opacity: 0 }}
@@ -84,7 +84,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           {/* Main content */}
           <div className="relative z-10 w-full max-w-6xl px-6 md:px-16 overflow-y-auto max-h-[90vh] py-14 md:py-16 scrollbar-thin">
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={`${project.slug}-${activeIndex}`}
                 className="relative aspect-[16/10] overflow-hidden bg-surface"
                 initial={reduced ? false : { opacity: 0, scale: 0.97 }}
@@ -100,7 +100,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   className="object-cover"
                   priority
                 />
-              </motion.div>
+              </m.div>
             </AnimatePresence>
 
             {/* Navigation arrows */}
@@ -188,7 +188,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

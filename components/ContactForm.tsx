@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from '@/i18n/navigation'
 import { useSearchParams } from 'next/navigation'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { toast } from 'sonner'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
@@ -274,7 +274,7 @@ export default function ContactForm() {
                   reduced ? (
                     <span key={i} className="w-1 h-1 rounded-full bg-background inline-block opacity-60" />
                   ) : (
-                    <motion.span
+                    <m.span
                       key={i}
                       className="w-1 h-1 rounded-full bg-background inline-block"
                       animate={{ opacity: [0.3, 1, 0.3] }}

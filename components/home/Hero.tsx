@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { m, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
@@ -28,7 +28,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[100svh] min-h-[700px] overflow-hidden flex flex-col justify-end">
-      <motion.div className="absolute inset-0" style={{ scale: heroScale, borderRadius: heroBorderRadius }}>
+      <m.div className="absolute inset-0" style={{ scale: heroScale, borderRadius: heroBorderRadius }}>
         <Image
           src="/media/hero-home-poster.jpg"
           alt=""
@@ -53,24 +53,24 @@ export default function Hero() {
             <source src="/media/hero-home.mp4" type="video/mp4" />
           </video>
         )}
-      </motion.div>
+      </m.div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/20" />
 
-      <motion.div
+      <m.div
         className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-10 pb-20 md:pb-28"
         style={{ opacity: heroOpacity }}
       >
-        <motion.p
+        <m.p
           className="font-sans text-[11px] tracking-[0.3em] uppercase text-accent mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.2 }}
         >
           {t('badge')}
-        </motion.p>
+        </m.p>
 
-        <motion.h1
+        <m.h1
           className="font-serif leading-[0.9] tracking-tight mb-8"
           style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)', y: titleY }}
           initial="hidden"
@@ -82,7 +82,7 @@ export default function Hero() {
         >
           <div className="overflow-hidden">
             {t('heroLine1').split(' ').map((word, i) => (
-              <motion.span
+              <m.span
                 key={i}
                 className="inline-block mr-[0.25em] font-light text-foreground/60 italic"
                 variants={reduced ? {} : {
@@ -91,12 +91,12 @@ export default function Hero() {
                 }}
               >
                 {word}
-              </motion.span>
+              </m.span>
             ))}
           </div>
           <div className="overflow-hidden">
             {t('heroLine2').split(' ').map((word, i) => (
-              <motion.span
+              <m.span
                 key={i}
                 className="inline-block mr-[0.25em] font-semibold text-foreground"
                 variants={reduced ? {} : {
@@ -105,21 +105,21 @@ export default function Hero() {
                 }}
               >
                 {word}
-              </motion.span>
+              </m.span>
             ))}
           </div>
-        </motion.h1>
+        </m.h1>
 
-        <motion.p
+        <m.p
           className="font-sans text-sm font-light text-foreground/75 leading-relaxed mb-8 max-w-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.58 }}
         >
           {t('heroSubline')}
-        </motion.p>
+        </m.p>
 
-        <motion.div
+        <m.div
           className="flex flex-col items-start gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -138,23 +138,23 @@ export default function Hero() {
           <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45 mt-1">
             {t('availability')}
           </p>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         className="absolute bottom-8 right-8 md:right-10 flex flex-col items-center gap-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
         style={{ opacity: scrollIndicatorOpacity }}
       >
-        <motion.div
+        <m.div
           className="w-px h-10 bg-gradient-to-b from-foreground/30 to-transparent"
           animate={reduced ? {} : { scaleY: [1, 0.4, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           style={{ originY: 0 }}
         />
-      </motion.div>
+      </m.div>
     </section>
   )
 }

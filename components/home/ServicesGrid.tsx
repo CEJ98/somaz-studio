@@ -2,7 +2,7 @@
 
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { services } from '@/data/services'
 import { Icon } from '@/components/icons'
@@ -49,7 +49,7 @@ export default function ServicesGrid({ locale }: Props) {
           {services.map((s, i) => {
             const imgData = pickBySlug(SERVICE_IMAGES[s.slug] ?? '')
             return (
-              <motion.div
+              <m.div
                 key={s.number}
                 initial={reduced ? false : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ export default function ServicesGrid({ locale }: Props) {
                     {tl(s.description, locale)}
                   </p>
                 </Link>
-              </motion.div>
+              </m.div>
             )
           })}
         </div>

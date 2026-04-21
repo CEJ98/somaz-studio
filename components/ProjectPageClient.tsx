@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { motion, useScroll, useTransform, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { m, useScroll, useTransform, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { useState, useEffect, useCallback } from 'react'
 import type { Project } from '@/data/projects'
@@ -57,7 +57,7 @@ function Lightbox({
   const [touchStart, setTouchStart] = useState<number | null>(null)
 
   return (
-    <motion.div
+    <m.div
       className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -102,7 +102,7 @@ function Lightbox({
       )}
 
       {/* Image */}
-      <motion.div
+      <m.div
         key={current}
         className="relative w-[90vw] h-[80vh] max-w-6xl"
         initial={{ opacity: 0, scale: 0.95 }}
@@ -127,8 +127,8 @@ function Lightbox({
           sizes="90vw"
           priority
         />
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   )
 }
 
@@ -173,7 +173,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
 
       {/* Hero — full viewport */}
       <div className="relative w-full h-screen min-h-[600px] overflow-hidden">
-        <motion.div className="absolute inset-0 scale-110" style={{ y: heroY }}>
+        <m.div className="absolute inset-0 scale-110" style={{ y: heroY }}>
           <Image
             src={project.images[0]}
             alt={`${project.title} — ${project.category} · ${project.location}`}
@@ -183,16 +183,16 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
             sizes="100vw"
             onClick={() => setLightboxIndex(0)}
           />
-        </motion.div>
+        </m.div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10" />
 
         {/* Title overlay — bottom */}
-        <motion.div
+        <m.div
           className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-16 md:pb-24"
           style={{ opacity: heroOpacity }}
         >
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.2, ease }}
@@ -207,15 +207,15 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
                 <span className="block text-foreground/60 italic">{tp('thePrefix')}</span>
                 <span className="block font-semibold text-foreground">{project.title}</span>
               </h1>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Info bar — 4 columns with architectural lines */}
       <div className="border-b border-border/40">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease }}
@@ -231,13 +231,13 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
                 </p>
               </div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
       {/* Description — centered, Cormorant Italic */}
       <div className="max-w-3xl mx-auto px-6 md:px-10 py-24 md:py-36">
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
@@ -246,12 +246,12 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
           style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)' }}
         >
           {tl(project.description, locale)}
-        </motion.p>
+        </m.p>
       </div>
 
       {/* Outcome */}
       {project.outcome && (
-        <motion.div
+        <m.div
           className="max-w-3xl mx-auto px-6 md:px-10 pb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -260,7 +260,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
         >
           <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/60 mb-3">{tp('outcomeLabel')}</p>
           <p className="font-sans text-sm text-foreground/65 leading-relaxed">{tl(project.outcome, locale)}</p>
-        </motion.div>
+        </m.div>
       )}
 
       {/* Gallery — editorial grid */}
@@ -271,7 +271,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
               const isFullWidth =
                 i === 0 || (galleryImages.length % 2 === 1 && i === galleryImages.length - 1)
               return (
-                <motion.div
+                <m.div
                   key={img}
                   className={`relative overflow-hidden cursor-zoom-in ${
                     isFullWidth ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
@@ -289,7 +289,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
                     className="object-cover hover:scale-[1.02] transition-transform duration-500"
                     sizes={isFullWidth ? '100vw' : '(max-width: 768px) 100vw, 50vw'}
                   />
-                </motion.div>
+                </m.div>
               )
             })}
           </div>

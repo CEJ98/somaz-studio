@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { motion, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
+import { m, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
 
 interface ImageCursorTrailProps {
   src: string | null
@@ -38,7 +38,7 @@ export default function ImageCursorTrail({ src }: ImageCursorTrailProps) {
   if (!enabled) return null
 
   return (
-    <motion.div
+    <m.div
       className="fixed top-0 left-0 pointer-events-none z-[200]"
       style={{
         x: springX,
@@ -49,7 +49,7 @@ export default function ImageCursorTrail({ src }: ImageCursorTrailProps) {
     >
       <AnimatePresence mode="wait">
         {src && (
-          <motion.div
+          <m.div
             key={src}
             className="w-44 h-32 overflow-hidden shadow-2xl"
             initial={{ opacity: 0, scale: 0.88 }}
@@ -65,9 +65,9 @@ export default function ImageCursorTrail({ src }: ImageCursorTrailProps) {
               className="object-cover"
               aria-hidden
             />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   )
 }

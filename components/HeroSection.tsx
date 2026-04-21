@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from 'framer-motion'
+import { m, useScroll, useTransform, useReducedMotion, AnimatePresence } from 'framer-motion'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
@@ -48,7 +48,7 @@ export default function HeroSection({
   return (
     <section ref={heroRef} className="relative h-[100vh] min-h-[600px] flex items-end overflow-hidden">
       {/* Background */}
-      <motion.div
+      <m.div
         className="absolute inset-0"
         style={reduced ? {} : { y: bgY }}
       >
@@ -79,7 +79,7 @@ export default function HeroSection({
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/20" />
-      </motion.div>
+      </m.div>
 
       {/* Ghost text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
@@ -92,13 +92,13 @@ export default function HeroSection({
       </div>
 
       {/* Content */}
-      <motion.div
+      <m.div
         className="relative z-10 w-full px-6 md:px-10 pb-20 md:pb-28"
         style={reduced ? {} : { y: textY }}
       >
         <div className="max-w-7xl mx-auto">
           {/* Pre-heading label */}
-          <motion.div
+          <m.div
             initial={reduced ? false : { opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease }}
@@ -108,7 +108,7 @@ export default function HeroSection({
             <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent">
               Miami · Global
             </span>
-          </motion.div>
+          </m.div>
 
           {/* Headline with word reveal */}
           <h1
@@ -134,7 +134,7 @@ export default function HeroSection({
 
           {/* Subline */}
           {subline && (
-            <motion.p
+            <m.p
               initial={reduced ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8, ease }}
@@ -142,11 +142,11 @@ export default function HeroSection({
               style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.1rem)' }}
             >
               {subline[locale as 'en' | 'es'] ?? subline.en}
-            </motion.p>
+            </m.p>
           )}
 
           {/* CTAs */}
-          <motion.div
+          <m.div
             initial={reduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1, ease }}
@@ -165,12 +165,12 @@ export default function HeroSection({
             >
               {viewWorkLabel}
             </Link>
-          </motion.div>
+          </m.div>
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <m.div
         className="absolute bottom-10 right-10 flex flex-col items-center gap-2"
         initial={reduced ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -180,7 +180,7 @@ export default function HeroSection({
         <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/40" style={{ writingMode: 'vertical-rl' }}>
           Scroll
         </span>
-      </motion.div>
+      </m.div>
 
       {/* Bottom line */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />

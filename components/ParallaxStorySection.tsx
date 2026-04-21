@@ -2,7 +2,7 @@
 
 import { useRef, ReactNode } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { m, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { pickBySlug } from '@/data/imageLibrary'
 
 interface Props {
@@ -55,7 +55,7 @@ export default function ParallaxStorySection({
       className="relative overflow-hidden border-t border-border/40"
       style={{ height }}
     >
-      <motion.div
+      <m.div
         className="absolute inset-0 -top-[12%] -bottom-[12%]"
         style={{ y }}
       >
@@ -68,7 +68,7 @@ export default function ParallaxStorySection({
           blurDataURL={img.blurDataURL}
           className="object-cover"
         />
-      </motion.div>
+      </m.div>
 
       <div
         className="absolute inset-0"

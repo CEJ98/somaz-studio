@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { Link } from '@/i18n/navigation'
 import { t as tl } from '@/lib/locale'
 
@@ -118,16 +118,16 @@ export default function FAQSection({ locale }: Props) {
                   <span className="font-serif text-xl text-foreground/85">
                     {tl(faq.q, locale)}
                   </span>
-                  <motion.span
+                  <m.span
                     className="text-accent text-2xl leading-none shrink-0"
                     aria-hidden="true"
                     animate={{ rotate: openIndex === i ? 45 : 0 }}
                     transition={{ duration: reduced ? 0 : 0.3 }}
                   >
                     +
-                  </motion.span>
+                  </m.span>
                 </button>
-                <motion.div
+                <m.div
                   id={`faq-panel-${i}`}
                   role="region"
                   aria-labelledby={`faq-btn-${i}`}
@@ -145,7 +145,7 @@ export default function FAQSection({ locale }: Props) {
                   <p className="font-sans font-light text-foreground/65 leading-relaxed text-sm pb-6">
                     {tl(faq.a, locale)}
                   </p>
-                </motion.div>
+                </m.div>
               </div>
             ))}
           </div>

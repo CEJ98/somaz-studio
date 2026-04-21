@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
@@ -44,7 +44,7 @@ export default function TestimonialsSection() {
         {/* Quote */}
         <div className="relative min-h-[260px] md:min-h-[220px]">
           <AnimatePresence mode="wait">
-            <motion.blockquote
+            <m.blockquote
               key={active}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -53,19 +53,19 @@ export default function TestimonialsSection() {
               className="flex flex-col items-center"
             >
               {/* Opening quote mark */}
-              <motion.span
+              <m.span
                 className="font-serif text-accent/30 text-8xl leading-none -mt-6 mb-2 select-none self-start"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, ease }}
               >
                 &ldquo;
-              </motion.span>
+              </m.span>
 
               {/* Word-by-word reveal */}
               <p className="font-serif text-xl md:text-2xl font-light italic text-foreground/85 leading-relaxed text-center px-4 flex flex-wrap justify-center gap-x-[0.28em] gap-y-1">
                 {words.map((word, i) => (
-                  <motion.span
+                  <m.span
                     key={`${active}-${i}`}
                     custom={i}
                     initial={{ opacity: 0, y: 18 }}
@@ -77,12 +77,12 @@ export default function TestimonialsSection() {
                     }}
                   >
                     {word}
-                  </motion.span>
+                  </m.span>
                 ))}
               </p>
 
               {/* Attribution */}
-              <motion.footer
+              <m.footer
                 className="text-center mt-6"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -103,8 +103,8 @@ export default function TestimonialsSection() {
                     <Icon name="north_east" size={10} />
                   </Link>
                 )}
-              </motion.footer>
-            </motion.blockquote>
+              </m.footer>
+            </m.blockquote>
           </AnimatePresence>
         </div>
 
@@ -121,7 +121,7 @@ export default function TestimonialsSection() {
           {/* Dots */}
           <div className="flex items-center gap-2">
             {testimonials.map((_, i) => (
-              <motion.button
+              <m.button
                 key={i}
                 onClick={() => setActive(i)}
                 animate={i === active

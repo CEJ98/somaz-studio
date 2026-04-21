@@ -1,7 +1,7 @@
 'use client'
 
 import { Link } from '@/i18n/navigation'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { m, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import type { Service } from '@/data/services'
@@ -67,7 +67,7 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
   const libImg = pickBySlug(SERVICE_LIBRARY_IMAGES[service.slug] ?? '')
 
   return (
-    <motion.div
+    <m.div
       id={service.slug}
       ref={ref}
       initial={reduced ? false : { opacity: 0, y: 40 }}
@@ -130,6 +130,6 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
           </Link>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   )
 }

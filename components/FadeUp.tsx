@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
 import { ease } from '@/lib/motion'
@@ -37,26 +37,26 @@ export default function FadeUp({
   if (clipPath) {
     return (
       <div ref={ref} className={className}>
-        <motion.div
+        <m.div
           initial={{ clipPath: 'inset(0 0 100% 0)' }}
           animate={inView ? { clipPath: 'inset(0 0 0% 0)' } : {}}
           transition={{ duration, delay, ease }}
         >
           {children}
-        </motion.div>
+        </m.div>
       </div>
     )
   }
 
   return (
     <div ref={ref} className={className}>
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration, delay, ease }}
       >
         {children}
-      </motion.div>
+      </m.div>
     </div>
   )
 }

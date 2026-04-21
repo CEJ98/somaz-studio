@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { useInView, useMotionValue, useTransform, useReducedMotion, animate, motion } from 'framer-motion'
+import { useInView, useMotionValue, useTransform, useReducedMotion, animate, m } from 'framer-motion'
 
 interface Props {
   value: number
@@ -33,7 +33,7 @@ export default function AnimatedCounter({ value, suffix = '', duration = 2 }: Pr
       className="font-serif font-light text-accent leading-none"
       style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
     >
-      <motion.span>{rounded}</motion.span>
+      <m.span>{rounded}</m.span>
       {suffix}
     </span>
   )

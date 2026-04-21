@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { ease } from '@/lib/motion'
 import AnimatedSection from '@/components/AnimatedSection'
@@ -21,7 +21,7 @@ function StepCard({
   const reduced = useReducedMotion()
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={reduced ? false : { opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ function StepCard({
 
       <h3 className="font-serif text-3xl font-semibold text-foreground mb-5">{title}</h3>
       <p className="font-sans font-light text-foreground/70 leading-relaxed">{description}</p>
-    </motion.div>
+    </m.div>
   )
 }
 

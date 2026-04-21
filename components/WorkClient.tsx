@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
@@ -69,7 +69,7 @@ export default function WorkClient() {
         </div>
         <div className="relative z-10 w-full px-6 md:px-10 pb-16">
           <div className="max-w-7xl mx-auto">
-            <motion.div
+            <m.div
               initial={reduced ? false : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease }}
@@ -81,7 +81,7 @@ export default function WorkClient() {
               >
                 {tw('selectedWork')}
               </h1>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </section>
@@ -98,7 +98,7 @@ export default function WorkClient() {
         </p>
 
         {/* Market filter */}
-        <motion.div
+        <m.div
           initial={reduced ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15, ease }}
@@ -118,10 +118,10 @@ export default function WorkClient() {
               {market === 'All' ? tw('marketAll') : market}
             </button>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Category filters */}
-        <motion.div
+        <m.div
           initial={reduced ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease }}
@@ -144,10 +144,10 @@ export default function WorkClient() {
               {tc(cat)}
             </button>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Project counter */}
-        <motion.p
+        <m.p
           key={filtered.length}
           initial={reduced ? false : { opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -155,15 +155,15 @@ export default function WorkClient() {
           className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 mb-10"
         >
           {filtered.length} {filtered.length === 1 ? tw('projectSingular') : tw('projectPlural')}
-        </motion.p>
+        </m.p>
 
         {/* Editorial Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <m.div layout className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, i) => {
               const isWide = project.size === 'large'
               return (
-                <motion.div
+                <m.div
                   key={project.slug}
                   layout
                   initial={reduced ? false : { opacity: 0, scale: 0.96 }}
@@ -183,11 +183,11 @@ export default function WorkClient() {
                     isWide={isWide}
                     onView={setSelectedProject}
                   />
-                </motion.div>
+                </m.div>
               )
             })}
           </AnimatePresence>
-        </motion.div>
+        </m.div>
 
         {/* CTA section */}
         <div ref={ctaVideoRef} className="mt-24 pt-16 border-t border-border/40 text-center relative overflow-hidden">

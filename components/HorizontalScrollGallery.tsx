@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import { m, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { byCategory } from '@/data/imageLibrary'
 
@@ -57,7 +57,7 @@ export default function HorizontalScrollGallery() {
           </h2>
         </div>
 
-        <motion.div
+        <m.div
           className="flex gap-6 md:gap-10 px-6 md:px-10"
           style={{ x }}
         >
@@ -87,7 +87,7 @@ export default function HorizontalScrollGallery() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )
