@@ -30,7 +30,7 @@ export default function Hero() {
     <section className="relative min-h-[100svh] min-h-[700px] overflow-hidden flex flex-col justify-end">
       <m.div className="absolute inset-0" style={{ scale: heroScale, borderRadius: heroBorderRadius }}>
         <Image
-          src="/media/hero-home-poster.jpg"
+          src="/library/video/hero-penthouse-poster.jpg"
           alt=""
           fill
           priority
@@ -47,15 +47,12 @@ export default function Hero() {
             preload="auto"
             className="absolute inset-0 h-full w-full object-cover"
           >
-            <source src="/media/hero-home-mobile.webm" media="(max-width: 767px)" type="video/webm" />
-            <source src="/media/hero-home-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
-            <source src="/media/hero-home.webm" type="video/webm" />
-            <source src="/media/hero-home.mp4" type="video/mp4" />
+            <source src="/library/video/hero-penthouse.mp4" type="video/mp4" />
           </video>
         )}
       </m.div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/75 to-background/15" />
 
       <m.div
         className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-10 pb-20 md:pb-28"
