@@ -63,6 +63,7 @@ export default async function BlogPostPage(props: Props) {
       dateModified: post.date,
       mainEntityOfPage: `https://somazstudio.com/${locale}/blog/${slug}`,
       image: `https://somazstudio.com${post.coverImage}`,
+      inLanguage: locale === 'es' ? 'es' : 'en',
       articleSection: post.category,
       wordCount: localizedContent.split(' ').length,
       author: {

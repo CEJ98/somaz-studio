@@ -85,14 +85,13 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/logos/logo-smz.png"
+            src="/logos/logo-full-black.png"
             alt="Somaz Studio"
-            width={200}
+            width={300}
             height={52}
-            className="h-16 w-auto object-contain"
+            className="h-10 w-auto object-contain"
             style={{ width: 'auto' }}
             priority
-            loading="eager"
           />
         </Link>
 
