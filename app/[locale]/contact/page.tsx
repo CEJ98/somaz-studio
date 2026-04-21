@@ -60,9 +60,9 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         availableLanguage: ['English', 'Spanish'],
       },
       sameAs: [
-        'https://instagram.com/somazstudio',
-        'https://linkedin.com/company/somazstudio',
-        'https://tiktok.com/@somazstudio',
+        'https://www.instagram.com/somazstudio',
+        'https://www.linkedin.com/company/somazstudio',
+        'https://www.tiktok.com/@somazstudio',
       ],
     },
   ])

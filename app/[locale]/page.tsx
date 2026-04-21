@@ -87,7 +87,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       {/* SSR-rendered hero text for AI crawlers (ChatGPT, Perplexity, Google AI Overviews).
           The animated Hero below overlays this visually after hydration. */}
-      <div className="sr-only" aria-hidden="true">
+      <div className="sr-only">
         <h1>{t('heroLine1')} {t('heroLine2')}</h1>
         <p>{t('heroSubline')}</p>
         <p>{t('badge')}</p>
