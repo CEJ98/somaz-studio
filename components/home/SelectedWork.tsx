@@ -55,12 +55,12 @@ export default function SelectedWork() {
         </Link>
       </AnimatedSection>
 
-      {/* Row 1: large left + small right */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6 items-start mb-3 md:mb-6">
+      {/* Row 1: symmetric pair */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start mb-6 md:mb-8">
         {selected[0] && (
-          <ScrollCard className="md:col-span-7">
+          <ScrollCard>
             <Link href={`/work/${selected[0].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/3] md:aspect-[7/4] mb-4">
+              <div className="relative overflow-hidden aspect-[4/3] mb-4">
                 <Image
                   src={selected[0].coverImage}
                   alt={selected[0].title}
@@ -82,9 +82,9 @@ export default function SelectedWork() {
           </ScrollCard>
         )}
         {selected[1] && (
-          <ScrollCard className="md:col-span-5">
+          <ScrollCard>
             <Link href={`/work/${selected[1].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/3] md:aspect-[5/4] mb-4">
+              <div className="relative overflow-hidden aspect-[4/3] mb-4">
                 <Image
                   src={selected[1].coverImage}
                   alt={selected[1].title}
@@ -107,12 +107,12 @@ export default function SelectedWork() {
         )}
       </div>
 
-      {/* Row 2: small left + large right */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6 items-start">
+      {/* Row 2 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
         {selected[2] && (
-          <ScrollCard className="md:col-span-5">
+          <ScrollCard>
             <Link href={`/work/${selected[2].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/3] md:aspect-[5/4] mb-4">
+              <div className="relative overflow-hidden aspect-[4/3] mb-4">
                 <Image
                   src={selected[2].coverImage}
                   alt={selected[2].title}
@@ -134,9 +134,9 @@ export default function SelectedWork() {
           </ScrollCard>
         )}
         {selected[3] && (
-          <ScrollCard className="md:col-span-7">
+          <ScrollCard>
             <Link href={`/work/${selected[3].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/3] md:aspect-[7/4] mb-4">
+              <div className="relative overflow-hidden aspect-[4/3] mb-4">
                 <Image
                   src={selected[3].coverImage}
                   alt={selected[3].title}
