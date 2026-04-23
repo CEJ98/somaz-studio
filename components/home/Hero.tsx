@@ -72,7 +72,7 @@ export default function Hero() {
           aria-level={1}
           aria-hidden="true"
           className="font-serif leading-[0.9] tracking-tight mb-8"
-          style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)', y: titleY }}
+          style={{ y: titleY }}
           initial="hidden"
           animate="visible"
           variants={{
@@ -80,7 +80,7 @@ export default function Hero() {
             visible: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } },
           }}
         >
-          <div className="overflow-hidden">
+          <div className="overflow-hidden" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 7rem)' }}>
             {t('heroLine1').split(' ').map((word, i) => (
               <m.span
                 key={i}
@@ -94,7 +94,7 @@ export default function Hero() {
               </m.span>
             ))}
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden" style={{ fontSize: 'clamp(4rem, 9.5vw, 11rem)' }}>
             {t('heroLine2').split(' ').map((word, i) => (
               <m.span
                 key={i}
@@ -135,9 +135,6 @@ export default function Hero() {
               <Icon name="north_east" size={16} />
             </Link>
           </MagneticButton>
-          <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/45 mt-1">
-            {t('availability')}
-          </p>
         </m.div>
       </m.div>
 
