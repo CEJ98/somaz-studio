@@ -5,7 +5,7 @@
 :root {
   --background: #F8F6F2;
   --foreground: #1A1A1A;
-  --accent: #6B6B68;
+  --accent: #8B6F47;
   --surface: #EAE7E0;
   --border: #C8C3B8;
 }
@@ -53,7 +53,7 @@ body {
 
 /* Selection color */
 ::selection {
-  background: #6B6B68;
+  background: #8B6F47;
   color: #F8F6F2;
 }
 
@@ -65,7 +65,7 @@ body {
   background: #F8F6F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #6B6B68;
+  background: #8B6F47;
 }
 
 /* Placeholder */
@@ -122,7 +122,7 @@ body {
     font-family: var(--font-bodoni), Georgia, serif;
   }
   .text-gradient {
-    background: linear-gradient(135deg, #6B6B68 0%, #1A1A1A 60%);
+    background: linear-gradient(135deg, #8B6F47 0%, #1A1A1A 60%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

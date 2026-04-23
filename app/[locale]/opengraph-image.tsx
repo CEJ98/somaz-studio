@@ -23,7 +23,7 @@ export default async function Image() {
           style={{
             fontSize: '13px',
             fontWeight: 400,
-            color: '#6B6B68',
+            color: '#8B6F47',
             letterSpacing: '6px',
             textTransform: 'uppercase' as const,
           }}
@@ -47,7 +47,7 @@ export default async function Image() {
             style={{
               width: '48px',
               height: '2px',
-              background: '#6B6B68',
+              background: '#8B6F47',
             }}
           />
           <div

@@ -74,7 +74,7 @@ export default function Hero() {
               visible: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } },
             }}
           >
-            <div className="overflow-hidden" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 7rem)' }}>
+            <div className="overflow-hidden" style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}>
               {t('heroLine1').split(' ').map((word, i) => (
                 <m.span
                   key={i}
@@ -88,7 +88,7 @@ export default function Hero() {
                 </m.span>
               ))}
             </div>
-            <div className="overflow-hidden" style={{ fontSize: 'clamp(4rem, 9.5vw, 11rem)' }}>
+            <div className="overflow-hidden" style={{ fontSize: 'clamp(3rem, 7vw, 8rem)' }}>
               {t('heroLine2').split(' ').map((word, i) => (
                 <m.span
                   key={i}

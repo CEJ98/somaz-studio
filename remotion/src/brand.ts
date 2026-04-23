@@ -20,7 +20,7 @@ export const brand = {
   colors: {
     background: '#F8F6F2',
     foreground: '#1A1A1A',
-    accent: '#6B6B68',
+    accent: '#8B6F47',
     surface: '#EAE7E0',
     border: '#C8C3B8',
   },

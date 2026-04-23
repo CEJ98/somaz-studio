@@ -45,8 +45,8 @@ export default async function Image() {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '32px', height: '1px', background: '#6B6B68' }} />
-            <div style={{ fontSize: '12px', fontWeight: 300, color: '#6B6B68', letterSpacing: '5px', textTransform: 'uppercase' }}>
+            <div style={{ width: '32px', height: '1px', background: '#8B6F47' }} />
+            <div style={{ fontSize: '12px', fontWeight: 300, color: '#8B6F47', letterSpacing: '5px', textTransform: 'uppercase' }}>
               3D Visualization · Interior Design
             </div>
           </div>
