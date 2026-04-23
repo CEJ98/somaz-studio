@@ -19,10 +19,13 @@ export default function ServiceJsonLd() {
       ],
       offers: {
         '@type': 'Offer',
-        price: '350',
-        priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
         url: 'https://somazstudio.com/services',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          priceCurrency: 'USD',
+          description: 'Custom quote per project scope',
+        },
       },
     },
     {
@@ -40,10 +43,13 @@ export default function ServiceJsonLd() {
       ],
       offers: {
         '@type': 'Offer',
-        price: '800',
-        priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
         url: 'https://somazstudio.com/services',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          priceCurrency: 'USD',
+          description: 'Custom quote per project scope',
+        },
       },
     },
     {
@@ -58,10 +64,13 @@ export default function ServiceJsonLd() {
       areaServed: [{ '@type': 'Place', name: 'Worldwide' }],
       offers: {
         '@type': 'Offer',
-        price: '800',
-        priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
         url: 'https://somazstudio.com/services',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          priceCurrency: 'USD',
+          description: 'Custom quote per project scope',
+        },
       },
     },
   ]

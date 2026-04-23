@@ -54,7 +54,7 @@ export default async function Image() {
             style={{
               fontSize: '18px',
               fontWeight: 300,
-              color: 'rgba(240, 237, 230, 0.5)',
+              color: 'rgba(26, 26, 26, 0.55)',
               letterSpacing: '3px',
               textTransform: 'uppercase' as const,
             }}
@@ -67,7 +67,7 @@ export default async function Image() {
           style={{
             fontSize: '13px',
             fontWeight: 300,
-            color: 'rgba(240, 237, 230, 0.3)',
+            color: 'rgba(26, 26, 26, 0.4)',
             letterSpacing: '4px',
             textTransform: 'uppercase' as const,
           }}

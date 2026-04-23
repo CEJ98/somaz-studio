@@ -40,7 +40,7 @@ export default function FinalCta() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/[0.04] via-transparent to-transparent z-[1]" />
 
       {/* Ghost SOMAZ text */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-[2]" aria-hidden="true">
+      <div className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none select-none overflow-hidden z-[2]" aria-hidden="true">
         <span
           className="ghost-text font-serif font-bold leading-none"
           style={{ fontSize: 'clamp(8rem, 25vw, 22rem)' }}

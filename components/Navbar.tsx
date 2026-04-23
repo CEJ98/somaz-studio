@@ -89,7 +89,7 @@ export default function Navbar() {
             alt="Somaz Studio"
             width={420}
             height={72}
-            className="h-14 md:h-16 w-auto object-contain"
+            className="h-11 md:h-16 w-auto object-contain"
             style={{ width: 'auto' }}
             priority
           />

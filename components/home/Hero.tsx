@@ -74,11 +74,11 @@ export default function Hero() {
               visible: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } },
             }}
           >
-            <div className="overflow-hidden" style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}>
+            <div className="overflow-hidden" style={{ fontSize: 'clamp(2.25rem, 5vw, 5rem)' }}>
               {t('heroLine1').split(' ').map((word, i) => (
                 <m.span
                   key={i}
-                  className="inline-block mr-[0.25em] font-light text-foreground/60 italic"
+                  className="inline-block mr-[0.25em] font-light text-foreground italic"
                   variants={reduced ? {} : {
                     hidden: { y: '110%', opacity: 0 },
                     visible: { y: 0, opacity: 1, transition: { duration: 1.1, ease } },
@@ -88,11 +88,11 @@ export default function Hero() {
                 </m.span>
               ))}
             </div>
-            <div className="overflow-hidden" style={{ fontSize: 'clamp(3rem, 7vw, 8rem)' }}>
+            <div className="overflow-hidden" style={{ fontSize: 'clamp(2.75rem, 6vw, 6.5rem)' }}>
               {t('heroLine2').split(' ').map((word, i) => (
                 <m.span
                   key={i}
-                  className="inline-block mr-[0.25em] font-semibold text-foreground"
+                  className="inline-block mr-[0.25em] font-normal text-foreground"
                   variants={reduced ? {} : {
                     hidden: { y: '110%', opacity: 0 },
                     visible: { y: 0, opacity: 1, transition: { duration: 1.1, ease } },
@@ -105,7 +105,7 @@ export default function Hero() {
           </m.div>
 
           <m.p
-            className="font-sans text-sm font-light text-foreground/75 leading-relaxed mb-8 max-w-md"
+            className="font-sans text-base font-light text-foreground/80 leading-relaxed mb-10 max-w-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.58 }}

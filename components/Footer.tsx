@@ -58,7 +58,7 @@ export default function Footer() {
   return (
     <footer className="bg-surface relative overflow-hidden">
       {/* Ghost text background */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
+      <div className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
         <span
           className="ghost-text font-serif font-bold leading-none"
           style={{ fontSize: 'clamp(6rem, 18vw, 16rem)' }}

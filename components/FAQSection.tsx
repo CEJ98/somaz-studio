@@ -62,12 +62,12 @@ const faqs = [
   },
   {
     q: {
-      en: 'What is the minimum project price?',
-      es: '¿Cuál es el precio mínimo de un proyecto?',
+      en: 'How is a project scoped and quoted?',
+      es: '¿Cómo se cotiza un proyecto?',
     },
     a: {
-      en: 'Our Essential 3D visualization package starts at $350 for a single photorealistic view with 48–72h delivery. Interior design and conceptual design projects start at $800.',
-      es: 'Nuestro paquete Esencial de visualización 3D comienza en $350 por una vista fotorrealista con entrega en 48–72h. Los proyectos de diseño de interiores y diseño conceptual comienzan en $800.',
+      en: 'Every project is quoted after a short briefing call. Scope depends on number of views, complexity of the space, and delivery timeline. You receive a detailed estimate within 24h — no hidden fees, no surprises.',
+      es: 'Cada proyecto se cotiza después de una breve llamada de briefing. El alcance depende de la cantidad de vistas, complejidad del espacio y tiempo de entrega. Recibís una cotización detallada en 24h — sin costos ocultos.',
     },
   },
 ]

@@ -49,10 +49,10 @@ const faqJsonLd = {
     },
     {
       '@type': 'Question',
-      name: 'What is the minimum project price?',
+      name: 'How is a project scoped and quoted?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Our Essential 3D visualization package starts at $350 for a single photorealistic view with 48–72h delivery. Interior design and conceptual design projects start at $800.',
+        text: 'Every project is quoted after a short briefing call. Scope depends on number of views, complexity of the space, and delivery timeline. You receive a detailed estimate within 24h.',
       },
     },
   ],
