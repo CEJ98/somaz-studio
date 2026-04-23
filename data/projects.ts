@@ -76,7 +76,7 @@ export const projects: Project[] = [
     size: 'large',
   },
   {
-    title: 'Casa Tiago',
+    title: 'Casa T',
     slug: 'casa-tiago',
     category: '3D Visualization',
     location: 'Argentina',
