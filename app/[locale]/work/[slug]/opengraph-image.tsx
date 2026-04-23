@@ -35,8 +35,8 @@ export default async function OGImage({ params }: { params: Promise<{ locale: st
       {/* Content */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '60px', display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-          <div style={{ width: '32px', height: '2px', background: '#8A7A5A' }} />
-          <span style={{ fontFamily: 'sans-serif', fontSize: '14px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#8A7A5A' }}>
+          <div style={{ width: '32px', height: '2px', background: '#6B6B68' }} />
+          <span style={{ fontFamily: 'sans-serif', fontSize: '14px', letterSpacing: '0.3em', textTransform: 'uppercase', color: '#6B6B68' }}>
             {project.category}
           </span>
         </div>
@@ -50,7 +50,7 @@ export default async function OGImage({ params }: { params: Promise<{ locale: st
           <span style={{ fontFamily: 'sans-serif', fontSize: '14px', color: 'rgba(240,237,230,0.35)' }}>
             {project.location} — {project.year}
           </span>
-          <span style={{ fontFamily: 'sans-serif', fontSize: '14px', letterSpacing: '0.2em', color: '#8A7A5A' }}>
+          <span style={{ fontFamily: 'sans-serif', fontSize: '14px', letterSpacing: '0.2em', color: '#6B6B68' }}>
             SOMAZ STUDIO
           </span>
         </div>

@@ -20,17 +20,17 @@ export default async function Image() {
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
-          <div style={{ fontSize: '18px', fontWeight: 300, color: '#8A7A5A', letterSpacing: '6px', textTransform: 'uppercase' as const }}>
+          <div style={{ fontSize: '18px', fontWeight: 300, color: '#6B6B68', letterSpacing: '6px', textTransform: 'uppercase' as const }}>
             Studio
           </div>
           <div style={{ fontSize: '88px', fontWeight: 700, color: '#1A1A1A', letterSpacing: '-2px' }}>
             About
           </div>
-          <div style={{ width: '60px', height: '2px', background: '#8A7A5A' }} />
+          <div style={{ width: '60px', height: '2px', background: '#6B6B68' }} />
           <div style={{ fontSize: '22px', fontWeight: 300, color: 'rgba(240, 237, 230, 0.65)', letterSpacing: '2px', textAlign: 'center' as const, maxWidth: '900px' }}>
             A boutique design studio crafting precise, photoreal spaces
           </div>
-          <div style={{ fontSize: '14px', fontWeight: 300, color: '#8A7A5A', letterSpacing: '6px', textTransform: 'uppercase' as const, marginTop: '24px' }}>
+          <div style={{ fontSize: '14px', fontWeight: 300, color: '#6B6B68', letterSpacing: '6px', textTransform: 'uppercase' as const, marginTop: '24px' }}>
             Somaz Studio · Miami
           </div>
         </div>

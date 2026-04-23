@@ -1,6 +1,6 @@
-import { Bodoni_Moda, DM_Sans } from 'next/font/google'
+import { Fraunces, Inter } from 'next/font/google'
 
-export const bodoniModa = Bodoni_Moda({
+export const bodoniModa = Fraunces({
   subsets: ['latin'],
   variable: '--font-bodoni',
   weight: ['400', '500', '600'],
@@ -8,7 +8,7 @@ export const bodoniModa = Bodoni_Moda({
   display: 'swap',
 })
 
-export const dmSans = DM_Sans({
+export const dmSans = Inter({
   subsets: ['latin'],
   variable: '--font-dm-sans',
   weight: ['300', '400', '500'],
