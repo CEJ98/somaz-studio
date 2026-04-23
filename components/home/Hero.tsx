@@ -92,7 +92,7 @@ export default function Hero() {
               {t('heroLine2').split(' ').map((word, i) => (
                 <m.span
                   key={i}
-                  className="inline-block mr-[0.25em] font-normal text-foreground"
+                  className="inline-block mr-[0.25em] font-light text-foreground/85"
                   variants={reduced ? {} : {
                     hidden: { y: '110%', opacity: 0 },
                     visible: { y: 0, opacity: 1, transition: { duration: 1.1, ease } },
