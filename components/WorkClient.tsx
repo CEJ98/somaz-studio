@@ -158,7 +158,7 @@ export default function WorkClient() {
         </m.p>
 
         {/* Editorial Grid */}
-        <m.div layout className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <m.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, i) => {
               const isWide = project.size === 'large'
@@ -179,7 +179,7 @@ export default function WorkClient() {
                   <ProjectCard
                     project={project}
                     priority={i === 0}
-                    aspectRatio={isWide ? 'aspect-[16/9]' : 'aspect-[3/2]'}
+                    aspectRatio="aspect-[4/3]"
                     isWide={isWide}
                     onView={setSelectedProject}
                   />
