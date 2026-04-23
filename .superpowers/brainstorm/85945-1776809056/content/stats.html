@@ -1,0 +1,104 @@
+<h2>Stats — Peso visual</h2>
+<p class="subtitle">Mismo contenido (50+, 8+, 24h), distinto impacto.</p>
+
+<style>
+  .stats-mock { background: #F8F6F2; padding: 3rem 2rem; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid rgba(200,195,184,0.3); }
+  .stat-cell { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid rgba(200,195,184,0.3); }
+  .stat-cell:last-child { border-right: none; }
+  .stat-num-a { font-family: Georgia, serif; font-weight: 300; color: #8A7A5A; line-height: 1; font-size: clamp(2rem, 4vw, 3rem); }
+  .stat-num-b { font-family: Georgia, serif; font-weight: 300; color: #8A7A5A; line-height: 1; font-size: clamp(3.5rem, 7vw, 5.5rem); }
+  .stat-num-c { font-family: Georgia, serif; font-weight: 300; color: #1A1A1A; line-height: 1; font-size: clamp(4rem, 8vw, 6.5rem); }
+  .stat-label-a { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(26,26,26,0.55); margin-top: 0.6rem; }
+  .stat-label-b { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(26,26,26,0.4); margin-top: 0.8rem; }
+  .stat-label-c { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #8A7A5A; margin-top: 1rem; }
+  .stat-hint { font-family: 'DM Sans', sans-serif; font-size: 9px; color: rgba(26,26,26,0.25); letter-spacing: 0.1em; margin-top: 0.4rem; }
+  .accent-line { height: 1px; background: linear-gradient(to right, transparent, rgba(138,122,90,0.4), transparent); margin-bottom: 2rem; }
+</style>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="stats-mock">
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-num-a">50+</div>
+            <div class="stat-label-a">Proyectos</div>
+            <div class="stat-hint">entregados</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num-a">8+</div>
+            <div class="stat-label-a">Países</div>
+            <div class="stat-hint">AR · US · MX · CO</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num-a">24h</div>
+            <div class="stat-label-a">Rush</div>
+            <div class="stat-hint">entrega express</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Actual</h3>
+      <p>Números en ~3rem. Se leen pero no impactan. El label compite visualmente con el número.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="stats-mock">
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-num-b">50+</div>
+            <div class="stat-label-b">Proyectos entregados</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num-b">8+</div>
+            <div class="stat-label-b">Países</div>
+            <div class="stat-hint">AR · US · MX · CO · PE · UY · ES · UAE</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num-b">24h</div>
+            <div class="stat-label-b">Rush disponible</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Números grandes ⭐ Recomendado</h3>
+      <p>Números en ~5.5rem, label más pequeño debajo. Los números dominan sin competencia. Fácil de escanear.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="stats-mock">
+        <div class="accent-line"></div>
+        <div class="stats-grid" style="border: none;">
+          <div class="stat-cell" style="border-right: 1px solid rgba(200,195,184,0.2); padding: 1rem 1.5rem;">
+            <div class="stat-num-c">50+</div>
+            <div class="stat-label-c">Proyectos</div>
+          </div>
+          <div class="stat-cell" style="border-right: 1px solid rgba(200,195,184,0.2); padding: 1rem 1.5rem;">
+            <div class="stat-num-c">8+</div>
+            <div class="stat-label-c">Países</div>
+          </div>
+          <div class="stat-cell" style="padding: 1rem 1.5rem;">
+            <div class="stat-num-c">24h</div>
+            <div class="stat-label-c">Rush</div>
+          </div>
+        </div>
+        <div class="accent-line" style="margin-top: 2rem; margin-bottom: 0;"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Maximalista</h3>
+      <p>Números en ~6.5rem en negro con label en bronce. Más agresivo. Entre líneas decorativas de acento. Muy editorial, menos cálido.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:1.5rem">Seleccioná y respondé en la terminal.</p>

@@ -1,0 +1,93 @@
+<h2>Testimonial — Presencia y peso</h2>
+<p class="subtitle">El contenido es excelente (Michael Kriger, banco, financiamiento). El layout actual lo achica. ¿Cómo lo mostramos?</p>
+
+<style>
+  .tm { background: #F8F6F2; padding: 3rem 2rem; }
+  .tm-label { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #8A7A5A; text-align: center; margin-bottom: 2rem; display: block; }
+  .tm-quote-mark { font-family: Georgia, serif; color: rgba(138,122,90,0.25); line-height: 1; }
+
+  /* A — actual: centrado pequeño */
+  .opt-a .tm-quote-mark { font-size: 5rem; }
+  .opt-a .tm-quote { font-family: Georgia, serif; font-size: 1.1rem; font-style: italic; font-weight: 300; color: rgba(26,26,26,0.85); line-height: 1.6; text-align: center; }
+  .opt-a .tm-name { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #1A1A1A; text-align: center; margin-top: 1.5rem; }
+  .opt-a .tm-role { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,26,26,0.5); text-align: center; }
+
+  /* B — split: quote izq, info der */
+  .opt-b .tm-split { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: start; }
+  .opt-b .tm-quote-mark { font-size: 6rem; margin-bottom: -1.5rem; display: block; }
+  .opt-b .tm-quote { font-family: Georgia, serif; font-size: 1.35rem; font-style: italic; font-weight: 300; color: rgba(26,26,26,0.88); line-height: 1.65; }
+  .opt-b .tm-side { border-left: 1px solid rgba(138,122,90,0.3); padding-left: 2rem; padding-top: 0.5rem; min-width: 160px; }
+  .opt-b .tm-name { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #1A1A1A; }
+  .opt-b .tm-role { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,26,26,0.5); margin-top: 0.4rem; }
+  .opt-b .tm-link { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: #8A7A5A; margin-top: 1.5rem; display: block; }
+
+  /* C — quote enorme centrado */
+  .opt-c .tm-quote-mark { font-size: 8rem; text-align: center; display: block; margin: 0 auto -2rem; }
+  .opt-c .tm-quote { font-family: Georgia, serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-style: italic; font-weight: 300; color: rgba(26,26,26,0.9); line-height: 1.5; text-align: center; }
+  .opt-c .tm-divider { width: 40px; height: 1px; background: rgba(138,122,90,0.4); margin: 2rem auto 1.5rem; }
+  .opt-c .tm-name { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #1A1A1A; text-align: center; }
+  .opt-c .tm-role { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,26,26,0.5); text-align: center; }
+</style>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="tm opt-a">
+        <span class="tm-label">Client Stories</span>
+        <div class="tm-quote-mark">&ldquo;</div>
+        <p class="tm-quote">Enviamos los renders al banco y aprobaron el financiamiento en la primera presentación. Las imágenes hablaron por sí solas.</p>
+        <p class="tm-name">Michael Kriger</p>
+        <p class="tm-role">Desarrollador Inmobiliario — Miami, FL</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Actual</h3>
+      <p>Centrado, texto en ~1.1rem. Funcional pero la cita no impacta a la altura de su contenido.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="tm opt-b">
+        <span class="tm-label">Client Stories</span>
+        <div class="tm-split">
+          <div>
+            <span class="tm-quote-mark">&ldquo;</span>
+            <p class="tm-quote">Enviamos los renders al banco y aprobaron el financiamiento en la primera presentación. Las imágenes hablaron por sí solas.</p>
+          </div>
+          <div class="tm-side">
+            <p class="tm-name">Michael Kriger</p>
+            <p class="tm-role">Desarrollador Inmobiliario</p>
+            <p class="tm-role">Miami, FL</p>
+            <a class="tm-link">Ver proyecto ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Split layout ⭐ Recomendado</h3>
+      <p>Cita a la izquierda en 1.35rem, info del cliente separada a la derecha con línea de acento. Más editorial, más espacio a la cita.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="tm opt-c">
+        <span class="tm-label">Client Stories</span>
+        <span class="tm-quote-mark">&ldquo;</span>
+        <p class="tm-quote">Enviamos los renders al banco y aprobaron el financiamiento en la primera presentación. Las imágenes hablaron por sí solas.</p>
+        <div class="tm-divider"></div>
+        <p class="tm-name">Michael Kriger</p>
+        <p class="tm-role">Desarrollador Inmobiliario — Miami, FL</p>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Quote enorme centrado</h3>
+      <p>Texto al ~2.2rem centrado. La cita es lo único que importa. Muy impactante pero puede cortarse mal en quotes largas.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:1.5rem">Seleccioná y respondé en la terminal.</p>

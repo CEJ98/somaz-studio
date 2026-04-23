@@ -1,0 +1,97 @@
+<h2>Portfolio — Impacto visual</h2>
+<p class="subtitle">El layout asimétrico ya existe. La diferencia está en proporción y tratamiento de imagen.</p>
+
+<style>
+  .pm { background: #F8F6F2; padding: 1rem; }
+  .pm-grid-top { display: grid; grid-template-columns: 7fr 5fr; gap: 6px; margin-bottom: 6px; }
+  .pm-grid-bot { display: grid; grid-template-columns: 5fr 7fr; gap: 6px; }
+  .img-a { background: linear-gradient(135deg, #8A7A5A 0%, #2a2520 100%); position: relative; }
+  .img-b { background: linear-gradient(135deg, #5a6a7a 0%, #2a3a4a 100%); position: relative; }
+  .img-c { background: linear-gradient(135deg, #7a5a6a 0%, #4a2a3a 100%); position: relative; }
+  .img-d { background: linear-gradient(135deg, #5a7a6a 0%, #2a4a3a 100%); position: relative; }
+  .proj-label { position: absolute; bottom: 0.6rem; left: 0.6rem; right: 0.6rem; }
+  .proj-title { font-family: Georgia, serif; font-size: 0.85rem; color: rgba(248,246,242,0.9); }
+  .proj-sub { font-family: 'DM Sans', sans-serif; font-size: 9px; color: rgba(248,246,242,0.5); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* Opción A — actual: 4/3, siempre gris */
+  .opt-a .img-a { aspect-ratio: 4/3; filter: saturate(0.4); }
+  .opt-a .img-b { aspect-ratio: 4/3; filter: saturate(0.4); }
+  .opt-a .img-c { aspect-ratio: 4/3; filter: saturate(0.4); }
+  .opt-a .img-d { aspect-ratio: 4/3; filter: saturate(0.4); }
+
+  /* Opción B — 3/2, sin gris siempre */
+  .opt-b .img-a { aspect-ratio: 3/2; }
+  .opt-b .img-b { aspect-ratio: 3/2; }
+  .opt-b .img-c { aspect-ratio: 3/2; }
+  .opt-b .img-d { aspect-ratio: 3/2; }
+
+  /* Opción C — primera imagen portrait tall */
+  .opt-c .pm-grid-top { grid-template-columns: 1fr 1fr; align-items: start; }
+  .opt-c .img-a { aspect-ratio: 2/3; }
+  .opt-c .img-b { aspect-ratio: 4/3; margin-top: 3rem; }
+  .opt-c .img-c { aspect-ratio: 4/3; }
+  .opt-c .img-d { aspect-ratio: 2/3; }
+</style>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="pm opt-a">
+        <div class="pm-grid-top">
+          <div class="img-a"><div class="proj-label"><div class="proj-title">Casa Marchetti</div><div class="proj-sub">3D Viz · Argentina</div></div></div>
+          <div class="img-b"><div class="proj-label"><div class="proj-title">Casa Mariano Miami</div><div class="proj-sub">3D Viz · Miami</div></div></div>
+        </div>
+        <div class="pm-grid-bot">
+          <div class="img-c"><div class="proj-label"><div class="proj-title">Casa Estancita</div><div class="proj-sub">Interior · Argentina</div></div></div>
+          <div class="img-d"><div class="proj-label"><div class="proj-title">Casa Kriger Miami</div><div class="proj-sub">3D Viz · Miami</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Actual</h3>
+      <p>4/3 compacto, siempre con 30% de desaturación. Las imágenes se ven apagadas antes del hover.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="pm opt-b">
+        <div class="pm-grid-top">
+          <div class="img-a"><div class="proj-label"><div class="proj-title">Casa Marchetti</div><div class="proj-sub">3D Viz · Argentina</div></div></div>
+          <div class="img-b"><div class="proj-label"><div class="proj-title">Casa Mariano Miami</div><div class="proj-sub">3D Viz · Miami</div></div></div>
+        </div>
+        <div class="pm-grid-bot">
+          <div class="img-c"><div class="proj-label"><div class="proj-title">Casa Estancita</div><div class="proj-sub">Interior · Argentina</div></div></div>
+          <div class="img-d"><div class="proj-label"><div class="proj-title">Casa Kriger Miami</div><div class="proj-sub">3D Viz · Miami</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Más ancho, sin gris ⭐ Recomendado</h3>
+      <p>Proporción 3/2 (más paisaje), imágenes siempre en color completo. El hover solo hace el zoom. Mucho más impacto visual.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="pm opt-c">
+        <div class="pm-grid-top">
+          <div class="img-a"><div class="proj-label"><div class="proj-title">Casa Marchetti</div><div class="proj-sub">3D Viz · Argentina</div></div></div>
+          <div class="img-b"><div class="proj-label"><div class="proj-title">Casa Mariano Miami</div><div class="proj-sub">3D Viz · Miami</div></div></div>
+        </div>
+        <div class="pm-grid-bot">
+          <div class="img-c"><div class="proj-label"><div class="proj-title">Casa Estancita</div><div class="proj-sub">Interior · Argentina</div></div></div>
+          <div class="img-d"><div class="proj-label"><div class="proj-title">Casa Kriger Miami</div><div class="proj-sub">3D Viz · Miami</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Masonry con portrait</h3>
+      <p>Primera imagen en portrait (vertical), segunda desplazada. Más movimiento editorial. Más complejo de mantener.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:1.5rem">Seleccioná y respondé en la terminal.</p>

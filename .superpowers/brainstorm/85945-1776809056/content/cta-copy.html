@@ -1,0 +1,85 @@
+<h2>CTA Final — Copy</h2>
+<p class="subtitle">El layout (video de fondo + "SOMAZ" ghost) está bien. Solo el copy.</p>
+
+<style>
+  .cta-mock {
+    background: #1a1814;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .cta-ghost {
+    position: absolute;
+    font-family: Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(5rem, 18vw, 12rem);
+    color: rgba(248,246,242,0.03);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .cta-label { font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #8A7A5A; margin-bottom: 1.5rem; position: relative; }
+  .cta-line1 { font-family: Georgia, serif; font-weight: 300; color: #F8F6F2; line-height: 1.1; position: relative; font-size: clamp(1.8rem, 4vw, 3rem); }
+  .cta-line2 { font-family: Georgia, serif; font-weight: 300; font-style: italic; color: rgba(248,246,242,0.55); line-height: 1.1; position: relative; font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 2rem; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: #8A7A5A; color: #F8F6F2; padding: 0.75rem 2rem; font-family: 'DM Sans', sans-serif; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; position: relative; }
+</style>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="cta-mock">
+        <div class="cta-ghost">SOMAZ</div>
+        <p class="cta-label">Start a conversation</p>
+        <p class="cta-line1">Ready to bring your</p>
+        <p class="cta-line2">vision to life?</p>
+        <div class="cta-btn">Start a Project ↗</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Actual</h3>
+      <p>Pregunta + 7 palabras. Funciona pero es genérico y algo largo para un remate final.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="cta-mock">
+        <div class="cta-ghost">SOMAZ</div>
+        <p class="cta-label">Start a conversation</p>
+        <p class="cta-line1">Your next space</p>
+        <p class="cta-line2">starts here.</p>
+        <div class="cta-btn">Start a Project ↗</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Directo ⭐ Recomendado</h3>
+      <p>Afirmativo, no pregunta. "Space" conecta con el servicio. Corto y con punch. ES: "Tu próximo espacio / empieza acá."</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="cta-mock">
+        <div class="cta-ghost">SOMAZ</div>
+        <p class="cta-label">Start a conversation</p>
+        <p class="cta-line1">Let's build something</p>
+        <p class="cta-line2">that lasts.</p>
+        <div class="cta-btn">Start a Project ↗</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Aspiracional</h3>
+      <p>Foco en durabilidad/legado. Más emocional. ES: "Construyamos algo / que perdure." Muy premium pero menos específico al servicio.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:1.5rem">Seleccioná y respondé en la terminal.</p>
