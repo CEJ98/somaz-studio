@@ -71,7 +71,7 @@ export default function SelectedWork() {
                   className="object-cover group-hover:scale-[1.03] transition-all duration-700"
                   sizes="(max-width: 768px) 100vw, 58vw"
                 />
-                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-500" />
               </div>
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -95,7 +95,7 @@ export default function SelectedWork() {
                   className="object-cover group-hover:scale-[1.03] transition-all duration-700"
                   sizes="(max-width: 768px) 100vw, 42vw"
                 />
-                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-500" />
               </div>
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -123,7 +123,7 @@ export default function SelectedWork() {
                   className="object-cover group-hover:scale-[1.03] transition-all duration-700"
                   sizes="(max-width: 768px) 100vw, 42vw"
                 />
-                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-500" />
               </div>
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -147,7 +147,7 @@ export default function SelectedWork() {
                   className="object-cover group-hover:scale-[1.03] transition-all duration-700"
                   sizes="(max-width: 768px) 100vw, 58vw"
                 />
-                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-700" />
+                <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-500" />
               </div>
               <div className="flex items-start justify-between gap-4">
                 <div>

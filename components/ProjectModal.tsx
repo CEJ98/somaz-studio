@@ -67,10 +67,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {/* Top bar */}
           <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 md:px-10 py-5">
-            <div className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/70">
-              <span className="text-accent">{tc(project.category)}</span>
-              <span className="mx-3 text-foreground/30">/</span>
-              <span>{project.title}</span>
+            <div className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/70 min-w-0 flex items-center">
+              <span className="text-accent shrink-0">{tc(project.category)}</span>
+              <span className="mx-3 text-foreground/30 shrink-0">/</span>
+              <span className="truncate">{project.title}</span>
             </div>
             <div className="flex items-center gap-6">
               <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 tabular-nums">
@@ -79,7 +79,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <button
                 onClick={onClose}
                 className="w-9 h-9 flex items-center justify-center text-foreground/70 hover:text-accent transition-colors duration-300"
-                aria-label="Close"
+                aria-label={tp('closeGallery')}
               >
                 <Icon name="close" size={18} />
               </button>
@@ -107,6 +107,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 />
               </m.div>
             </AnimatePresence>
+            {project.images.length > 1 && (
+              <div aria-hidden="true" className="hidden">
+                <Image
+                  src={project.images[(activeIndex + 1) % project.images.length]}
+                  alt=""
+                  width={1}
+                  height={1}
+                />
+              </div>
+            )}
           </div>
 
           {/* Navigation arrows */}
@@ -115,14 +125,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <button
                 onClick={() => navigate(-1)}
                 className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center text-foreground/50 hover:text-accent transition-colors duration-300"
-                aria-label="Previous image"
+                aria-label={tp('prevImage')}
               >
                 <Icon name="arrow_back" size={22} />
               </button>
               <button
                 onClick={() => navigate(1)}
                 className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center text-foreground/50 hover:text-accent transition-colors duration-300"
-                aria-label="Next image"
+                aria-label={tp('nextImage')}
               >
                 <Icon name="arrow_forward" size={22} />
               </button>

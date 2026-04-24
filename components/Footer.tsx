@@ -16,6 +16,7 @@ export default function Footer() {
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [errored, setErrored] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const reduced = useReducedMotion()
@@ -38,6 +39,7 @@ export default function Footer() {
     e.preventDefault()
     if (!email.trim() || isLoading) return
     setIsLoading(true)
+    setErrored(false)
     try {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
@@ -47,9 +49,11 @@ export default function Footer() {
       if (res.ok || res.status === 409) {
         setSubscribed(true)
         setEmail('')
+      } else {
+        setErrored(true)
       }
     } catch {
-      window.location.href = `mailto:hola@somazstudio.com?subject=Newsletter&body=I'd like to subscribe: ${encodeURIComponent(email)}`
+      setErrored(true)
     } finally {
       setIsLoading(false)
     }
@@ -198,6 +202,12 @@ export default function Footer() {
                     </>
                   )}
                 </button>
+                {errored && (
+                  <p className="font-sans text-[11px] text-foreground/60 mt-1" role="alert">
+                    No pudimos suscribirte ahora. Escribinos a{' '}
+                    <a href="mailto:hola@somazstudio.com" className="text-accent hover:underline">hola@somazstudio.com</a>.
+                  </p>
+                )}
               </form>
             )}
           </m.div>

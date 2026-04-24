@@ -61,9 +61,9 @@ export default function Hero() {
             {t('badge')}
           </m.p>
 
+          <h1 className="sr-only">{t('heroLine1')} {t('heroLine2')}</h1>
+
           <m.div
-            role="heading"
-            aria-level={1}
             aria-hidden="true"
             className="font-serif leading-[0.9] tracking-tight mb-8"
             style={{ y: titleY }}

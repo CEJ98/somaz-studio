@@ -191,7 +191,7 @@ export default function WorkClient() {
 
         {/* CTA section */}
         <div ref={ctaVideoRef} className="mt-24 pt-16 border-t border-border/40 text-center relative overflow-hidden">
-          {ctaVideoVisible && (
+          {ctaVideoVisible && !reduced && (
             <video
               autoPlay
               muted
@@ -204,6 +204,15 @@ export default function WorkClient() {
               <source src="/media/work-cta.webm" type="video/webm" />
               <source src="/media/work-cta.mp4" type="video/mp4" />
             </video>
+          )}
+          {reduced && (
+            <Image
+              src="/media/work-cta-poster.jpg"
+              alt=""
+              fill
+              className="object-cover hidden md:block"
+              sizes="100vw"
+            />
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/60" />
           <div className="relative z-10 py-16">
