@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useState, useRef } from 'react'
 import { m, useInView, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import type { Project } from '@/data/projects'
 import { ease } from '@/lib/motion'
 
@@ -13,31 +14,23 @@ interface ProjectCardProps {
   featured?: boolean
   aspectRatio?: string
   isWide?: boolean
-  onView?: (project: Project) => void
 }
 
-export default function ProjectCard({ project, priority = false, featured = false, aspectRatio, isWide = false, onView }: ProjectCardProps) {
+export default function ProjectCard({ project, priority = false, featured = false, aspectRatio, isWide = false }: ProjectCardProps) {
   const tc = useTranslations('categories')
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef(null)
   const inView = useInView(cardRef, { once: true, margin: '-80px' })
   const reduced = useReducedMotion()
 
-  const handleClick = (e: React.MouseEvent) => {
-    if (onView) {
-      e.preventDefault()
-      onView(project)
-    }
-  }
-
   const resolvedAspect = aspectRatio ?? (featured ? 'aspect-[16/9]' : 'aspect-[4/3]')
 
   return (
-    <div
-      className="group block relative overflow-hidden bg-surface cursor-pointer"
+    <Link
+      href={`/work/${project.slug}`}
+      className="group block relative overflow-hidden bg-surface"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onClick={handleClick}
     >
       <div ref={cardRef} className={`relative overflow-hidden ${resolvedAspect}`}>
         {/* Curtain reveal */}
@@ -104,6 +97,6 @@ export default function ProjectCard({ project, priority = false, featured = fals
           {project.location} — {project.year}
         </p>
       </div>
-    </div>
+    </Link>
   )
 }

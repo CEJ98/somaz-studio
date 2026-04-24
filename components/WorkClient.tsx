@@ -7,9 +7,8 @@ import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
-import ProjectModal from '@/components/ProjectModal'
 import ImageCursorTrail from '@/components/ImageCursorTrail'
-import { projects, categories, type Project, type ProjectCategory } from '@/data/projects'
+import { projects, categories, type ProjectCategory } from '@/data/projects'
 
 type ProjectMarket = 'All' | 'Miami' | 'LATAM'
 const markets: ProjectMarket[] = ['All', 'Miami', 'LATAM']
@@ -25,7 +24,6 @@ export default function WorkClient() {
   const [active, setActive] = useState<ProjectCategory>('All')
   const [activeMarket, setActiveMarket] = useState<ProjectMarket>('All')
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null)
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const reduced = useReducedMotion()
   const ctaVideoRef = useRef<HTMLDivElement>(null)
   const [ctaVideoVisible, setCtaVideoVisible] = useState(false)
@@ -181,7 +179,6 @@ export default function WorkClient() {
                     priority={i === 0}
                     aspectRatio="aspect-[4/3]"
                     isWide={isWide}
-                    onView={setSelectedProject}
                   />
                 </m.div>
               )
@@ -231,8 +228,6 @@ export default function WorkClient() {
         </div>
       </div>
       </div>
-
-      <ProjectModal key={selectedProject?.slug ?? ''} project={selectedProject} onClose={() => setSelectedProject(null)} />
     </div>
   )
 }
