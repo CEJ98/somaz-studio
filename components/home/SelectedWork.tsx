@@ -35,7 +35,10 @@ function ScrollCard({
 
 export default function SelectedWork() {
   const t = useTranslations('home')
-  const selected = projects.filter(p => p.slug !== 'iron-fitness-gym').slice(0, 4)
+  const homeSlugs = ['casa-m', 'cabanas-terraciello', 'casa-k', 'cabana-concepcion']
+  const selected = homeSlugs
+    .map(slug => projects.find(p => p.slug === slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
 
   return (
     <section className="px-6 md:px-10 py-28 md:py-40 max-w-7xl mx-auto">
