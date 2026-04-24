@@ -2,12 +2,11 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
-import { useTranslations, useLocale } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
-import { t as tr } from '@/lib/locale'
 import type { Project } from '@/data/projects'
 
 interface ProjectModalProps {
@@ -18,7 +17,6 @@ interface ProjectModalProps {
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const tc = useTranslations('categories')
   const tp = useTranslations('project')
-  const locale = useLocale()
   const [activeIndex, setActiveIndex] = useState(0)
   const reduced = useReducedMotion()
 
@@ -52,7 +50,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     <AnimatePresence>
       {project && (
         <m.div
-          className="fixed inset-0 z-[100] flex items-center justify-center"
+          className="fixed inset-0 z-[100]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -60,133 +58,91 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         >
           {/* Backdrop */}
           <m.div
-            className="absolute inset-0 bg-background/95 backdrop-blur-md"
+            className="absolute inset-0 bg-background/98"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           />
 
-          {/* Close */}
-          <button
-            onClick={onClose}
-            className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full border border-border flex items-center justify-center hover:border-accent transition-colors duration-300"
-            aria-label="Close"
-          >
-            <Icon name="close" size={16} className="text-foreground" />
-          </button>
-
-          {/* Counter */}
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55">
-            {activeIndex + 1} / {project.images.length}
+          {/* Top bar */}
+          <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 md:px-10 py-5">
+            <div className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/70">
+              <span className="text-accent">{tc(project.category)}</span>
+              <span className="mx-3 text-foreground/30">/</span>
+              <span>{project.title}</span>
+            </div>
+            <div className="flex items-center gap-6">
+              <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 tabular-nums">
+                {String(activeIndex + 1).padStart(2, '0')} <span className="text-foreground/30">—</span> {String(project.images.length).padStart(2, '0')}
+              </span>
+              <button
+                onClick={onClose}
+                className="w-9 h-9 flex items-center justify-center text-foreground/70 hover:text-accent transition-colors duration-300"
+                aria-label="Close"
+              >
+                <Icon name="close" size={18} />
+              </button>
+            </div>
           </div>
 
-          {/* Main content */}
-          <div className="relative z-10 w-full max-w-6xl px-6 md:px-16 overflow-y-auto max-h-[90vh] py-14 md:py-16 scrollbar-thin">
+          {/* Image stage */}
+          <div className="absolute inset-0 flex items-center justify-center px-6 md:px-24 py-20 md:py-24">
             <AnimatePresence mode="wait">
               <m.div
                 key={`${project.slug}-${activeIndex}`}
-                className="relative aspect-[16/10] overflow-hidden bg-surface"
-                initial={reduced ? false : { opacity: 0, scale: 0.97 }}
-                animate={{ opacity: 1, scale: 1 }}
+                className="relative w-full h-full"
+                initial={reduced ? false : { opacity: 0 }}
+                animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35, ease }}
               >
                 <Image
                   src={project.images[activeIndex]}
-                  alt={`${project.title} — image ${activeIndex + 1}`}
+                  alt={`${project.title} — ${activeIndex + 1}`}
                   fill
-                  sizes="(max-width: 768px) 100vw, 80vw"
-                  className="object-cover"
+                  sizes="100vw"
+                  className="object-contain"
                   priority
                 />
               </m.div>
             </AnimatePresence>
+          </div>
 
-            {/* Navigation arrows */}
-            {project.images.length > 1 && (
-              <>
-                <button
-                  onClick={() => navigate(-1)}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-24 flex items-center justify-center hover:text-accent transition-colors duration-300"
-                  aria-label="Previous image"
-                >
-                  <Icon name="arrow_back" size={20} className="text-foreground/50" />
-                </button>
-                <button
-                  onClick={() => navigate(1)}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-24 flex items-center justify-center hover:text-accent transition-colors duration-300"
-                  aria-label="Next image"
-                >
-                  <Icon name="arrow_forward" size={20} className="text-foreground/50" />
-                </button>
-              </>
-            )}
-
-            {/* Thumbnail strip */}
-            {project.images.length > 1 && (
-              <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
-                {project.images.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveIndex(i)}
-                    className={`relative flex-shrink-0 w-16 h-12 overflow-hidden transition-all duration-300 ${
-                      i === activeIndex
-                        ? 'ring-1 ring-accent'
-                        : 'opacity-50 hover:opacity-80'
-                    }`}
-                  >
-                    <Image src={img} alt="" fill sizes="64px" className="object-cover" />
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Project info */}
-            <div className="mt-6 flex items-start justify-between gap-4">
-              <div>
-                <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-2">
-                  {tc(project.category)}
-                </p>
-                <h2 className="font-serif text-2xl font-semibold text-foreground">{project.title}</h2>
-                <p className="font-sans text-sm text-foreground/55 mt-1">
-                  {project.location} — {project.year}
-                  {project.area && ` — ${project.area}`}
-                </p>
-              </div>
-              <Link
-                href={`/work/${project.slug}`}
-                onClick={onClose}
-                className="shrink-0 inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300 mt-1"
+          {/* Navigation arrows */}
+          {project.images.length > 1 && (
+            <>
+              <button
+                onClick={() => navigate(-1)}
+                className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center text-foreground/50 hover:text-accent transition-colors duration-300"
+                aria-label="Previous image"
               >
-                {tp('viewProject')}
-                <Icon name="north_east" size={12} />
-              </Link>
-            </div>
+                <Icon name="arrow_back" size={22} />
+              </button>
+              <button
+                onClick={() => navigate(1)}
+                className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center text-foreground/50 hover:text-accent transition-colors duration-300"
+                aria-label="Next image"
+              >
+                <Icon name="arrow_forward" size={22} />
+              </button>
+            </>
+          )}
 
-            {/* Case study: brief → description → outcome */}
-            <div className="mt-8 border-t border-border/30 pt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="md:col-span-1">
-                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/35 mb-3">Brief</p>
-                <p className="font-sans font-light text-foreground/60 text-sm leading-relaxed">
-                  {tr(project.brief, locale)}
-                </p>
-              </div>
-              <div className="md:col-span-2">
-                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/35 mb-3">Overview</p>
-                <p className="font-sans font-light text-foreground/60 text-sm leading-relaxed">
-                  {tr(project.description, locale)}
-                </p>
-                {project.outcome && (
-                  <div className="mt-6 border-l-2 border-accent/40 pl-4">
-                    <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/60 mb-2">{tp('outcomeLabel')}</p>
-                    <p className="font-sans font-light text-foreground/55 text-sm leading-relaxed italic">
-                      {tr(project.outcome, locale)}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
+          {/* Bottom bar: meta + view full project */}
+          <div className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-between px-6 md:px-10 py-5">
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/50">
+              {project.location} <span className="text-foreground/30 mx-2">—</span> {project.year}
+              {project.area && <><span className="text-foreground/30 mx-2">—</span>{project.area}</>}
+            </p>
+            <Link
+              href={`/work/${project.slug}`}
+              onClick={onClose}
+              className="group inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/70 hover:text-accent transition-colors duration-300"
+            >
+              {tp('viewProject')}
+              <Icon name="north_east" size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            </Link>
           </div>
         </m.div>
       )}
