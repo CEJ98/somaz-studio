@@ -204,7 +204,6 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
                 className="font-serif font-light leading-[0.9]"
                 style={{ fontSize: 'clamp(2.5rem, 7vw, 7rem)' }}
               >
-                <span className="block text-foreground/60 italic">{tp('thePrefix')}</span>
                 <span className="block font-semibold text-foreground">{project.title}</span>
               </h1>
             </m.div>
