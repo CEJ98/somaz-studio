@@ -25,10 +25,11 @@ test.describe('Home ES', () => {
 })
 
 test.describe('/services', () => {
-  test('shows PricingTable', async ({ page }) => {
+  test('shows services and comparison', async ({ page }) => {
     await page.goto('/en/services')
-    // PricingTable renders a 3-col grid with pricing cards
-    await expect(page.locator('.grid.sm\\:grid-cols-3').first()).toBeVisible()
+    await expect(page.getByTestId('services-list')).toBeVisible()
+    await expect(page.getByTestId('services-comparison')).toBeVisible()
+    await expect(page.getByRole('heading', { name: /3d visualization/i })).toBeVisible()
   })
 })
 
@@ -40,7 +41,7 @@ test.describe('/contact', () => {
     await expect(page.locator('input[name="name"]')).toBeVisible()
     await expect(page.locator('input[name="email"]')).toBeVisible()
     await expect(page.locator('select[name="project_type"]')).toBeVisible()
-    await expect(page.locator('select[name="budget"]')).toBeVisible()
+    await expect(page.locator('select[name="timeline"]')).toBeVisible()
     await expect(page.locator('textarea[name="message"]')).toBeVisible()
     await expect(page.getByRole('button', { name: /send message/i })).toBeVisible()
   })

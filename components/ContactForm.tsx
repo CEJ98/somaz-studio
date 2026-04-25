@@ -192,7 +192,7 @@ export default function ContactForm() {
       </div>
 
       <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/65 mb-4">{tf('formTime')}</p>
-      <form onSubmit={handleSubmit} className="space-y-10">
+      <form onSubmit={handleSubmit} className="space-y-10" data-testid="contact-form">
         {/* Honeypot anti-spam: invisible para humanos, atractivo para bots */}
         <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0 }}>
           <input

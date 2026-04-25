@@ -106,7 +106,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
         <div className="max-w-7xl mx-auto">
           <div className="architectural-line mb-4" />
 
-          <div>
+          <div data-testid="services-list">
             {services.map((service) => (
               <ServiceItem key={service.slug} service={service} locale={locale} />
             ))}

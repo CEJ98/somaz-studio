@@ -44,7 +44,7 @@ export default function ServicesComparison({ locale }: Props) {
   ]
 
   return (
-    <div className="mt-20 pt-16 border-t border-border/40">
+    <div className="mt-20 pt-16 border-t border-border/40" data-testid="services-comparison">
       <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-10 text-center">
         {headings.title}
       </p>
