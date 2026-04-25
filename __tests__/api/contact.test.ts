@@ -10,6 +10,10 @@ vi.mock('@/lib/resend', () => ({
   getResend: vi.fn().mockReturnValue(null),
 }))
 
+vi.mock('@/lib/contact-submissions', () => ({
+  saveContactSubmission: vi.fn().mockResolvedValue({ ok: true }),
+}))
+
 function makeRequest(body: Record<string, unknown>) {
   return new NextRequest('http://localhost/api/contact', {
     method: 'POST',
