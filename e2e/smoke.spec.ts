@@ -29,7 +29,7 @@ test.describe('/services', () => {
     await page.goto('/en/services')
     await expect(page.getByTestId('services-list')).toBeVisible()
     await expect(page.getByTestId('services-comparison')).toBeVisible()
-    await expect(page.getByRole('heading', { name: /3d visualization/i })).toBeVisible()
+    await expect(page.getByTestId('services-list').getByRole('heading', { name: '3D Visualization' })).toBeVisible()
   })
 })
 
