@@ -76,7 +76,8 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true })
-  } catch {
+  } catch (error) {
+    console.error('Contact request error:', error)
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
 }
