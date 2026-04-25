@@ -78,11 +78,11 @@ export default function ServicesComparison({ locale }: Props) {
             <p className="font-serif italic text-foreground text-lg mb-3">{row.name}</p>
             <div className="space-y-2 font-sans text-xs">
               <div>
-                <span className="text-foreground/45 uppercase tracking-[0.2em] text-[9px] mr-2">{headings.includes}:</span>
+                <span className="text-foreground/60 uppercase tracking-[0.2em] text-[9px] mr-2">{headings.includes}:</span>
                 <span className="text-foreground/70">{row.includes}</span>
               </div>
               <div>
-                <span className="text-foreground/45 uppercase tracking-[0.2em] text-[9px] mr-2">{headings.turnaround}:</span>
+                <span className="text-foreground/60 uppercase tracking-[0.2em] text-[9px] mr-2">{headings.turnaround}:</span>
                 <span className="text-foreground/70">{row.turnaround}</span>
               </div>
             </div>

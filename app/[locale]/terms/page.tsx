@@ -33,8 +33,8 @@ export default async function TermsPage(props: { params: Promise<{ locale: strin
 
         <div className="architectural-line mb-12" />
 
-        <div className="space-y-10 font-sans font-light text-foreground/55 leading-relaxed">
-          <p className="font-sans text-xs text-foreground/30 tracking-widest uppercase">
+        <div className="space-y-10 font-sans font-light text-foreground/70 leading-relaxed">
+          <p className="font-sans text-xs text-foreground/60 tracking-widest uppercase">
             {t('lastUpdated')}
           </p>
 
@@ -93,7 +93,7 @@ export default async function TermsPage(props: { params: Promise<{ locale: strin
         <div className="architectural-line mt-16 mb-8" />
         <Link
           href="/"
-          className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/30 hover:text-accent transition-colors duration-300"
+          className="inline-flex min-h-11 items-center font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/65 hover:text-accent transition-colors duration-300"
         >
           {tl('backHome')}
         </Link>

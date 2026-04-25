@@ -99,15 +99,15 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
           <div className="grid grid-cols-3 gap-4 mb-14 max-w-sm">
             <div>
               <p className="font-serif text-2xl font-light text-foreground/80">50+</p>
-              <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/25 mt-1">{t('stat1')}</p>
+              <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/60 mt-1">{t('stat1')}</p>
             </div>
             <div>
               <p className="font-serif text-2xl font-light text-foreground/80">8</p>
-              <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/25 mt-1">{t('stat2')}</p>
+              <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/60 mt-1">{t('stat2')}</p>
             </div>
             <div>
               <p className="font-serif text-2xl font-light text-accent">24h</p>
-              <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/25 mt-1">{t('stat3')}</p>
+              <p className="font-sans text-[9px] tracking-[0.2em] uppercase text-foreground/60 mt-1">{t('stat3')}</p>
             </div>
           </div>
 
@@ -175,7 +175,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
                 <div>
                   <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-foreground/50 mb-3">{t('locationLabel')}</p>
-                  <p className="font-sans text-sm text-foreground/40 leading-relaxed">
+                  <p className="font-sans text-sm text-foreground/65 leading-relaxed">
                     {t('locationValue')}
                   </p>
                 </div>
@@ -183,7 +183,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             </div>
 
             <div className="md:col-span-7 md:col-start-6">
-              <p className="font-sans text-[11px] tracking-[0.15em] text-foreground/35 mb-8">
+              <p className="font-sans text-[11px] tracking-[0.15em] text-foreground/65 mb-8">
                 {t('responseNote')}
               </p>
 
@@ -200,7 +200,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                   href="https://wa.me/17865377682"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+                  className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
                   aria-label="Chat via WhatsApp"
                 >
                   {t('writeOnWhatsApp')}

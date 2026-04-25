@@ -74,3 +74,19 @@ public/            # Assets estáticos (imágenes de proyectos, logos)
 | `pnpm start` | Servidor de producción |
 | `pnpm lint` | ESLint |
 | `pnpm test` | Tests con Vitest |
+| `pnpm test:ci` | Lint + tests unitarios (pipeline rápido) |
+| `pnpm test:e2e` | E2E con Playwright |
+| `pnpm test:e2e:ci` | Instala Chromium + corre E2E (para CI) |
+
+## CI
+
+Se agregó workflow en `.github/workflows/ci.yml` con dos jobs:
+
+1. `lint-and-unit` → instala dependencias, corre `pnpm lint` y `pnpm test`.
+2. `e2e` → instala Playwright Chromium (`pnpm exec playwright install --with-deps chromium`) y corre `pnpm test:e2e`.
+
+Además, se agregó `.github/workflows/lighthouse.yml` para correr Lighthouse CI en PRs usando `.lighthouserc.json` sobre rutas clave:
+
+- `/en`
+- `/en/services`
+- `/en/contact`

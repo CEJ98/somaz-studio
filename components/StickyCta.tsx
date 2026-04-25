@@ -11,25 +11,29 @@ export default function StickyCta() {
   const t = useTranslations('home')
   const locale = useLocale()
   const reduced = useReducedMotion()
-  const [visible, setVisible] = useState(false)
-  const [dismissed, setDismissed] = useState(false)
+  const [visible, setVisible] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const scrolled = window.scrollY
+    const threshold = window.innerHeight * 0.8
+    const nearBottom = window.innerHeight + scrolled >= document.body.scrollHeight - 600
+    return scrolled > threshold && !nearBottom
+  })
+  const [dismissed, setDismissed] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return sessionStorage.getItem('somaz-sticky-dismissed') === '1'
+  })
 
   useEffect(() => {
-    const dismissedKey = sessionStorage.getItem('somaz-sticky-dismissed')
-    if (dismissedKey === '1') {
-      setDismissed(true)
-      return
-    }
+    if (dismissed) return
     const onScroll = () => {
       const scrolled = window.scrollY
       const threshold = window.innerHeight * 0.8
       const nearBottom = window.innerHeight + scrolled >= document.body.scrollHeight - 600
       setVisible(scrolled > threshold && !nearBottom)
     }
-    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [dismissed])
 
   if (dismissed) return null
 

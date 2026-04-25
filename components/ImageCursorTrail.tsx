@@ -9,7 +9,10 @@ interface ImageCursorTrailProps {
 }
 
 export default function ImageCursorTrail({ src }: ImageCursorTrailProps) {
-  const [enabled, setEnabled] = useState(false)
+  const [enabled, setEnabled] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  })
   const mouseX = useMotionValue(-200)
   const mouseY = useMotionValue(-200)
 
@@ -19,7 +22,6 @@ export default function ImageCursorTrail({ src }: ImageCursorTrailProps) {
   useEffect(() => {
     // Only enable on devices with fine pointer (mouse/trackpad), not touch
     const mq = window.matchMedia('(hover: hover) and (pointer: fine)')
-    setEnabled(mq.matches)
     const onChange = (e: MediaQueryListEvent) => setEnabled(e.matches)
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)

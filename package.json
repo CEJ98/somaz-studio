@@ -2,6 +2,7 @@
   "name": "somaz-studio",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@8.15.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,8 +10,10 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:ci": "pnpm lint && pnpm test",
     "optimize-images": "node scripts/optimize-images.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:ci": "playwright install --with-deps chromium && playwright test"
   },
   "dependencies": {
     "@upstash/ratelimit": "^2.0.8",

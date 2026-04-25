@@ -138,7 +138,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
                   </p>
                   <div>
                     <p className="font-sans text-sm text-foreground font-medium">{testimonial.name}</p>
-                    <p className="font-sans text-[11px] text-foreground/35 tracking-wide mt-1">
+                    <p className="font-sans text-[11px] text-foreground/65 tracking-wide mt-1">
                       {locale === 'es' ? testimonial.role.es : testimonial.role.en} — {testimonial.location}
                     </p>
                   </div>
@@ -161,7 +161,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
                 <div key={i} className="border-l border-accent/30 pl-6 hover:border-accent/70 transition-colors duration-300 group/faq">
                   <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/50 mb-2">0{i + 1}</p>
                   <h2 className="font-serif text-foreground/80 mb-3 group-hover/faq:text-foreground transition-colors duration-300" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.1rem)', fontWeight: 'normal' }}>{q}</h2>
-                  <p className="font-sans font-light text-foreground/40 group-hover/faq:text-foreground/55 text-sm leading-relaxed transition-colors duration-300">{a}</p>
+                  <p className="font-sans font-light text-foreground/65 group-hover/faq:text-foreground/80 text-sm leading-relaxed transition-colors duration-300">{a}</p>
                 </div>
               ))}
             </div>
@@ -176,7 +176,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
               <p className="font-serif italic text-foreground/50 mb-2" style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)' }}>
                 {t('ctaQuestion')}
               </p>
-              <p className="font-sans font-light text-foreground/30 text-sm mb-10">{t('ctaSubtitle')}</p>
+              <p className="font-sans font-light text-foreground/65 text-sm mb-10">{t('ctaSubtitle')}</p>
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
@@ -192,7 +192,7 @@ export default async function ServicesPage(props: { params: Promise<{ locale: st
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border/40 px-6 py-4">
         <Link
           href="/contact"
-          className="flex items-center justify-center gap-3 w-full bg-accent text-background py-4 font-sans text-[10px] tracking-[0.25em] uppercase"
+          className="flex min-h-12 items-center justify-center gap-3 w-full bg-accent text-background py-4 font-sans text-[10px] tracking-[0.25em] uppercase"
         >
           {t('letsTalk')}
           <Icon name="north_east" size={16} />

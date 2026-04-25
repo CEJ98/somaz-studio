@@ -76,16 +76,16 @@ export default function ServicesGrid({ locale }: Props) {
 
                 <Link href={`/services#${s.slug}`} className="relative block h-full z-10">
                   <div className="flex items-start justify-between mb-6">
-                    <span className="font-sans text-[10px] text-foreground/40 tracking-widest">{s.number}</span>
-                    <Icon name="north_east" size={16} className="text-foreground/30 group-hover:text-accent transition-colors duration-300" />
+                    <span className="font-sans text-[10px] text-foreground/60 tracking-widest">{s.number}</span>
+                    <Icon name="north_east" size={16} className="text-foreground/60 group-hover:text-accent transition-colors duration-300" />
                   </div>
                   <h3 className="font-serif text-2xl md:text-3xl text-foreground mb-3 group-hover:text-accent/90 transition-colors duration-300">
                     {tl(s.title, locale)}
                   </h3>
-                  <p className="font-sans text-sm font-light italic text-foreground/60 mb-4">
+                  <p className="font-sans text-sm font-light italic text-foreground/70 mb-4">
                     {tl(s.tagline, locale)}
                   </p>
-                  <p className="font-sans text-sm text-foreground/55 leading-relaxed">
+                  <p className="font-sans text-sm text-foreground/70 leading-relaxed">
                     {tl(s.description, locale)}
                   </p>
                 </Link>
@@ -97,7 +97,7 @@ export default function ServicesGrid({ locale }: Props) {
         <AnimatedSection className="mt-10 flex justify-center" delay={0.3}>
           <Link
             href="/services"
-            className="inline-flex items-center gap-3 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+            className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
           >
             {t('exploreServices')}
             <Icon name="north_east" size={14} />

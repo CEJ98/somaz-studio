@@ -60,14 +60,14 @@ export default function Error({
 
         <div className="architectural-line max-w-xs mx-auto mb-8" />
 
-        <p className="font-sans font-light text-foreground/35 mb-12 max-w-sm leading-relaxed">
+        <p className="font-sans font-light text-foreground/70 mb-12 max-w-sm leading-relaxed">
           {t.body}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             onClick={reset}
-            className="inline-flex items-center justify-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-8 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+            className="inline-flex min-h-12 items-center justify-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-8 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
           >
             {t.button}
           </button>

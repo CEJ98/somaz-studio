@@ -1,16 +1,24 @@
-import { Fraunces, Inter } from 'next/font/google'
+import localFont from 'next/font/local'
 
-export const bodoniModa = Fraunces({
-  subsets: ['latin'],
+export const bodoniModa = localFont({
   variable: '--font-bodoni',
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
   display: 'swap',
+  src: [
+    { path: '../public/fonts/fraunces-normal-400.ttf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/fraunces-normal-500.ttf', weight: '500', style: 'normal' },
+    { path: '../public/fonts/fraunces-normal-600.ttf', weight: '600', style: 'normal' },
+    { path: '../public/fonts/fraunces-italic-400.ttf', weight: '400', style: 'italic' },
+    { path: '../public/fonts/fraunces-italic-500.ttf', weight: '500', style: 'italic' },
+    { path: '../public/fonts/fraunces-italic-600.ttf', weight: '600', style: 'italic' },
+  ],
 })
 
-export const dmSans = Inter({
-  subsets: ['latin'],
+export const dmSans = localFont({
   variable: '--font-dm-sans',
-  weight: ['300', '400', '500'],
   display: 'swap',
+  src: [
+    { path: '../public/fonts/inter-300.ttf', weight: '300', style: 'normal' },
+    { path: '../public/fonts/inter-400.ttf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/inter-500.ttf', weight: '500', style: 'normal' },
+  ],
 })

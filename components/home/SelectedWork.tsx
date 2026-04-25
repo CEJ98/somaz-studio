@@ -39,6 +39,8 @@ export default function SelectedWork() {
   const selected = homeSlugs
     .map(slug => projects.find(p => p.slug === slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
+  const imageFrameClass = 'relative overflow-hidden aspect-video bg-surface/70 mb-4'
+  const imageClass = 'object-contain transition-opacity duration-700 group-hover:opacity-90'
 
   return (
     <section className="px-6 md:px-10 py-28 md:py-40 max-w-7xl mx-auto">
@@ -63,12 +65,12 @@ export default function SelectedWork() {
         {selected[0] && (
           <ScrollCard>
             <Link href={`/work/${selected[0].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/3] mb-4">
+              <div className={imageFrameClass}>
                 <Image
                   src={selected[0].coverImage}
                   alt={selected[0].title}
                   fill
-                  className="object-cover group-hover:scale-[1.03] transition-all duration-700"
+                  className={imageClass}
                   sizes="(max-width: 768px) 100vw, 58vw"
                 />
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-500" />
@@ -87,12 +89,12 @@ export default function SelectedWork() {
         {selected[1] && (
           <ScrollCard>
             <Link href={`/work/${selected[1].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/3] mb-4">
+              <div className={imageFrameClass}>
                 <Image
                   src={selected[1].coverImage}
                   alt={selected[1].title}
                   fill
-                  className="object-cover group-hover:scale-[1.03] transition-all duration-700"
+                  className={imageClass}
                   sizes="(max-width: 768px) 100vw, 42vw"
                 />
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-500" />
@@ -115,12 +117,12 @@ export default function SelectedWork() {
         {selected[2] && (
           <ScrollCard>
             <Link href={`/work/${selected[2].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/3] mb-4">
+              <div className={imageFrameClass}>
                 <Image
                   src={selected[2].coverImage}
                   alt={selected[2].title}
                   fill
-                  className="object-cover group-hover:scale-[1.03] transition-all duration-700"
+                  className={imageClass}
                   sizes="(max-width: 768px) 100vw, 42vw"
                 />
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-500" />
@@ -139,12 +141,12 @@ export default function SelectedWork() {
         {selected[3] && (
           <ScrollCard>
             <Link href={`/work/${selected[3].slug}`} className="group block">
-              <div className="relative overflow-hidden aspect-[4/3] mb-4">
+              <div className={imageFrameClass}>
                 <Image
                   src={selected[3].coverImage}
                   alt={selected[3].title}
                   fill
-                  className="object-cover group-hover:scale-[1.03] transition-all duration-700"
+                  className={imageClass}
                   sizes="(max-width: 768px) 100vw, 58vw"
                 />
                 <div className="absolute bottom-0 left-0 h-0.5 bg-accent w-0 group-hover:w-full transition-all duration-500" />

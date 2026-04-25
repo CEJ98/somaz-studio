@@ -106,7 +106,7 @@ export default async function BlogPostPage(props: Props) {
         <div className="max-w-3xl mx-auto">
           <Link
             href="/blog"
-            className="group inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/30 hover:text-foreground/60 transition-colors duration-300 mb-12"
+            className="group inline-flex min-h-11 items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/65 hover:text-foreground transition-colors duration-300 mb-12"
           >
             <Icon name="arrow_back" size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
             {tb('backToNotes')}
@@ -116,15 +116,15 @@ export default async function BlogPostPage(props: Props) {
             {localizedTitle}
           </h1>
           <div className="flex items-center gap-4 mb-12">
-            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/25">
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/60">
               {new Date(post.date).toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
             <span className="w-px h-3 bg-border/40" aria-hidden="true" />
-            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/25">
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/60">
               {readingTime} {locale === 'es' ? 'min de lectura' : 'min read'}
             </p>
             <span className="w-px h-3 bg-border/40" aria-hidden="true" />
-            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/25">
+            <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/60">
               Sofía Mazzucco
             </p>
           </div>
@@ -148,7 +148,7 @@ export default async function BlogPostPage(props: Props) {
               : tb('relatedServiceThinking')
             return (
               <div className="mt-12 border-t border-border/30 pt-8 flex items-center justify-between gap-4">
-                <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/40">{label}</p>
+                <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/65">{label}</p>
                 <Link
                   href={href}
                   className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent hover:text-accent/70 transition-colors duration-300 shrink-0"
@@ -164,7 +164,7 @@ export default async function BlogPostPage(props: Props) {
             <nav aria-label="Post navigation" className="flex justify-between gap-4 mt-16 pt-8 border-t border-border">
               {prevPost && (
                 <Link href={`/blog/${prevPost.slug}`} className="group flex flex-col gap-1 max-w-[45%]">
-                  <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/40">← {tb('prevPost')}</span>
+                  <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/65">← {tb('prevPost')}</span>
                   <span className="font-sans text-sm text-foreground/70 group-hover:text-foreground transition-colors line-clamp-2">
                     {t(prevPost.title, locale)}
                   </span>
@@ -172,7 +172,7 @@ export default async function BlogPostPage(props: Props) {
               )}
               {nextPost && (
                 <Link href={`/blog/${nextPost.slug}`} className="group flex flex-col gap-1 max-w-[45%] items-end ml-auto text-right">
-                  <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/40">{tb('nextPost')} →</span>
+                  <span className="font-sans text-[10px] tracking-widest uppercase text-foreground/65">{tb('nextPost')} →</span>
                   <span className="font-sans text-sm text-foreground/70 group-hover:text-foreground transition-colors line-clamp-2">
                     {t(nextPost.title, locale)}
                   </span>
@@ -203,7 +203,7 @@ export default async function BlogPostPage(props: Props) {
           <div className="architectural-line mb-12" />
           <Link
             href="/blog"
-            className="group inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/30 hover:text-foreground/60 transition-colors duration-300"
+            className="group inline-flex min-h-11 items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/65 hover:text-foreground transition-colors duration-300"
           >
             <Icon name="arrow_back" size={14} className="transition-transform duration-300 group-hover:-translate-x-1" />
             {tb('allNotes')}

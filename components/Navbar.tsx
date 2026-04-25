@@ -104,7 +104,7 @@ export default function Navbar() {
                 <Link
                   href={href}
                   className={`relative font-sans text-xs tracking-[0.25em] uppercase transition-colors duration-300 ${
-                    isActive ? 'text-accent' : 'text-foreground/50 hover:text-foreground'
+                    isActive ? 'text-accent' : 'text-foreground/70 hover:text-foreground'
                   }`}
                 >
                   {label}
@@ -118,7 +118,7 @@ export default function Navbar() {
           <li>
             <button
               onClick={toggleLocale}
-              className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/65 hover:text-accent transition-colors duration-300"
+              className="min-h-11 px-2 font-sans text-xs tracking-[0.25em] uppercase text-foreground/70 hover:text-accent transition-colors duration-300"
               aria-label="Switch language"
             >
               {locale === 'en' ? 'ES' : 'EN'}
@@ -127,7 +127,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 hover:border-accent hover:text-accent px-5 py-2 font-sans text-xs tracking-[0.25em] uppercase transition-all duration-300"
+              className="inline-flex min-h-11 items-center gap-2 border border-foreground/30 text-foreground/80 hover:border-accent hover:text-accent px-5 py-2 font-sans text-xs tracking-[0.25em] uppercase transition-all duration-300"
             >
               {t('startProject')}
               <Icon name="north_east" size={14} />
@@ -138,7 +138,7 @@ export default function Navbar() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex min-h-11 min-w-11 flex-col items-center justify-center gap-1.5 p-2"
           aria-label={t('toggleMenu')}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
@@ -185,7 +185,7 @@ export default function Navbar() {
               <Link
                 href={href}
                 className={`font-sans text-xs tracking-[0.25em] uppercase ${
-                  pathname === href ? 'text-accent' : 'text-foreground/60'
+                  pathname === href ? 'text-accent' : 'text-foreground/75'
                 }`}
               >
                 {label}
@@ -200,7 +200,7 @@ export default function Navbar() {
             <button
               onClick={toggleLocale}
               aria-label={locale === 'en' ? 'Switch language to Español' : 'Switch language to English'}
-              className="font-sans text-xs tracking-[0.25em] uppercase text-foreground/65 hover:text-accent transition-colors duration-300"
+              className="min-h-11 font-sans text-xs tracking-[0.25em] uppercase text-foreground/75 hover:text-accent transition-colors duration-300"
             >
               {locale === 'en' ? 'ES' : 'EN'}
             </button>
@@ -212,7 +212,7 @@ export default function Navbar() {
           >
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/70 px-5 py-2.5 font-sans text-xs tracking-[0.25em] uppercase"
+              className="inline-flex min-h-11 items-center gap-2 border border-foreground/30 text-foreground/80 px-5 py-2.5 font-sans text-xs tracking-[0.25em] uppercase"
             >
               {t('startProject')}
             </Link>

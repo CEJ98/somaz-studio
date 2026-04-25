@@ -14,8 +14,8 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   return {
     metadataBase,
     title: isEs
-      ? 'Visualización 3D y Diseño de Interiores en Miami | Somaz Studio'
-      : '3D Visualization & Interior Design in Miami | Somaz Studio',
+      ? 'Visualización 3D y Diseño de Interiores en Miami'
+      : '3D Visualization & Interior Design in Miami',
     description: isEs
       ? 'Estudio de diseño y visualización 3D con base en Miami. Renders fotorrealistas, diseño de interiores y consultoría para proyectos residenciales y comerciales.'
       : 'Miami-based design and 3D visualization studio. Photorealistic renders, interior design, and consulting for residential and commercial projects.',
@@ -87,7 +87,6 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
 
@@ -133,7 +132,7 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
                 href="https://wa.me/17865377682?text=Hi%20Somaz%20Studio%2C%20I%27m%20in%20Miami%20and%20would%20like%20a%2015-min%20consultation."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-foreground/30 text-foreground/65 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+                className="inline-flex min-h-11 items-center gap-2 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-6 py-3 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
               >
                 {labels.consult}
                 <Icon name="chat" size={14} />
@@ -151,7 +150,7 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
               <div key={i} className="bg-background p-8">
                 <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/50 mb-3">0{i + 1}</p>
                 <p className="font-serif text-foreground mb-3" style={{ fontSize: '1.2rem' }}>{item.t}</p>
-                <p className="font-sans font-light text-sm text-foreground/55 leading-relaxed">{item.d}</p>
+                <p className="font-sans font-light text-sm text-foreground/70 leading-relaxed">{item.d}</p>
               </div>
             ))}
           </div>
@@ -173,7 +172,7 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
                   <div className="flex items-end justify-between mt-4">
                     <div>
                       <p className="font-serif italic text-foreground text-lg">{p.name}</p>
-                      <p className="font-sans text-[11px] text-foreground/45 tracking-wide mt-1">{p.location} · {p.year}</p>
+                      <p className="font-sans text-[11px] text-foreground/65 tracking-wide mt-1">{p.location} · {p.year}</p>
                     </div>
                     <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent inline-flex items-center gap-1">
                       {labels.viewProject}
@@ -206,7 +205,7 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
             <p className="font-serif italic text-foreground/55 mb-2" style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)' }}>
               {labels.finalQ}
             </p>
-            <p className="font-sans font-light text-foreground/35 text-sm mb-10">{labels.finalSub}</p>
+            <p className="font-sans font-light text-foreground/65 text-sm mb-10">{labels.finalSub}</p>
             <Link
               href="/contact"
               className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"

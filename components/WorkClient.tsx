@@ -9,14 +9,13 @@ import { Icon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
 import ImageCursorTrail from '@/components/ImageCursorTrail'
 import { projects, categories, type ProjectCategory } from '@/data/projects'
+import { ease } from '@/lib/motion'
 
 type ProjectMarket = 'All' | 'Miami' | 'LATAM'
 const markets: ProjectMarket[] = ['All', 'Miami', 'LATAM']
 function getMarket(location: string): 'Miami' | 'LATAM' {
   return location.toLowerCase().includes('miami') ? 'Miami' : 'LATAM'
 }
-import { ease } from '@/lib/motion'
-
 
 export default function WorkClient() {
   const tw = useTranslations('work')
@@ -85,7 +84,7 @@ export default function WorkClient() {
       </section>
 
       <div className="px-6 md:px-10 pt-12">
-      <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">
 
         {/* Architectural separator */}
         <div className="architectural-line mb-10" />
@@ -107,10 +106,10 @@ export default function WorkClient() {
               key={market}
               onClick={() => setActiveMarket(market)}
               aria-pressed={activeMarket === market}
-              className={`font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-2 transition-all duration-300 ${
+              className={`min-h-11 font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-2 transition-all duration-300 ${
                 activeMarket === market
                   ? 'text-foreground bg-foreground/8 border-b border-foreground/40'
-                  : 'text-foreground/40 hover:text-foreground/70'
+                  : 'text-foreground/70 hover:text-foreground'
               }`}
             >
               {market === 'All' ? tw('marketAll') : market}
@@ -130,10 +129,10 @@ export default function WorkClient() {
               key={cat}
               onClick={() => setActive(cat)}
               aria-pressed={active === cat}
-              className={`font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-3 border transition-all duration-300 ${
+              className={`min-h-11 font-sans text-[10px] tracking-[0.25em] uppercase px-4 py-3 border transition-all duration-300 ${
                 active === cat
                   ? 'border-accent text-accent'
-                  : 'border-border/50 text-foreground/55 hover:border-foreground/30 hover:text-foreground/80'
+                  : 'border-border/60 text-foreground/70 hover:border-foreground/40 hover:text-foreground'
               }`}
             >
               {active === cat && (
@@ -150,7 +149,7 @@ export default function WorkClient() {
           initial={reduced ? false : { opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease }}
-          className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/55 mb-10"
+          className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/70 mb-10"
         >
           {filtered.length} {filtered.length === 1 ? tw('projectSingular') : tw('projectPlural')}
         </m.p>
@@ -213,17 +212,17 @@ export default function WorkClient() {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/60" />
           <div className="relative z-10 py-16">
-          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-6">{tw('ctaLabel')}</p>
-          <p className="font-serif font-light italic text-foreground mb-10" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
-            {tw('ctaHeading')}
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
-          >
-            {tw('ctaButton')}
-            <Icon name="north_east" size={14} />
-          </Link>
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-6">{tw('ctaLabel')}</p>
+            <p className="font-serif font-light italic text-foreground mb-10" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+              {tw('ctaHeading')}
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex min-h-12 items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
+            >
+              {tw('ctaButton')}
+              <Icon name="north_east" size={14} />
+            </Link>
           </div>
         </div>
       </div>

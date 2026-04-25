@@ -50,7 +50,7 @@ export default function NotFound() {
         />
 
         <m.p
-          className="font-sans font-light text-foreground/35 mb-12 max-w-sm leading-relaxed"
+          className="font-sans font-light text-foreground/70 mb-12 max-w-sm leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease }}
@@ -66,7 +66,7 @@ export default function NotFound() {
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-3 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-8 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300 group"
+            className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-8 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300 group"
           >
             <Icon name="arrow_back" size={14} className="transition-transform duration-300 group-hover:-translate-x-0.5" />
             {t('goHome')}

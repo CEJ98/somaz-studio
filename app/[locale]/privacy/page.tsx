@@ -28,14 +28,14 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
       <h1 className="font-serif font-light text-foreground mb-2 leading-tight" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
         {tp('title')}
       </h1>
-      <p className="font-sans text-xs text-foreground/30 mb-12">{tp('lastUpdated')}</p>
+      <p className="font-sans text-xs text-foreground/60 mb-12">{tp('lastUpdated')}</p>
 
       <div className="architectural-line mb-12" />
 
-      <div className="space-y-10 font-sans text-sm text-foreground/60 leading-relaxed">
+      <div className="space-y-10 font-sans text-sm text-foreground/70 leading-relaxed">
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s1title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s1title')}</h2>
           <p>
             {tp('s1body').replace('hola@somazstudio.com', '').trim()}{' '}
             <a href="mailto:hola@somazstudio.com" className="text-accent hover:text-foreground transition-colors duration-300">hola@somazstudio.com</a>.
@@ -43,7 +43,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s2title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s2title')}</h2>
           <p className="mb-3">{tp('s2intro')}</p>
           <ul className="list-disc list-inside space-y-1 text-foreground/50">
             <li>{tp('s2li1')}</li>
@@ -53,7 +53,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s3title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s3title')}</h2>
           <ul className="list-disc list-inside space-y-1 text-foreground/50">
             <li>{tp('s3li1')}</li>
             <li>{tp('s3li2')}</li>
@@ -63,17 +63,17 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s4title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s4title')}</h2>
           <p>{tp('s4body')}</p>
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s5title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s5title')}</h2>
           <p>{tp('s5body')}</p>
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s6title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s6title')}</h2>
           <p className="mb-3">{tp('s6intro')}</p>
           <ul className="list-disc list-inside space-y-1 text-foreground/50">
             <li>{tp('s6li1')}</li>
@@ -88,22 +88,22 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s7title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s7title')}</h2>
           <p>{tp('s7body')}</p>
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s8title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s8title')}</h2>
           <p>{tp('s8body')}</p>
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s9title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s9title')}</h2>
           <p>{tp('s9body')}</p>
         </section>
 
         <section>
-          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/40 mb-3">{tp('s10title')}</h2>
+          <h2 className="font-sans text-xs tracking-[0.2em] uppercase text-foreground/65 mb-3">{tp('s10title')}</h2>
           <p>
             {tp('s10body').split('hola@somazstudio.com')[0]}
             <a href="mailto:hola@somazstudio.com" className="text-accent hover:text-foreground transition-colors duration-300">hola@somazstudio.com</a>
@@ -116,7 +116,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
       <div className="architectural-line mt-16 mb-8" />
       <Link
         href="/"
-        className="font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/30 hover:text-accent transition-colors duration-300"
+        className="inline-flex min-h-11 items-center font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/65 hover:text-accent transition-colors duration-300"
       >
         {t('backHome')}
       </Link>

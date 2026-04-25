@@ -1,5 +1,4 @@
 // Hardcoded JSON-LD schema — no user input, sanitization not required.
-// Same pattern as OrganizationJsonLd and LocalBusinessJsonLd.
 export default function ServiceJsonLd() {
   const services = [
     {
@@ -81,7 +80,6 @@ export default function ServiceJsonLd() {
     <script
       type="application/ld+json"
       suppressHydrationWarning
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: json }}
     />
   )

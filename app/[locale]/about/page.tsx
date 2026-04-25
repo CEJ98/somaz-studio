@@ -78,7 +78,6 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <AboutClient />

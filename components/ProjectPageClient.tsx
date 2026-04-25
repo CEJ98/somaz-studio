@@ -304,7 +304,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
         return (
           <div className="max-w-7xl mx-auto px-6 md:px-10 mb-24">
             <div className="border-t border-border/30 pt-14 mb-10">
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/40">{tp('relatedWork')}</p>
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/60">{tp('relatedWork')}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
               {related.map((p) => (
@@ -415,7 +415,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
               href={`https://wa.me/17865377682?text=${encodeURIComponent(`Hi! I saw the ${project.title} project on your website and I'd love something similar.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-foreground/20 text-foreground/60 hover:border-accent hover:text-accent px-6 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+              className="inline-flex min-h-11 items-center gap-2 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-6 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
             >
               {tp('wantSimilar')}
             </a>
@@ -433,7 +433,7 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border/40 px-6 py-4">
         <Link
           href="/contact"
-          className="flex items-center justify-center gap-3 w-full bg-accent text-background py-4 font-sans text-[10px] tracking-[0.25em] uppercase"
+          className="flex min-h-12 items-center justify-center gap-3 w-full bg-accent text-background py-4 font-sans text-[10px] tracking-[0.25em] uppercase"
         >
           {tp('startProject')}
           <Icon name="north_east" size={14} />
