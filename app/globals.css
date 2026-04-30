@@ -35,12 +35,6 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
-/* Custom cursor — only on pointer devices with min 768px screen */
-@media (pointer: fine) and (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-  * {
-    cursor: none !important;
-  }
-}
 
 /* Focus visible — keyboard navigation */
 :focus-visible {

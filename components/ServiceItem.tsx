@@ -157,16 +157,6 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
             </div>
           )}
           <div className="flex flex-col items-start gap-4">
-            {service.slug === 'architecture' && (
-              <Link
-                href="/services/architecture"
-                onClick={() => trackEvent('service_interest', { service: service.slug, entrypoint: 'services_page' })}
-                className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[12px] tracking-[0.18em] uppercase transition-all duration-300"
-              >
-                {locale === 'es' ? 'Ver modelo arquitectonico' : 'See architecture model'}
-                <Icon name="arrow_right_alt" size={14} />
-              </Link>
-            )}
             <Link
               href={`/contact?type=${slugToProjectType[service.slug] ?? 'other'}`}
               onClick={() => trackEvent('service_interest', { service: service.slug, entrypoint: 'services_page_cta' })}
