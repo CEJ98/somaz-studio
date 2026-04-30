@@ -13,7 +13,7 @@ export default function LocalBusinessJsonLd() {
     logo: 'https://somazstudio.com/logos/logo-smz.png',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Miami, FL (Service Area Business — remote-first)',
+      streetAddress: 'Miami, FL (Service Area Business)',
       addressLocality: 'Miami',
       addressRegion: 'FL',
       postalCode: '33131',
@@ -50,7 +50,7 @@ export default function LocalBusinessJsonLd() {
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '3D Visualization', description: 'Photorealistic architectural renders. Essential (1 view) in 48–72h, Rush 24h available.' } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Interior Design', description: 'Full interior design from concept to material specification.' } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Conceptual Design', description: 'Spatial concept development and design direction.' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Design Consulting', description: 'Strategic design guidance for projects that need clearer spatial decisions.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Design Consulting', description: 'Strategic design guidance for projects that need clearer decisions.' } },
       ],
     },
   }

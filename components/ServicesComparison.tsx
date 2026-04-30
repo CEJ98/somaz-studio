@@ -23,14 +23,14 @@ export default function ServicesComparison({ locale }: Props) {
     {
       name: 'Interior Design',
       includes: isEs
-        ? 'Plan espacial, materiales, mobiliario, mood boards'
+        ? 'Distribución, materiales, mobiliario, tableros visuales'
         : 'Space plan, materials, furniture, mood boards',
       turnaround: isEs ? '3–5 semanas' : '3–5 weeks',
     },
     {
       name: 'Conceptual Design',
       includes: isEs
-        ? 'Concepto espacial, dirección de diseño, esquemas'
+        ? 'Idea principal, dirección de diseño, esquemas'
         : 'Spatial concept, design direction, schematics',
       turnaround: isEs ? '2–3 semanas' : '2–3 weeks',
     },

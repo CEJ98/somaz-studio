@@ -56,7 +56,7 @@ export default function WorkClient() {
         <div className="absolute inset-0">
           <Image
             src="/work-hero.jpg"
-            alt="Selected portfolio work — architecture-led cases built for approvals, alignment, and project clarity"
+            alt="Selected portfolio work by Somaz Studio"
             fill
             className="object-cover"
             priority

@@ -24,12 +24,12 @@ export const services: Service[] = [
       es: 'Diseño arquitectónico para proyectos residenciales, comerciales y hospitality, desde la idea inicial hasta el paquete final de presentación.',
     },
     idealFor: {
-      en: 'Clients who need a clear spatial concept, stronger design decisions, and better coordination as the project grows.',
-      es: 'Clientes que necesitan un concepto espacial claro, mejores decisiones de diseño y una coordinación más sólida a medida que el proyecto avanza.',
+      en: 'Clients who need clear design direction, stronger decisions, and better coordination as the project grows.',
+      es: 'Clientes que necesitan una dirección de diseño clara, mejores decisiones y coordinación a medida que el proyecto avanza.',
     },
     deliverables: [
       { en: 'Concept design and schematic packages', es: 'Concepto arquitectónico y paquetes esquemáticos' },
-      { en: 'Design development and interior architecture', es: 'Design development e interior architecture' },
+      { en: 'Design development and interior architecture', es: 'Desarrollo de diseño e interiores' },
       { en: 'Presentation packages and technical coordination', es: 'Paquetes de presentación y coordinación técnica' },
     ],
     deliveryModel: {
@@ -68,19 +68,19 @@ export const services: Service[] = [
     number: '02',
     title: { en: 'Interior Design', es: 'Diseño de Interiores' },
     slug: 'interior-design',
-    tagline: { en: 'Spaces that feel inevitable.', es: 'Espacios que se sienten inevitables.' },
+    tagline: { en: 'Interiors with proportion and character.', es: 'Interiores con proporción y carácter.' },
     description: {
       en: 'Full interior design service: space planning, material selection, furniture layout, and mood boards — delivered remotely, executed anywhere.',
-      es: 'Servicio completo de diseño de interiores: planificación espacial, selección de materiales, distribución de mobiliario y mood boards — entregado de forma remota, ejecutado en cualquier lugar.',
+      es: 'Servicio completo de diseño de interiores: distribución, selección de materiales, mobiliario y tableros visuales, entregado de forma remota y listo para ejecutar con el equipo correspondiente.',
     },
     idealFor: {
       en: 'Residential and hospitality clients who need a clear material direction, furnishing strategy, and spatial cohesion.',
-      es: 'Clientes residenciales y hospitality que necesitan dirección material clara, estrategia de equipamiento y cohesión espacial.',
+      es: 'Clientes residenciales y hospitality que necesitan dirección material clara, estrategia de equipamiento y coherencia en el proyecto.',
     },
     deliverables: [
-      { en: 'Space planning and furniture layouts', es: 'Planificación espacial y layout de mobiliario' },
+      { en: 'Space planning and furniture layouts', es: 'Distribución y layout de mobiliario' },
       { en: 'Material palette and finish direction', es: 'Paleta de materiales y dirección de terminaciones' },
-      { en: 'Mood boards and specification packages', es: 'Mood boards y paquetes de especificación' },
+      { en: 'Mood boards and specification packages', es: 'Tableros visuales y paquetes de especificación' },
     ],
     deliveryModel: {
       en: 'A flexible service that can support both remote work and local execution teams.',
@@ -95,17 +95,17 @@ export const services: Service[] = [
     slug: 'conceptual-design',
     tagline: { en: 'The vision, before the plans.', es: 'La visión, antes de los planos.' },
     description: {
-      en: 'From the first idea to a strong spatial concept. We shape the vision before technical development begins.',
-      es: 'De la idea al concepto espacial. Definimos la visión del proyecto antes de entrar en desarrollo técnico.',
+      en: 'We turn an early idea into a clear design direction before technical development begins.',
+      es: 'Convertimos una idea inicial en una dirección de diseño clara antes del desarrollo técnico.',
     },
     idealFor: {
       en: 'Early-stage projects that need clarity before drawings, budgeting, or the next design phase.',
       es: 'Proyectos en etapa temprana que necesitan claridad antes de dibujar, presupuestar o avanzar a la siguiente fase.',
     },
     deliverables: [
-      { en: 'Spatial concept and massing studies', es: 'Concepto espacial y estudios de volumetría' },
+      { en: 'Spatial concept and massing studies', es: 'Idea principal y estudios de volumetría' },
       { en: 'Floor plan logic and design narrative', es: 'Lógica de planta y narrativa de diseño' },
-      { en: 'Visual boards and stakeholder-ready presentation', es: 'Boards visuales y presentación para stakeholders' },
+      { en: 'Visual boards and stakeholder-ready presentation', es: 'Láminas visuales y presentación para equipos de decisión' },
     ],
     deliveryModel: {
       en: 'Best used as the first phase of architecture, interiors, or development work.',
@@ -121,7 +121,7 @@ export const services: Service[] = [
     tagline: { en: 'Expert guidance, on demand.', es: 'Asesoría experta, cuando la necesitas.' },
     description: {
       en: 'Strategic guidance on spatial decisions, material choices, and design direction when a project needs sharper judgment.',
-      es: 'Acompañamiento estratégico para decisiones espaciales, materiales y dirección de diseño cuando un proyecto necesita más criterio.',
+      es: 'Acompañamiento estratégico para decisiones de distribución, materiales y dirección de diseño cuando un proyecto necesita más criterio.',
     },
     idealFor: {
       en: 'Teams or owners who already have drawings but need sharper design judgment, review, or strategic input.',
@@ -134,7 +134,7 @@ export const services: Service[] = [
     ],
     deliveryModel: {
       en: 'Remote-first consulting delivered through scoped sessions, advisory sprints, or retainers with written outcomes.',
-      es: 'Consultoría remote-first entregada mediante sesiones con alcance definido, advisory sprints o retainers con resultados escritos.',
+      es: 'Consultoría remota mediante sesiones con alcance definido, bloques de asesoría o acompañamiento mensual con resultados escritos.',
     },
     regions: ['Worldwide'],
     includesSignoff: false,

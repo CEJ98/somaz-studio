@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'Somaz Studio — Portfolio · Architecture-Led Work'
+export const alt = 'Somaz Studio — Portfolio · Architecture, Interiors and Visualization'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -59,7 +59,7 @@ export default async function Image() {
               textTransform: 'uppercase' as const,
             }}
           >
-            Residential · Hospitality · Development
+            Residential · Hospitality · Commercial
           </div>
         </div>
 

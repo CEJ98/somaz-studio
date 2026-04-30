@@ -258,11 +258,11 @@ const baseProjects: BaseProject[] = [
     ],
     brief: {
       en: 'Conceptual design for a compact modern duplex with efficient spatial organization.',
-      es: 'Diseño conceptual para un dúplex moderno compacto con organización espacial eficiente.',
+      es: 'Diseño conceptual para un dúplex moderno compacto con una distribución eficiente.',
     },
     description: {
       en: "A duplex housing study exploring compact, efficient spatial planning for a contemporary residential typology. The conceptual work included volumetric studies, floor plan optimization, and isometric representations that communicate the project's spatial logic. The design prioritizes natural light, cross-ventilation, and a clear vertical separation of private and shared programs.",
-      es: 'Un estudio de vivienda dúplex que explora la planificación espacial compacta y eficiente para una tipología residencial contemporánea. El trabajo conceptual incluyó estudios volumétricos, optimización de plantas y representaciones isométricas que comunican la lógica espacial del proyecto. El diseño prioriza la luz natural, la ventilación cruzada y una clara separación vertical entre programas privados y compartidos.',
+      es: 'Un estudio de vivienda dúplex que explora una distribución compacta y eficiente para una tipología residencial contemporánea. El trabajo conceptual incluyó estudios volumétricos, optimización de plantas y representaciones isométricas que comunican la lógica del proyecto. El diseño prioriza la luz natural, la ventilación cruzada y una clara separación vertical entre programas privados y compartidos.',
     },
     size: 'small',
   },
@@ -305,7 +305,7 @@ const baseProjects: BaseProject[] = [
     },
     description: {
       en: 'A conceptual residential project structured around three patios that organize the program and bring natural light deep into the plan. The design explores the relationship between enclosed outdoor space and interior living, using the patios as the primary organizing element of the spatial sequence.',
-      es: 'Un proyecto residencial conceptual estructurado en torno a tres patios que organizan el programa y llevan luz natural al interior de la planta. El diseño explora la relación entre el espacio exterior contenido y la vida interior, utilizando los patios como elemento organizador principal de la secuencia espacial.',
+      es: 'Un proyecto residencial conceptual estructurado en torno a tres patios que organizan el programa y llevan luz natural al interior de la planta. El diseño explora la relación entre el exterior contenido y la vida interior, utilizando los patios como elemento organizador principal del recorrido.',
     },
     size: 'small',
   },
@@ -336,7 +336,7 @@ const projectMetadata: Record<string, Pick<Project, 'market' | 'service' | 'clie
     deliverables: [
       { en: 'Exterior hero view for rollout', es: 'Vista hero exterior para lanzamiento' },
       { en: 'Interior views across training floors', es: 'Vistas interiores de los pisos de entrenamiento' },
-      { en: 'Commercial presentation imagery for stakeholders', es: 'Imágenes comerciales de presentación para stakeholders' },
+      { en: 'Commercial presentation imagery for stakeholders', es: 'Imágenes comerciales de presentación para equipos de decisión' },
     ],
     anchor_case: true,
     related_post_slugs: ['interior-architecture-for-hospitality-projects', 'architectural-visualization-for-developers'],
@@ -405,7 +405,7 @@ const projectMetadata: Record<string, Pick<Project, 'market' | 'service' | 'clie
     },
     scope: {
       en: 'Interior architecture direction across shared and private spaces, with material continuity, furniture logic, and presentation support for execution decisions.',
-      es: 'Dirección de interior architecture en espacios sociales y privados, con continuidad material, lógica de mobiliario y soporte de presentación para decisiones de ejecución.',
+      es: 'Dirección de arquitectura interior en espacios sociales y privados, con continuidad material, lógica de mobiliario y soporte de presentación para decisiones de ejecución.',
     },
     deliverables: [
       { en: 'Interior layout and atmosphere direction', es: 'Dirección de layout interior y atmósfera' },
@@ -432,7 +432,7 @@ const projectMetadata: Record<string, Pick<Project, 'market' | 'service' | 'clie
     },
     scope: {
       en: 'Interior architecture direction across guest cabins, material palette, lighting logic, and hospitality-facing presentation material.',
-      es: 'Dirección de interior architecture para cabañas de huéspedes, paleta material, lógica de iluminación y material de presentación orientado a hospitality.',
+      es: 'Dirección de arquitectura interior para cabañas de huéspedes, paleta material, lógica de iluminación y material de presentación orientado a hospitality.',
     },
     deliverables: [
       { en: 'Material and furnishing direction', es: 'Dirección material y de equipamiento' },
@@ -466,7 +466,7 @@ const projectMetadata: Record<string, Pick<Project, 'market' | 'service' | 'clie
     },
     deliverables: [
       { en: 'Hero exterior views for investor-facing decks', es: 'Vistas hero exteriores para decks frente a inversores' },
-      { en: 'Residential imagery for stakeholder alignment', es: 'Imágenes residenciales para alinear stakeholders' },
+      { en: 'Residential imagery for stakeholder alignment', es: 'Imágenes residenciales para alinear decisiones' },
       { en: 'Presentation-ready visuals for development conversations', es: 'Visuales listos para presentación en conversaciones de desarrollo' },
     ],
     anchor_case: true,
@@ -508,7 +508,7 @@ const projectMetadata: Record<string, Pick<Project, 'market' | 'service' | 'clie
     use_case: 'Concept Clarity',
     outcome_metric: {
       en: 'Spatial concept clarified the project before executive documentation.',
-      es: 'El concepto espacial aclaró el proyecto antes de la documentación ejecutiva.',
+      es: 'La idea principal quedó clara antes de avanzar con la documentación ejecutiva.',
     },
     regulatory_context: {
       en: 'Conceptual architecture phase suitable for later technical development and local sign-off.',

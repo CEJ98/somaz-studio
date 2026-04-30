@@ -91,10 +91,10 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 Sobre Somaz Studio
               </h2>
               <p>
-                Somaz Studio es un estudio de arquitectura, interiores y visualización fundado por Sofía Mazzucco. El enfoque del estudio combina sensibilidad espacial, criterio contemporáneo y una forma de trabajo clara, pensada para que el proyecto avance sin ruido.
+                Somaz Studio es un estudio de arquitectura, interiores y visualización fundado por Sofía Mazzucco. El estudio desarrolla proyectos residenciales, comerciales y hospitality con atención a la distribución, los materiales y la forma en que cada idea se presenta.
               </p>
               <p>
-                La práctica se organiza en tres líneas que se cruzan todo el tiempo: arquitectura, interiores y visualización. Más que separarlas, Somaz las trabaja como partes de una misma idea para que el espacio tenga coherencia desde el concepto hasta la presentación final.
+                La práctica se organiza en tres líneas: arquitectura, interiores y visualización. Somaz las trabaja de forma integrada para que el proyecto mantenga coherencia desde las primeras decisiones hasta la presentación final.
               </p>
               <p>
                 Eso se traduce en proyectos donde importan tanto la calidad del diseño como la forma en que se comunica: plantas más claras, mejores decisiones materiales, imágenes más precisas y entregables que ayudan a presentar y coordinar mejor.

@@ -57,7 +57,7 @@ const faqs = [
     },
     a: {
       en: 'Both. Our 3D Visualization service focuses on rendering existing plans. Our Interior Design service includes space planning, material selection, furniture layouts, and mood boards — delivered remotely.',
-      es: 'Ambos. Nuestro servicio de Visualización 3D se enfoca en renderizar planos existentes. Nuestro servicio de Diseño de Interiores incluye planificación espacial, selección de materiales, distribución de mobiliario y mood boards — entregado de forma remota.',
+      es: 'Ambos. Nuestro servicio de Visualización 3D se enfoca en renderizar planos existentes. Nuestro servicio de Diseño de Interiores incluye distribución, selección de materiales, mobiliario y tableros visuales, entregados de forma remota.',
     },
   },
   {

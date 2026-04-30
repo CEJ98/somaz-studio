@@ -39,7 +39,7 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
     whyTitle: isEs ? 'Por qué clientes en Miami eligen Somaz' : 'Why Miami clients choose Somaz',
     why: isEs
       ? [
-          { t: 'Criterio arquitectónico', d: 'No trabajamos como estudio de imágenes sueltas. Partimos del proyecto, del alcance y de la decisión espacial que hace falta tomar.' },
+          { t: 'Criterio arquitectónico', d: 'No trabajamos como estudio de imágenes sueltas. Partimos del proyecto, del alcance y de las decisiones que hacen falta tomar.' },
           { t: 'Presentación clara', d: 'Preparamos material que ayuda a explicar el proyecto con más claridad frente a clientes, equipos y consultores.' },
           { t: 'Proceso ordenado', d: 'Cada etapa se define con entregables concretos para que el proyecto avance con menos fricción.' },
         ]
@@ -192,8 +192,8 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
         eyebrow="South Florida"
         title={isEs ? 'Proyectos que hablan\npor sí solos.' : 'Projects that speak\nfor themselves.'}
         body={isEs
-          ? 'Desde Brickell hasta Coral Gables, desarrollamos proyectos con una mirada clara sobre el espacio, la atmósfera y la forma en que se presentan.'
-          : 'From Brickell to Coral Gables, we develop projects with a clear eye for space, atmosphere, and how they are presented.'}
+          ? 'Desde Brickell hasta Coral Gables, desarrollamos proyectos residenciales y comerciales con atención a distribución, materiales e imagen final.'
+          : 'From Brickell to Coral Gables, we develop residential and commercial projects with attention to layout, materials, and final presentation.'}
         align="left"
         height="70vh"
         overlay={0.62}

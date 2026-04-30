@@ -65,7 +65,7 @@ export default function Hero() {
 
           <m.div
             aria-hidden="true"
-            className="font-serif leading-[0.9] tracking-tight mb-8"
+            className="font-serif leading-[0.94] tracking-tight mb-8"
             style={{ y: titleY }}
             initial="hidden"
             animate="visible"
@@ -74,7 +74,7 @@ export default function Hero() {
               visible: { transition: { staggerChildren: 0.07, delayChildren: 0.3 } },
             }}
           >
-            <div className="overflow-hidden" style={{ fontSize: 'clamp(2.25rem, 5vw, 5rem)' }}>
+            <div className="overflow-hidden" style={{ fontSize: 'clamp(2.5rem, 5.4vw, 5.75rem)' }}>
               {t('heroLine1').split(' ').map((word, i) => (
                 <m.span
                   key={i}
@@ -88,7 +88,7 @@ export default function Hero() {
                 </m.span>
               ))}
             </div>
-            <div className="overflow-hidden" style={{ fontSize: 'clamp(2.75rem, 6vw, 6.5rem)' }}>
+            <div className="overflow-hidden" style={{ fontSize: 'clamp(2.5rem, 5.4vw, 5.75rem)' }}>
               {t('heroLine2').split(' ').map((word, i) => (
                 <m.span
                   key={i}
@@ -129,13 +129,6 @@ export default function Hero() {
                 <Icon name="north_east" size={16} />
               </Link>
             </MagneticButton>
-            <Link
-              href="/services/architecture"
-              className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/78 px-8 py-3.5 font-sans text-[12px] tracking-[0.18em] uppercase hover:border-accent hover:text-accent transition-all duration-300"
-            >
-              {t('freeConsult')}
-              <Icon name="arrow_right_alt" size={16} />
-            </Link>
           </m.div>
         </m.div>
 

@@ -35,12 +35,12 @@ export default async function ArchitecturePage(props: { params: Promise<{ locale
     ? {
         eyebrow: 'Arquitectura',
         title: 'Arquitectura con claridad, criterio y buena presentación.',
-        intro: 'Somaz Studio desarrolla proyectos residenciales, comerciales y hospitality desde el concepto espacial hasta los entregables necesarios para presentarlos, coordinarlos y hacerlos avanzar.',
+        intro: 'Somaz Studio desarrolla proyectos residenciales, comerciales y hospitality desde la primera idea hasta los materiales necesarios para presentarlos y seguir avanzando.',
         primaryCta: 'Iniciar proyecto',
         secondaryCta: 'Ver servicios',
         modelTitle: 'Como trabajamos',
         model1Title: 'Concepto',
-        model1Body: 'Definimos la idea general, la lógica del proyecto y las decisiones espaciales que ordenan todo lo que sigue.',
+        model1Body: 'Definimos la idea general, la distribución y las decisiones que ordenan todo lo que sigue.',
         model2Title: 'Desarrollo',
         model2Body: 'Bajamos el proyecto a plantas, criterios interiores, materialidad y piezas de presentación claras.',
         model3Title: 'Coordinación',
@@ -48,7 +48,7 @@ export default async function ArchitecturePage(props: { params: Promise<{ locale
         deliverablesTitle: 'Qué entrega Somaz',
         deliverables: [
           'Concepto arquitectónico y paquetes esquemáticos',
-          'Desarrollo de diseño e interior architecture',
+          'Desarrollo de diseño e interiores',
           'Visuales y piezas de presentación',
           'Documentación base para coordinación',
           'Seguimiento de decisiones y consultores',
@@ -57,19 +57,19 @@ export default async function ArchitecturePage(props: { params: Promise<{ locale
         faqs: [
           ['¿Qué tipo de proyectos toman?', 'Principalmente residenciales, comerciales y hospitality donde la arquitectura, los interiores y la presentación del proyecto tienen que trabajar juntos.'],
           ['¿Trabajan por fases?', 'Sí. Definimos cada etapa por escrito para que el alcance, los entregables y los tiempos estén claros desde el inicio.'],
-          ['¿También hacen interiores?', 'Sí. Cuando el proyecto lo pide, desarrollamos arquitectura e interiores como una sola dirección espacial.'],
+          ['¿También hacen interiores?', 'Sí. Cuando el proyecto lo pide, desarrollamos arquitectura e interiores como una misma dirección de diseño.'],
           ['¿Pueden sumarse a un proyecto ya empezado?', 'Sí. Podemos entrar para revisar, ordenar o reforzar una etapa que ya está en curso.'],
         ],
       }
     : {
         eyebrow: 'Architecture',
         title: 'Architecture with clarity, judgment, and strong presentation.',
-        intro: 'Somaz Studio develops residential, commercial, and hospitality projects from the spatial concept through the deliverables needed to present, coordinate, and move them forward.',
+        intro: 'Somaz Studio develops residential, commercial, and hospitality projects from the first idea through the material needed to present and move them forward.',
         primaryCta: 'Start a project',
         secondaryCta: 'View services',
         modelTitle: 'How we work',
         model1Title: 'Concept',
-        model1Body: 'We define the main idea, the logic of the project, and the spatial decisions that organize everything that follows.',
+        model1Body: 'We define the main idea, the layout, and the decisions that organize everything that follows.',
         model2Title: 'Development',
         model2Body: 'We turn the project into plans, interior direction, material decisions, and clear presentation pieces.',
         model3Title: 'Coordination',
@@ -86,7 +86,7 @@ export default async function ArchitecturePage(props: { params: Promise<{ locale
         faqs: [
           ['What kind of projects do you take on?', 'Mostly residential, commercial, and hospitality projects where architecture, interiors, and presentation need to work together.'],
           ['Do you work in phases?', 'Yes. Each stage is scoped in writing so deliverables, timing, and responsibilities stay clear from the start.'],
-          ['Do you also design interiors?', 'Yes. When the project needs it, we develop architecture and interiors as one spatial direction.'],
+          ['Do you also design interiors?', 'Yes. When the project needs it, we develop architecture and interiors as one design direction.'],
           ['Can you join a project already in progress?', 'Yes. We can step in to review, organize, or strengthen a phase that is already underway.'],
         ],
       }

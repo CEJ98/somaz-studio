@@ -41,8 +41,8 @@ export default function ServicesGrid({ locale }: Props) {
             </blockquote>
             <p className="font-sans text-[16px] leading-relaxed text-foreground/68 mt-6 max-w-xl">
               {locale === 'es'
-                ? 'Diseñamos proyectos donde arquitectura, interiores y visualización tienen que trabajar en conjunto desde el principio.'
-                : 'We design projects where architecture, interiors, and visualization need to work together from the start.'}
+                ? 'Cada proyecto se trabaja desde su idea principal: distribución, materiales, imágenes y forma de presentación.'
+                : 'Each project is shaped from its main idea: layout, materials, images, and the way it is presented.'}
             </p>
           </AnimatedSection>
 
