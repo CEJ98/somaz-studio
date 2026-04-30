@@ -8,10 +8,7 @@ import { Toaster } from 'sonner'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { locales } from '@/i18n/config'
-
-import { ClientOnlyCursor, ClientOnlyWhatsApp, ClientOnlyAnalytics, ClientOnlyCookieConsent } from '@/components/ClientOnly'
-import ScrollToTop from '@/components/ScrollToTop'
-import StickyCta from '@/components/StickyCta'
+import SiteAnalytics from '@/components/Analytics'
 import LocalBusinessJsonLd from '@/components/seo/LocalBusinessJsonLd'
 import ServiceJsonLd from '@/components/seo/ServiceJsonLd'
 import MotionProvider from '@/components/MotionProvider'
@@ -19,24 +16,24 @@ import MotionProvider from '@/components/MotionProvider'
 export const metadata: Metadata = {
   metadataBase: new URL('https://somazstudio.com'),
   title: {
-    default: 'Somaz Studio | 3D Visualization & Interior Design — Miami',
+    default: 'Somaz Studio | Architecture, Interiors & Visualization — Miami and Argentina',
     template: '%s | Somaz Studio',
   },
-  description: 'Miami-based design studio specializing in 3D visualization, interior design, and spatial concepts. Working globally.',
-  keywords: ['3D visualization', 'interior design', 'Miami', 'design studio', 'architectural visualization'],
+  description: 'Architecture, interiors, and visualization studio based in Miami. Residential, commercial, and hospitality projects with a clear and contemporary approach.',
+  keywords: ['architecture studio Miami', 'interior design Miami', 'architectural visualization', 'Argentina architecture studio', 'residential hospitality development design'],
   authors: [{ name: 'Somaz Studio' }],
   openGraph: {
     type: 'website',
     url: 'https://somazstudio.com',
     siteName: 'Somaz Studio',
-    title: 'Somaz Studio — 3D Visualization & Interior Design',
-    description: 'Miami-based design studio. 3D visualization · Interior design · Spatial concepts.',
+    title: 'Somaz Studio — Architecture, Interiors & Visualization',
+    description: 'Architecture · Interiors · Visualization for residential, commercial, and hospitality projects.',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Somaz Studio' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Somaz Studio',
-    description: 'Miami-based design studio. 3D visualization · Interior design · Spatial concepts.',
+    description: 'Architecture · Interiors · Visualization for residential, commercial, and hospitality projects.',
     images: ['/og-image.jpg'],
   },
   icons: {
@@ -90,15 +87,10 @@ export default async function LocaleLayout(
           >
             Skip to content
           </a>
-          <ClientOnlyCursor />
-          <ClientOnlyAnalytics />
-          <ClientOnlyCookieConsent />
+          <SiteAnalytics />
           <Navbar />
           <main id="main-content">{children}</main>
           <Footer />
-          <ClientOnlyWhatsApp />
-          <ScrollToTop />
-          <StickyCta />
           <Toaster
             theme="light"
             position="bottom-right"

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import BlogClient from '@/components/BlogClient'
-import { posts } from '@/data/posts'
+import { postsByDateDesc } from '@/data/posts'
 import { buildAlternates, metadataBase } from '@/lib/seo'
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -53,7 +53,7 @@ export default async function BlogPage(props: { params: Promise<{ locale: string
          
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
-      <BlogClient posts={posts} locale={locale} />
+      <BlogClient posts={postsByDateDesc} locale={locale} />
     </>
   )
 }

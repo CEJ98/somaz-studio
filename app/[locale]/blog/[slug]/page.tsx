@@ -2,13 +2,16 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { Link } from '@/i18n/navigation'
-import { posts } from '@/data/posts'
+import { posts, postsByDateDesc } from '@/data/posts'
+import { getSeoLanding } from '@/data/seo-landings'
+import { projects } from '@/data/projects'
 import { locales } from '@/i18n/config'
 import { t } from '@/lib/locale'
 import { getTranslations } from 'next-intl/server'
 import PageFade from '@/components/PageFade'
 import { Icon } from '@/components/icons'
 import { buildAlternates, metadataBase } from '@/lib/seo'
+import type { SeoLanding } from '@/data/seo-landings'
 
 interface Props { params: Promise<{ locale: string; slug: string }> }
 
@@ -70,7 +73,7 @@ export default async function BlogPostPage(props: Props) {
         '@type': 'Person',
         name: 'Sofía Mazzucco',
         url: 'https://somazstudio.com/en/about',
-        jobTitle: 'Space Designer & Interior Designer',
+        jobTitle: 'Architect',
         worksFor: { '@type': 'Organization', name: 'Somaz Studio', url: 'https://somazstudio.com' },
       },
       publisher: { '@type': 'Organization', name: 'Somaz Studio', url: 'https://somazstudio.com', logo: { '@type': 'ImageObject', url: 'https://somazstudio.com/logos/logo-smz.png' } },
@@ -88,10 +91,13 @@ export default async function BlogPostPage(props: Props) {
 
   const paragraphs = localizedContent.split('\n\n').filter(Boolean)
 
-  const sortedPosts = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  const currentIndex = sortedPosts.findIndex((p) => p.slug === slug)
-  const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null
-  const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
+  const currentIndex = postsByDateDesc.findIndex((p) => p.slug === slug)
+  const prevPost = currentIndex < postsByDateDesc.length - 1 ? postsByDateDesc[currentIndex + 1] : null
+  const nextPost = currentIndex > 0 ? postsByDateDesc[currentIndex - 1] : null
+  const relatedPosts = posts.filter((candidate) => post.relatedSlugs?.includes(candidate.slug))
+  const relatedProjects = projects.filter((projectItem) => post.relatedProjectSlugs?.includes(projectItem.slug))
+  const relatedLandings: SeoLanding[] =
+    post.relatedLandingSlugs?.map((landingSlug) => getSeoLanding(landingSlug)).filter((landing): landing is SeoLanding => Boolean(landing)) ?? []
 
   return (
     <>
@@ -137,27 +143,91 @@ export default async function BlogPostPage(props: Props) {
             ))}
           </div>
 
-          {/* Service callout — contextual internal link */}
-          {(() => {
-            const isProjects = post.category === 'Projects'
-            const href = isProjects ? '/work' : '/services'
-            const label = isProjects
-              ? tb('relatedServiceProjects')
-              : post.category === 'Process'
-              ? tb('relatedServiceProcess')
-              : tb('relatedServiceThinking')
-            return (
-              <div className="mt-12 border-t border-border/30 pt-8 flex items-center justify-between gap-4">
-                <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/65">{label}</p>
-                <Link
-                  href={href}
-                  className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent hover:text-accent/70 transition-colors duration-300 shrink-0"
-                >
-                  {tb('relatedServiceAction')}
-                </Link>
+          <div className="mt-12 border-t border-border/30 pt-8 space-y-10">
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/65">
+                {post.category === 'Commercial Intent'
+                  ? locale === 'es' ? 'Ruta comercial relacionada' : 'Related commercial path'
+                  : post.category === 'Case Study'
+                  ? locale === 'es' ? 'Caso y servicio relacionados' : 'Related case and service'
+                  : post.category === 'Projects'
+                  ? tb('relatedServiceProjects')
+                  : post.category === 'Process'
+                  ? tb('relatedServiceProcess')
+                  : tb('relatedServiceThinking')}
+              </p>
+              <Link
+                href={post.primaryService === 'Architecture' ? '/services/architecture' : '/services'}
+                className="font-sans text-[10px] tracking-[0.2em] uppercase text-accent hover:text-accent/70 transition-colors duration-300 shrink-0"
+              >
+                {tb('relatedServiceAction')}
+              </Link>
+            </div>
+
+            {(relatedLandings.length > 0 || relatedProjects.length > 0 || relatedPosts.length > 0) && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {relatedLandings.length > 0 && (
+                  <div>
+                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-4">
+                      {locale === 'es' ? 'Landing relacionada' : 'Related landing'}
+                    </p>
+                    <div className="space-y-4">
+                      {relatedLandings.slice(0, 2).map((landing) => (
+                        <Link key={landing.slug} href={`/services/${landing.slug}`} className="group block">
+                          <p className="font-serif text-lg text-foreground/80 group-hover:text-foreground transition-colors duration-300">
+                            {t(landing.title, locale)}
+                          </p>
+                          <p className="font-sans text-sm text-foreground/65 leading-relaxed mt-2">
+                            {t(landing.metaDescription, locale)}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {relatedProjects.length > 0 && (
+                  <div>
+                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-4">
+                      {locale === 'es' ? 'Caso relacionado' : 'Related case'}
+                    </p>
+                    <div className="space-y-4">
+                      {relatedProjects.slice(0, 2).map((projectItem) => (
+                        <Link key={projectItem.slug} href={`/work/${projectItem.slug}`} className="group block">
+                          <p className="font-serif text-lg text-foreground/80 group-hover:text-foreground transition-colors duration-300">
+                            {projectItem.title}
+                          </p>
+                          <p className="font-sans text-sm text-foreground/65 leading-relaxed mt-2">
+                            {t(projectItem.outcome_metric, locale)}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {relatedPosts.length > 0 && (
+                  <div>
+                    <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-4">
+                      {locale === 'es' ? 'Seguir leyendo' : 'Keep reading'}
+                    </p>
+                    <div className="space-y-4">
+                      {relatedPosts.slice(0, 2).map((relatedPost) => (
+                        <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`} className="group block">
+                          <p className="font-serif text-lg text-foreground/80 group-hover:text-foreground transition-colors duration-300">
+                            {t(relatedPost.title, locale)}
+                          </p>
+                          <p className="font-sans text-sm text-foreground/65 leading-relaxed mt-2">
+                            {t(relatedPost.excerpt, locale)}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            )
-          })()}
+            )}
+          </div>
 
           {/* Prev / Next navigation */}
           {(prevPost || nextPost) && (

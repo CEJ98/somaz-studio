@@ -41,7 +41,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
       '@type': 'LocalBusiness',
       '@id': 'https://somazstudio.com/#business',
       name: 'Somaz Studio',
-      description: '3D visualization, interior design, and conceptual design studio based in Miami, FL. Working globally.',
+      description: 'Architecture, interiors, and visualization studio based in Miami. Start a project with a simple first contact.',
       url: 'https://somazstudio.com',
       telephone: '+17865377682',
       email: 'hola@somazstudio.com',
@@ -83,7 +83,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
           <div className="relative z-10 w-full px-6 md:px-10 pt-28 md:pt-32 pb-16">
             <div className="max-w-7xl mx-auto">
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-5">{t('getInTouch')}</p>
+              <p className="font-sans text-[11px] tracking-[0.14em] uppercase text-accent mb-5">{t('getInTouch')}</p>
               <h1 className="font-serif font-light leading-[0.9]" style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}>
                 <span className="block italic text-foreground/60">{t('letsTalk1')}</span>
                 <span className="block font-semibold text-foreground">{t('letsTalk2')}</span>
@@ -183,7 +183,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             </div>
 
             <div className="md:col-span-7 md:col-start-6">
-              <p className="font-sans text-[11px] tracking-[0.15em] text-foreground/65 mb-8">
+              <p className="font-sans text-[15px] text-foreground/68 leading-relaxed mb-8 max-w-xl">
                 {t('responseNote')}
               </p>
 
@@ -193,14 +193,14 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
               {/* WhatsApp inline */}
               <div className="mt-16 pt-12 border-t border-border/30 text-center">
-                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/50 mb-6">
+                <p className="font-sans text-[11px] tracking-[0.14em] uppercase text-foreground/50 mb-6">
                   {t('orViaWhatsApp')}
                 </p>
                 <a
                   href="https://wa.me/17865377682"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase transition-all duration-300"
+                  className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-10 py-4 font-sans text-[11px] tracking-[0.14em] uppercase transition-all duration-300"
                   aria-label="Chat via WhatsApp"
                 >
                   {t('writeOnWhatsApp')}

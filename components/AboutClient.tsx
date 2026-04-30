@@ -114,7 +114,7 @@ export default function AboutClient() {
         <div className="relative z-10 w-full px-6 md:px-10 pb-20 md:pb-28 pt-40">
           <div className="max-w-7xl mx-auto">
             <m.p
-              className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8"
+              className="font-sans text-[11px] tracking-[0.14em] uppercase text-accent mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease }}
@@ -136,7 +136,7 @@ export default function AboutClient() {
                   <span className="block font-light italic text-foreground/60">{t('heading1')}</span>
                   <span className="block font-semibold text-foreground">{t('heading2')}</span>
                 </h1>
-                <p className="font-sans font-light text-foreground/55 leading-relaxed max-w-lg">
+                <p className="font-sans text-[17px] text-foreground/62 leading-relaxed max-w-xl">
                   {t('intro')}
                 </p>
               </m.div>
@@ -164,7 +164,7 @@ export default function AboutClient() {
       <section className="px-6 md:px-10 py-28 md:py-40 border-b border-border/40">
         <div className="max-w-7xl mx-auto">
           <FadeUp className="mb-20">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('whySomaz')}</p>
+            <p className="font-sans text-[11px] tracking-[0.14em] uppercase text-accent mb-4">{t('whySomaz')}</p>
             <h2 className="font-serif font-light italic text-foreground/90" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
               {t('whySomazSub')}
             </h2>
@@ -178,7 +178,7 @@ export default function AboutClient() {
                     {String(i + 1).padStart(2, '0')}
                   </p>
                   <h3 className="font-serif text-2xl font-semibold text-foreground mb-5">{item.label}</h3>
-                  <p className="font-sans font-light text-foreground/85 leading-relaxed">{item.description}</p>
+                  <p className="font-sans text-[15px] text-foreground/72 leading-relaxed">{item.description}</p>
                 </div>
               </FadeUp>
             ))}
@@ -190,7 +190,7 @@ export default function AboutClient() {
       <section className="px-6 md:px-10 py-24 md:py-36 border-b border-border/40">
         <div className="max-w-7xl mx-auto">
           <FadeUp className="mb-16">
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
+            <p className="font-sans text-[11px] tracking-[0.14em] uppercase text-accent mb-4">
               {locale === 'es' ? 'Nuestros valores' : 'Our values'}
             </p>
             <h2 className="font-serif font-light italic text-foreground/80" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
@@ -241,7 +241,7 @@ export default function AboutClient() {
       {/* Team */}
       <section className="border-b border-border/40 overflow-hidden">
         <FadeUp className="px-6 md:px-10 pt-28 md:pt-40 pb-16 max-w-7xl mx-auto">
-          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('theTeam')}</p>
+          <p className="font-sans text-[11px] tracking-[0.14em] uppercase text-accent mb-4">{t('theTeam')}</p>
           <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
             {t('whoWeAre')}
           </h2>
@@ -256,14 +256,14 @@ export default function AboutClient() {
                   src={member.image}
                   alt={member.name}
                   fill
-                  className="object-cover object-top grayscale-[15%]"
+                  className="object-cover object-[center_16%] md:object-[center_12%]"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-background/30 hidden md:block" />
                 {/* Name overlay on mobile */}
                 <div className="absolute bottom-0 left-0 right-0 p-8 md:hidden bg-gradient-to-t from-background/80 to-transparent">
                   <h3 className="font-serif text-2xl font-semibold text-foreground">{member.name}</h3>
-                  <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mt-1">{tl(member.role, locale)}</p>
+                  <p className="font-sans text-[11px] tracking-[0.14em] uppercase text-accent mt-1">{tl(member.role, locale)}</p>
                 </div>
               </div>
 
@@ -271,14 +271,14 @@ export default function AboutClient() {
               <div className="flex flex-col justify-center px-8 md:px-16 py-16 md:py-20 bg-surface/20">
                 <div className="architectural-line mb-12 hidden md:block" />
                 <h3 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-2 hidden md:block">{member.name}</h3>
-                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8 hidden md:block">{tl(member.role, locale)}</p>
-                <p className="font-sans font-light text-foreground/65 leading-relaxed" style={{ fontSize: 'clamp(0.875rem, 1.2vw, 1rem)' }}>
+                <p className="font-sans text-[11px] tracking-[0.14em] uppercase text-accent mb-8 hidden md:block">{tl(member.role, locale)}</p>
+                <p className="font-sans text-foreground/65 leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.05rem)' }}>
                   {tl(member.bio, locale)}
                 </p>
                 <div className="mt-10 pt-8 border-t border-border/30 flex flex-col gap-3">
                   <a
                     href="mailto:hola@somazstudio.com"
-                    className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300"
+                    className="inline-flex items-center gap-2 font-sans text-[11px] tracking-[0.14em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300"
                   >
                     <span className="h-px w-5 bg-current" />
                     hola@somazstudio.com
@@ -287,7 +287,7 @@ export default function AboutClient() {
                     href="https://instagram.com/somazstudio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 font-sans text-[10px] tracking-[0.25em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300"
+                    className="inline-flex items-center gap-2 font-sans text-[11px] tracking-[0.14em] uppercase text-foreground/55 hover:text-accent transition-colors duration-300"
                   >
                     <span className="h-px w-5 bg-current" />
                     @somazstudio
@@ -311,7 +311,7 @@ export default function AboutClient() {
         </div>
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <FadeUp>
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-8">{t('letsBuild')}</p>
+            <p className="font-sans text-[11px] tracking-[0.14em] uppercase text-accent mb-8">{t('letsBuild')}</p>
             <h2
               className="font-serif font-light text-foreground mb-12 leading-tight"
               style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
@@ -321,7 +321,7 @@ export default function AboutClient() {
             </h2>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
+              className="inline-flex items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[11px] tracking-[0.14em] uppercase hover:bg-accent/90 transition-all duration-300"
             >
               {t('getInTouch')}
               <Icon name="north_east" size={14} />

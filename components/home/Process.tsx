@@ -38,8 +38,8 @@ function StepCard({
         {step}
       </p>
 
-      <h3 className="font-serif text-3xl font-semibold text-foreground mb-5">{title}</h3>
-      <p className="font-sans font-light text-foreground/70 leading-relaxed">{description}</p>
+      <h3 className="font-serif text-[28px] font-semibold text-foreground mb-5">{title}</h3>
+      <p className="font-sans text-[16px] text-foreground/70 leading-relaxed">{description}</p>
     </m.div>
   )
 }
@@ -57,7 +57,7 @@ export default function Process() {
     <section className="border-t border-border/50 px-6 md:px-10 py-28 md:py-40 bg-surface/30">
       <div className="max-w-7xl mx-auto">
         <AnimatedSection className="mb-12">
-          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{t('process')}</p>
+          <p className="font-sans text-[12px] tracking-[0.18em] uppercase text-accent mb-4">{t('process')}</p>
           <h2 className="font-serif font-light italic text-foreground/70" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
             {t('howWeWork')}
           </h2>

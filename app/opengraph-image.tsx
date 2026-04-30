@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'Somaz Studio — 3D Visualization & Interior Design'
+export const alt = 'Somaz Studio — Architecture, Interiors & Visualization'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -48,14 +48,14 @@ export default async function Image() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ width: '32px', height: '1px', background: '#8B6F47' }} />
             <div style={{ fontSize: '12px', fontWeight: 300, color: '#8B6F47', letterSpacing: '5px', textTransform: 'uppercase' }}>
-              3D Visualization · Interior Design
+              Architecture · Interiors · Visualization
             </div>
           </div>
           <div style={{ fontSize: '64px', fontWeight: 700, color: '#1A1A1A', letterSpacing: '-2px', lineHeight: 1.1, fontFamily: 'Georgia, serif' }}>
             Somaz Studio
           </div>
           <div style={{ fontSize: '18px', fontWeight: 300, color: 'rgba(240,237,230,0.55)', letterSpacing: '1px' }}>
-            Miami · Buenos Aires · Global
+            Miami · Argentina · Global
           </div>
         </div>
       </div>

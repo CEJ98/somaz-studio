@@ -6,8 +6,16 @@ export interface Post {
   date: string
   excerpt: LocaleString
   content: LocaleString
-  category: 'Process' | 'Projects' | 'Design Thinking'
+  category: 'Commercial Intent' | 'Process' | 'Projects' | 'Case Study' | 'Design Thinking'
   coverImage: string
+  seoIntent?: 'commercial' | 'authority' | 'case-study'
+  primaryService?: 'Architecture' | '3D Visualization' | 'Interior Design' | 'Conceptual Design' | 'Design Consulting'
+  primaryAudience?: 'Developer' | 'Hospitality' | 'Homeowner' | 'Architect Partner'
+  primaryMarket?: 'Global' | 'Miami' | 'Argentina'
+  ctaVariant?: 'start-project' | 'strategy-consult' | 'view-case'
+  relatedSlugs?: string[]
+  relatedProjectSlugs?: string[]
+  relatedLandingSlugs?: string[]
 }
 
 export const posts: Post[] = [
@@ -399,4 +407,250 @@ Para retail, la métrica crítica es el tiempo de permanencia. Para hospitalidad
 Nuestro enfoque: desarrollamos primero el concepto marca-espacio, lo visualizamos en 3D, lo testeamos con el cliente, y solo entonces pasamos al desarrollo de diseño detallado. Los renders no son ilustraciones de un diseño terminado — son herramientas de diseño.`,
     },
   },
+  {
+    title: {
+      en: 'How Architect-Led Remote Design Works',
+      es: 'Cómo Funciona el Diseño Remoto Liderado por Arquitectura',
+    },
+    slug: 'how-architect-led-remote-design-works',
+    date: '2026-04-27',
+    category: 'Commercial Intent',
+    coverImage: '/blog/from-concept-to-render-process.jpg',
+    excerpt: {
+      en: 'How Somaz scopes, designs, coordinates, and delivers remote projects without losing architectural clarity.',
+      es: 'Cómo Somaz define, diseña, coordina y entrega proyectos en remoto sin perder claridad arquitectónica.',
+    },
+    content: {
+      en: `Remote design fails when it tries to imitate a local office instead of building a process that actually works in distributed collaboration.
+
+At Somaz, remote work starts with scope clarity. Before drawing a plan or defining a material, we need to understand the project, who makes decisions, and what the next real milestone is.
+
+The second layer is design direction. We do not begin with image production. We begin with spatial decisions: what the project needs to achieve, how circulation should work, what material language makes sense, and what kind of package will help it move.
+
+The third layer is packaging. A remote project stays efficient when the deliverables are built to align people. That means presentations for owners, visual material for investors or boards, and packages that help builders, consultants, or technical teams understand the design intent without guessing.
+
+The last layer is coordination. Some projects stay fully inside the studio. Others later need another technical or local team. The value is not pretending every project works the same way. The value is keeping the design clear from the start so the next step is easier.`,
+      es: `El diseño remoto falla cuando intenta imitar a una oficina local en lugar de construir un proceso que realmente funcione en colaboración distribuida.
+
+En Somaz, el trabajo remoto empieza por la claridad de alcance. Antes de dibujar una planta o definir un material, necesitamos entender el proyecto, quién toma decisiones y cuál es el siguiente hito real.
+
+La segunda capa es la dirección de diseño. No empezamos por producir imágenes. Empezamos por decisiones espaciales: qué necesita lograr el proyecto, cómo debe funcionar la circulación, qué lenguaje material tiene sentido y qué tipo de paquete lo va a ayudar a avanzar.
+
+La tercera capa es el packaging. Un proyecto remoto se mantiene eficiente cuando los entregables están armados para alinear personas. Eso significa presentaciones para owners, material visual para inversores o boards y paquetes que ayuden a builders, consultores o equipos técnicos a entender la intención de diseño sin adivinar.
+
+La última capa es la coordinación. Algunos proyectos se resuelven completos dentro del estudio. Otros después necesitan otro equipo técnico o local. El valor no está en fingir que todos funcionan igual. El valor está en dejar el diseño claro desde el principio para que el siguiente paso sea más fácil.`,
+    },
+    seoIntent: 'commercial',
+    primaryService: 'Architecture',
+    primaryAudience: 'Developer',
+    primaryMarket: 'Global',
+    ctaVariant: 'start-project',
+    relatedSlugs: ['what-somaz-delivers-before-local-permit-submission', 'business-case-remote-design'],
+    relatedProjectSlugs: ['casa-m', 'cabanas-terraciello'],
+    relatedLandingSlugs: ['architecture-studio', 'remote-architecture-studio'],
+  },
+  {
+    title: {
+      en: 'What Somaz Delivers Before Local Permit Submission',
+      es: 'Qué Entrega Somaz Antes de una Submission Local de Permiso',
+    },
+    slug: 'what-somaz-delivers-before-local-permit-submission',
+    date: '2026-04-26',
+    category: 'Commercial Intent',
+    coverImage: '/blog/renders-accelerate-permit-approvals.jpg',
+    excerpt: {
+      en: 'A clear explanation of the package Somaz prepares before another technical or review stage begins.',
+      es: 'Una explicación clara del paquete que Somaz prepara antes de que empiece otra etapa técnica o de revisión.',
+    },
+    content: {
+      en: `One of the most important distinctions in multi-market projects is understanding what the design studio delivers before another review or technical stage begins.
+
+Somaz prepares the design direction, interiors when they are in scope, visualization, presentation material, and the base package that helps the project move with clarity. That package can support owner approvals, investor presentations, HOA reviews, and early conversations with consultants or technical teams.
+
+The value of the Somaz package is that it reduces friction before the next layer starts. The project arrives to the next reviewer, consultant, or collaborator with stronger visual logic, a clearer design narrative, and better internal alignment among stakeholders.
+
+If the package is built correctly, the review process becomes easier because the intent is already legible. That is the commercial point: fewer assumptions, fewer contradictory interpretations, and a cleaner handoff into whatever comes next.`,
+      es: `Una de las distinciones más importantes en proyectos entre mercados es entender qué entrega el estudio antes de que empiece otra etapa técnica o de revisión.
+
+Somaz prepara la dirección de diseño, interiores cuando están dentro del alcance, visualización, material de presentación y el paquete base que ayuda a que el proyecto avance con claridad. Ese paquete puede apoyar aprobaciones del owner, presentaciones a inversores, revisiones de HOA y conversaciones tempranas con consultores o equipos técnicos.
+
+El valor del paquete Somaz está en que reduce fricción antes de que empiece la siguiente capa. El proyecto llega al próximo revisor, consultor o colaborador con una lógica visual más fuerte, una narrativa de diseño más clara y mejor alineación interna entre stakeholders.
+
+Si el paquete está bien armado, el proceso de revisión se vuelve más fácil porque la intención ya es legible. Ese es el punto comercial: menos supuestos, menos interpretaciones contradictorias y un handoff más limpio hacia lo que sigue.`,
+    },
+    seoIntent: 'commercial',
+    primaryService: 'Architecture',
+    primaryAudience: 'Developer',
+    primaryMarket: 'Global',
+    ctaVariant: 'strategy-consult',
+    relatedSlugs: ['how-architect-led-remote-design-works', 'renders-accelerate-permit-approvals'],
+    relatedProjectSlugs: ['casa-m', 'casa-k'],
+    relatedLandingSlugs: ['permit-presentation-packages', 'architect-led-design-with-local-partners'],
+  },
+  {
+    title: {
+      en: 'Architectural Visualization for Developers',
+      es: 'Visualización Arquitectónica para Developers',
+    },
+    slug: 'architectural-visualization-for-developers',
+    date: '2026-04-25',
+    category: 'Commercial Intent',
+    coverImage: '/blog/3d-visualization-real-estate-developers.jpg',
+    excerpt: {
+      en: 'Why developers use visualization to shorten decision cycles, support funding, and prepare projects for boards, partners, and pre-sales.',
+      es: 'Por qué los developers usan visualización para acortar ciclos de decisión, apoyar financiamiento y preparar proyectos para boards, partners y preventa.',
+    },
+    content: {
+      en: `Developers do not buy visualization because they need pretty images. They buy it because unclear projects get stuck.
+
+The right visualization package helps a project move in three directions at once. First, it helps internal decisions happen faster. Owners, partners, and investors can react to something concrete instead of debating abstract drawings for weeks.
+
+Second, visualization improves external communication. Sales teams, lender conversations, and stakeholder presentations become stronger when the project is shown with real spatial logic, credible light, and material choices that feel buildable.
+
+Third, developers use visualization to reduce friction with review bodies. Boards, HOAs, and local authorities are rarely persuaded by technical drawings alone. A clear exterior view, context shot, or interior spatial image can make the proposal easier to evaluate and defend.
+
+The important distinction is this: the package only works when it is rooted in architectural judgment. Images that look polished but misread the actual space make the project weaker, not stronger. That is why developer-facing visualization has to begin with the project logic, not the rendering software.`,
+      es: `Los developers no compran visualización porque necesiten imágenes lindas. La compran porque los proyectos poco claros se traban.
+
+El paquete correcto de visualización ayuda a que el proyecto avance en tres direcciones al mismo tiempo. Primero, permite que las decisiones internas sucedan más rápido. Owners, socios e inversores pueden reaccionar frente a algo concreto en vez de debatir dibujos abstractos durante semanas.
+
+Segundo, mejora la comunicación externa. Los equipos comerciales, las conversaciones con lenders y las presentaciones a stakeholders se vuelven más fuertes cuando el proyecto se muestra con lógica espacial real, luz creíble y elecciones materiales que se sienten construibles.
+
+Tercero, los developers usan visualización para reducir fricción con organismos de revisión. Boards, HOAs y autoridades locales rara vez se convencen solo con dibujos técnicos. Una vista exterior clara, una toma de contexto o una imagen interior espacial pueden volver la propuesta más fácil de evaluar y defender.
+
+La distinción importante es esta: el paquete solo funciona cuando está apoyado en criterio arquitectónico. Imágenes pulidas que leen mal el espacio real debilitan el proyecto en vez de fortalecerlo. Por eso la visualización orientada a developers tiene que empezar desde la lógica del proyecto, no desde el software de render.`,
+    },
+    seoIntent: 'commercial',
+    primaryService: '3D Visualization',
+    primaryAudience: 'Developer',
+    primaryMarket: 'Global',
+    ctaVariant: 'start-project',
+    relatedSlugs: ['renders-accelerate-permit-approvals'],
+    relatedProjectSlugs: ['casa-k', 'iron-fitness-gym'],
+    relatedLandingSlugs: ['architectural-visualization', 'permit-presentation-packages'],
+  },
+  {
+    title: {
+      en: 'Interior Architecture for Hospitality Projects',
+      es: 'Interior Architecture para Proyectos de Hospitality',
+    },
+    slug: 'interior-architecture-for-hospitality-projects',
+    date: '2026-04-24',
+    category: 'Commercial Intent',
+    coverImage: '/blog/commercial-spaces-brand-identity.jpg',
+    excerpt: {
+      en: 'How interior architecture helps hospitality projects align brand, guest experience, layout, materials, and operations before execution.',
+      es: 'Cómo la interior architecture ayuda a proyectos de hospitality a alinear marca, experiencia del huésped, layout, materiales y operación antes de ejecutar.',
+    },
+    content: {
+      en: `Hospitality projects fail when they are treated like styled residential spaces with a brand moodboard on top.
+
+Interior architecture in hospitality has to solve operational flow, guest perception, brand identity, maintenance, lighting, furniture logic, and material aging at the same time. When those layers are disconnected, the result may photograph well but it does not perform.
+
+Somaz approaches hospitality interiors as a system. The spatial sequence, material palette, lighting temperature, furniture scale, and visual storytelling all need to reinforce the same promise. The goal is not just to make a place look premium. The goal is to make it feel coherent, usable, and commercially strong.
+
+This matters especially in boutique hospitality, where the guest experience is the brand. The first impression, the transition between public and private zones, and the consistency between visuals and on-site reality all affect reviews, repeat visits, and pricing power.
+
+That is why interior architecture has to begin early, before contractors and late-stage selections force the project into compromises it never intended to make.`,
+      es: `Los proyectos de hospitality fallan cuando se los trata como espacios residenciales estilizados con un moodboard de marca por encima.
+
+La interior architecture en hospitality tiene que resolver al mismo tiempo flujo operativo, percepción del huésped, identidad de marca, mantenimiento, iluminación, lógica de equipamiento y envejecimiento de materiales. Cuando esas capas están desconectadas, el resultado puede fotografiar bien pero no performa.
+
+Somaz aborda los interiores de hospitality como un sistema. La secuencia espacial, la paleta material, la temperatura de luz, la escala del mobiliario y la narrativa visual tienen que reforzar la misma promesa. El objetivo no es solo que el lugar se vea premium. El objetivo es que se sienta coherente, usable y comercialmente fuerte.
+
+Esto importa especialmente en hospitality boutique, donde la experiencia del huésped es la marca. La primera impresión, la transición entre zonas públicas y privadas y la consistencia entre los visuales y la realidad en sitio afectan reviews, retorno y poder de precio.
+
+Por eso la interior architecture tiene que empezar temprano, antes de que contratistas y selecciones tardías fuercen al proyecto a compromisos que nunca quiso hacer.`,
+    },
+    seoIntent: 'commercial',
+    primaryService: 'Interior Design',
+    primaryAudience: 'Hospitality',
+    primaryMarket: 'Global',
+    ctaVariant: 'strategy-consult',
+    relatedSlugs: ['materials-photograph-age-well'],
+    relatedProjectSlugs: ['cabanas-terraciello', 'iron-fitness-gym'],
+    relatedLandingSlugs: ['interior-architecture'],
+  },
+  {
+    title: {
+      en: 'Full-Scope Architecture in Argentina',
+      es: 'Arquitectura Integral en Argentina',
+    },
+    slug: 'full-scope-architecture-in-argentina',
+    date: '2026-04-23',
+    category: 'Commercial Intent',
+    coverImage: '/blog/casa-estancita-designing-for-silence.jpg',
+    excerpt: {
+      en: 'What a more complete architecture process looks like in Argentina and why that continuity matters.',
+      es: 'Qué significa un proceso de arquitectura más completo en Argentina y por qué esa continuidad importa.',
+    },
+    content: {
+      en: `Clients often assume an architecture studio works the same way everywhere. In practice, the process changes depending on the project and market.
+
+In Argentina, Somaz can often work with more continuity between concept, development, interior architecture, documentation, and coordination inside one process.
+
+This matters because the project does not need to split too early between design intent and technical preparation. The same design logic can carry through more of the work, which usually produces better continuity in layout, material systems, and spatial hierarchy.
+
+It also changes the commercial conversation. Instead of selling isolated services, Somaz can build a phased architectural scope with clearer continuity between concept and execution planning.`,
+      es: `Muchas veces se asume que un estudio de arquitectura funciona igual en todos lados. En la práctica, el proceso cambia según el proyecto y el mercado.
+
+En Argentina, Somaz muchas veces puede trabajar con más continuidad entre concepto, desarrollo, interior architecture, documentación y coordinación dentro de un mismo proceso.
+
+Esto importa porque el proyecto no necesita dividirse demasiado temprano entre intención de diseño y preparación técnica. La misma lógica de diseño puede recorrer más etapas del trabajo, lo que normalmente produce mejor continuidad en layout, sistemas materiales y jerarquía espacial.
+
+También cambia la conversación comercial. En lugar de vender servicios aislados, Somaz puede construir un alcance arquitectónico por fases con continuidad más clara entre concepto y planificación de ejecución.`,
+    },
+    seoIntent: 'commercial',
+    primaryService: 'Architecture',
+    primaryAudience: 'Homeowner',
+    primaryMarket: 'Argentina',
+    ctaVariant: 'start-project',
+    relatedSlugs: ['from-concept-to-render-process'],
+    relatedProjectSlugs: ['casa-estancita', 'cabana-concepcion'],
+    relatedLandingSlugs: ['architecture-in-argentina'],
+  },
+  {
+    title: {
+      en: 'Case Study: Miami Permit Presentation Package',
+      es: 'Caso de Estudio: Paquete de Presentación para Permiso en Miami',
+    },
+    slug: 'case-study-miami-permit-presentation-package',
+    date: '2026-04-22',
+    category: 'Case Study',
+    coverImage: '/blog/renders-accelerate-permit-approvals.jpg',
+    excerpt: {
+      en: 'How Somaz structured visualization and presentation material to help a Miami residential project be understood clearly.',
+      es: 'Cómo Somaz estructuró visualización y material de presentación para que un proyecto residencial en Miami se entendiera con claridad.',
+    },
+    content: {
+      en: `The brief was not simply to produce exterior images. The real need was to prepare a package that would help the project be understood clearly during a Miami review process.
+
+Somaz focused on three deliverables. First, street-level exterior views that made the scale, massing, and material language legible. Second, context imagery that showed how the house sat inside its neighborhood condition. Third, selected interior and transition views that made the use of the project easier to understand for non-design stakeholders.
+
+The package was not treated as an isolated render service. It was structured as a communication layer inside a broader review workflow. That meant every image had to support architectural clarity rather than visual drama.
+
+The result was a cleaner review process and stronger alignment between client expectations, the local technical path, and the way the project was presented externally.
+
+This is exactly where Somaz is most useful in review-sensitive work: by making the proposal easier to understand before it reaches the next stage.`,
+      es: `El brief no era simplemente producir imágenes exteriores. La necesidad real era preparar un paquete que ayudara a que el proyecto se entendiera con claridad dentro de una revisión en Miami.
+
+Somaz se enfocó en tres entregables. Primero, vistas exteriores a nivel calle que volvieran legible la escala, la volumetría y el lenguaje material. Segundo, imágenes de contexto que mostraran cómo se insertaba la casa en su condición de barrio. Tercero, vistas interiores y de transición seleccionadas que hicieran más fácil de entender el uso del proyecto para stakeholders no diseñadores.
+
+El paquete no se trató como un servicio de render aislado. Se estructuró como una capa de comunicación dentro de un workflow de revisión más amplio. Eso significó que cada imagen tenía que apoyar claridad arquitectónica y no drama visual.
+
+El resultado fue un proceso de revisión más limpio y una alineación más fuerte entre expectativas del cliente, la ruta técnica local y la forma en que el proyecto se presentaba externamente.
+
+Ahí es exactamente donde Somaz resulta más útil en trabajo sensible a revisión: al volver la propuesta más fácil de entender antes de que llegue a la siguiente etapa.`,
+    },
+    seoIntent: 'case-study',
+    primaryService: '3D Visualization',
+    primaryAudience: 'Developer',
+    primaryMarket: 'Miami',
+    ctaVariant: 'view-case',
+    relatedSlugs: ['what-somaz-delivers-before-local-permit-submission', 'renders-accelerate-permit-approvals'],
+    relatedProjectSlugs: ['casa-m', 'casa-k'],
+    relatedLandingSlugs: ['permit-presentation-packages', 'architecture-in-miami'],
+  },
 ]
+
+export const postsByDateDesc = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

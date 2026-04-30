@@ -25,7 +25,7 @@ export async function GET() {
   <channel>
     <title>Somaz Studio — Notes</title>
     <link>${base}/en/blog</link>
-    <description>Design insights from Somaz Studio — 3D visualization, interior design, and spatial concepts.</description>
+    <description>Design insights from Somaz Studio — architecture, interiors, visualization, and clear project communication.</description>
     <language>en</language>
     <atom:link href="${base}/feed.xml" rel="self" type="application/rss+xml"/>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>

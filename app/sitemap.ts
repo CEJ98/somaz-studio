@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { projects } from '@/data/projects'
 import { posts } from '@/data/posts'
+import { seoLandings } from '@/data/seo-landings'
 import { locales } from '@/i18n/config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '', changeFrequency: 'monthly' as const, priority: 1, lastMod: new Date('2026-04-20') },
     { path: '/work', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: new Date('2026-04-20') },
     { path: '/services', changeFrequency: 'monthly' as const, priority: 0.9, lastMod: new Date('2026-03-15') },
+    { path: '/services/architecture', changeFrequency: 'monthly' as const, priority: 0.88, lastMod: new Date('2026-04-26') },
     { path: '/services/miami', changeFrequency: 'monthly' as const, priority: 0.85, lastMod: new Date('2026-04-20') },
     { path: '/about', changeFrequency: 'yearly' as const, priority: 0.7, lastMod: new Date('2024-06-01') },
     { path: '/contact', changeFrequency: 'yearly' as const, priority: 0.8, lastMod: new Date('2024-06-01') },
@@ -45,5 +47,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   )
 
-  return [...staticRoutes, ...projectRoutes, ...blogRoutes]
+  const landingRoutes: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    seoLandings.map((landing) => ({
+      url: `${base}/${locale}/services/${landing.slug}`,
+      lastModified: new Date('2026-04-27'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.86,
+    }))
+  )
+
+  return [...staticRoutes, ...projectRoutes, ...blogRoutes, ...landingRoutes]
 }

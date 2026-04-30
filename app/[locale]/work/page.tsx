@@ -35,18 +35,18 @@ export default async function WorkPage(props: { params: Promise<{ locale: string
     },
     {
       '@context': 'https://schema.org',
-      '@type': 'ItemList',
-      name: 'Somaz Studio Portfolio',
-      url: `https://somazstudio.com/${locale}/work`,
-      itemListElement: projects.map((project, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        url: `https://somazstudio.com/${locale}/work/${project.slug}`,
-        name: project.title,
-        description: project.brief[locale as 'en' | 'es'] ?? project.brief.en,
-      })),
-    },
-  ])
+        '@type': 'ItemList',
+        name: 'Somaz Studio Portfolio',
+        url: `https://somazstudio.com/${locale}/work`,
+        itemListElement: projects.map((project, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: `https://somazstudio.com/${locale}/work/${project.slug}`,
+          name: project.title,
+          description: project.outcome_metric[locale as 'en' | 'es'] ?? project.outcome_metric.en,
+        })),
+      },
+    ])
 
   return (
     <>

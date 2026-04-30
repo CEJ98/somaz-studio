@@ -4,9 +4,11 @@ import Image from 'next/image'
 import { useState, useRef } from 'react'
 import { m, useInView, useReducedMotion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import type { Project } from '@/data/projects'
 import { ease } from '@/lib/motion'
+import { t as tl } from '@/lib/locale'
 
 interface ProjectCardProps {
   project: Project
@@ -18,6 +20,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, priority = false, featured = false, aspectRatio, isWide = false }: ProjectCardProps) {
   const tc = useTranslations('categories')
+  const locale = useLocale()
   const [hovered, setHovered] = useState(false)
   const cardRef = useRef(null)
   const inView = useInView(cardRef, { once: true, margin: '-80px' })
@@ -62,9 +65,16 @@ export default function ProjectCard({ project, priority = false, featured = fals
           }`}
           style={{ background: 'linear-gradient(to top, rgba(248,246,242,0.96) 0%, rgba(248,246,242,0.6) 55%, transparent 100%)' }}
         >
-          <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent mb-2">
-            {tc(project.category)}
-          </p>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <p className="font-sans text-[10px] tracking-[0.25em] uppercase text-accent">
+              {tc(project.category)}
+            </p>
+            {project.anchor_case ? (
+              <span className="font-sans text-[9px] tracking-[0.22em] uppercase text-foreground/60">
+                {locale === 'es' ? 'Caso ancla' : 'Anchor case'}
+              </span>
+            ) : null}
+          </div>
           <div className="overflow-hidden">
             <h3 className={`font-serif text-xl md:text-2xl font-semibold text-foreground transition-transform duration-500 ${hovered ? 'translate-y-0' : 'translate-y-full'}`}>
               {project.title}
@@ -72,7 +82,12 @@ export default function ProjectCard({ project, priority = false, featured = fals
           </div>
           <div className="overflow-hidden mt-1">
             <p className={`font-sans text-sm text-foreground/60 transition-transform duration-500 delay-75 ${hovered ? 'translate-y-0' : 'translate-y-full'}`}>
-              {project.location} — {project.year}
+              {project.market} — {project.service}
+            </p>
+          </div>
+          <div className="overflow-hidden mt-2">
+            <p className={`font-sans text-[13px] text-foreground/72 leading-relaxed transition-transform duration-500 delay-100 ${hovered ? 'translate-y-0' : 'translate-y-full'}`}>
+              {tl(project.outcome_metric, locale)}
             </p>
           </div>
         </div>
@@ -94,7 +109,10 @@ export default function ProjectCard({ project, priority = false, featured = fals
         </p>
         <h3 className="font-serif text-xl font-semibold">{project.title}</h3>
         <p className="font-sans text-sm text-foreground/65">
-          {project.location} — {project.year}
+          {project.market} — {project.service}
+        </p>
+        <p className="font-sans text-[13px] text-foreground/72 leading-relaxed mt-2">
+          {tl(project.outcome_metric, locale)}
         </p>
       </div>
     </Link>

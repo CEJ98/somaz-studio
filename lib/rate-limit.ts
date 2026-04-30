@@ -22,13 +22,10 @@ function createRateLimiter(maxRequests: number, window: Duration) {
 
 // Contact form: 5 per hour
 const contactLimiter = createRateLimiter(5, '1 h')
-// Newsletter: 3 per hour
-const newsletterLimiter = createRateLimiter(3, '1 h')
 
 // In-memory fallback maps
 const memoryMaps = {
   contact: new Map<string, { count: number; resetAt: number }>(),
-  newsletter: new Map<string, { count: number; resetAt: number }>(),
 }
 
 function memoryCheck(map: Map<string, { count: number; resetAt: number }>, ip: string, max: number): boolean {
@@ -49,12 +46,4 @@ export async function checkContactRateLimit(ip: string): Promise<boolean> {
     return !success
   }
   return memoryCheck(memoryMaps.contact, ip, 5)
-}
-
-export async function checkNewsletterRateLimit(ip: string): Promise<boolean> {
-  if (newsletterLimiter) {
-    const { success } = await newsletterLimiter.limit(ip)
-    return !success
-  }
-  return memoryCheck(memoryMaps.newsletter, ip, 3)
 }

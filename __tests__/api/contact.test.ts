@@ -26,9 +26,8 @@ const validBody = {
   name: 'Test User',
   email: 'test@example.com',
   phone: '+1234567890',
-  project_type: '3D Visualization',
-  budget: '$5K – $15K',
-  sqft: '200',
+  location: 'Miami, FL',
+  project_type: 'architecture',
   message: 'Test message',
 }
 

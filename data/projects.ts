@@ -1,6 +1,15 @@
 import type { LocaleString } from '@/lib/locale'
 
 export type ProjectCategory = 'All' | '3D Visualization' | 'Interior Design' | 'Conceptual Design'
+export type ProjectMarket = 'Miami' | 'Argentina' | 'LATAM'
+export type ClientType = 'Developer' | 'Homeowner' | 'Architect' | 'Hospitality' | 'Commercial'
+export type ServiceType = 'Architecture' | '3D Visualization' | 'Interior Design' | 'Conceptual Design'
+export type ProjectUseCase =
+  | 'Permits & Approvals'
+  | 'Investor & Pre-Sales'
+  | 'Interior Architecture'
+  | 'Brand & Marketing'
+  | 'Concept Clarity'
 
 export interface Project {
   title: string
@@ -16,9 +25,23 @@ export interface Project {
   outcome?: LocaleString
   featured?: boolean
   size: 'large' | 'medium' | 'small'
+  market: ProjectMarket
+  service: ServiceType
+  client_type: ClientType
+  use_case: ProjectUseCase
+  outcome_metric: LocaleString
+  regulatory_context: LocaleString
+  challenge?: LocaleString
+  scope?: LocaleString
+  deliverables?: LocaleString[]
+  anchor_case?: boolean
+  related_post_slugs?: string[]
+  related_landing_slugs?: string[]
 }
 
-export const projects: Project[] = [
+type BaseProject = Omit<Project, 'market' | 'service' | 'client_type' | 'use_case' | 'outcome_metric' | 'regulatory_context'>
+
+const baseProjects: BaseProject[] = [
   // ── Full-width (large) ─────────────────────────────────────────────
   {
     title: 'Iron Fitness Gym',
@@ -287,6 +310,245 @@ export const projects: Project[] = [
     size: 'small',
   },
 ]
+
+const projectMetadata: Record<string, Pick<Project, 'market' | 'service' | 'client_type' | 'use_case' | 'outcome_metric' | 'regulatory_context'> & Partial<Pick<Project, 'challenge' | 'scope' | 'deliverables' | 'anchor_case' | 'related_post_slugs' | 'related_landing_slugs'>>> = {
+  'iron-fitness-gym': {
+    market: 'Argentina',
+    service: '3D Visualization',
+    client_type: 'Commercial',
+    use_case: 'Brand & Marketing',
+    outcome_metric: {
+      en: 'Used for planning review and commercial rollout.',
+      es: 'Usado para revisión de planificación y lanzamiento comercial.',
+    },
+    regulatory_context: {
+      en: 'Visualization support for a commercial facility without jurisdictional sign-off by Somaz.',
+      es: 'Soporte visual para una instalación comercial, enfocado en presentación y claridad del proyecto.',
+    },
+    challenge: {
+      en: 'Translate an industrial fitness concept into commercial imagery that could align brand identity, planning review, and launch materials.',
+      es: 'Traducir un concepto fitness industrial en imágenes comerciales capaces de alinear identidad de marca, revisión de planificación y materiales de lanzamiento.',
+    },
+    scope: {
+      en: 'Commercial visualization package for facade, interiors, circulation, and brand-facing presentation views.',
+      es: 'Paquete de visualización comercial para fachada, interiores, circulación y vistas de presentación orientadas a marca.',
+    },
+    deliverables: [
+      { en: 'Exterior hero view for rollout', es: 'Vista hero exterior para lanzamiento' },
+      { en: 'Interior views across training floors', es: 'Vistas interiores de los pisos de entrenamiento' },
+      { en: 'Commercial presentation imagery for stakeholders', es: 'Imágenes comerciales de presentación para stakeholders' },
+    ],
+    anchor_case: true,
+    related_post_slugs: ['interior-architecture-for-hospitality-projects', 'architectural-visualization-for-developers'],
+    related_landing_slugs: ['architectural-visualization', 'interior-architecture'],
+  },
+  'casa-m': {
+    market: 'Miami',
+    service: '3D Visualization',
+    client_type: 'Developer',
+    use_case: 'Permits & Approvals',
+    outcome_metric: {
+      en: 'Permit application approved on first submission.',
+      es: 'Solicitud de permiso aprobada en la primera presentación.',
+    },
+    regulatory_context: {
+      en: 'Visualization package prepared to support a Miami review and presentation process.',
+      es: 'Paquete de visualización preparado para apoyar un proceso de revisión y presentación en Miami.',
+    },
+    challenge: {
+      en: 'Make a Miami residential project easier to understand during review and decision-making.',
+      es: 'Volver más legible un proyecto residencial en Miami durante revisión y toma de decisiones.',
+    },
+    scope: {
+      en: 'Permit-support visualization package focused on exterior envelope, context, pool terrace, and key indoor-outdoor transitions.',
+      es: 'Paquete de visualización de soporte para permisos enfocado en envolvente exterior, contexto, terraza de piscina y transiciones interior-exterior clave.',
+    },
+    deliverables: [
+      { en: 'Street-level exterior views', es: 'Vistas exteriores a nivel calle' },
+      { en: 'Context and massing visuals for review', es: 'Visuales de contexto y volumetría para revisión' },
+      { en: 'Presentation imagery for client and technical team alignment', es: 'Imágenes de presentación para alinear cliente y equipo técnico' },
+    ],
+    anchor_case: true,
+    related_post_slugs: ['what-somaz-delivers-before-local-permit-submission', 'case-study-miami-permit-presentation-package'],
+    related_landing_slugs: ['permit-presentation-packages', 'architecture-in-miami'],
+  },
+  'casa-tiago': {
+    market: 'Argentina',
+    service: '3D Visualization',
+    client_type: 'Homeowner',
+    use_case: 'Concept Clarity',
+    outcome_metric: {
+      en: 'Exterior package delivered for pre-construction decision-making.',
+      es: 'Paquete exterior entregado para toma de decisiones preconstrucción.',
+    },
+    regulatory_context: {
+      en: 'Pre-construction visualization with no direct signing responsibility by Somaz.',
+      es: 'Visualización preobra sin responsabilidad de firma directa por parte de Somaz.',
+    },
+  },
+  'casa-estancita': {
+    market: 'Argentina',
+    service: 'Interior Design',
+    client_type: 'Homeowner',
+    use_case: 'Interior Architecture',
+    outcome_metric: {
+      en: 'Full interior direction package for a countryside residence.',
+      es: 'Paquete integral de dirección interior para una residencia de campo.',
+    },
+    regulatory_context: {
+      en: 'Interior design scope delivered directly within Argentina.',
+      es: 'Alcance de diseño interior entregado directamente dentro de Argentina.',
+    },
+    challenge: {
+      en: 'Shape a countryside home that felt warm and refined without turning the interiors into a purely decorative exercise.',
+      es: 'Dar forma a una casa de campo cálida y refinada sin convertir el interior en un ejercicio puramente decorativo.',
+    },
+    scope: {
+      en: 'Interior architecture direction across shared and private spaces, with material continuity, furniture logic, and presentation support for execution decisions.',
+      es: 'Dirección de interior architecture en espacios sociales y privados, con continuidad material, lógica de mobiliario y soporte de presentación para decisiones de ejecución.',
+    },
+    deliverables: [
+      { en: 'Interior layout and atmosphere direction', es: 'Dirección de layout interior y atmósfera' },
+      { en: 'Material and furniture selection logic', es: 'Lógica de selección de materiales y mobiliario' },
+      { en: 'Client-facing package for decision alignment', es: 'Paquete para alinear decisiones con el cliente' },
+    ],
+  },
+  'cabanas-terraciello': {
+    market: 'Argentina',
+    service: 'Interior Design',
+    client_type: 'Hospitality',
+    use_case: 'Interior Architecture',
+    outcome_metric: {
+      en: 'Interior concept aligned across a multi-cabin hospitality project.',
+      es: 'Concepto interior alineado en un proyecto de hospitality de múltiples cabañas.',
+    },
+    regulatory_context: {
+      en: 'Interior design package coordinated with the local execution team.',
+      es: 'Paquete de interiorismo coordinado con el equipo local de ejecución.',
+    },
+    challenge: {
+      en: 'Create a hospitality interior concept that felt premium and consistent across multiple cabins without losing the raw character of the landscape.',
+      es: 'Crear un concepto interior de hospitality que se sintiera premium y consistente en múltiples cabañas sin perder el carácter crudo del paisaje.',
+    },
+    scope: {
+      en: 'Interior architecture direction across guest cabins, material palette, lighting logic, and hospitality-facing presentation material.',
+      es: 'Dirección de interior architecture para cabañas de huéspedes, paleta material, lógica de iluminación y material de presentación orientado a hospitality.',
+    },
+    deliverables: [
+      { en: 'Material and furnishing direction', es: 'Dirección material y de equipamiento' },
+      { en: 'Lighting and atmosphere logic', es: 'Lógica de iluminación y atmósfera' },
+      { en: 'Presentation package for local execution alignment', es: 'Paquete de presentación para alinear la ejecución local' },
+    ],
+    anchor_case: true,
+    related_post_slugs: ['interior-architecture-for-hospitality-projects'],
+    related_landing_slugs: ['interior-architecture', 'architecture-in-argentina'],
+  },
+  'casa-k': {
+    market: 'Miami',
+    service: '3D Visualization',
+    client_type: 'Developer',
+    use_case: 'Investor & Pre-Sales',
+    outcome_metric: {
+      en: 'Investor presentations helped close funding ahead of schedule.',
+      es: 'Las presentaciones a inversores ayudaron a cerrar financiamiento antes de lo previsto.',
+    },
+    regulatory_context: {
+      en: 'Visualization package used alongside a local licensed architect and development team.',
+      es: 'Paquete de visualización usado junto a un arquitecto local matriculado y el equipo de desarrollo.',
+    },
+    challenge: {
+      en: 'Give a residential development proposal enough clarity to support investor conversations and move decision-making faster.',
+      es: 'Dar suficiente claridad a una propuesta residencial para apoyar conversaciones con inversores y acelerar la toma de decisiones.',
+    },
+    scope: {
+      en: 'Investor-facing visualization package focused on exterior composition, development positioning, and presentation-ready residential imagery.',
+      es: 'Paquete de visualización orientado a inversores, enfocado en composición exterior, posicionamiento del desarrollo e imágenes residenciales listas para presentación.',
+    },
+    deliverables: [
+      { en: 'Hero exterior views for investor-facing decks', es: 'Vistas hero exteriores para decks frente a inversores' },
+      { en: 'Residential imagery for stakeholder alignment', es: 'Imágenes residenciales para alinear stakeholders' },
+      { en: 'Presentation-ready visuals for development conversations', es: 'Visuales listos para presentación en conversaciones de desarrollo' },
+    ],
+    anchor_case: true,
+    related_post_slugs: ['architectural-visualization-for-developers', 'how-architect-led-remote-design-works'],
+    related_landing_slugs: ['architectural-visualization', 'remote-architecture-studio'],
+  },
+  'cabana-concepcion': {
+    market: 'Argentina',
+    service: 'Interior Design',
+    client_type: 'Hospitality',
+    use_case: 'Interior Architecture',
+    outcome_metric: {
+      en: 'Warm hospitality concept translated into a build-ready interior direction.',
+      es: 'Concepto cálido de hospitality traducido en una dirección interior lista para construir.',
+    },
+    regulatory_context: {
+      en: 'Interior design project delivered for local execution in Argentina.',
+      es: 'Proyecto de interiorismo entregado para ejecución local en Argentina.',
+    },
+  },
+  'casa-f-g': {
+    market: 'Argentina',
+    service: 'Interior Design',
+    client_type: 'Homeowner',
+    use_case: 'Interior Architecture',
+    outcome_metric: {
+      en: 'Cohesive residential interior strategy across social and private areas.',
+      es: 'Estrategia interior residencial coherente en áreas sociales y privadas.',
+    },
+    regulatory_context: {
+      en: 'Interior design scope delivered without separate permit-signing obligations by Somaz.',
+      es: 'Alcance de interiorismo entregado sin obligaciones separadas de firma de permisos por parte de Somaz.',
+    },
+  },
+  'duplex-mia': {
+    market: 'Argentina',
+    service: 'Conceptual Design',
+    client_type: 'Developer',
+    use_case: 'Concept Clarity',
+    outcome_metric: {
+      en: 'Spatial concept clarified the project before executive documentation.',
+      es: 'El concepto espacial aclaró el proyecto antes de la documentación ejecutiva.',
+    },
+    regulatory_context: {
+      en: 'Conceptual architecture phase suitable for later technical development and local sign-off.',
+      es: 'Fase de arquitectura conceptual apta para posterior desarrollo técnico y firma local.',
+    },
+  },
+  'fabrica-nutrar': {
+    market: 'Argentina',
+    service: '3D Visualization',
+    client_type: 'Commercial',
+    use_case: 'Brand & Marketing',
+    outcome_metric: {
+      en: 'Commercial imagery aligned planning and brand rollout materials.',
+      es: 'Las imágenes comerciales alinearon la planificación y los materiales de lanzamiento de marca.',
+    },
+    regulatory_context: {
+      en: 'Visualization support for planning and rollout, separate from formal architectural sign-off.',
+      es: 'Soporte visual para planificación y lanzamiento, separado de la firma arquitectónica formal.',
+    },
+  },
+  'tres-patios': {
+    market: 'Argentina',
+    service: 'Conceptual Design',
+    client_type: 'Homeowner',
+    use_case: 'Concept Clarity',
+    outcome_metric: {
+      en: 'Three-patio concept established the architectural logic before technical development.',
+      es: 'El concepto de tres patios estableció la lógica arquitectónica antes del desarrollo técnico.',
+    },
+    regulatory_context: {
+      en: 'Concept design phase intended to move into full-scope Argentine architecture.',
+      es: 'Fase conceptual pensada para avanzar hacia arquitectura integral en Argentina.',
+    },
+  },
+}
+
+export const projects: Project[] = baseProjects.map((project) => ({
+  ...project,
+  ...projectMetadata[project.slug],
+}))
 
 export const categories: ProjectCategory[] = [
   'All',

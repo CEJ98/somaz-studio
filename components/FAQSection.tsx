@@ -26,8 +26,8 @@ const faqs = [
       es: '¿Trabajan con proyectos fuera de Miami?',
     },
     a: {
-      en: 'Yes — we work globally. All we need are your blueprints, reference images, and a 30-minute briefing call. We have completed projects across 8+ countries.',
-      es: 'Sí — trabajamos globalmente. Solo necesitamos tus planos, imágenes de referencia y una llamada de briefing de 30 minutos. Hemos completado proyectos en más de 8 países.',
+      en: 'Yes. We work with clients in Miami, Argentina, and other markets through a remote process that keeps the project clear and well organized.',
+      es: 'Sí. Trabajamos con clientes en Miami, Argentina y otros mercados mediante un proceso remoto que mantiene el proyecto claro y bien organizado.',
     },
   },
   {
@@ -42,12 +42,12 @@ const faqs = [
   },
   {
     q: {
-      en: 'What is the revision process?',
-      es: '¿Cuál es el proceso de revisiones?',
+      en: 'Can Somaz sign plans in Miami?',
+      es: '¿Somaz puede firmar planos en Miami?',
     },
     a: {
-      en: 'Every project includes 2 rounds of revisions. Additional revisions are billed at our hourly rate. We use a structured feedback form to make revisions fast and precise.',
-      es: 'Cada proyecto incluye 2 rondas de revisiones. Las revisiones adicionales se cobran a nuestra tarifa por hora. Usamos un formulario de feedback estructurado para hacer las revisiones rápidas y precisas.',
+      en: 'If a project needs local licensed sign-off, we define that path with the client at the right stage of the process.',
+      es: 'Si un proyecto necesita firma profesional local, esa parte se define con el cliente en la etapa correspondiente del proceso.',
     },
   },
   {

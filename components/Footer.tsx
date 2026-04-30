@@ -1,22 +1,16 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
 import { m, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
-import { Icon } from '@/components/icons'
 import { ease } from '@/lib/motion'
 
 export default function Footer() {
   const tf = useTranslations('footer')
   const tn = useTranslations('nav')
   const tform = useTranslations('form')
-  const [email, setEmail] = useState('')
-  const [subscribed, setSubscribed] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [errored, setErrored] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const reduced = useReducedMotion()
@@ -29,35 +23,12 @@ export default function Footer() {
   ]
 
   const serviceLinks = [
+    { href: '/services/architecture', label: tform('optArchitecture') },
     { href: '/services#3d-visualization', label: tform('opt3dViz') },
     { href: '/services#interior-design', label: tform('optInterior') },
     { href: '/services#conceptual-design', label: tform('optConceptual') },
     { href: '/services#design-consulting', label: tform('optConsulting') },
   ]
-
-  async function handleSubscribe(e: React.FormEvent) {
-    e.preventDefault()
-    if (!email.trim() || isLoading) return
-    setIsLoading(true)
-    setErrored(false)
-    try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      })
-      if (res.ok || res.status === 409) {
-        setSubscribed(true)
-        setEmail('')
-      } else {
-        setErrored(true)
-      }
-    } catch {
-      setErrored(true)
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   return (
     <footer className="bg-surface relative overflow-hidden">
@@ -73,7 +44,7 @@ export default function Footer() {
 
       <div className="architectural-line" />
       <div ref={ref} className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
 
           {/* Col 1 — Brand */}
           <m.div
@@ -89,7 +60,7 @@ export default function Footer() {
               height={40}
               className="h-10 w-auto object-contain mb-3"
             />
-            <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed mb-6">
+            <p className="font-sans text-[16px] text-foreground/65 leading-relaxed mb-6">
               {tf('tagline')}
             </p>
             <a
@@ -115,7 +86,7 @@ export default function Footer() {
             animate={inView || reduced ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease }}
           >
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
+            <p className="font-sans text-[12px] tracking-[0.18em] uppercase text-foreground/55 mb-6">
               {tf('navigate')}
             </p>
             <ul className="space-y-3">
@@ -139,7 +110,7 @@ export default function Footer() {
             animate={inView || reduced ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease }}
           >
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
+            <p className="font-sans text-[12px] tracking-[0.18em] uppercase text-foreground/55 mb-6">
               {tf('services')}
             </p>
             <ul className="space-y-3">
@@ -157,60 +128,6 @@ export default function Footer() {
             </ul>
           </m.div>
 
-          {/* Col 4 — Newsletter */}
-          <m.div
-            initial={reduced ? false : { opacity: 0, y: 30 }}
-            animate={inView || reduced ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3, ease }}
-          >
-            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/55 mb-6">
-              {tf('newsletter')}
-            </p>
-            <p className="font-sans text-sm font-light text-foreground/65 leading-relaxed mb-5">
-              {tf('newsletterCopy')}
-            </p>
-            {subscribed ? (
-              <p className="font-sans text-xs text-accent tracking-wide">
-                ✓ {tf('subscribed')}
-              </p>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col gap-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={tf('emailPlaceholder')}
-                  aria-label={tf('emailPlaceholder')}
-                  required
-                  className="w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-2 focus:outline-none focus:border-accent transition-colors duration-300"
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="self-start font-sans text-[10px] tracking-[0.25em] uppercase text-accent hover:text-foreground transition-colors duration-300 group inline-flex items-center gap-2 disabled:opacity-50"
-                >
-                  {isLoading ? (
-                    <span className="inline-flex gap-1">
-                      <span className="animate-pulse">.</span>
-                      <span className="animate-pulse" style={{ animationDelay: '0.2s' }}>.</span>
-                      <span className="animate-pulse" style={{ animationDelay: '0.4s' }}>.</span>
-                    </span>
-                  ) : (
-                    <>
-                      {tf('subscribe')}
-                      <Icon name="north_east" size={12} className="group-hover:translate-x-0.5 transition-transform duration-300" />
-                    </>
-                  )}
-                </button>
-                {errored && (
-                  <p className="font-sans text-[11px] text-foreground/60 mt-1" role="alert">
-                    No pudimos suscribirte ahora. Escribinos a{' '}
-                    <a href="mailto:hola@somazstudio.com" className="text-accent hover:underline">hola@somazstudio.com</a>.
-                  </p>
-                )}
-              </form>
-            )}
-          </m.div>
         </div>
 
         {/* Bottom bar */}
@@ -261,9 +178,6 @@ export default function Footer() {
               >
                 {tf('terms')}
               </Link>
-              <p className="font-sans text-[10px] text-foreground/55 italic">
-                {tf('disclaimer')}
-              </p>
             </div>
           </div>
         </m.div>

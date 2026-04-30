@@ -28,7 +28,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
       logo: 'https://somazstudio.com/logos/logo-smz.png',
       email: 'hola@somazstudio.com',
       telephone: '+17865377682',
-      description: 'Miami-based design studio with Latin American roots. Specializing in 3D visualization, interior design, and spatial concept development.',
+      description: 'Architecture, interiors, and visualization studio based in Miami, working across residential, commercial, and hospitality projects.',
       foundingDate: '2022',
       areaServed: 'Worldwide',
       sameAs: [
@@ -40,10 +40,10 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Sofía Mazzucco',
-      jobTitle: 'Space Designer & Interior Designer',
-      description: 'Founder of Somaz Studio. Space designer and interior designer based in Miami, FL, with over 5 years of experience in 3D architectural visualization and interior design. Projects across the US, Latin America, and the Middle East.',
+      jobTitle: 'Architect & Interior Designer',
+      description: 'Founder of Somaz Studio. Architect trained in Argentina and now working from Miami, focused on architecture, interiors, and visualization.',
       url: `https://somazstudio.com/${locale}/about`,
-      image: 'https://somazstudio.com/about-hero.jpg',
+      image: 'https://somazstudio.com/team/sofia-mazzucco.jpg',
       email: 'hola@somazstudio.com',
       telephone: '+17865377682',
       address: {
@@ -91,31 +91,31 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 Sobre Somaz Studio
               </h2>
               <p>
-                Somaz Studio es un estudio de diseño y visualización 3D con sede en Miami, Florida, fundado en 2022 por Sofía Mazzucco, diseñadora de espacios e interiorista con más de cinco años de experiencia en visualización arquitectónica fotorrealista. El estudio trabaja de forma completamente remota con clientes en Estados Unidos, Latinoamérica, Europa y Medio Oriente.
+                Somaz Studio es un estudio de arquitectura, interiores y visualización fundado por Sofía Mazzucco. El enfoque del estudio combina sensibilidad espacial, criterio contemporáneo y una forma de trabajo clara, pensada para que el proyecto avance sin ruido.
               </p>
               <p>
-                Nos especializamos en tres áreas principales: visualización 3D arquitectónica, diseño de interiores y diseño conceptual. Para proyectos de visualización, el flujo de trabajo incluye modelado 3D, iluminación realista, selección de materiales digitales y renderizado fotorrealista — todo entregado en formatos de alta resolución listos para presentaciones a inversores, HOAs, instituciones bancarias o clientes finales.
+                La práctica se organiza en tres líneas que se cruzan todo el tiempo: arquitectura, interiores y visualización. Más que separarlas, Somaz las trabaja como partes de una misma idea para que el espacio tenga coherencia desde el concepto hasta la presentación final.
               </p>
               <p>
-                Nuestro enfoque combina sensibilidad latinoamericana con los estándares del mercado de Miami: renders precisos que cumplen con los requisitos de permisos de construcción en el sur de Florida, presentaciones profesionales para desarrolladores residenciales y comerciales, y paquetes visuales completos para agencias de bienes raíces.
-              </p>
-              <h3 className="font-serif text-foreground/75 mt-10 mb-4" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}>
-                Proceso y entregables
-              </h3>
-              <p>
-                El proceso comienza con una consulta de 30 minutos para alinear visión, alcance y cronograma. El cliente provee planos en PDF o CAD, imágenes de referencia y una descripción del espacio. A partir de ahí, el estudio se encarga de todo: modelado del espacio, paleta de materiales, propuesta de mobiliario, iluminación y renders finales.
-              </p>
-              <p>
-                El paquete Essential (1 vista fotorrealista) se entrega en 48 a 72 horas. El paquete Standard (3 vistas) en 5 a 7 días hábiles. Para proyectos con fechas críticas, el servicio Rush de 24 horas está disponible. Todos los paquetes incluyen al menos una ronda de revisiones; rondas adicionales se facturan por hora.
+                Eso se traduce en proyectos donde importan tanto la calidad del diseño como la forma en que se comunica: plantas más claras, mejores decisiones materiales, imágenes más precisas y entregables que ayudan a presentar y coordinar mejor.
               </p>
               <h3 className="font-serif text-foreground/75 mt-10 mb-4" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}>
-                Proyectos y mercados
+                Cómo trabaja el estudio
               </h3>
               <p>
-                Somaz Studio ha completado más de 50 proyectos en más de 8 países, incluyendo residencias de lujo en Miami, desarrollos comerciales en Argentina y proyectos de hospitalidad en múltiples mercados. Los proyectos en Miami incluyen Casa Mariano (Brickell, 2025) y Casa Kriger (Coral Gables, 2025), ambos con renders utilizados en presentaciones de financiamiento bancario.
+                Cada proyecto empieza con una conversación breve para entender el encargo, la etapa en la que está y el tipo de resultado que hace falta. Desde ahí, se define un alcance por fases, con entregables y tiempos claros.
               </p>
               <p>
-                El estudio trabaja con arquitectos, desarrolladores inmobiliarios, constructores, diseñadores de interiores y propietarios de viviendas que buscan visualizar sus proyectos antes de construirlos. La facturación se realiza en dólares estadounidenses para todos los mercados internacionales. Somaz Studio LLC es una sociedad de responsabilidad limitada registrada en Florida, operando globalmente.
+                Según el proyecto, el trabajo puede incluir arquitectura, interiores, visualización o una combinación de las tres. El objetivo no es sumar capas innecesarias, sino dar al cliente el nivel de definición que el proyecto realmente necesita.
+              </p>
+              <h3 className="font-serif text-foreground/75 mt-10 mb-4" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}>
+                Proyectos y enfoque
+              </h3>
+              <p>
+                Somaz trabaja en proyectos residenciales, hospitality y comerciales donde el diseño necesita sentirse cuidado, contemporáneo y bien resuelto. El estudio colabora con clientes en Miami, Argentina y otros mercados, siempre manteniendo una escala de trabajo cercana y muy atenta al detalle.
+              </p>
+              <p>
+                La meta en todos los casos es la misma: que el proyecto gane claridad, presencia y coherencia, tanto en su diseño como en la manera en que se presenta y se entiende.
               </p>
             </article>
           ) : (
@@ -124,31 +124,31 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 About Somaz Studio
               </h2>
               <p>
-                Somaz Studio is a 3D visualization and interior design studio based in Miami, Florida, founded in 2022 by Sofía Mazzucco — a space designer and interior designer with over five years of experience in photorealistic architectural visualization. The studio operates as a fully remote practice, serving clients across the United States, Latin America, Europe, and the Middle East.
+                Somaz Studio is an architecture, interiors, and visualization studio founded by Sofía Mazzucco. The practice combines spatial sensitivity, contemporary judgment, and a clear way of working so projects can move forward without noise.
               </p>
               <p>
-                The studio specializes in three core disciplines: 3D architectural visualization, interior design, and conceptual design. The 3D visualization workflow encompasses space modeling, realistic lighting setup, digital material selection, and photorealistic rendering — all delivered in high-resolution formats suitable for investor presentations, HOA reviews, bank financing submissions, and client approvals.
+                The studio works across three lines that constantly inform one another: architecture, interiors, and visualization. Rather than treating them as separate services, Somaz develops them as parts of the same idea so the project stays coherent from concept to final presentation.
               </p>
               <p>
-                Our approach fuses Latin American design sensibility with the exacting standards of the Miami market: renders precise enough to support South Florida building permit applications, professional presentation packages for residential and commercial developers, and complete visual suites for real estate agencies and brokers.
-              </p>
-              <h3 className="font-serif text-foreground/75 mt-10 mb-4" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}>
-                Process and deliverables
-              </h3>
-              <p>
-                Every project begins with a 30-minute consultation to align on vision, scope, and timeline. The client provides floor plans in PDF or CAD format, reference images, and a brief description of the space. From there, the studio handles everything: space modeling, material palette development, furniture layout, lighting design, and final renders.
-              </p>
-              <p>
-                The Essential package (1 photorealistic view) is delivered in 48 to 72 hours. The Standard package (3 views) takes 5 to 7 business days. For projects with critical deadlines, a 24-hour Rush service is available. All packages include at least one revision round; additional rounds are billed at an hourly rate.
+                In practice, that means projects where both the design and the communication of the design matter: clearer plans, stronger material decisions, more precise imagery, and deliverables that help clients present and coordinate with more confidence.
               </p>
               <h3 className="font-serif text-foreground/75 mt-10 mb-4" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}>
-                Projects and markets
+                How the studio works
               </h3>
               <p>
-                Somaz Studio has completed over 50 projects across more than 8 countries, including luxury residences in Miami, commercial developments in Argentina, and hospitality projects in multiple markets. Miami projects include Casa Mariano (Brickell, 2025) and Casa Kriger (Coral Gables, 2025) — both with renders prepared for bank financing presentations.
+                Each project begins with a short conversation to understand the brief, the stage it is in, and the kind of result it needs. From there, the scope is organized in phases, with clear deliverables and timing.
               </p>
               <p>
-                The studio collaborates with architects, real estate developers, builders, interior designers, and homeowners who want to visualize their projects before construction begins. Billing is in US dollars for all international markets. Somaz Studio LLC is a registered Florida limited liability company operating globally.
+                Depending on the project, the work may include architecture, interiors, visualization, or a combination of the three. The goal is not to add unnecessary layers, but to give each project the level of definition it actually needs.
+              </p>
+              <h3 className="font-serif text-foreground/75 mt-10 mb-4" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)' }}>
+                Projects and approach
+              </h3>
+              <p>
+                Somaz works on residential, hospitality, and commercial projects where the design needs to feel considered, contemporary, and well resolved. The studio collaborates with clients in Miami, Argentina, and other markets while keeping a close working scale and a sharp eye for detail.
+              </p>
+              <p>
+                The aim is consistent across all of them: to give the project more clarity, more presence, and more coherence in both its design and the way it is presented.
               </p>
             </article>
           )}

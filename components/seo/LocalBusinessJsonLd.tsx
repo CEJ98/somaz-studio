@@ -4,7 +4,7 @@ export default function LocalBusinessJsonLd() {
     '@type': 'ProfessionalService',
     '@id': 'https://somazstudio.com/#business',
     name: 'Somaz Studio',
-    description: '3D visualization, interior design, and conceptual design studio based in Miami, FL. Working globally.',
+    description: 'Architecture, interiors, and visualization studio based in Miami, serving residential, commercial, and hospitality projects.',
     url: 'https://somazstudio.com',
     telephone: '+17865377682',
     email: 'hola@somazstudio.com',
@@ -44,12 +44,13 @@ export default function LocalBusinessJsonLd() {
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Design Services',
+      name: 'Architecture and Design Services',
       itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Architecture', description: 'Architecture service for residential, commercial, and hospitality projects.' } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '3D Visualization', description: 'Photorealistic architectural renders. Essential (1 view) in 48–72h, Rush 24h available.' } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Interior Design', description: 'Full interior design from concept to material specification.' } },
         { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Conceptual Design', description: 'Spatial concept development and design direction.' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Design Consulting', description: 'Expert design guidance billed hourly.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Design Consulting', description: 'Strategic design guidance for projects that need clearer spatial decisions.' } },
       ],
     },
   }

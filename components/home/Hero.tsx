@@ -105,7 +105,7 @@ export default function Hero() {
           </m.div>
 
           <m.p
-            className="font-sans text-base font-light text-foreground/80 leading-relaxed mb-10 max-w-lg"
+            className="font-sans text-[18px] font-light text-foreground/82 leading-relaxed mb-10 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.58 }}
@@ -114,21 +114,28 @@ export default function Hero() {
           </m.p>
 
           <m.div
-            className="flex flex-col items-start gap-4"
+            className="flex flex-col sm:flex-row items-start gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.65 }}
           >
             <MagneticButton>
               <Link
-                href="/contact"
+                href="/contact?type=architecture"
                 onClick={() => trackCtaClick('hero', 'start_project')}
-                className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
+                className="inline-flex min-h-12 items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[12px] tracking-[0.18em] uppercase hover:bg-accent/90 transition-all duration-300"
               >
                 {t('startProject')}
                 <Icon name="north_east" size={16} />
               </Link>
             </MagneticButton>
+            <Link
+              href="/services/architecture"
+              className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/78 px-8 py-3.5 font-sans text-[12px] tracking-[0.18em] uppercase hover:border-accent hover:text-accent transition-all duration-300"
+            >
+              {t('freeConsult')}
+              <Icon name="arrow_right_alt" size={16} />
+            </Link>
           </m.div>
         </m.div>
 

@@ -9,10 +9,18 @@ import type { Project } from '@/data/projects'
 import { Icon } from '@/components/icons'
 import { t as tl } from '@/lib/locale'
 import { ease } from '@/lib/motion'
+import { posts } from '@/data/posts'
+import { getSeoLanding } from '@/data/seo-landings'
+import type { SeoLanding } from '@/data/seo-landings'
 
 function useCategoryLabel() {
   const tc = useTranslations('categories')
   return (category: string) => tc(category)
+}
+
+function usePortfolioTaxonomyLabel() {
+  const tt = useTranslations('portfolioTaxonomy')
+  return (value: string) => tt(value)
 }
 
 interface Props {
@@ -135,6 +143,7 @@ function Lightbox({
 export default function ProjectPageClient({ project, allProjects, locale }: Props) {
   const tp = useTranslations('project')
   const catLabel = useCategoryLabel()
+  const taxonomyLabel = usePortfolioTaxonomyLabel()
   const reduced = useReducedMotion()
   const { scrollY } = useScroll()
   const heroY = useTransform(scrollY, [0, 700], reduced ? [0, 0] : [0, -140])
@@ -146,14 +155,19 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
 
   const galleryImages = project.images.slice(1)
   const allImages = project.images
+  const relatedPosts = posts.filter((post) => project.related_post_slugs?.includes(post.slug))
+  const relatedLandings: SeoLanding[] =
+    project.related_landing_slugs?.map((slug) => getSeoLanding(slug)).filter((landing): landing is SeoLanding => Boolean(landing)) ?? []
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   const infoCols = [
     { label: tp('categoryLabel'), value: catLabel(project.category), accent: true },
-    { label: tp('locationLabel'), value: project.location },
+    { label: tp('marketLabel'), value: project.market },
     { label: tp('yearLabel'), value: String(project.year) },
-    ...(project.area ? [{ label: tp('areaLabel'), value: project.area }] : []),
+    { label: tp('serviceLabel'), value: project.service },
+    { label: tp('clientTypeLabel'), value: taxonomyLabel(project.client_type) },
+    ...(project.area ? [{ label: tp('areaLabel'), value: project.area }] : [{ label: tp('locationLabel'), value: project.location }]),
   ]
 
   return (
@@ -234,32 +248,78 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
         </div>
       </div>
 
-      {/* Description — centered, Cormorant Italic */}
-      <div className="max-w-3xl mx-auto px-6 md:px-10 py-24 md:py-36">
-        <m.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.9, ease }}
-          className="font-serif italic text-foreground/65 text-center leading-relaxed"
-          style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)' }}
-        >
-          {tl(project.description, locale)}
-        </m.p>
+      {/* Project context */}
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 border-t border-border/30 pt-12">
+          <div className="md:col-span-5">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{tp('projectContextLabel')}</p>
+            <p className="font-serif italic text-foreground/70 leading-relaxed" style={{ fontSize: 'clamp(1.1rem, 2vw, 1.45rem)' }}>
+              {tl(project.description, locale)}
+            </p>
+          </div>
+          <div className="md:col-span-3">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{tp('useCaseLabel')}</p>
+            <p className="font-sans text-sm leading-relaxed text-foreground/68">{taxonomyLabel(project.use_case)}</p>
+          </div>
+          <div className="md:col-span-4">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{tp('regulatoryContextLabel')}</p>
+            <p className="font-sans text-sm leading-relaxed text-foreground/68">{tl(project.regulatory_context, locale)}</p>
+          </div>
+        </div>
       </div>
 
-      {/* Outcome */}
-      {project.outcome && (
-        <m.div
-          className="max-w-3xl mx-auto px-6 md:px-10 pb-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.7, ease }}
-        >
-          <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent/60 mb-3">{tp('outcomeLabel')}</p>
-          <p className="font-sans text-sm text-foreground/65 leading-relaxed">{tl(project.outcome, locale)}</p>
-        </m.div>
+      {(project.challenge || project.scope || project.deliverables?.length || project.outcome) && (
+        <div className="max-w-7xl mx-auto px-6 md:px-10 pb-20">
+          <div className="border-t border-border/30 pt-14 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+            {project.outcome && (
+              <div className="md:col-span-3">
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
+                  {tp('outcomeLabel')}
+                </p>
+                <p className="font-sans text-sm leading-relaxed text-foreground/68">
+                  {tl(project.outcome, locale)}
+                </p>
+                <p className="font-sans text-[10px] tracking-[0.18em] uppercase text-foreground/55 mt-4">
+                  {tl(project.outcome_metric, locale)}
+                </p>
+              </div>
+            )}
+            {project.challenge && (
+              <div className="md:col-span-3">
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
+                  {tp('challengeLabel')}
+                </p>
+                <p className="font-sans text-sm leading-relaxed text-foreground/68">
+                  {tl(project.challenge, locale)}
+                </p>
+              </div>
+            )}
+            {project.scope && (
+              <div className="md:col-span-3">
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
+                  {tp('scopeLabel')}
+                </p>
+                <p className="font-sans text-sm leading-relaxed text-foreground/68">
+                  {tl(project.scope, locale)}
+                </p>
+              </div>
+            )}
+            {project.deliverables?.length ? (
+              <div className="md:col-span-3">
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">
+                  {tp('deliverablesLabel')}
+                </p>
+                <div className="space-y-3">
+                  {project.deliverables.map((item) => (
+                    <p key={item.en} className="font-sans text-sm leading-relaxed text-foreground/68">
+                      {tl(item, locale)}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </div>
       )}
 
       {/* Gallery — editorial grid */}
@@ -328,6 +388,71 @@ export default function ProjectPageClient({ project, allProjects, locale }: Prop
           </div>
         )
       })()}
+
+      {(relatedLandings.length > 0 || relatedPosts.length > 0) && (
+        <div className="max-w-7xl mx-auto px-6 md:px-10 mb-24">
+          <div className="border-t border-border/30 pt-14 mb-10">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/60">
+              {locale === 'es' ? 'Ruta comercial relacionada' : 'Related commercial path'}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {relatedLandings.length > 0 && (
+              <div className="space-y-4">
+                {relatedLandings.slice(0, 2).map((landing) => (
+                  <Link key={landing.slug} href={`/services/${landing.slug}`} className="group block">
+                    <p className="font-serif text-xl text-foreground/80 group-hover:text-foreground transition-colors duration-300">
+                      {tl(landing.title, locale)}
+                    </p>
+                    <p className="font-sans text-sm leading-relaxed text-foreground/65 mt-2">
+                      {tl(landing.metaDescription, locale)}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            )}
+            {relatedPosts.length > 0 && (
+              <div className="space-y-4">
+                {relatedPosts.slice(0, 2).map((post) => (
+                  <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+                    <p className="font-serif text-xl text-foreground/80 group-hover:text-foreground transition-colors duration-300">
+                      {tl(post.title, locale)}
+                    </p>
+                    <p className="font-sans text-sm leading-relaxed text-foreground/65 mt-2">
+                      {tl(post.excerpt, locale)}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {project.anchor_case && (
+        <div className="max-w-7xl mx-auto px-6 md:px-10 mb-24">
+          <div className="border-t border-border/30 pt-14 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 items-end">
+            <div className="md:col-span-8">
+              <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-4">{tp('caseStudyCtaLabel')}</p>
+              <p className="font-serif text-2xl md:text-4xl text-foreground/85 leading-tight">
+                {tp('caseStudyCtaHeading')}
+              </p>
+              <p className="font-sans text-sm leading-relaxed text-foreground/65 mt-4 max-w-2xl">
+                {tp('caseStudyCtaBody')}
+              </p>
+            </div>
+            <div className="md:col-span-4 flex md:justify-end">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300 group"
+              >
+                {tp('startProject')}
+                <Icon name="north_east" size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Previous / Next Project */}
       <div className="grid grid-cols-1 md:grid-cols-2">

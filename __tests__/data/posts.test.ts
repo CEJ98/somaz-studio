@@ -19,7 +19,7 @@ describe('posts data', () => {
   })
 
   it('all categories are valid', () => {
-    const valid = ['Process', 'Projects', 'Design Thinking']
+    const valid = ['Commercial Intent', 'Process', 'Projects', 'Case Study', 'Design Thinking']
     for (const p of posts) {
       expect(valid).toContain(p.category)
     }

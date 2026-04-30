@@ -16,10 +16,10 @@ export default function ContactParallaxHero() {
         <LazyVideo
           src="/media/contact-hero.mp4"
           webmSrc="/media/contact-hero.webm"
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-28 saturate-[0.85]"
         />
       </m.div>
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/72 to-background/42" />
     </div>
   )
 }

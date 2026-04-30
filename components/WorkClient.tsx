@@ -8,20 +8,17 @@ import { Link } from '@/i18n/navigation'
 import { Icon } from '@/components/icons'
 import ProjectCard from '@/components/ProjectCard'
 import ImageCursorTrail from '@/components/ImageCursorTrail'
-import { projects, categories, type ProjectCategory } from '@/data/projects'
+import { projects, categories, type ProjectCategory, type ProjectMarket } from '@/data/projects'
 import { ease } from '@/lib/motion'
 
-type ProjectMarket = 'All' | 'Miami' | 'LATAM'
-const markets: ProjectMarket[] = ['All', 'Miami', 'LATAM']
-function getMarket(location: string): 'Miami' | 'LATAM' {
-  return location.toLowerCase().includes('miami') ? 'Miami' : 'LATAM'
-}
+type MarketFilter = 'All' | ProjectMarket
+const markets: MarketFilter[] = ['All', 'Miami', 'Argentina', 'LATAM']
 
 export default function WorkClient() {
   const tw = useTranslations('work')
   const tc = useTranslations('categories')
   const [active, setActive] = useState<ProjectCategory>('All')
-  const [activeMarket, setActiveMarket] = useState<ProjectMarket>('All')
+  const [activeMarket, setActiveMarket] = useState<MarketFilter>('All')
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null)
   const reduced = useReducedMotion()
   const ctaVideoRef = useRef<HTMLDivElement>(null)
@@ -40,9 +37,12 @@ export default function WorkClient() {
 
   const filtered = projects.filter((p) => {
     const matchesCategory = active === 'All' || p.category === active
-    const matchesMarket = activeMarket === 'All' || getMarket(p.location) === activeMarket
+    const matchesMarket = activeMarket === 'All' || p.market === activeMarket
     return matchesCategory && matchesMarket
   })
+
+  const anchorCases = filtered.filter((project) => project.anchor_case)
+  const supportingCases = filtered.filter((project) => !project.anchor_case)
 
   const hoveredCoverImage = hoveredSlug
     ? (projects.find((p) => p.slug === hoveredSlug)?.coverImage ?? null)
@@ -56,7 +56,7 @@ export default function WorkClient() {
         <div className="absolute inset-0">
           <Image
             src="/work-hero.jpg"
-            alt="Selected portfolio work — 3D visualization and interior design projects"
+            alt="Selected portfolio work — architecture-led cases built for approvals, alignment, and project clarity"
             fill
             className="object-cover"
             priority
@@ -90,7 +90,7 @@ export default function WorkClient() {
         <div className="architectural-line mb-10" />
 
         {/* Editorial intro */}
-        <p className="font-serif font-light italic text-foreground/65 mb-10 max-w-2xl" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.15rem)' }}>
+        <p className="font-serif font-light italic text-foreground/65 mb-10 max-w-3xl" style={{ fontSize: 'clamp(1rem, 1.5vw, 1.15rem)' }}>
           {tw('intro')}
         </p>
 
@@ -154,10 +154,49 @@ export default function WorkClient() {
           {filtered.length} {filtered.length === 1 ? tw('projectSingular') : tw('projectPlural')}
         </m.p>
 
+        {anchorCases.length > 0 && (
+          <div className="mb-14">
+            <div className="border-t border-border/30 pt-10 mb-8 flex items-center justify-between gap-4">
+              <div>
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-2">{tw('anchorCasesLabel')}</p>
+                <p className="font-sans text-sm text-foreground/65 max-w-2xl">{tw('anchorCasesIntro')}</p>
+              </div>
+            </div>
+            <m.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              <AnimatePresence mode="popLayout">
+                {anchorCases.map((project, i) => (
+                  <m.div
+                    key={project.slug}
+                    layout
+                    initial={reduced ? false : { opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.45, delay: reduced ? 0 : i * 0.05, ease }}
+                    className="md:col-span-2"
+                    onMouseEnter={() => setHoveredSlug(project.slug)}
+                    onMouseLeave={() => setHoveredSlug(null)}
+                  >
+                    <ProjectCard
+                      project={project}
+                      priority={i === 0}
+                      aspectRatio="aspect-[16/9]"
+                      isWide
+                    />
+                  </m.div>
+                ))}
+              </AnimatePresence>
+            </m.div>
+          </div>
+        )}
+
         {/* Editorial Grid */}
-        <m.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => {
+        <div>
+          <div className="border-t border-border/30 pt-10 mb-8">
+            <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/60">{tw('allCasesLabel')}</p>
+          </div>
+          <m.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <AnimatePresence mode="popLayout">
+              {supportingCases.map((project, i) => {
               const isWide = project.size === 'large'
               return (
                 <m.div
@@ -175,15 +214,16 @@ export default function WorkClient() {
                 >
                   <ProjectCard
                     project={project}
-                    priority={i === 0}
+                    priority={i === 0 && anchorCases.length === 0}
                     aspectRatio="aspect-[4/3]"
                     isWide={isWide}
                   />
                 </m.div>
               )
-            })}
-          </AnimatePresence>
-        </m.div>
+              })}
+            </AnimatePresence>
+          </m.div>
+        </div>
 
         {/* CTA section */}
         <div ref={ctaVideoRef} className="mt-24 pt-16 border-t border-border/40 text-center relative overflow-hidden">

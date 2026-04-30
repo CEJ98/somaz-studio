@@ -9,10 +9,10 @@ const faqJsonLd = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'How long does a photorealistic render take?',
+      name: 'How does Somaz start a project?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Standard delivery is 48–72 hours for a single view. Complex projects or 3+ views typically take 5–7 business days. Rush delivery (24h) is available for Essential packages.',
+        text: 'Every project starts with a short first contact. From there we define the clearest next step based on the project and its stage.',
       },
     },
     {
@@ -20,7 +20,7 @@ const faqJsonLd = {
       name: 'Do you work with projects outside Miami?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes — we work globally. All we need are your blueprints, reference images, and a 30-minute briefing call. We have completed projects across 8+ countries.',
+        text: 'Yes. Somaz works with clients in Miami, Argentina, and other markets through a remote process that keeps communication and deliverables clear.',
       },
     },
     {
@@ -28,7 +28,7 @@ const faqJsonLd = {
       name: 'What do I need to get started?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'A floor plan or sketch, reference images for style direction, and a brief description of the space. That is enough to begin. We handle the rest in the briefing call.',
+        text: 'A brief description of the project, any plans or sketches you already have, and a few reference images are enough to start.',
       },
     },
     {
@@ -36,15 +36,15 @@ const faqJsonLd = {
       name: 'What is the revision process?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Every project includes 2 rounds of revisions. Additional revisions are billed at our hourly rate. We use a structured feedback form to make revisions fast and precise.',
+        text: 'Every project includes 2 rounds of revisions. Additional revisions require a written scope adjustment or change order. We use a structured feedback form to keep revisions fast and precise.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Do you offer full interior design or only visualization?',
+      name: 'What does Somaz deliver directly?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Both. Our 3D Visualization service focuses on rendering existing plans. Our Interior Design service includes space planning, material selection, furniture layouts, and mood boards — delivered remotely.',
+        text: 'Somaz works across architecture, interiors, visualization, and presentation material, depending on what the project needs.',
       },
     },
     {
@@ -52,7 +52,7 @@ const faqJsonLd = {
       name: 'How is a project scoped and quoted?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Every project is quoted after a short briefing call. Scope depends on number of views, complexity of the space, and delivery timeline. You receive a detailed estimate within 24h.',
+        text: 'Projects are scoped in phases rather than public hourly pricing. Scope, deliverables, revision rounds, exclusions, fees, and partner coordination are defined in writing before production starts.',
       },
     },
   ],
@@ -71,7 +71,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
       description: t('ogDesc'),
     },
     alternates: buildAlternates('', locale as 'en' | 'es'),
-    keywords: ['3D visualization Miami', 'photorealistic renders', 'interior design Miami', 'architectural visualization', 'real estate renders', '3D rendering studio', 'design studio Miami'],
+    keywords: ['architecture studio Miami', 'interior design Miami', 'architectural visualization', 'hospitality interiors', 'residential architecture', 'commercial design studio'],
   }
 }
 

@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Somaz Studio',
     short_name: 'Somaz',
-    description: 'Miami-based design studio. 3D visualization, interior design, and spatial concepts.',
+    description: 'Architecture, interiors, and visualization studio based in Miami.',
     start_url: '/',
     display: 'standalone',
     background_color: '#F8F6F2',

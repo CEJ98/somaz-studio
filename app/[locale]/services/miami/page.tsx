@@ -14,11 +14,11 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   return {
     metadataBase,
     title: isEs
-      ? 'Visualización 3D y Diseño de Interiores en Miami'
-      : '3D Visualization & Interior Design in Miami',
+      ? 'Arquitectura, Interiores y Visualización en Miami'
+      : 'Architecture, Interiors & Visualization in Miami',
     description: isEs
-      ? 'Estudio de diseño y visualización 3D con base en Miami. Renders fotorrealistas, diseño de interiores y consultoría para proyectos residenciales y comerciales.'
-      : 'Miami-based design and 3D visualization studio. Photorealistic renders, interior design, and consulting for residential and commercial projects.',
+      ? 'Arquitectura, interiores y visualización en Miami para proyectos residenciales, comerciales y hospitality.'
+      : 'Architecture, interiors, and visualization in Miami for residential, commercial, and hospitality projects.',
     alternates: buildAlternates('/services/miami', locale as 'en' | 'es'),
   }
 }
@@ -30,28 +30,28 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
 
   const labels = {
     badge: 'Miami, FL',
-    heading: isEs ? 'El estudio de diseño de Miami para proyectos premium.' : "Miami's design studio for premium projects.",
+    heading: isEs ? 'Arquitectura, interiores y visualización en Miami.' : 'Architecture, interiors, and visualization in Miami.',
     sub: isEs
-      ? 'Visualización 3D fotorrealista, diseño de interiores y consultoría — para constructores, desarrolladores y clientes residenciales en el sur de Florida.'
-      : 'Photorealistic 3D visualization, interior design, and consulting — for builders, developers, and residential clients across South Florida.',
+      ? 'Trabajamos con proyectos residenciales, comerciales y hospitality que necesitan mejor diseño, mejor presentación y una coordinación más clara.'
+      : 'We work on residential, commercial, and hospitality projects that need stronger design, better presentation, and clearer coordination.',
     cta: isEs ? 'Iniciar proyecto' : 'Start a project',
     consult: isEs ? 'Consulta de 15 min' : '15-min consult',
     whyTitle: isEs ? 'Por qué clientes en Miami eligen Somaz' : 'Why Miami clients choose Somaz',
     why: isEs
       ? [
-          { t: 'Local presence', d: 'Sede en Miami, equipo bilingüe y conocimiento del clima, código y estética del sur de Florida.' },
-          { t: 'Permit-ready renders', d: 'Renders precisos para presentaciones a HOAs, bancos y autoridades de permisos.' },
-          { t: 'Turnaround rápido', d: 'Essential en 48–72h. Rush 24h disponible para deadlines críticos.' },
+          { t: 'Criterio arquitectónico', d: 'No trabajamos como estudio de imágenes sueltas. Partimos del proyecto, del alcance y de la decisión espacial que hace falta tomar.' },
+          { t: 'Presentación clara', d: 'Preparamos material que ayuda a explicar el proyecto con más claridad frente a clientes, equipos y consultores.' },
+          { t: 'Proceso ordenado', d: 'Cada etapa se define con entregables concretos para que el proyecto avance con menos fricción.' },
         ]
       : [
-          { t: 'Local presence', d: 'Miami-based, bilingual team with full understanding of South Florida climate, code, and aesthetic.' },
-          { t: 'Permit-ready renders', d: 'Precise renders for HOA reviews, bank financing submissions, and permit applications.' },
-          { t: 'Fast turnaround', d: 'Essential package in 48–72h. 24h Rush available for critical deadlines.' },
+          { t: 'Architectural judgment', d: 'We do not work like an image-only studio. We start from the project, the scope, and the spatial decision that actually needs to be made.' },
+          { t: 'Clear presentation', d: 'We prepare material that helps explain the project more clearly to clients, teams, and consultants.' },
+          { t: 'Organized process', d: 'Each stage is defined through concrete deliverables so the project can move forward with less friction.' },
         ],
     workTitle: isEs ? 'Proyectos recientes en Miami' : 'Recent Miami projects',
     viewProject: isEs ? 'Ver proyecto' : 'View project',
-    finalQ: isEs ? '¿Listo para ver tu proyecto antes de construirlo?' : 'Ready to see your project before you build it?',
-    finalSub: isEs ? 'Respuesta en menos de 24 horas hábiles.' : 'Response within 24 business hours.',
+    finalQ: isEs ? '¿Listo para ordenar el proyecto antes de moverlo?' : 'Ready to bring structure to the project before it moves?',
+    finalSub: isEs ? 'Respondemos en menos de 24 horas hábiles con el siguiente paso correcto.' : 'We reply within 24 business hours with the right next step.',
   }
 
   const projects = [
@@ -63,7 +63,7 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Somaz Studio',
-    description: 'Miami-based 3D visualization, interior design, and conceptual design studio.',
+    description: 'Miami-based studio focused on architecture, interiors, and visualization for residential, commercial, and hospitality projects.',
     url: `https://somazstudio.com/${locale}/services/miami`,
     telephone: '+1-786-537-7682',
     email: 'hola@somazstudio.com',
@@ -94,7 +94,7 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
         {libraryHero ? (
           <Image
             src={libraryHero.src}
-            alt="Somaz Studio — 3D visualization and interior design in Miami"
+            alt="Somaz Studio — architecture-led design in Miami"
             fill
             priority
             placeholder="blur"
@@ -105,7 +105,7 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
         ) : (
           <Image
             src="/projects/casa-mariano-miami/cover.jpg"
-            alt="Somaz Studio — 3D visualization and interior design in Miami"
+            alt="Somaz Studio — architecture-led design in Miami"
             fill
             priority
             className="object-cover"
@@ -146,11 +146,11 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
         <div className="max-w-7xl mx-auto">
           <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-accent mb-10">{labels.whyTitle}</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border/30 mb-24">
-            {labels.why.map((item, i) => (
-              <div key={i} className="bg-background p-8">
-                <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/50 mb-3">0{i + 1}</p>
-                <p className="font-serif text-foreground mb-3" style={{ fontSize: '1.2rem' }}>{item.t}</p>
-                <p className="font-sans font-light text-sm text-foreground/70 leading-relaxed">{item.d}</p>
+          {labels.why.map((item, i) => (
+            <div key={i} className="bg-background p-8">
+              <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-accent/50 mb-3">0{i + 1}</p>
+              <p className="font-serif text-foreground mb-3" style={{ fontSize: '1.2rem' }}>{item.t}</p>
+              <p className="font-sans font-light text-sm text-foreground/70 leading-relaxed">{item.d}</p>
               </div>
             ))}
           </div>
@@ -192,8 +192,8 @@ export default async function MiamiServicesPage(props: { params: Promise<{ local
         eyebrow="South Florida"
         title={isEs ? 'Proyectos que hablan\npor sí solos.' : 'Projects that speak\nfor themselves.'}
         body={isEs
-          ? 'Desde Brickell hasta Coral Gables — renders que convencen a bancos, HOAs y clientes antes de que se pose la primera piedra.'
-          : 'From Brickell to Coral Gables — renders that convince banks, HOAs, and clients before the first stone is laid.'}
+          ? 'Desde Brickell hasta Coral Gables, desarrollamos proyectos con una mirada clara sobre el espacio, la atmósfera y la forma en que se presentan.'
+          : 'From Brickell to Coral Gables, we develop projects with a clear eye for space, atmosphere, and how they are presented.'}
         align="left"
         height="70vh"
         overlay={0.62}

@@ -21,14 +21,14 @@ export default async function Image() {
       >
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px' }}>
           <div style={{ fontSize: '18px', fontWeight: 300, color: '#8B6F47', letterSpacing: '6px', textTransform: 'uppercase' as const }}>
-            Studio
+            Architecture-Led
           </div>
           <div style={{ fontSize: '88px', fontWeight: 700, color: '#1A1A1A', letterSpacing: '-2px' }}>
             About
           </div>
           <div style={{ width: '60px', height: '2px', background: '#8B6F47' }} />
           <div style={{ fontSize: '22px', fontWeight: 300, color: 'rgba(240, 237, 230, 0.65)', letterSpacing: '2px', textAlign: 'center' as const, maxWidth: '900px' }}>
-            A boutique design studio crafting precise, photoreal spaces
+            Global design direction with local partner coordination when required
           </div>
           <div style={{ fontSize: '14px', fontWeight: 300, color: '#8B6F47', letterSpacing: '6px', textTransform: 'uppercase' as const, marginTop: '24px' }}>
             Somaz Studio · Miami

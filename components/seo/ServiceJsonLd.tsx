@@ -4,6 +4,32 @@ export default function ServiceJsonLd() {
     {
       '@context': 'https://schema.org',
       '@type': 'Service',
+      '@id': 'https://somazstudio.com/services#architecture',
+      serviceType: 'Architecture',
+      name: 'Architecture',
+      description:
+        'Architecture service for residential, commercial, and hospitality projects, from concept through presentation and coordination.',
+      provider: { '@type': 'ProfessionalService', '@id': 'https://somazstudio.com/#business' },
+      areaServed: [
+        { '@type': 'Place', name: 'Argentina' },
+        { '@type': 'Place', name: 'Miami' },
+        { '@type': 'Place', name: 'United States' },
+        { '@type': 'Place', name: 'Worldwide' },
+      ],
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/InStock',
+        url: 'https://somazstudio.com/services/architecture',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          priceCurrency: 'USD',
+          description: 'Custom quote per project scope',
+        },
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
       '@id': 'https://somazstudio.com/services#3d-visualization',
       serviceType: '3D Architectural Visualization',
       name: '3D Visualization Essential',

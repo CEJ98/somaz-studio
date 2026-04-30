@@ -10,8 +10,10 @@ import { t as tl } from '@/lib/locale'
 import { ease } from '@/lib/motion'
 import Image from 'next/image'
 import { pickBySlug } from '@/data/imageLibrary'
+import { trackEvent } from '@/components/Analytics'
 
 const slugToProjectType: Record<string, string> = {
+  architecture: 'architecture',
   '3d-visualization': '3d-visualization',
   'interior-design': 'interior-design',
   'conceptual-design': 'conceptual-design',
@@ -19,6 +21,7 @@ const slugToProjectType: Record<string, string> = {
 }
 
 const SERVICE_LIBRARY_IMAGES: Record<string, string> = {
+  architecture: 'exterior-modern-01',
   '3d-visualization':  'exterior-modern-02',
   'interior-design':   'interior-living-luxury-01',
   'conceptual-design': 'interior-luxury-02',
@@ -26,6 +29,13 @@ const SERVICE_LIBRARY_IMAGES: Record<string, string> = {
 }
 
 const serviceIcons: Record<string, React.ReactNode> = {
+  architecture: (
+    <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-accent/60" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2.5 16.5h15" />
+      <path d="M4.5 16.5V9l5.5-5 5.5 5v7.5" />
+      <path d="M7.5 16.5v-3.5h5v3.5" />
+    </svg>
+  ),
   '3d-visualization': (
     <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.2" className="text-accent/60" strokeLinecap="round" strokeLinejoin="round">
       <polygon points="10,2 18,6 18,14 10,18 2,14 2,6" />
@@ -103,6 +113,31 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
             {tl(service.description, locale)}
           </p>
 
+          <p className="font-sans text-[12px] uppercase tracking-[0.18em] text-foreground/55 mb-3">
+            {locale === 'es' ? 'Ideal para' : 'Ideal for'}
+          </p>
+          <p className="font-sans text-[16px] leading-relaxed text-foreground/75 mb-8">
+            {tl(service.idealFor, locale)}
+          </p>
+
+          <p className="font-sans text-[12px] uppercase tracking-[0.18em] text-foreground/55 mb-3">
+            {locale === 'es' ? 'Entregables clave' : 'Key deliverables'}
+          </p>
+          <div className="space-y-2 mb-8">
+            {service.deliverables.map((item) => (
+              <p key={item.en} className="font-sans text-[14px] leading-relaxed text-foreground/70">
+                {tl(item, locale)}
+              </p>
+            ))}
+          </div>
+
+          <p className="font-sans text-[12px] uppercase tracking-[0.18em] text-foreground/55 mb-3">
+            {locale === 'es' ? 'Modelo de entrega' : 'Delivery model'}
+          </p>
+          <p className="font-sans text-[14px] leading-relaxed text-foreground/70">
+            {tl(service.deliveryModel, locale)}
+          </p>
+
         </div>
 
         {/* Right — image + CTA */}
@@ -121,13 +156,26 @@ export default function ServiceItem({ service, locale }: { service: Service; loc
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </div>
           )}
-          <Link
-            href={`/contact?type=${slugToProjectType[service.slug] ?? 'other'}`}
-            className="inline-flex items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 transition-all duration-300"
-          >
-            {ts('startProject')}
-            <Icon name="north_east" size={14} />
-          </Link>
+          <div className="flex flex-col items-start gap-4">
+            {service.slug === 'architecture' && (
+              <Link
+                href="/services/architecture"
+                onClick={() => trackEvent('service_interest', { service: service.slug, entrypoint: 'services_page' })}
+                className="inline-flex min-h-12 items-center gap-3 border border-foreground/30 text-foreground/75 hover:border-accent hover:text-accent px-8 py-3.5 font-sans text-[12px] tracking-[0.18em] uppercase transition-all duration-300"
+              >
+                {locale === 'es' ? 'Ver modelo arquitectonico' : 'See architecture model'}
+                <Icon name="arrow_right_alt" size={14} />
+              </Link>
+            )}
+            <Link
+              href={`/contact?type=${slugToProjectType[service.slug] ?? 'other'}`}
+              onClick={() => trackEvent('service_interest', { service: service.slug, entrypoint: 'services_page_cta' })}
+              className="inline-flex min-h-12 items-center gap-3 bg-accent text-background px-8 py-3.5 font-sans text-[12px] tracking-[0.18em] uppercase hover:bg-accent/90 transition-all duration-300"
+            >
+              {ts('startProject')}
+              <Icon name="north_east" size={14} />
+            </Link>
+          </div>
         </div>
       </div>
     </m.div>

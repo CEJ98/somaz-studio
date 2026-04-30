@@ -1,17 +1,18 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from '@/i18n/navigation'
 import { useSearchParams } from 'next/navigation'
 import { m, useReducedMotion } from 'framer-motion'
 import { toast } from 'sonner'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Icon } from '@/components/icons'
-import { trackLead } from '@/components/Analytics'
+import { trackEvent, trackLead } from '@/components/Analytics'
 
 type Status = 'idle' | 'loading'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const PHONE_RE = /^[0-9+()\-\s]{7,}$/
 
 function FloatingSelect({
   id,
@@ -35,8 +36,8 @@ function FloatingSelect({
     <div className="relative pt-4">
       <label
         htmlFor={id}
-        className={`absolute left-0 font-sans tracking-widest uppercase transition-all duration-200 pointer-events-none ${
-          hasValue ? '-top-0 text-accent text-[10px]' : 'top-7 text-foreground/50 text-xs'
+        className={`absolute left-0 font-sans uppercase transition-all duration-200 pointer-events-none ${
+          hasValue ? '-top-0 text-accent text-[11px] tracking-[0.12em]' : 'top-7 text-foreground/50 text-[13px] tracking-[0.08em]'
         }`}
       >
         {label}
@@ -90,8 +91,8 @@ function FloatingInput({
     <div className="relative pt-4">
       <label
         htmlFor={id}
-        className={`absolute left-0 font-sans tracking-widest uppercase transition-all duration-200 pointer-events-none ${
-          active ? '-top-0 text-[10px] ' + (error ? 'text-red-400' : 'text-accent') : 'top-7 text-foreground/50 text-xs'
+        className={`absolute left-0 font-sans uppercase transition-all duration-200 pointer-events-none ${
+          active ? '-top-0 text-[11px] tracking-[0.12em] ' + (error ? 'text-red-400' : 'text-accent') : 'top-7 text-foreground/50 text-[13px] tracking-[0.08em]'
         }`}
       >
         {label}
@@ -127,19 +128,34 @@ function FloatingInput({
 export default function ContactForm() {
   const router = useRouter()
   const tf = useTranslations('form')
+  const locale = useLocale()
   const searchParams = useSearchParams()
-  const VALID_TYPES = ['3d-visualization', 'interior-design', 'conceptual-design', 'consulting', 'full-studio-partnership', 'other']
+  const VALID_TYPES = ['architecture', '3d-visualization', 'interior-design', 'conceptual-design', 'consulting', 'other']
   const rawType = searchParams.get('type') ?? ''
   const preselectedType = VALID_TYPES.includes(rawType) ? rawType : (rawType === 'consult' ? 'consulting' : rawType === 'quote' ? '3d-visualization' : '')
   const [status, setStatus] = useState<Status>('idle')
   const [msgLen, setMsgLen] = useState(0)
   const reduced = useReducedMotion()
+  const labels = locale === 'es'
+    ? {
+        phone: 'Telefono / WhatsApp',
+        location: 'Ubicacion del proyecto (opcional)',
+        serviceNeeded: 'Tipo de proyecto (opcional)',
+      }
+    : {
+        phone: 'Phone / WhatsApp',
+        location: 'Project location (optional)',
+        serviceNeeded: 'Project type (optional)',
+      }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
+    trackEvent('lead_form_started', { form: 'contact' })
     const email = (form.elements.namedItem('email') as HTMLInputElement).value
+    const phone = (form.elements.namedItem('phone') as HTMLInputElement).value
     if (!EMAIL_RE.test(email)) return
+    if (!PHONE_RE.test(phone.trim())) return
     setStatus('loading')
     const data = new FormData(form)
     const utms: Record<string, string> = {}
@@ -156,8 +172,12 @@ export default function ContactForm() {
         body: JSON.stringify(payload),
       })
       if (res.ok) {
+        trackEvent('contact_form_submitted', {
+          project_type: payload.project_type || 'not-specified',
+        })
         trackLead({
-          project_type: payload.project_type,
+          project_type: payload.project_type || 'not-specified',
+          location: payload.location || '',
           ...utms,
         })
         router.push('/contact/thank-you')
@@ -173,7 +193,7 @@ export default function ContactForm() {
 
   const inputClass =
     'w-full bg-transparent border-b border-border text-foreground font-sans text-sm py-3 focus:outline-none focus:border-accent transition-colors duration-300'
-  const labelClass = 'font-sans text-xs tracking-widest uppercase text-foreground/65 mb-2 block'
+  const labelClass = 'font-sans text-[11px] tracking-[0.12em] uppercase text-foreground/65 mb-2 block'
 
   return (
     <div className="relative">
@@ -191,7 +211,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-foreground/65 mb-4">{tf('formTime')}</p>
+      <p className="font-sans text-[11px] tracking-[0.12em] uppercase text-foreground/65 mb-4">{tf('formTime')}</p>
       <form onSubmit={handleSubmit} className="space-y-10" data-testid="contact-form">
         {/* Honeypot anti-spam: invisible para humanos, atractivo para bots */}
         <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0 }}>
@@ -218,22 +238,25 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Row 2: Project Type */}
-        <FloatingSelect id="project_type" name="project_type" label={tf('projectType')} required defaultValue={preselectedType}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <FloatingInput
+            id="phone"
+            name="phone"
+            label={labels.phone}
+            required
+            validate={(v) => (PHONE_RE.test(v.trim()) ? '' : tf('phoneError'))}
+          />
+          <FloatingInput id="location" name="location" label={labels.location} />
+        </div>
+
+        <FloatingSelect id="project_type" name="project_type" label={labels.serviceNeeded} defaultValue={preselectedType}>
+          <option value="other">{locale === 'es' ? 'No estoy seguro aun' : 'Not sure yet'}</option>
+          <option value="architecture">{tf('optArchitecture')}</option>
           <option value="3d-visualization">{tf('opt3dViz')}</option>
           <option value="interior-design">{tf('optInterior')}</option>
           <option value="conceptual-design">{tf('optConceptual')}</option>
           <option value="consulting">{tf('optConsulting')}</option>
-          <option value="full-studio-partnership">{tf('optPartnership')}</option>
           <option value="other">{tf('optOther')}</option>
-        </FloatingSelect>
-
-        {/* Row 3: Timeline */}
-        <FloatingSelect id="timeline" name="timeline" label={tf('timeline')}>
-          <option value="urgent">{tf('timelineUrgent')}</option>
-          <option value="normal">{tf('timelineNormal')}</option>
-          <option value="flexible">{tf('timelineFlexible')}</option>
-          <option value="not-sure">{tf('timelineNotSure')}</option>
         </FloatingSelect>
 
         {/* Row 4: Message (opcional) */}
@@ -245,7 +268,8 @@ export default function ContactForm() {
             rows={4}
             maxLength={2000}
             placeholder={tf('messagePlaceholder')}
-            className={`${inputClass} resize-none`}
+            required
+            className={`${inputClass} resize-none min-h-32`}
             onChange={(e) => setMsgLen(e.target.value.length)}
           />
           {msgLen > 0 && (
@@ -257,7 +281,7 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="self-start inline-flex items-center gap-3 bg-accent text-background px-10 py-5 font-sans text-[10px] tracking-[0.25em] uppercase hover:bg-accent/90 disabled:opacity-50 transition-all duration-300 group"
+            className="self-start inline-flex min-h-12 items-center gap-3 bg-accent text-background px-10 py-4 font-sans text-[11px] tracking-[0.14em] uppercase hover:bg-accent/90 disabled:opacity-50 transition-all duration-300 group"
           >
             {status === 'loading' ? (
               <span className="flex gap-1">
