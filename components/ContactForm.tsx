@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from '@/i18n/navigation'
+import { useRouter, Link } from '@/i18n/navigation'
 import { useSearchParams } from 'next/navigation'
 import { m, useReducedMotion } from 'framer-motion'
 import { toast } from 'sonner'
@@ -155,7 +155,6 @@ export default function ContactForm() {
     const email = (form.elements.namedItem('email') as HTMLInputElement).value
     const phone = (form.elements.namedItem('phone') as HTMLInputElement).value
     if (!EMAIL_RE.test(email)) return
-    if (!PHONE_RE.test(phone.trim())) return
     setStatus('loading')
     const data = new FormData(form)
     const utms: Record<string, string> = {}
@@ -243,8 +242,6 @@ export default function ContactForm() {
             id="phone"
             name="phone"
             label={labels.phone}
-            required
-            validate={(v) => (PHONE_RE.test(v.trim()) ? '' : tf('phoneError'))}
           />
           <FloatingInput id="location" name="location" label={labels.location} />
         </div>
@@ -308,6 +305,12 @@ export default function ContactForm() {
           </button>
           <p className="font-sans text-[10px] text-foreground/55 tracking-wide">
             {tf('trustCopy')}
+          </p>
+          <p className="font-sans text-[10px] text-foreground/50 leading-relaxed">
+            {locale === 'es'
+              ? <><span>Al enviar aceptás nuestra </span><Link href="/privacy" className="underline underline-offset-2 hover:text-accent transition-colors">política de privacidad</Link>.</>
+              : <><span>By submitting you agree to our </span><Link href="/privacy" className="underline underline-offset-2 hover:text-accent transition-colors">privacy policy</Link>.</>
+            }
           </p>
         </div>
       </form>

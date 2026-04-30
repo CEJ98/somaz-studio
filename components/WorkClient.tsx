@@ -194,10 +194,19 @@ export default function WorkClient() {
           <div className="border-t border-border/30 pt-10 mb-8">
             <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-foreground/60">{tw('allCasesLabel')}</p>
           </div>
-          <m.div layout className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <m.div layout className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
             <AnimatePresence mode="popLayout">
               {supportingCases.map((project, i) => {
-              const isWide = project.size === 'large'
+              const pattern = i % 3
+              const colSpan =
+                pattern === 0 ? 'md:col-span-12' :
+                pattern === 1 ? 'md:col-span-7' :
+                'md:col-span-5'
+              const aspectRatio =
+                pattern === 0 ? 'aspect-[21/9]' :
+                pattern === 1 ? 'aspect-[4/3]' :
+                'aspect-[4/5]'
+              const isWide = pattern === 0
               return (
                 <m.div
                   key={project.slug}
@@ -206,7 +215,7 @@ export default function WorkClient() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.45, delay: reduced ? 0 : i * 0.05, ease }}
-                  className={`${isWide ? 'md:col-span-2' : ''} transition-opacity duration-500 ${
+                  className={`${colSpan} transition-opacity duration-500 ${
                     hoveredSlug && hoveredSlug !== project.slug ? 'opacity-30' : 'opacity-100'
                   }`}
                   onMouseEnter={() => setHoveredSlug(project.slug)}
@@ -215,7 +224,7 @@ export default function WorkClient() {
                   <ProjectCard
                     project={project}
                     priority={i === 0 && anchorCases.length === 0}
-                    aspectRatio="aspect-[4/3]"
+                    aspectRatio={aspectRatio}
                     isWide={isWide}
                   />
                 </m.div>

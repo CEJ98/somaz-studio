@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
       utm_term,
     } = body
 
-    if (!name || !email || !phone || !message) {
+    if (!name || !email || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
@@ -99,9 +99,11 @@ export async function POST(req: NextRequest) {
     if (!EMAIL_RE.test(email)) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     }
-    const PHONE_RE = /^[0-9+()\-\s]{7,}$/
-    if (!PHONE_RE.test(phone.trim())) {
-      return NextResponse.json({ error: 'Invalid phone' }, { status: 400 })
+    if (phone && phone.trim()) {
+      const PHONE_RE = /^[0-9+()\-\s]{7,}$/
+      if (!PHONE_RE.test(phone.trim())) {
+        return NextResponse.json({ error: 'Invalid phone' }, { status: 400 })
+      }
     }
     if (message && message.length > 2000) {
       return NextResponse.json({ error: 'Message too long' }, { status: 400 })
