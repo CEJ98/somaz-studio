@@ -14,11 +14,11 @@ vi.mock('@/lib/contact-submissions', () => ({
   saveContactSubmission: vi.fn().mockResolvedValue({ ok: true }),
 }))
 
-function makeRequest(body: Record<string, unknown>) {
+function makeRequest(body: Record<string, unknown>, origin = 'https://somazstudio.com') {
   return new NextRequest('http://localhost/api/contact', {
     method: 'POST',
     body: JSON.stringify(body),
-    headers: { 'content-type': 'application/json' },
+    headers: { 'content-type': 'application/json', origin },
   })
 }
 
@@ -55,5 +55,10 @@ describe('POST /api/contact', () => {
     vi.mocked(checkContactRateLimit).mockResolvedValueOnce(true)
     const res = await POST(makeRequest(validBody))
     expect(res.status).toBe(429)
+  })
+
+  it('returns 403 for disallowed origins', async () => {
+    const res = await POST(makeRequest(validBody, 'https://example.com'))
+    expect(res.status).toBe(403)
   })
 })

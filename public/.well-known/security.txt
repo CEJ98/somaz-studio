@@ -1,0 +1,6 @@
+# Signed: 2026-05-06T04:28:17.000Z
+Contact: mailto:flowmaticbusiness@gmail.com
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://somazstudio.com/.well-known/security.txt
+Policy: https://somazstudio.com/security

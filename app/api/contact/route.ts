@@ -26,6 +26,25 @@ const SOURCE_VALUES = new Set([
   'organic_search',
 ])
 
+const ALLOWED_REQUEST_ORIGINS = new Set([
+  'https://somazstudio.com',
+  'https://www.somazstudio.com',
+])
+
+function getRequestOrigin(req: NextRequest): string | null {
+  const origin = req.headers.get('origin')
+  if (origin) return origin
+
+  const referer = req.headers.get('referer')
+  if (!referer) return null
+
+  try {
+    return new URL(referer).origin
+  } catch {
+    return null
+  }
+}
+
 function normalizeLeadSource(source?: string, utmSource?: string, utmMedium?: string): string {
   const directSource = (source || '').trim().toLowerCase()
   if (SOURCE_VALUES.has(directSource)) return directSource
@@ -57,6 +76,11 @@ function normalizeLeadSource(source?: string, utmSource?: string, utmMedium?: st
 
 export async function POST(req: NextRequest) {
   try {
+    const requestOrigin = getRequestOrigin(req)
+    if (!requestOrigin || !ALLOWED_REQUEST_ORIGINS.has(requestOrigin)) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
     if (await checkContactRateLimit(ip)) {
       return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
@@ -64,7 +88,6 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json()
 
-    // Honeypot: si el campo "website" viene relleno es un bot
     if (body.website) {
       return NextResponse.json({ success: true })
     }

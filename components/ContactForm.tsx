@@ -215,11 +215,13 @@ export default function ContactForm() {
         {/* Honeypot anti-spam: invisible para humanos, atractivo para bots */}
         <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0 }}>
           <input
+            id="website"
             type="text"
             name="website"
             autoComplete="off"
             tabIndex={-1}
             aria-label="Do not fill this field"
+            className="absolute left-[-9999px] top-[-9999px]"
           />
         </div>
         {/* Row 1: Name + Email */}
